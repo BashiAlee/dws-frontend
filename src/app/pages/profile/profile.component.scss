@@ -4,30 +4,69 @@
 
 
 .profile-main {
-    .topContent {
-        text-align: center;
-    }
-    .custom-tabs {
-        ul {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            li {
-                display: inline-block;
-                margin: 15px;
-                
-                a {
-                    background-color: rgb(41, 171, 226);
-                    color: #fff;
-                    padding: 12px 20px 12px 20px;
-                    border-radius: 21px;
 
-                    &:hover {
-                        text-decoration: none;
-                    }
-                }
-              }
-        }
-    
+  .topContent {
+
+    text-align: center;
+
+    h1 {
+      font-family: 'Apercu-Medium';
+      padding-top: 100px;
+      padding-bottom: 25px;
     }
+
+    p {
+        width: 39%;
+        margin: 0 auto;
+      font-family: 'Apercu-Regular';
+      padding-bottom: 30px;
+      color: $p-color;
+    }
+  }
+
+  .custom-tabs {
+
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      li {
+        display: inline-block;
+        margin: 15px;
+
+        a {
+          border: 1px solid $p-color;
+          // background-color: rgb(41, 171, 226);
+          color: $p-color;
+          padding: 12px 20px 12px 20px;
+          border-radius: 21px;
+          background: $white;
+          font-size: 22 px;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+
+.active-link {
+    position: relative;
+  background: $primary-color !important;
+  border: 1px solid $primary-color !important;
+  color: $white !important;
+
+  &::after {
+      position: absolute;
+      left: 38%;
+    right: 0;
+    bottom: -16px;
+    content: url('../../../assets/images/down_arrow.svg');
+
+  }
 }

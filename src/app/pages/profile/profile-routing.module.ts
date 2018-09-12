@@ -7,7 +7,7 @@ import { PersonalInformationComponent } from './personal-information/personal-in
 import { ExperiencePortfolioComponent } from './experience-portfolio/experience-portfolio.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo:'personal-information', pathMatch:'full' },
+  { path: '', redirectTo:'personal-information', pathMatch:'full' },
   { path: 'business-information', component: BusinessInformationComponent },
   { path: 'document-declaration', component: DocumentDeclarationComponent },
   { path:'equipment' ,component: EquipmentComponent },
