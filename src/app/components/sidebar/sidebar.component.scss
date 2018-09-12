@@ -1,0 +1,23 @@
+
+.sidebar a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+.sidebar i {
+  color: #d2d2d2;
+  text-decoration: none;
+}
+
+.sidebar a:hover
+{
+  color:#67b2e2;
+  background-color: #f7f7fb;
+  text-decoration:none;
+  cursor:pointer;
+  border-radius: 4px;
+}
+
+.sidebar{
+  background-color: #ffffff !important;
+  border-left-color: #d2d2d2
+}
