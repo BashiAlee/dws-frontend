@@ -1,0 +1,20 @@
+@import '../../../variables';
+
+.custom-tabs {
+    ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        li {
+            display: inline-block;
+            
+            a {
+                background-color: rgb(41, 171, 226);
+                color: #fff;
+                padding: 10px 10px 10px 10px;
+            }
+          }
+    }
+
+}
+  
