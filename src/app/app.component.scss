@@ -1,0 +1,10 @@
+.alignItem {
+  display: flex;
+
+  app-sidebar {
+    width: 12%;
+  }
+  .alignRight {
+    flex: 1;
+  }
+}
