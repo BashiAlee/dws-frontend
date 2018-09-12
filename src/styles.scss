@@ -21,4 +21,9 @@
 
   .makeBgWhite {
       background: $white;
+      border-radius: 10px;
+  }
+
+  .makeCenter {
+      text-align: center;
   }
