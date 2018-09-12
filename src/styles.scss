@@ -1,2 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import './variables';
+@font-face {
+    font-family: 'Apercu-Medium';
+    src: url('assets/fonts/Apercu-Medium/Apercu-Medium.eot?#iefix') format('embedded-opentype'), 
+    url('assets/fonts/Apercu-Medium/Apercu-Medium.woff') format('woff'), 
+    url('assets/fonts/Apercu-Medium/Apercu-Medium.ttf') format('truetype'), 
+    url('assets/fonts/Apercu-Medium/Apercu-Medium.svg#Quicksand-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Apercu-Regular';
+    src: url('assets/fonts/Apercu-Regular/Apercu-Regular.eot?#iefix') format('embedded-opentype'), 
+    url('assets/fonts/Apercu-Regular/Apercu-Regular.woff') format('woff'), 
+    url('assets/fonts/Apercu-Regular/Apercu-Regular.ttf') format('truetype'), 
+    url('assets/fonts/Apercu-Regular/Apercu-Regular.svg#Quicksand-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
 
+  .makeBgWhite {
+      background: $white;
+  }
