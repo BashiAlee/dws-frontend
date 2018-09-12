@@ -1,0 +1,22 @@
+
+<div class="profile-main">
+        <h1>Complete Your Profile</h1>
+        <p>Start by Completing Your Profile. It Consists of Five Steps Below.
+            You Can Edit Your Information Anytime later.</p>
+
+            <div class="col-md-12">
+                    <ul>
+                      <li ><a  [routerLink]="['business-information']" [routerLinkActive]="['active-link']">Account Information</a></li>
+                      <li ><a [routerLink]="['personal-information']"  [routerLinkActive]="['active-link']">Edit/Update Preferences</a></li>
+                      <li><a  [routerLink]="['equipment']" [routerLinkActive]="['active-link']">About Me</a></li>
+                    </ul>
+                  </div>
+          
+              <div class="col-md-12">
+                  <router-outlet></router-outlet>
+              </div>
+        
+      </div>
+        
+
+    
