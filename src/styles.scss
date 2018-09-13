@@ -28,10 +28,20 @@
     font-weight: normal;
     font-style: normal;
   }
+  @font-face {
+    font-family: 'Karla-Bold';
+    src: url('assets/fonts/Karla-Bold/Karla-Bold.eot?#iefix') format('embedded-opentype'), 
+    url('assets/fonts/Karla-Bold/Karla-Bold.woff') format('woff'), 
+    url('assets/fonts/Karla-Bold/Karla-Bold.ttf') format('truetype'), 
+    url('assets/fonts/Karla-Bold/Karla-Bold.svg#Karla-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
 
   .makeBgWhite {
       background: $white;
       border-radius: 10px;
+      padding-bottom: 54px;
   }
 
   .makeCenter {
@@ -122,15 +132,38 @@
     
     /* Style the checkmark/indicator */
     .container .checkmark:after {
-        left: 5px;
-        top: 5px;
-        width: 22px;
-        height: 22px;
-        background: $white;
-        border-radius: 50%;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
+        // left: 5px;
+        // top: 5px;
+        // width: 22px;
+        // height: 22px;
+        // background: $white;
+        // border-radius: 50%;
+        // -webkit-transform: rotate(45deg);
+        // -ms-transform: rotate(45deg);
+        // transform: rotate(45deg);
+        // content: '\2713';
+        // position: absolute;
+        // left: 5px;
+        // top: 9px;
+        // background: white;
+        // width: 2px;
+        // height: 2px;
+        // // box-shadow: 
+        // //   2px 0 0 white,
+        // //   4px 0 0 white,
+        // //   4px -2px 0 white,
+        // //   4px -4px 0 white,
+        // //   4px -6px 0 white,
+        // //   4px -8px 0 white;
+        // transform: rotate(45deg);
+        content: '\2713';
+        position: absolute;
+        left: 9px;
+        top: 2px;
+        color: $white;
+        /* background: white; */
+        width: 2px;
+        height: 2px;
     }
   }
 
@@ -142,3 +175,45 @@
     box-shadow: none;
     border-color: $border-input-color;
   }
+
+.call-to-action {
+    font-family: 'Apercu-Medium';
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 10px;
+
+    margin-top: 40px;
+
+  .goBack {
+    justify-self: right;
+    margin-right: 15px;
+      button {
+        box-shadow: 0px 11px 46px 0px rgba(190, 66, 241, 0.2);
+        background: $previous-button-bg;
+        color: $white;
+        padding: 14px 60px 14px 60px;
+           border-radius: 32px;
+      }
+  }
+
+  .saveButton {
+    justify-self: left;
+    margin-left: 15px;
+
+      button {
+        box-shadow: 0px 11px 16px 0px rgba(190, 66, 241, 0.35);
+        background: $save-button-bg;
+        color: $white;
+        padding: 14px 60px 14px 60px;
+           border-radius: 32px;
+      }
+  }
+  p{
+      color: $buttons-desc-color;
+      grid-row: 2/3;
+      grid-column: 2/3;
+      margin-left: 15px;
+      width: 45%;
+      text-align: center;
+  }
+}
