@@ -1,6 +1,6 @@
 @import '../../../../variables';
 
-.profile-picture {
+.profile-details {
     padding-top: 45px;
 
   .image-upload>input {
@@ -40,9 +40,35 @@
     display: inline-block;
 
     img {
-      height: 100px;
+      width: 144px;
+      height: 143px;
       border-radius: 28px;
       box-shadow: 0px 11px 46px 0px rgba(0, 0, 0, 0.2)
     }
+  }
+
+  .user-name {
+    font-family: 'Apercu-Medium';
+    text-transform: capitalize;
+    font-size: 33px;
+    margin-top: 32px;
+  }
+  .user-id {
+    
+    text-transform: uppercase;
+    color: $primary-color;
+    border: 1px solid $p-color;
+    display: inline-block;
+    padding: 10px 25px 10px 25px;
+    border-radius: 21px;
+    font-family: 'Apercu-Mono';
+  }
+  .user-description {
+    font-family: 'Apercu-Regular';
+    color: $p-color;
+  }
+
+  .custom-input-label {
+    color: $input-label;
   }
 }
