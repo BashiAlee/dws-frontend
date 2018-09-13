@@ -1,23 +1,19 @@
 
 
-.header input{
+.header {
 
-}
-.header input{
-  // background: url("http://kodyrabatowe.wp.pl/img/ico/search_gr.png") top left     no-repeat;
-  height: 100px;
-  border-style:none;
-}
-.header{
   background-color: #fff !important;
-}
-
-.header img{
-  height: 45px;
-}
-
-.notification{
-  margin-top: 13px;
+  input:focus {
+    outline: none;
+  }
+  input{
+    // background: url("http://kodyrabatowe.wp.pl/img/ico/search_gr.png") top left     no-repeat;
+    height: 100px;
+    border-style:none;
+  }
+  img{
+    height: 45px;
+  }
 }
 
 .dropdown button{
@@ -28,6 +24,38 @@
   color: #29abe2;
 }
 
-.notification i {
-  color: #d2d0e5;
+.notification{
+
+  margin-top: 13px;
+  i{
+    color: #d2d0e5;
+  }
+  .notify-icon{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%
+  }
+  .col-md-4{
+    position: relative;
+    .blue{
+      background: #5570f9;
+      position: absolute;
+      top: -3px;
+      right: 5px;
+    }
+  }
+  .col-md-6{
+    position: relative;
+    .pink{
+      background: #ff32b4;
+      position: absolute;
+      top: -3px;
+      right: 32px;
+    }
+  }
+}
+
+.main-notification{
+  display:  flex;
+  justify-content:  flex-end;
 }
