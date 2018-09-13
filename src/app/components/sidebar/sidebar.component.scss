@@ -21,5 +21,14 @@
 
 .sidebar{
   background-color: #ffffff !important;
-  border-right: 1px solid #d2d2d2 !important;
+  margin-top: 22px;
+  border-top: 1px solid #e0dfdf;
+}
+
+.sidebar li{
+  margin: 14px 0;
+}
+
+.sidebar i {
+  margin-right: 18px;
 }
