@@ -5,7 +5,7 @@
     src: url('assets/fonts/Apercu-Medium/Apercu-Medium.eot?#iefix') format('embedded-opentype'), 
     url('assets/fonts/Apercu-Medium/Apercu-Medium.woff') format('woff'), 
     url('assets/fonts/Apercu-Medium/Apercu-Medium.ttf') format('truetype'), 
-    url('assets/fonts/Apercu-Medium/Apercu-Medium.svg#Quicksand-Bold') format('svg');
+    url('assets/fonts/Apercu-Medium/Apercu-Medium.svg#Apercu-Medium') format('svg');
     font-weight: normal;
     font-style: normal;
   }
@@ -14,11 +14,42 @@
     src: url('assets/fonts/Apercu-Regular/Apercu-Regular.eot?#iefix') format('embedded-opentype'), 
     url('assets/fonts/Apercu-Regular/Apercu-Regular.woff') format('woff'), 
     url('assets/fonts/Apercu-Regular/Apercu-Regular.ttf') format('truetype'), 
-    url('assets/fonts/Apercu-Regular/Apercu-Regular.svg#Quicksand-Bold') format('svg');
+    url('assets/fonts/Apercu-Regular/Apercu-Regular.svg#Apercu-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Apercu-Mono';
+    src: url('assets/fonts/Apercu-Mono/Apercu-Mono.eot?#iefix') format('embedded-opentype'), 
+    url('assets/fonts/Apercu-Mono/Apercu-Mono.woff') format('woff'), 
+    url('assets/fonts/Apercu-Mono/Apercu-Mono.ttf') format('truetype'), 
+    url('assets/fonts/Apercu-Mono/Apercu-Mono.svg#Apercu-Mono') format('svg');
     font-weight: normal;
     font-style: normal;
   }
 
   .makeBgWhite {
       background: $white;
+      border-radius: 10px;
+  }
+
+  .makeCenter {
+      text-align: center;
+  }
+
+  input.custom-input {
+      font-family: 'Apercu-Regular';
+      border-radius: 3px;
+      border-width: 2px; 
+      border-color: $border-input-color;
+      height: 73px;
+  }
+
+  input.custom-input:focus {
+      box-shadow: none;
+      border-color: $border-input-color;
+  }
+  .custom-input-label {
+    font-family: 'Apercu-Regular';
   }
