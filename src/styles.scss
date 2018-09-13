@@ -37,7 +37,12 @@
     font-weight: normal;
     font-style: normal;
   }
-
+  button {
+      border: none;
+      &:hover {
+          cursor: pointer;
+      }
+  }
   .makeBgWhite {
       background: $white;
       border-radius: 10px;
@@ -201,6 +206,7 @@
     margin-left: 15px;
 
       button {
+        
         box-shadow: 0px 11px 16px 0px rgba(190, 66, 241, 0.35);
         background: $save-button-bg;
         color: $white;
@@ -217,3 +223,53 @@
       text-align: center;
   }
 }
+
+.image-upload>input {
+    display: none;
+  }
+
+  .image-upload i {
+    color: $primary-color;
+  }
+
+  .image-upload {
+    position: absolute;
+    top: -12px;
+    right: -17px;
+
+    label {
+      background: $white;
+      cursor: pointer;
+      box-shadow: 0px 11px 46px 0px rgba(0, 0, 0, 0.18);
+      width: 39px;
+      height: 39px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+  }
+
+  .displayPicture {
+    position: relative;
+    display: inline-block;
+
+    img {
+      width: 144px;
+      height: 143px;
+      border-radius: 28px;
+      box-shadow: 0px 11px 46px 0px rgba(0, 0, 0, 0.2)
+    }
+  }
+
+.aperu-medium {
+    font-family: 'Apercu-Medium';
+  }
+
+  .mTop15 {
+      margin-top: 15px;
+  }
+
+  input[type=number] {
+    font-family: 'Karla-Bold';
+  }
