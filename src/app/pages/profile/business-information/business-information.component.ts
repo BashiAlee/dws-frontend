@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./business-information.component.scss']
 })
 export class BusinessInformationComponent implements OnInit {
-
+  selectedSuffix;
+  suffix = [
+      { name: 'Jr.' },
+      { name: 'Sr.' }
+  ]
   constructor() { }
 
   ngOnInit() {

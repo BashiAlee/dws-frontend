@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./experience-portfolio.component.scss']
 })
 export class ExperiencePortfolioComponent implements OnInit {
-
+  selectedSuffix;
+  suffix = [
+      { name: 'Jr.' },
+      { name: 'Sr.' }
+  ]
   constructor() { }
 
   ngOnInit() {

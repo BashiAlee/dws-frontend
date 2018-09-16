@@ -1,0 +1,31 @@
+@import '../../../../variables';
+
+.equipment-info-details {
+    padding-top: 45px;
+
+
+  .user-name {
+    font-family: 'Apercu-Medium';
+    text-transform: capitalize;
+    font-size: 33px;
+    margin-top: 32px;
+  }
+  .user-id {
+    
+    text-transform: uppercase;
+    color: $primary-color;
+    border: 1px solid $p-color;
+    display: inline-block;
+    padding: 10px 25px 10px 25px;
+    border-radius: 21px;
+    font-family: 'Apercu-Mono';
+  }
+  .user-description {
+    font-family: 'Apercu-Regular';
+    color: $p-color;
+  }
+
+  .custom-input-label {
+    color: $input-label;
+  }
+}

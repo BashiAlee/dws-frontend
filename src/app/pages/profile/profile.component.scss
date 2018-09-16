@@ -13,11 +13,13 @@
       font-family: 'Apercu-Medium';
       padding-top: 100px;
       padding-bottom: 25px;
+      font-size: 34px;
     }
 
     p {
-        width: 39%;
-        margin: 0 auto;
+      width: 42%;
+      margin: 0 auto;
+      font-size: 18px;
       font-family: 'Apercu-Regular';
       padding-bottom: 30px;
       color: $p-color;
@@ -25,7 +27,7 @@
   }
 
   .custom-tabs {
-
+    margin-bottom: 28px;
     ul {
       display: flex;
       align-items: center;
@@ -61,7 +63,7 @@
   background: $primary-color !important;
   border: 1px solid $primary-color !important;
   color: $white !important;
-
+  box-shadow: 0px 8px 33px 0px rgba(41, 171, 226, 0.18);
   &::after {
       position: absolute;
       left: 38%;

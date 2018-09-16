@@ -42,50 +42,28 @@
 
                 <input id="file-input" type="file" />
               </div>
-              
+
             </div>
             <p class="aperu-medium mTop15">Business Logo (Secondary)</p>
           </div>
         </div>
         <form>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="form-group">
-                <label for="firstName" class="custom-input-label">First Name</label>
-                <input type="text" class="form-control custom-input" id="firstName" aria-describedby="firstName"
-                  placeholder="First Name">
+                <label for="businessName" class="custom-input-label">Business Name</label>
+                <input type="text" class="form-control custom-input" id="businessName" aria-describedby="businessName"
+                  placeholder="Business Name">
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="form-group">
-                <label for="middleName" class="custom-input-label">Middle Name</label>
-                <input type="text" class="form-control custom-input" id="middleName" aria-describedby="middleName"
-                  placeholder="Middle Name">
+                <label for="businessType" class="custom-input-label">Business Type</label>
+                <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+                  <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+                </ng-select>
               </div>
             </div>
-
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="lastName" class="custom-input-label">last Name</label>
-                <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
-                  placeholder="Last Name">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="firstName" class="custom-input-label">Suffix</label>
-                <input type="text" class="form-control custom-input" id="suffix" aria-describedby="suffix" placeholder="Suffix Name">
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="date" class="custom-input-label">Date</label>
-                <input type="date" class="form-control custom-input" id="date" aria-describedby="data">
-              </div>
-            </div>
-
           </div>
         </form>
 
@@ -94,7 +72,7 @@
 
     <div class="physical-address">
       <div class="container">
-        <h1 class="form-heading">Physical Address</h1>
+        <h1 class="form-heading">Business Physical Address</h1>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -115,7 +93,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
-              <input type="text" class="form-control custom-input" id="country" aria-describedby="country" placeholder="Country">
+              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+                <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+              </ng-select>
             </div>
           </div>
           <div class="col-md-4">
@@ -127,7 +107,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
-              <input type="text" class="form-control custom-input" id="state" aria-describedby="state" placeholder="State">
+              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+                <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+              </ng-select>
             </div>
           </div>
         </div>
@@ -143,7 +125,7 @@
     </div>
     <div class="mailing-address">
       <div class="container">
-        <h1 class="form-heading">Mailing Address</h1>
+        <h1 class="form-heading">Business Mailing Address</h1>
         <div class="row">
           <div class="col-md-6">
             <div class="custom-checkbox">
@@ -174,7 +156,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
-              <input type="text" class="form-control custom-input" id="country" aria-describedby="country" placeholder="Country">
+              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+                <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+              </ng-select>
             </div>
           </div>
           <div class="col-md-4">
@@ -186,7 +170,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
-              <input type="text" class="form-control custom-input" id="state" aria-describedby="state" placeholder="State">
+              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+                <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+              </ng-select>
             </div>
           </div>
         </div>
@@ -206,30 +192,101 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="PrimaryEmail" class="custom-input-label">Primary Email</label>
-              <input type="email" class="form-control custom-input" id="zip" aria-describedby="PrimaryEmail"
-                placeholder="PrimaryEmail">
+              <label for="businessPhoneNumberP" class="custom-input-label">Business Phone Number (Primary)</label>
+              <input type="number" class="form-control custom-input" id="zip" aria-describedby="businessPhoneNumberP"
+                placeholder="Business Phone Number (Primary)">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="PrimaryPhone" class="custom-input-label">Primary Phone</label>
-              <input type="text" class="form-control custom-input" id="PrimaryPhone" aria-describedby="PrimaryPhone"
-                placeholder="PrimaryPhone">
+              <label for="businessPhoneNumberS" class="custom-input-label">Business Phone Number (Secondary)</label>
+              <input type="number" class="form-control custom-input" id="businessPhoneNumberS" aria-describedby="businessPhoneNumberS"
+                placeholder="Business Phone Number (Secondary)">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="general-info" class="custom-input-label">General Information</label>
-              <textarea class="form-control custom-textarea" id="general-info"></textarea>
+              <label for="stateRegistered" class="custom-input-label">State Registered In</label>
+              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+                <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+              </ng-select>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="notes" class="custom-input-label">Notes</label>
-              <textarea class="form-control custom-textarea" id="notes"></textarea>
+              <label for="BusinessStartDate" class="custom-input-label">Business Start Date</label>
+              <input type="date" class="form-control custom-input" id="BusinessStartDate" aria-describedby="BusinessStartDate"
+                placeholder="BusinessStartDate">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="liabilityRadio" class="custom-input-label">General Liability Insurance</label>
+            <div class="custom-radio">
+              <label class="container">Yes
+                <input type="radio" name="liabilityRadio">
+                <span class="checkmark"></span>
+              </label>
+
+              <label class="container">No
+                <input type="radio" name="liabilityRadio">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+              <label for="liabilityRadio" class="custom-input-label">Professional Liability Insurance</label>
+              <div class="custom-radio">
+                <label class="container">Yes
+                  <input type="radio" name="ProfessionalliabilityRadio">
+                  <span class="checkmark"></span>
+                </label>
+  
+                <label class="container">No
+                  <input type="radio" name="ProfessionalliabilityRadio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+              <label for="CompInsurance" class="custom-input-label">Workman’s Comp Insurance</label>
+              <div class="custom-radio">
+                <label class="container">Yes
+                  <input type="radio" name="CompInsurance">
+                  <span class="checkmark"></span>
+                </label>
+  
+                <label class="container">No
+                  <input type="radio" name="CompInsurance">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <label for="AutoInsurance" class="custom-input-label">Commercial Auto Insurance</label>
+                <div class="custom-radio">
+                  <label class="container">Yes
+                    <input type="radio" name="AutoInsurance">
+                    <span class="checkmark"></span>
+                  </label>
+    
+                  <label class="container">No
+                    <input type="radio" name="AutoInsurance">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+          </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="additional-notes" class="custom-input-label">Additional Notes</label>
+              <textarea class="form-control custom-textarea" id="additional-notes"></textarea>
             </div>
           </div>
         </div>

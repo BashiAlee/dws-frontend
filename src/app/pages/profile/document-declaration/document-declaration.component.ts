@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./document-declaration.component.scss']
 })
 export class DocumentDeclarationComponent implements OnInit {
-
+  selectedSuffix;
+  suffix = [
+      { name: 'Jr.' },
+      { name: 'Sr.' }
+  ]
   constructor() { }
 
   ngOnInit() {

@@ -1,4 +1,319 @@
 <div class="container makeBgWhite">
-    <p>Portfolip</p>
+    <div class="personal-information">
+      <div class="experience-portfolio-info-details makeCenter">
+        <p class="user-name">Experience &amp; Work Portfolio</p>
+        <p class="user-description">Please Provide the Correct Information about your Experience &amp; Work Portfolio Details </p>
+      </div>
+  
+      <div class="user-personal-info">
+        <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="businessType" class="custom-input-label">Type of Work offered</label>
+                        <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
+                          <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+                        </ng-select>
+                      </div>
+                    </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="commercialSuasExp" class="custom-input-label">Years of Commercial SUAS Experience</label>
+                      <input type="text" class="form-control custom-input" id="commercialSuasExp" aria-describedby="commercialSuasExp"
+                        placeholder="Years of Commercial SUAS Experience">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                      <label for="travelOutside" class="custom-input-label">Are you Willing to Travel outside of united States?</label>
+                      <div class="custom-radio">
+                        <label class="container">Yes
+                          <input type="radio" name="travelOutside">
+                          <span class="checkmark"></span>
+                        </label>
+          
+                        <label class="container">No
+                          <input type="radio" name="travelOutside">
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="form-heading">Passport</h1>
+                        <label for="validPassport" class="custom-input-label">Do you have a Valid Passport?</label>
+                        <div class="custom-radio">
+                          <label class="container">Yes
+                            <input type="radio" name="validPassport">
+                            <span class="checkmark"></span>
+                          </label>
+            
+                          <label class="container">No
+                            <input type="radio" name="validPassport">
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                      </div>
+                </div>
+                <div class="row justify-content-start">
+                    
+                    <div class="col-md-12">
+                        <label for="passportImage" class="custom-input-label">Upload of your passport is Optional and is not Required at this time. DWS May require a copy of your Passport on file
+                            Depending on the Project type.</label>
+                      <div class="passportImage">
+                        <img src="../../../../assets/images/image-placeholder.png" alt="">
+                        <div class="image-upload">
+                          <label for="file-input">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                          </label>
+          
+                          <input id="file-input" type="file" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          <!-- <div class="row justify-content-center">
+            <div class="col-md-3 makeCenter">
+                
+              <div class="displayPicture">
+                <img src="../../../../assets/images/avatar.png" alt="">
+                <div class="image-upload">
+                  <label for="file-input">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </label>
+  
+                  <input id="file-input" type="file" />
+                </div>
+              </div>
+              <p class="aperu-medium mTop15">Business Logo (Primary)</p>
+            </div>
+            <div class="col-md-3 makeCenter">
+              <div class="displayPicture">
+                <img src="../../../../assets/images/avatar.png" alt="">
+                <div class="image-upload">
+                  <label for="file-input">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </label>
+  
+                  <input id="file-input" type="file" />
+                </div>
+  
+              </div>
+              <p class="aperu-medium mTop15">Business Logo (Secondary)</p>
+            </div>
+          </div> -->
+          <div class="row">
+              <div class="col-md-12">
+                  <h1 class="form-heading noPadding">Social/Professional Plarforms</h1>
+                  <label for="validPassport" class="custom-input-label">If you don’t have any of the listed platform presence. Please leave that field empty.</label>
+                </div>
+          </div>
+        
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="facebookPersonal" class="custom-input-label">Personal Facebook Profile</label>
+                  <input type="text" class="form-control custom-input" id="facebookPersonal" aria-describedby="facebookPersonal"
+                    placeholder="Personal Facebook Profile">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="businessFb" class="custom-input-label">Business Facebook Profile</label>
+                  <input type="text" class="form-control custom-input" id="businessName" aria-describedby="businessName"
+                  placeholder="Business Facebook Profile">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="InstagramHandle" class="custom-input-label">Instagram Handle</label>
+                    <input type="text" class="form-control custom-input" id="InstagramHandle" aria-describedby="InstagramHandle"
+                      placeholder="Instagram">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Twitter" class="custom-input-label">Twitter</label>
+                    <input type="text" class="form-control custom-input" id="Twitter" aria-describedby="Twitter"
+                    placeholder="Twitter">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="LinkedPersonal" class="custom-input-label">Personal Linked Profile</label>
+                      <input type="text" class="form-control custom-input" id="LinkedPersonal" aria-describedby="LinkedPersonal"
+                        placeholder="Personal Linked Profile">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="businessLinkedIn" class="custom-input-label">Business LinkedIn Profile</label>
+                      <input type="text" class="form-control custom-input" id="businessLinkedIn" aria-describedby="businessLinkedIn"
+                      placeholder="Business LinkedIn Profile">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="youtubeChannel" class="custom-input-label">Youtube Channel</label>
+                        <input type="text" class="form-control custom-input" id="youtubeChannel" aria-describedby="youtubeChannel"
+                          placeholder="Youtube Channel">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="vimeoChannel" class="custom-input-label">Vimeo Channel</label>
+                        <input type="text" class="form-control custom-input" id="vimeoChannel" aria-describedby="vimeoChannel"
+                        placeholder="Vimeo Channel">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="facebookPersonal" class="custom-input-label">Personal Facebook Profile</label>
+                          <input type="text" class="form-control custom-input" id="facebookPersonal" aria-describedby="facebookPersonal"
+                            placeholder="Personal Facebook Profile">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="form-heading noPadding">Portfolio &amp; Work Samples</h1>
+                            <label for="validPassport" class="custom-input-label">You can Upload your Photographs and Paste your Youtube/Vimeo Links as
+                                your Video Portfolio</label>
+                          </div>
+                    </div>
+                    <div class="row  mBottom20 mtop30">
+                        <div class="col-md-6">
+                          <h4 class="aperu-regular makeBlue">Photographs</h4>
+                        </div>
+              
+                        <div class="col-md-6">
+                         <button class="primary-dws-button aperu-regular pull-right">Add Photographs</button>
+                        </div>
+                      </div>
+
+                      <div class="row imageGallery">
+                        <div class="col-md-3">
+                          <div class="thumb-img">
+                           <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
+                          </div>
+                          <div class="thumb-title makeBlue mTop15"><p>Bird Eye View of Venice</p></div>
+                          <div class="thumb-description"><p>Captured this Image 2
+                              Years ago. Still Love it!</p></div>
+                          <div class="action-buttons">
+                            <div class="makePurple zoom inline-block">
+                                <i class="fa fa-search-plus" aria-hidden="true"></i>
+                            </div>
+                            <div class="makeBlue editImage inline-block">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </div>
+                            <div class="makeRed deleteImags inline-block">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="thumb-img">
+                             <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
+                            </div>
+                            <div class="thumb-title makeBlue mTop15"><p>Bird Eye View of Venice</p></div>
+                            <div class="thumb-description"><p>Captured this Image 2
+                                Years ago. Still Love it!</p></div>
+                            <div class="action-buttons">
+                              <div class="makePurple zoom inline-block">
+                                  <i class="fa fa-search-plus" aria-hidden="true"></i>
+                              </div>
+                              <div class="makeBlue editImage inline-block">
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </div>
+                              <div class="makeRed deleteImags inline-block">
+                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </div>
+                            </div>
+  
+                          </div>
+                      </div>
+
+                      <div class="row  mBottom20 mtop30">
+                          <div class="col-md-6">
+                            <h4 class="aperu-regular makeBlue">Videos</h4>
+                            <label for="validPassport" class="custom-input-label">You can add Youtube &amp; Vimeo Links along with the Title & Description.</label>
+                          </div>
+                
+                          <div class="col-md-6">
+                           <button class="primary-dws-button aperu-regular pull-right">Add Videos</button>
+                          </div>
+                        </div>
+  
+                        <div class="row imageGallery">
+                          <div class="col-md-3">
+                            <div class="thumb-img">
+                             <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
+                            </div>
+                            <div class="thumb-title makeBlue mTop15"><p>Bird Eye View of Venice</p></div>
+                            <div class="thumb-description"><p>Captured this Image 2
+                                Years ago. Still Love it!</p></div>
+                            <div class="action-buttons">
+                              <div class="makeBlue editImage inline-block">
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </div>
+                              <div class="makeRed deleteImags inline-block">
+                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </div>
+                            </div>
+  
+                          </div>
+                          <div class="col-md-3">
+                              <div class="thumb-img">
+                               <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
+                              </div>
+                              <div class="thumb-title makeBlue mTop15"><p>Bird Eye View of Venice</p></div>
+                              <div class="thumb-description"><p>Captured this Image 2
+                                  Years ago. Still Love it!</p></div>
+                              <div class="action-buttons">
+                                <div class="makeBlue editImage inline-block">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </div>
+                                <div class="makeRed deleteImags inline-block">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </div>
+                              </div>
+    
+                            </div>
+                        </div>
+   
+  
+        </div>
+      </div>
+  
+    </div>
   
   </div>
+  
+  <div class="container">
+    <div class="call-to-action">
+      <div class="goBack">
+        <button>Previous Step</button>
+      </div>
+      <div class="saveButton">
+        <button>Save &amp; Continue</button>
+      </div>
+      <p>Save your Personal Information and Continue to next Step.</p>
+    </div>
+  </div>
+  
