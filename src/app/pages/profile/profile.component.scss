@@ -28,21 +28,27 @@
 
   .custom-tabs {
     margin-bottom: 28px;
+    margin: 0 auto;
     ul {
       display: flex;
       align-items: center;
       justify-content: center;
+      height: 46px;
+      padding-right: 42px;
 
       li {
         display: inline-block;
         // margin: 15px;
+        margin-top: 12px;
         margin: 8px;
 
         a {
           border: 1px solid $p-color;
           // background-color: rgb(41, 171, 226);
           color: $p-color;
-          padding: 12px 20px 12px 20px;
+          // padding: 12px 20px 12px 20px;
+          padding: 12px 29px 12px 29px;
+
           border-radius: 21px;
           background: $white;
           font-size: 22 px;
@@ -54,6 +60,19 @@
       }
     }
 
+  }
+
+  @media only screen and (max-width: 1340px){
+    .custom-tabs{
+      overflow-x: scroll;
+      overflow-y: hidden;
+      ul{
+        min-width: 1100px;
+      }
+    }
+    ::-webkit-scrollbar {
+      height: 6px;
+    }
   }
 }
 

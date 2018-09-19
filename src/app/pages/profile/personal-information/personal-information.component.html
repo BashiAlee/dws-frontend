@@ -116,7 +116,7 @@
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
               <ng-select formControlName="p1Country" [searchable]="false">
-                    <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
+                    <ng-option *ngFor="let country of countriesList" [value]="country.code">{{country.name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.p1Country.invalid && (form.p1Country.dirty || form.p1Country.touched)" class="invalid-feedback">
                   <div *ngIf="form.p1Country.errors.required">Country is required</div>
@@ -201,7 +201,7 @@
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
               <ng-select  formControlName="m1Country" [searchable]="false">
-                    <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
+                    <ng-option *ngFor="let country of countriesList" [value]="country.code">{{country.name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.m1Country.invalid && (form.m1Country.dirty || form.m1Country.touched)" class="invalid-feedback">
                   <div *ngIf="form.m1Country.errors.required">Country is required</div>

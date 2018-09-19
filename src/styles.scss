@@ -420,7 +420,6 @@ div.custom-table {
   box-shadow: inset 0 0 5px $scroll-bar;
   border-radius: 10px;
   width: 6px;
-  ;
 }
 
 /* Handle */
@@ -475,18 +474,24 @@ div.custom-table {
     color: $white !important;
     font-family: 'Apercu-Medium' !important;
     padding: 4px 0px 4px 0 !important;
-    width: 165px !important;
+    // width: 165px !important;
     text-align: center !important;
     border-radius: 32px !important;
 
     .ng-value-icon {
       float: right;
       border: 0 !important;
+      padding-right: 9px !important;
 
       &:hover {
         background-color: transparent !important;
         border: 0 !important;
       }
+    }
+
+    .ng-value-label {
+      padding-left: 22px !important;
+      padding-right: 7px !important;
     }
   }
 }

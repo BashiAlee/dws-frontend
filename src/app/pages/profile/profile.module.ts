@@ -28,6 +28,8 @@ import {
 } from './profile.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfileService } from '../../services/profile/profile.service';
+import { HttpModule } from '@angular/http';
 @NgModule({
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProfileRoutingModule,
     NgSelectModule,
     ReactiveFormsModule,
+    HttpModule
   ],
   declarations: [
     DocumentDeclarationComponent, 
@@ -46,6 +49,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     ProfileComponent
+  ],
+  providers: [
+    ProfileService
   ]
 })
 export class ProfileModule {}

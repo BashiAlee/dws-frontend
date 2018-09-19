@@ -16,12 +16,16 @@
 
 .alignItems {
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 18% 82%;
 }
 
 div.collapseCss {
   // grid-template-columns: 6% 94%;
   grid-template-columns: 115px auto;
+}
+
+.sidebar {
+  border-right: 1px solid $border-color-navbar;
 }
 
 

@@ -5,9 +5,9 @@ import { ProfileModule } from './pages/profile/profile.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo:'dashboard', pathMatch:'full' },
+  { path: '', redirectTo:'profile/:id', pathMatch:'full' },
   { path: 'dashboard', component: DashboardComponent },
-  {path:'profile' ,component: ProfileComponent, loadChildren: ()=>ProfileModule},
+  {path:'profile/:id' ,component: ProfileComponent, loadChildren: ()=>ProfileModule},
 ];
 
 @NgModule({

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiURL: "http://172.25.33.31/main_dws/public/"
+
 };
 
 /*

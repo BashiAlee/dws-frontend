@@ -45,6 +45,7 @@
   .sidebar-header {
     display: flex;
     height: 86px;
+    border-bottom: 1px solid $border-color-navbar;
 
     .toggle-button {
       align-items: center;
@@ -57,10 +58,26 @@
       i {
         color: $primary-color;
         font-size: 21px;
+        position: relative;
       }
 
       &:hover {
         cursor: pointer;
+      }
+
+      .notify-icon-red {
+        position: absolute;
+        top: -4px;
+        width: 10px;
+        /* left: 0; */
+        right: -4px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ff566a;
+        width: 10px;
+        height: 10px;
+   
+        
       }
     }
 
@@ -75,7 +92,7 @@
 
     .navbar-logo {
       align-items: center;
-      justify-content: flex-end;
+      // justify-content: flex-end;
       display: flex;
     }
   }
@@ -92,6 +109,33 @@
       i {
         margin-right: 20px;
         color: #d2d0e5;
+ 
+      }
+
+      .badge-value {
+
+        border: 1px solid #d8ddeb;
+        border-radius: 14px;
+        padding: 1px 12px 0px 12px;
+        float: right;
+        color: #ff566a;
+      }
+
+      .user-list {
+        position: relative;
+        .small-badge {
+          position: absolute;
+          top: -17px;
+     
+          right: -15px;
+          color: #ff566a;
+    
+          border: 1px solid #d8ddeb;
+          border-radius: 50%;
+          width: 20px;
+          font-size: 14px;
+          height: 20px;
+        }
       }
 
       .inner-item {
@@ -129,3 +173,4 @@ nav.collapsingSideBar {
     }
   }
 }
+

@@ -5,6 +5,7 @@
   grid-template-columns: 70% 30%;
   background-color: $white !important;
   height: 86px;
+  border-bottom: 1px solid $border-color-navbar;
 }
 
 .header {
@@ -17,7 +18,7 @@
 
   input {
     // background: url("http://kodyrabatowe.wp.pl/img/ico/search_gr.png") top left     no-repeat;
-    height: 86px;
+    height: 85px;
     border-style: none;
     color: #8e89bd;
     font-family: 'Apercu-Medium';
@@ -45,6 +46,8 @@
 .rightContent {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+    margin-right: 26px;
 
   .profile-section {
     display: flex;
