@@ -1,15 +1,62 @@
-<nav class="header navbar navbar-dark bg-dark flex-md-nowrap p-0">
+<nav class="header navbar navbar-dark bg-dark flex-md-nowrap p-0 custom-navbar">
+  <div class="search-bar">
+    <div class="input-group">
+      <span class="input-group-append">
+        <div class="input-group-text bg-transparent border-0"><i class="fa fa-search"></i></div>
+      </span>
+      <input class="form-control py-2" type="search" placeholder="Search your dashboard" id="example-search-input">
+    </div>
+  </div>
 
-  <div class="input-group col-md-6">
+  <div class="rightContent">
+      <div class="main-notification">
+        <div class="messages">
+          <a href="#">
+            <i class="fa fa-envelope-o"></i>
+          </a>
+          <div class="notify-icon blue"></div>
+        </div>
+      
+        <div class="notification">
+          <a href="#">
+            <i class="fa fa-bell-o"></i>
+          </a>
+          <div class="notify-icon pink"></div>
+        </div>
+      </div>
+      <div class="profile-section">
+        <div class="picture">
+          <img src="https://www.w3schools.com/bootstrap/sanfran.jpg" alt="Cinque Terre">
+        </div>
+
+        <div class="detail">
+          <p class="user-name">Sam Buxton</p>
+          <p class="user-type">Pilot</p>
+        </div>
+      </div>
+      <div class="dropdown-details">
+        <div class="btn-group dropdown-button">
+          <button type="button" class="dropdown-toggle toggler" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+
+            <button class="dropdown-item" type="button">Logout</button>
+          </div>
+        </div>
+      </div>
+      
+  </div>
+  <!-- <div class="input-group col-md-6">
     <span class="input-group-append">
       <div class="input-group-text bg-transparent border-0"><i class="fa fa-search"></i></div>
     </span>
     <input class="form-control py-2" type="search" value="search" id="example-search-input">
   </div>
 
-  <!-- Main Div -->
+
   <div class="col-md-6 row main-notification">
-    <!-- Notification, Message -->
+
     <div class="col-md-2 notification">
       <div class="row">
 
@@ -27,8 +74,7 @@
         </div>
       </div>
     </div>
-    <!-- /Notification, Message -->
-    <!-- User Image Name -->
+
     <div class="col-md-3">
       <div class="row">
         <div class="col-md-4">
@@ -44,9 +90,7 @@
         </div>
       </div>
     </div>
-    <!-- /User Image Name -->
 
-    <!-- Drop Down -->
     <div class="col-md-2">
       <div class="dropdown">
         <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
@@ -59,7 +103,7 @@
         </div>
       </div>
     </div>
-    <!-- /Drop Down -->
-  </div>
-  <!-- /Main Div -->
+
+  </div> -->
+
 </nav>

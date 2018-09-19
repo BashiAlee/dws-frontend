@@ -1,3 +1,4 @@
+<form [formGroup]="personalInformation">
 <div class="container makeBgWhite">
   <div class="personal-information">
     <div class="profile-details makeCenter">
@@ -18,20 +19,28 @@
 
     <div class="user-personal-info">
       <div class="container">
-        <form>
+   
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <label for="firstName" class="custom-input-label">First Name</label>
                 <input type="text" class="form-control custom-input" id="firstName" aria-describedby="firstName"
+                formControlName="firstname" 
                   placeholder="First Name">
+                  <div *ngIf="form.firstname.invalid && (form.firstname.dirty || form.firstname.touched)" class="invalid-feedback">
+                    <div *ngIf="form.firstname.errors.required">First Name is required</div>
+                </div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label for="middleName" class="custom-input-label">Middle Name</label>
                 <input type="text" class="form-control custom-input" id="middleName" aria-describedby="middleName"
+                formControlName="middleName" 
                   placeholder="Middle Name">
+                  <div *ngIf="form.middleName.invalid && (form.middleName.dirty || form.middleName.touched)" class="invalid-feedback">
+                    <div *ngIf="form.middleName.errors.required">Middle Name is required</div>
+                </div>
               </div>
             </div>
 
@@ -39,7 +48,11 @@
               <div class="form-group">
                 <label for="lastName" class="custom-input-label">last Name</label>
                 <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
-                  placeholder="Last Name">
+                formControlName="lastname"   
+                placeholder="Last Name">
+                  <div *ngIf="form.lastname.invalid && (form.lastname.dirty || form.lastname.touched)" class="invalid-feedback">
+                    <div *ngIf="form.lastname.errors.required">Last Name is required</div>
+                </div>
               </div>
             </div>
           </div>
@@ -47,20 +60,26 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="firstName" class="custom-input-label">Suffix</label>
-                <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+                <ng-select formControlName="nameSuffix"  [searchable]="false">
                         <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
                     </ng-select>
+                    <div *ngIf="form.nameSuffix.invalid && (form.nameSuffix.dirty || form.nameSuffix.touched)" class="invalid-feedback">
+                      <div *ngIf="form.nameSuffix.errors.required">Suffix is required</div>
+                  </div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label for="date" class="custom-input-label">Date</label>
-                <input type="date" class="form-control custom-input" id="date" aria-describedby="data">
+                <input type="date" class="form-control custom-input" id="date" aria-describedby="data"
+                formControlName="dob">
+                <div *ngIf="form.dob.invalid && (form.dob.dirty || form.dob.touched)" class="invalid-feedback">
+                  <div *ngIf="form.dob.errors.required">Date of birth is required</div>
+              </div>
               </div>
             </div>
 
           </div>
-        </form>
 
       </div>
     </div>
@@ -73,14 +92,22 @@
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
               <input type="text" class="form-control custom-input" id="addressone" aria-describedby="addressone"
+              formControlName="p1StreetAddress"
                 placeholder="Address line 1">
+                <div *ngIf="form.p1StreetAddress.invalid && (form.p1StreetAddress.dirty || form.p1StreetAddress.touched)" class="invalid-feedback">
+                  <div *ngIf="form.p1StreetAddress.errors.required">Street Address is required</div>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="addresstwo" class="custom-input-label">Address Line 2</label>
               <input type="text" class="form-control custom-input" id="addresstwo" aria-describedby="addresstwo"
-                placeholder="Address line 2">
+                placeholder="Address line 2"
+                formControlName="p2StreetAddress">
+                <div *ngIf="form.p2StreetAddress.invalid && (form.p2StreetAddress.dirty || form.p2StreetAddress.touched)" class="invalid-feedback">
+                  <div *ngIf="form.p2StreetAddress.errors.required">Street Address is required</div>
+              </div>
             </div>
           </div>
         </div>
@@ -88,23 +115,34 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
-              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+              <ng-select formControlName="p1Country" [searchable]="false">
                     <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
                 </ng-select>
+                <div *ngIf="form.p1Country.invalid && (form.p1Country.dirty || form.p1Country.touched)" class="invalid-feedback">
+                  <div *ngIf="form.p1Country.errors.required">Country is required</div>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="city" class="custom-input-label">City</label>
-              <input type="text" class="form-control custom-input" id="city" aria-describedby="city" placeholder="City">
+              <input type="text" class="form-control custom-input" id="city" aria-describedby="city" 
+              formControlName="p1City"
+              placeholder="City">
+              <div *ngIf="form.p1City.invalid && (form.p1City.dirty || form.p1City.touched)" class="invalid-feedback">
+                <div *ngIf="form.p1City.errors.required">City is required</div>
+            </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
-              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+              <ng-select formControlName="p1State" [searchable]="false">
                     <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
                 </ng-select>
+                <div *ngIf="form.p1State.invalid && (form.p1State.dirty || form.p1State.touched)" class="invalid-feedback">
+                  <div *ngIf="form.p1State.errors.required">City is required</div>
+              </div>
             </div>
           </div>
         </div>
@@ -112,7 +150,12 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="zip" class="custom-input-label">Zip</label>
-              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" placeholder="zip">
+              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" 
+              formControlName="p1Zip"
+              placeholder="zip">
+              <div *ngIf="form.p1Zip.invalid && (form.p1Zip.dirty || form.p1Zip.touched)" class="invalid-feedback">
+                <div *ngIf="form.p1Zip.errors.required">Zip is required</div>
+            </div>
             </div>
           </div>
         </div>
@@ -135,15 +178,21 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
-              <input type="text" class="form-control custom-input" id="addressone" aria-describedby="addressone"
+              <input type="text" class="form-control custom-input" id="addressone"   formControlName="m1StreetAddress" aria-describedby="addressone"
                 placeholder="Address line 1">
+                <div *ngIf="form.m1StreetAddress.invalid && (form.m1StreetAddress.dirty || form.m1StreetAddress.touched)" class="invalid-feedback">
+                  <div *ngIf="form.m1StreetAddress.errors.required">Street Address is required</div>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="addresstwo" class="custom-input-label">Address Line 2</label>
-              <input type="text" class="form-control custom-input" id="addresstwo" aria-describedby="addresstwo"
+              <input type="text" class="form-control custom-input" id="addresstwo"  formControlName="m2StreetAddress" aria-describedby="addresstwo"
                 placeholder="Address line 2">
+                <div *ngIf="form.m2StreetAddress.invalid && (form.m2StreetAddress.dirty || form.m2StreetAddress.touched)" class="invalid-feedback">
+                  <div *ngIf="form.m2StreetAddress.errors.required">Street Address is required</div>
+              </div>
             </div>
           </div>
         </div>
@@ -151,23 +200,32 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
-              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+              <ng-select  formControlName="m1Country" [searchable]="false">
                     <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
                 </ng-select>
+                <div *ngIf="form.m1Country.invalid && (form.m1Country.dirty || form.m1Country.touched)" class="invalid-feedback">
+                  <div *ngIf="form.m1Country.errors.required">Country is required</div>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="city" class="custom-input-label">City</label>
-              <input type="text" class="form-control custom-input" id="city" aria-describedby="city" placeholder="City">
+              <input type="text" class="form-control custom-input" id="city" formControlName="m1City" aria-describedby="city" placeholder="City">
+              <div *ngIf="form.m1City.invalid && (form.m1City.dirty || form.m1City.touched)" class="invalid-feedback">
+                <div *ngIf="form.m1City.errors.required">City is required</div>
+            </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
-              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+              <ng-select formControlName="m1State" [searchable]="false">
                     <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
                 </ng-select>
+                <div *ngIf="form.m1State.invalid && (form.m1State.dirty || form.m1State.touched)" class="invalid-feedback">
+                  <div *ngIf="form.m1State.errors.required">State is required</div>
+              </div>
             </div>
           </div>
         </div>
@@ -175,7 +233,10 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="zip" class="custom-input-label">Zip</label>
-              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" placeholder="zip">
+              <input type="text" class="form-control custom-input" id="zip" formControlName="m1Zip" aria-describedby="zip" placeholder="zip">
+              <div *ngIf="form.m1Zip.invalid && (form.m1Zip.dirty || form.m1Zip.touched)" class="invalid-feedback">
+                <div *ngIf="form.m1Zip.errors.required">Zip is required</div>
+            </div>
             </div>
           </div>
         </div>
@@ -189,14 +250,24 @@
             <div class="form-group">
               <label for="PrimaryEmail" class="custom-input-label">Primary Email</label>
               <input type="email" class="form-control custom-input" id="zip" aria-describedby="PrimaryEmail"
-                placeholder="PrimaryEmail">
+              formControlName="email"  
+              placeholder="PrimaryEmail">
+              <div *ngIf="form.email.invalid && (form.email.dirty || form.email.touched)" class="invalid-feedback">
+                <div *ngIf="form.email.errors.required">Email is required</div>
+                <div *ngIf="form.email.errors.email">Email must be a valid email address</div>
+            </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="PrimaryPhone" class="custom-input-label">Primary Phone</label>
-              <input type="number" class="form-control custom-input" id="PrimaryPhone" aria-describedby="PrimaryPhone"
+              <input type="number" class="form-control custom-input" id="PrimaryPhone"
+              formControlName="phone"
+              aria-describedby="PrimaryPhone"
                 placeholder="PrimaryPhone">
+                <div *ngIf="form.phone.invalid && (form.phone.dirty || form.phone.touched)" class="invalid-feedback">
+                  <div *ngIf="form.phone.errors.required">Phone is required</div>
+              </div>
             </div>
           </div>
         </div>
@@ -204,13 +275,23 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="general-info" class="custom-input-label">General Information</label>
-              <textarea class="form-control custom-textarea" id="general-info"></textarea>
+              <textarea class="form-control custom-textarea" id="general-info"
+              formControlName="gernalBiography"
+              ></textarea>
+              <div *ngIf="form.gernalBiography.invalid && (form.gernalBiography.dirty || form.gernalBiography.touched)" class="invalid-feedback">
+                <div *ngIf="form.gernalBiography.errors.required">Biography is required</div>
+            </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="notes" class="custom-input-label">Notes</label>
-              <textarea class="form-control custom-textarea" id="notes"></textarea>
+              <textarea class="form-control custom-textarea" id="notes"
+              formControlName="pInfoNotes"
+              ></textarea>
+              <div *ngIf="form.pInfoNotes.invalid && (form.pInfoNotes.dirty || form.pInfoNotes.touched)" class="invalid-feedback">
+                <div *ngIf="form.pInfoNotes.errors.required">Notes is required</div>
+            </div>
             </div>
           </div>
         </div>
@@ -227,8 +308,9 @@
       <button>Previous Step</button>
     </div>
     <div class="saveButton">
-      <button>Save &amp; Continue</button>
+      <button [disabled]="personalInformation.invalid" [class.disabledButton]="personalInformation.invalid">Save &amp; Continue</button>
     </div>
     <p>Save your Personal Information and Continue to next Step.</p>
   </div>
 </div>
+</form>

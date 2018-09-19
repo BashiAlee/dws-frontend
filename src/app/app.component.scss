@@ -13,3 +13,15 @@
   background: $background-color;
   padding-left: 0px;
 }
+
+.alignItems {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+div.collapseCss {
+  // grid-template-columns: 6% 94%;
+  grid-template-columns: 115px auto;
+}
+
+

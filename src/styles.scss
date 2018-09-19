@@ -57,12 +57,23 @@ i {
     cursor: pointer;
   }
 }
+a {
 
+  &:hover {
+    cursor: pointer;
+  }
+}
+input:focus {
+  box-shadow: none !important;
+}
 button {
   border: none;
 
   &:hover {
     cursor: pointer;
+  }
+  &:focus {
+    outline: 0 !important;
   }
 }
 
@@ -85,7 +96,7 @@ input.custom-input {
 }
 
 input.custom-input:focus {
-  box-shadow: none;
+  // box-shadow: none;
   border-color: $border-input-color;
 }
 
@@ -288,8 +299,10 @@ textarea.custom-textarea:focus {
   display: inline-block;
 
   img {
-    width: 144px;
-    height: 143px;
+    // width: 144px;
+    // height: 143px;
+    width: 104px;
+    height: 104px;
     border-radius: 28px;
     box-shadow: 0px 11px 46px 0px rgba(0, 0, 0, 0.2)
   }
@@ -547,4 +560,20 @@ div.custom-table {
     text-decoration: underline !important;
     font-family: 'Apercu-Bold';
   }
+}
+
+.invalid-feedback {
+  display: block !important;
+}
+button.disabledButton {
+  cursor: no-drop;
+  opacity: 0.6;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+     -webkit-appearance: none !important;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

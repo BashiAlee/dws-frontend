@@ -27,13 +27,14 @@ import {
   ProfileComponent
 } from './profile.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ProfileRoutingModule,
-    NgSelectModule
+    NgSelectModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     DocumentDeclarationComponent, 

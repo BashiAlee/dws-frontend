@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<!-- <div class="col-md-12">
   <a class="navbar-brand col-sm-7 col-md-7 mr-0" href="#"><img src="../../../assets/images/logo.svg" ></a>
   <span class="nav-pipes" onclick="openNav()">&#9776; </span>
 </div>
@@ -32,4 +32,57 @@
       </li>
     </ul>
   </div>
-</nav>
+</nav> -->
+
+<div class="custom-sidebar">
+  <!-- Sidebar -->
+  <nav class="sidebar" [class.collapsingSideBar]="!isOpen">
+      <div class="sidebar-header">
+        <a class="navbar-brand col-sm-7 col-md-7 mr-0 navbar-logo">
+          <img *ngIf="isOpen" src="../../../assets/images/logo.svg" >
+          <img class="small-logo" *ngIf="!isOpen" src="../../../assets/images/small-logo.png" >
+        </a>
+        <span class="nav-pipes toggle-button" (click)="toggleNav()"><i class="fa fa-align-justify" aria-hidden="true"></i>
+        </span>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li class="nav-item">
+          <a class="nav-link">
+            <span><i class="fa fa-tachometer"></i> 
+              <span class="inner-item" *ngIf="isOpen">Dashboard</span>
+              
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['profile']" [routerLinkActive]="['active-sidebarlink']">
+            <span><i class="fa fa-user-o" aria-hidden="true"></i>
+              <span class="inner-item" *ngIf="isOpen">Profiles</span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <span><i class="fa fa-users"></i>
+              <span class="inner-item" *ngIf="isOpen">Jobs</span>
+               </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <span><i class="fa fa-comment-o"></i> 
+              <span class="inner-item" *ngIf="isOpen">Communications</span></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <span><i class="fa fa-calendar" aria-hidden="true"></i>
+              <span class="inner-item" *ngIf="isOpen">Job Calender</span>
+              </span>
+          </a>
+        </li>
+      </ul>
+  </nav>
+
+</div>
