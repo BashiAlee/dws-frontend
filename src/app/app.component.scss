@@ -12,20 +12,27 @@
 .mainContent {
   background: $background-color;
   padding-left: 0px;
+  flex: 1;
 }
 
 .alignItems {
-  display: grid;
-  grid-template-columns: 18% 82%;
+  display: flex;
+  // grid-template-columns: 18% 82%;
+}
+
+
+
+.sidebar {
+  transition: all 100ms linear;
+  width: 300px;
+  border-right: 1px solid $border-color-navbar;
 }
 
 div.collapseCss {
   // grid-template-columns: 6% 94%;
-  grid-template-columns: 115px auto;
+  // grid-template-columns: 115px auto;
+
+  .sidebar {
+    width: 120px;
+  }
 }
-
-.sidebar {
-  border-right: 1px solid $border-color-navbar;
-}
-
-

@@ -1,6 +1,6 @@
 
 import { Component, Input, Output, EventEmitter, OnInit  } from '@angular/core';
-
+declare var $: any;
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -17,6 +17,7 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleNav() {
+    // $('.sidebar').fadeOut();
     this.isOpen = !this.isOpen;
     this.toggleEvent.emit(this.isOpen);
   }
