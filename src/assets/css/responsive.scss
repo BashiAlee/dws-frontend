@@ -1,0 +1,30 @@
+@media screen and (max-width: 1680px) {
+    div.inner-header {
+        nav.custom-navbar {
+            grid-template-columns: 50% 50%;
+        }
+    }
+
+  }
+  @media screen and (max-width: 1150px) {
+    div.inner-header {
+        nav.custom-navbar {
+            grid-template-columns: 30% 70%;
+        }
+    }
+
+}
+@media screen and (max-width:900px){
+    div.inner-header {
+        nav.custom-navbar {
+            grid-template-columns:100%;
+        }
+
+        .search-bar {
+            display: none;
+        }
+    }
+}
+  @media screen and (max-width:768px){
+    
+}

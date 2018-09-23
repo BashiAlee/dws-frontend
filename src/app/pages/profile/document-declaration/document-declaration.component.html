@@ -73,15 +73,6 @@
               <p class="aperu-mono mTop15 makeRed">file.pdf</p>
             </div>
           </div>
-          <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="FaaLink" class="custom-input-label">FAA Airman Registry Database Link</label>
-                  <input type="text" class="form-control custom-input" id="zip" aria-describedby="FaaLink"
-                    placeholder="Link">
-                </div>
-              </div>
-            </div>
             <div class="row">
                     
                 <div class="col-md-6">
@@ -102,7 +93,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="form-group">
-                        <label for="businessType" class="custom-input-label">Waivers Currently Held</label>
+                        <label for="businessType" class="custom-input-label mtop30">Waivers Currently Held</label>
                         <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
                           <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
                         </ng-select>
@@ -113,7 +104,7 @@
               <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <h3 class="mBottom25 mtop30">Additional Notes</h3>
+                      <h3  class="form-heading">Additional Notes</h3>
                       <textarea class="form-control custom-textarea" id="additional-notes"></textarea>
                     </div>
                   </div>

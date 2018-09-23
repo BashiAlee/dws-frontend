@@ -14,6 +14,7 @@
       </div>
       <p class="user-name">Sam Buxton</p>
       <p class="user-id">DWS208189890</p>
+      <p class="member-since">Member Since :  <span>14th December 2018.</span></p>
       <p class="user-description">You can use DWS Member ID Number as your Login Username also.</p>
     </div>
 
@@ -70,7 +71,7 @@
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <label for="date" class="custom-input-label">Date</label>
+                <label for="date" class="custom-input-label">Date of birth</label>
                 <input type="date" class="form-control custom-input" id="date" aria-describedby="data"
                 formControlName="dob">
                 <div *ngIf="form.dob.invalid && (form.dob.dirty || form.dob.touched)" class="invalid-feedback">
@@ -251,7 +252,7 @@
               <label for="PrimaryEmail" class="custom-input-label">Primary Email</label>
               <input type="email" class="form-control custom-input" id="zip" aria-describedby="PrimaryEmail"
               formControlName="email"  
-              placeholder="PrimaryEmail">
+              placeholder="Primary Email">
               <div *ngIf="form.email.invalid && (form.email.dirty || form.email.touched)" class="invalid-feedback">
                 <div *ngIf="form.email.errors.required">Email is required</div>
                 <div *ngIf="form.email.errors.email">Email must be a valid email address</div>
@@ -264,7 +265,7 @@
               <input type="number" class="form-control custom-input" id="PrimaryPhone"
               formControlName="phone"
               aria-describedby="PrimaryPhone"
-                placeholder="PrimaryPhone">
+                placeholder="Primary Phone">
                 <div *ngIf="form.phone.invalid && (form.phone.dirty || form.phone.touched)" class="invalid-feedback">
                   <div *ngIf="form.phone.errors.required">Phone is required</div>
               </div>
@@ -274,7 +275,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="general-info" class="custom-input-label">General Information</label>
+              <label for="general-info" class="form-heading">General Information</label>
               <textarea class="form-control custom-textarea" id="general-info"
               formControlName="gernalBiography"
               ></textarea>
@@ -285,7 +286,7 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="notes" class="custom-input-label">Notes</label>
+              <label for="notes" class="form-heading">Notes</label>
               <textarea class="form-control custom-textarea" id="notes"
               formControlName="pInfoNotes"
               ></textarea>

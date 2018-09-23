@@ -34,7 +34,7 @@
   </div>
 </nav> -->
 
-<div class="custom-sidebar">
+<div class="custom-sidebar" (window:resize)="onResize($event)">
   <!-- Sidebar -->
   <nav class="sidebar" [class.collapsingSideBar]="!isOpen">
       <div class="sidebar-header">

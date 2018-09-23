@@ -73,4 +73,8 @@ export class EquipmentComponent implements OnInit {
   ngOnInit() {
   }
 
+  editRow(value, type) {
+
+  }
+
 }

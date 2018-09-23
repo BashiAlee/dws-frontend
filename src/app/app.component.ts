@@ -1,18 +1,25 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { WOW } from '../assets/3rdParty/js/wow';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isOpen :boolean;
   @ViewChild(SidebarComponent) sidebar: SidebarComponent;
   title = 'DWS-Frontend';
 
   constructor(){
-    this.isOpen = true;
+    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    if(width < 768) {
+      this.isOpen = false;
+    } else {
+      this.isOpen = true;
+    }
+
   }
 
   checkSidebar(data) {
@@ -22,5 +29,13 @@ export class AppComponent {
     
    
   }
+
+  ngOnInit() {
+    new WOW().init();
+  }
+
+
+
+  
   
 }

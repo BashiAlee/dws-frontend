@@ -12,7 +12,7 @@
                       <div class="form-group">
                         <label for="businessType" class="custom-input-label">Type of Work offered</label>
                         <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
-                          <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+                          <ng-option *ngFor="let work of typeOfWork">{{work.name}}</ng-option>
                         </ng-select>
                       </div>
                     </div>
@@ -58,6 +58,16 @@
                         </div>
                       </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="businessType" class="custom-input-label">Distance Willing to travel</label>
+                        <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [clearable]="false" [searchable]="false">
+                          <ng-option *ngFor="let travel of distanceToTravel" >{{travel.value}}</ng-option>
+                      </ng-select>
+                      </div>
+                    </div>
+              </div>
                 <div class="row justify-content-start">
                     
                     <div class="col-md-12">
@@ -107,7 +117,7 @@
           </div> -->
           <div class="row">
               <div class="col-md-12">
-                  <h1 class="form-heading noPadding">Social/Professional Plarforms</h1>
+                  <h1 class="form-heading noPadding">Social/Professional Platforms</h1>
                   <label for="validPassport" class="custom-input-label">If you don’t have any of the listed platform presence. Please leave that field empty.</label>
                 </div>
           </div>
@@ -183,9 +193,9 @@
                   <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="facebookPersonal" class="custom-input-label">Personal Facebook Profile</label>
+                          <label for="facebookPersonal" class="custom-input-label">Business Website</label>
                           <input type="text" class="form-control custom-input" id="facebookPersonal" aria-describedby="facebookPersonal"
-                            placeholder="Personal Facebook Profile">
+                            placeholder="Business Website">
                         </div>
                       </div>
                     </div>

@@ -11,6 +11,48 @@ export class ExperiencePortfolioComponent implements OnInit {
       { name: 'Jr.' },
       { name: 'Sr.' }
   ]
+
+  distanceToTravel = [
+    {
+      value: "1-2"
+    },
+    {
+      value: "2-20"
+    },
+    {
+      value: "21-40"
+    },
+    {
+      value: "41-60"
+    },
+    {
+      value: "61-80"
+    },
+    {
+      value: "81-100"
+    }
+  ]
+
+  typeOfWork = [
+    {
+      name: "Aerial Photography"
+    },
+    {
+      name: "Aerial Video"
+    },
+    {
+      name: "Cinematography"
+    },
+    {
+      name: "Residential Real Estate"
+    },
+    {
+      name: "Commercial Real Estate"
+    },
+    {
+      name: "Flight Training"
+    }
+  ]
   constructor() { }
 
   ngOnInit() {
