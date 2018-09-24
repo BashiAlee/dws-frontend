@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentDeclarationComponent implements OnInit {
   selectedSuffix;
+  isLiabilityInsurance: any;
   suffix = [
       { name: 'Jr.' },
       { name: 'Sr.' }

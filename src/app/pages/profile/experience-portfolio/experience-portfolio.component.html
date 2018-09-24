@@ -21,8 +21,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="commercialSuasExp" class="custom-input-label">Years of Commercial SUAS Experience</label>
-                      <input type="text" class="form-control custom-input" id="commercialSuasExp" aria-describedby="commercialSuasExp"
-                        placeholder="Years of Commercial SUAS Experience">
+                      <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+                        <ng-option *ngFor="let exp of workExperience">{{exp.value}}</ng-option>
+                      </ng-select>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -84,6 +85,37 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                  <div class="row">
+                      <h1 class="form-heading noPadding makeBlock mtop30 mBottom25">Headshot &amp; Personal Photo upload</h1>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                      <div class="displayPicture">
+                        <img src="../../../../assets/images/avatar.png" alt="">
+                        <div class="image-upload">
+                          <label for="file-input">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                          </label>
+          
+                          <input id="file-input" type="file" />
+                        </div>
+                      </div>
+                      <p class="aperu-medium mTop15">Head Shot</p>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                      <div class="displayPicture">
+                        <img src="../../../../assets/images/avatar.png" alt="">
+                        <div class="image-upload">
+                          <label for="file-input">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                          </label>
+          
+                          <input id="file-input" type="file" />
+                        </div>
+          
+                      </div>
+                      <p class="aperu-medium mTop15">Other Personal Picture</p>
+                    </div>
+                    <p class="errorMsg makeBlock mtop30">We Suggest you to Upload a Square Images</p>
                   </div>
           <!-- <div class="row justify-content-center">
             <div class="col-md-3 makeCenter">

@@ -341,15 +341,15 @@ textarea.custom-textarea:focus {
 }
 
 .mTop15 {
-  margin-top: 15px;
+  margin-top: 15px !important;
 }
 
 .mBottom25 {
-  margin-bottom: 25px;
+  margin-bottom: 25px !important;
 }
 
 .mBottom20 {
-  margin-bottom: 20px;
+  margin-bottom: 20px !important;
 }
 
 input[type=number] {
@@ -470,7 +470,7 @@ div.custom-table {
 }
 
 .mtop30 {
-  margin-top: 30px;
+  margin-top: 30px !important;
 }
 
 .custom-ngselect {
@@ -599,4 +599,14 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.makeBlock {
+  width: 100%;
+  display: block;
+}
+
+.errorMsg {
+  font-family: 'Apercu-Regular';
+  color: #ff566a;
 }

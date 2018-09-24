@@ -133,14 +133,14 @@
         padding: 0;
         .drop-content {
           padding: 0px 20px 0px 20px;
-          min-height: 200px;
-          max-height: 200px;
+          min-height: 250px;
+          max-height: 250px;
           overflow-y: scroll;
           li {
             display: grid;
             grid-template-columns: 55px auto;
             align-items: center;
-            border-bottom: 1px solid $p-color;
+            border-bottom: 1px solid #73738a3b;
             padding-bottom: 8px;
             margin-top: 15px;
 

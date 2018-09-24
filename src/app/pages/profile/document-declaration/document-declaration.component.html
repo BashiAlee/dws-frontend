@@ -29,19 +29,19 @@
                   <label for="LiabilityInsurance" class="custom-input-label">Do You Have Aviation Liability Insurance?</label>
                   <div class="custom-radio">
                     <label class="container">Yes
-                      <input type="radio" name="LiabilityInsurance">
+                      <input type="radio" name="LiabilityInsurance" value="1" [(ngModel)]="isLiabilityInsurance" [ngModelOptions]="{standalone: true}" >
                       <span class="checkmark"></span>
                     </label>
       
                     <label class="container">No
-                      <input type="radio" name="LiabilityInsurance">
+                      <input type="radio" name="LiabilityInsurance"  value="0" [(ngModel)]="isLiabilityInsurance" [ngModelOptions]="{standalone: true}" >
                       <span class="checkmark"></span>
                     </label>
                   </div>
                 </div>
           </div>
   
-          <div class="row justify-content-center">
+          <div class="row justify-content-center" *ngIf="isLiabilityInsurance=='1'">
             <div class="col-md-6">
                 <label for="insuranceCertificate" class="custom-input-label hide-overflow">Upload a PDF of your Aviation Liability Insurance Certificate with
                     DWS listed as Additional Insured</label>
@@ -89,6 +89,37 @@
                   </div>
                 </div>
               </div>
+              <div class="row justify-content-center mtop30">
+                  <div class="col-md-6">
+                      <label for="insuranceCertificate" class="custom-input-label hide-overflow">Upload an image of your remote pilot Certificate.  Browse to upload jpg or png </label>
+                    <div class="displayPicture">
+                      <img src="../../../../assets/images/avatar.png" alt="">
+                      <div class="image-upload">
+                        <label for="file-input">
+                          <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </label>
+        
+                        <input id="file-input" type="file" />
+                      </div>
+                    </div>
+                    <p class="aperu-mono mTop15 makeRed">file.png</p>
+                  </div>
+                  <div class="col-md-6">
+                      <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your most recent recurrent exam result (If applicable) Browse to upload</label>
+                    <div class="displayPicture">
+                      <img src="../../../../assets/images/avatar.png" alt="">
+                      <div class="image-upload">
+                        <label for="file-input">
+                          <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </label>
+        
+                        <input id="file-input" type="file" />
+                      </div>
+        
+                    </div>
+                    <p class="aperu-mono mTop15 makeRed">file.pdf</p>
+                  </div>
+                </div>
 
               <div class="row">
                   <div class="col-md-12">
