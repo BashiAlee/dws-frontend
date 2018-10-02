@@ -6,6 +6,14 @@
     }
 
   }
+  @media screen and (max-width: 1500px) {
+    div.custom-tabs {
+        button {
+            display: block !important;
+        }
+    }
+
+  }
   @media screen and (max-width: 1150px) {
     div.inner-header {
         nav.custom-navbar {

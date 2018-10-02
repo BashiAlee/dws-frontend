@@ -8,18 +8,18 @@
       <div class="drones-details">
           <div class="inner-page-header mBottom20 mtop30">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-12 col-xs-12">
                   <h3 class="aperu-regular">Drones</h3>
                 </div>
       
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-12 col-xs-12">
                  <button class="primary-dws-button aperu-regular pull-right" (click)="showAddDrone=!showAddDrone">Add Drone</button>
                 </div>
               </div>
               <div class="add-drone-details" *ngIf="showAddDrone">
                 <div class="seperator"></div>
                   <div class="row add-top-border" >
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="form-group">
                           <label for="title" class="custom-input-label">Title</label>
                           <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [clearable]="false" [searchable]="false">
@@ -28,7 +28,7 @@
                         </div>
                       </div>
             
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="form-group">
                           <label for="serialnumber" class="custom-input-label">Serial Number (S/N)</label>
                           <input type="text" class="form-control custom-input" id="serialnumber" aria-describedby="serialnumber"
@@ -36,7 +36,7 @@
                         </div>
                       </div>
             
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="form-group">
                           <label for="Description" class="custom-input-label">Description</label>
                           <input type="text" class="form-control custom-input" id="Description" aria-describedby="Description"
@@ -46,7 +46,7 @@
                     </div>
             
                     <div class="row">
-                      <div class="col-md-12 makeCenter">
+                      <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
                         <button class="button-secondary-dws">Add to Drones</button>
                       </div>
                     </div>
@@ -76,21 +76,21 @@
             </div>
       </div>
 
-      <div class="batteries-details">
+      <!-- <div class="batteries-details">
           <div class="inner-page-header mBottom20 mtop30">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-12 col-xs-12">
                   <h3 class="aperu-regular">Batteries</h3>
                 </div>
       
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-12 col-xs-12">
                  <button class="primary-dws-button aperu-regular pull-right" (click)="showAddBattery=!showAddBattery">Add Battery</button>
                 </div>
               </div>
               <div class="add-battery-detail" *ngIf="showAddBattery">
                   <div class="seperator"></div>
                   <div class="row add-top-border" >
-                      <div class="col-md-6">
+                      <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                           <label for="title" class="custom-input-label">Title</label>
                           <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}">
@@ -100,7 +100,7 @@
                       </div>
       
             
-                      <div class="col-md-6">
+                      <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                           <label for="Description" class="custom-input-label">Description</label>
                           <input type="text" class="form-control custom-input" id="Description" aria-describedby="Description"
@@ -110,7 +110,7 @@
                     </div>
             
                     <div class="row">
-                      <div class="col-md-12 makeCenter">
+                      <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
                         <button class="button-secondary-dws">Add to Batteries</button>
                       </div>
                     </div>
@@ -137,23 +137,23 @@
                 </div>
               </div>
             </div>
-      </div>
+      </div> -->
 
       <div class="other-equipment-details">
           <div class="inner-page-header mBottom20 mtop30">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-12 col-xs-12">
                   <h3 class="aperu-regular">Other Equipment</h3>
                 </div>
       
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-12 col-xs-12">
                  <button class="primary-dws-button aperu-regular pull-right" (click)="otherEquipment=!otherEquipment">Add Other Equipment</button>
                 </div>
               </div>
               <div class="add-battery-detail" *ngIf="otherEquipment">
                   <div class="seperator"></div>
                   <div class="row add-top-border" >
-                      <div class="col-md-6">
+                      <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                           <label for="title" class="custom-input-label">Title</label>
                           <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}">
@@ -163,7 +163,7 @@
                       </div>
       
             
-                      <div class="col-md-6">
+                      <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                           <label for="Description" class="custom-input-label">Description</label>
                           <input type="text" class="form-control custom-input" id="Description" aria-describedby="Description"
@@ -173,7 +173,7 @@
                     </div>
             
                     <div class="row">
-                      <div class="col-md-12 makeCenter">
+                      <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
                         <button class="button-secondary-dws">Add to Other Equipment</button>
                       </div>
                     </div>
@@ -202,7 +202,7 @@
             </div>
       </div>
       <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="form-group">
               <h3  class="form-heading">Additional Notes</h3>
               <textarea class="form-control custom-textarea" id="additional-notes"></textarea>
@@ -219,7 +219,7 @@
         <button>Previous Step</button>
       </div>
       <div class="saveButton">
-        <button>Save &amp; Continue</button>
+        <button>Save</button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>

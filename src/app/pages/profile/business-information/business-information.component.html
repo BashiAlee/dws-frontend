@@ -12,7 +12,7 @@
           </div>
         </div> -->
       <p class="user-name">Business Information</p>
-      <p class="user-description">Please provide your business Information</p>
+      <p class="user-description">Please provide your business information</p>
     </div>
 
     <div class="user-personal-info">
@@ -30,9 +30,9 @@
                 <input id="file-input" type="file" />
               </div>
             </div>
-            <p class="aperu-medium mTop15">Business Logo (Primary)</p>
+            <p class="aperu-medium mTop15">Business Logo</p>
           </div>
-          <div class="col-md-3 makeCenter">
+          <!-- <div class="col-md-3 makeCenter">
             <div class="displayPicture">
               <img src="../../../../assets/images/avatar.png" alt="">
               <div class="image-upload">
@@ -45,18 +45,18 @@
 
             </div>
             <p class="aperu-medium mTop15">Business Logo (Secondary)</p>
-          </div>
+          </div> -->
         </div>
         <form>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
                 <label for="businessName" class="custom-input-label">Business Name</label>
                 <input type="text" class="form-control custom-input" id="businessName" aria-describedby="businessName"
                   placeholder="Business Name">
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
                 <label for="businessType" class="custom-input-label">Business Type</label>
                 <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
@@ -74,14 +74,14 @@
       <div class="container">
         <h1 class="form-heading">Business Physical Address</h1>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
               <input type="text" class="form-control custom-input" id="addressone" aria-describedby="addressone"
                 placeholder="Address line 1">
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addresstwo" class="custom-input-label">Address Line 2</label>
               <input type="text" class="form-control custom-input" id="addresstwo" aria-describedby="addresstwo"
@@ -90,7 +90,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
               <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
@@ -98,13 +98,13 @@
               </ng-select>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="city" class="custom-input-label">City</label>
               <input type="text" class="form-control custom-input" id="city" aria-describedby="city" placeholder="City">
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
               <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
@@ -114,10 +114,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
-              <label for="zip" class="custom-input-label">Zip</label>
-              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" placeholder="zip">
+              <label for="zip" class="custom-input-label"> ZIP Code</label>
+              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" placeholder=" ZIP Code">
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@
       <div class="container">
         <h1 class="form-heading">Business Mailing Address</h1>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="custom-checkbox">
               <label class="container">Same as Physical Address
                 <input type="checkbox" checked="checked">
@@ -137,14 +137,14 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
               <input type="text" class="form-control custom-input" id="addressone" aria-describedby="addressone"
                 placeholder="Address line 1">
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addresstwo" class="custom-input-label">Address Line 2</label>
               <input type="text" class="form-control custom-input" id="addresstwo" aria-describedby="addresstwo"
@@ -153,7 +153,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
               <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
@@ -161,13 +161,13 @@
               </ng-select>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="city" class="custom-input-label">City</label>
               <input type="text" class="form-control custom-input" id="city" aria-describedby="city" placeholder="City">
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
               <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
@@ -177,7 +177,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="zip" class="custom-input-label">Zip</label>
               <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" placeholder="zip">
@@ -190,14 +190,14 @@
     <div class="other-info">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="businessPhoneNumberP" class="custom-input-label">Business Phone Number (Primary)</label>
               <input type="number" class="form-control custom-input" id="zip" aria-describedby="businessPhoneNumberP"
                 placeholder="Business Phone Number (Primary)">
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="businessPhoneNumberS" class="custom-input-label">Business Phone Number (Secondary)</label>
               <input type="number" class="form-control custom-input" id="businessPhoneNumberS" aria-describedby="businessPhoneNumberS"
@@ -206,7 +206,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="stateRegistered" class="custom-input-label">State Registered In</label>
               <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
@@ -214,7 +214,7 @@
               </ng-select>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="BusinessStartDate" class="custom-input-label">Business Start Date</label>
               <input type="date" class="form-control custom-input" id="BusinessStartDate" aria-describedby="BusinessStartDate"
@@ -223,7 +223,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <label for="liabilityRadio" class="custom-input-label">General Liability Insurance</label>
             <div class="custom-radio">
               <label class="container">Yes
@@ -237,7 +237,7 @@
               </label>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
               <label for="liabilityRadio" class="custom-input-label">Professional Liability Insurance</label>
               <div class="custom-radio">
                 <label class="container">Yes
@@ -253,7 +253,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12 col-xs-12">
               <label for="CompInsurance" class="custom-input-label">Workman’s Comp Insurance</label>
               <div class="custom-radio">
                 <label class="container">Yes
@@ -267,7 +267,7 @@
                 </label>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <label for="AutoInsurance" class="custom-input-label">Commercial Auto Insurance</label>
                 <div class="custom-radio">
                   <label class="container">Yes
@@ -303,7 +303,7 @@
       <button>Previous Step</button>
     </div>
     <div class="saveButton">
-      <button>Save &amp; Continue</button>
+      <button>Save</button>
     </div>
     <p>Save your Personal Information and Continue to next Step.</p>
   </div>

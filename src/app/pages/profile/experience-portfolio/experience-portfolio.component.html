@@ -2,13 +2,13 @@
     <div class="personal-information">
       <div class="experience-portfolio-info-details makeCenter">
         <p class="user-name">Experience &amp; Work Portfolio</p>
-        <p class="user-description">Please Provide the Correct Information about your Experience &amp; Work Portfolio Details </p>
+        <p class="user-description">Please provide information regarding your experience and work portfolio</p>
       </div>
   
       <div class="user-personal-info">
         <div class="container">
               <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <label for="businessType" class="custom-input-label">Type of Work offered</label>
                         <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
@@ -18,34 +18,47 @@
                     </div>
               </div>
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                      <label for="commercialSuasExp" class="custom-input-label">Years of Commercial SUAS Experience</label>
-                      <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
+                      <label for="commercialSuasExp" class="custom-input-label">Years of Commercial sUAS Experience</label>
+                      <ng-select [searchable]="false">
                         <ng-option *ngFor="let exp of workExperience">{{exp.value}}</ng-option>
                       </ng-select>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                      <label for="travelOutside" class="custom-input-label">Are you Willing to Travel outside of united States?</label>
-                      <div class="custom-radio">
-                        <label class="container">Yes
-                          <input type="radio" name="travelOutside">
-                          <span class="checkmark"></span>
-                        </label>
-          
-                        <label class="container">No
-                          <input type="radio" name="travelOutside">
-                          <span class="checkmark"></span>
-                        </label>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label for="businessType" class="custom-input-label">Notify me of jobs within the following range.</label>
+                        <ng-select [clearable]="false" [searchable]="false">
+                          <ng-option *ngFor="let travel of distanceToTravel" >{{travel.value}}</ng-option>
+                      </ng-select>
                       </div>
                     </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <label for="travelOutside" class="custom-input-label">Are you willing to travel outside of the United States?</label>
+                  <div class="custom-radio">
+                    <label class="container">Yes
+                      <input type="radio" name="travelOutside">
+                      <span class="checkmark"></span>
+                    </label>
+      
+                    <label class="container">No
+                      <input type="radio" name="travelOutside">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
                 </div>
+              </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <h1 class="form-heading">Passport</h1>
-                        <label for="validPassport" class="custom-input-label">Do you have a Valid Passport?</label>
+                        <label for="validPassport" class="custom-input-label">Do you have a valid passport?</label>
                         <div class="custom-radio">
                           <label class="container">Yes
                             <input type="radio" name="validPassport">
@@ -59,21 +72,11 @@
                         </div>
                       </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="businessType" class="custom-input-label">Distance Willing to travel</label>
-                        <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [clearable]="false" [searchable]="false">
-                          <ng-option *ngFor="let travel of distanceToTravel" >{{travel.value}}</ng-option>
-                      </ng-select>
-                      </div>
-                    </div>
-              </div>
+
                 <div class="row justify-content-start">
                     
-                    <div class="col-md-12">
-                        <label for="passportImage" class="custom-input-label">Upload of your passport is Optional and is not Required at this time. DWS May require a copy of your Passport on file
-                            Depending on the Project type.</label>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <label for="passportImage" class="custom-input-label"> If DWS requires you to upload a copy of your passport, please do so here</label>
                       <div class="passportImage">
                         <img src="../../../../assets/images/image-placeholder.png" alt="">
                         <div class="image-upload">
@@ -115,7 +118,7 @@
                       </div>
                       <p class="aperu-medium mTop15">Other Personal Picture</p>
                     </div>
-                    <p class="errorMsg makeBlock mtop30">We Suggest you to Upload a Square Images</p>
+                    <!-- <p class="errorMsg makeBlock mtop30">We Suggest you to Upload a Square Images</p> -->
                   </div>
           <!-- <div class="row justify-content-center">
             <div class="col-md-3 makeCenter">
@@ -148,72 +151,72 @@
             </div>
           </div> -->
           <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                   <h1 class="form-heading noPadding">Social/Professional Platforms</h1>
-                  <label for="validPassport" class="custom-input-label">If you don’t have any of the listed platform presence. Please leave that field empty.</label>
+                  <!-- <label for="validPassport" class="custom-input-label">If you don’t have any of the listed platform presence. Please leave that field empty.</label> -->
                 </div>
           </div>
         
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <label for="facebookPersonal" class="custom-input-label">Personal Facebook Profile</label>
+                  <label for="facebookPersonal" class="custom-input-label">Personal Facebook Timeline</label>
                   <input type="text" class="form-control custom-input" id="facebookPersonal" aria-describedby="facebookPersonal"
-                    placeholder="Personal Facebook Profile">
+                    placeholder="Personal Facebook Timeline">
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <label for="businessFb" class="custom-input-label">Business Facebook Profile</label>
+                  <label for="businessFb" class="custom-input-label">Facebook Business Page</label>
                   <input type="text" class="form-control custom-input" id="businessName" aria-describedby="businessName"
-                  placeholder="Business Facebook Profile">
+                  placeholder="Facebook Business Page">
                 </div>
               </div>
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
-                    <label for="InstagramHandle" class="custom-input-label">Instagram Handle</label>
+                    <label for="InstagramHandle" class="custom-input-label">Instagram</label>
                     <input type="text" class="form-control custom-input" id="InstagramHandle" aria-describedby="InstagramHandle"
                       placeholder="Instagram">
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
-                    <label for="Twitter" class="custom-input-label">Twitter</label>
+                    <label for="Twitter" class="custom-input-label">Twitter Handle</label>
                     <input type="text" class="form-control custom-input" id="Twitter" aria-describedby="Twitter"
-                    placeholder="Twitter">
+                    placeholder="Twitter Handle">
                   </div>
                 </div>
               </div>
 
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                      <label for="LinkedPersonal" class="custom-input-label">Personal Linked Profile</label>
+                      <label for="LinkedPersonal" class="custom-input-label">Personal LinkedIn Profile</label>
                       <input type="text" class="form-control custom-input" id="LinkedPersonal" aria-describedby="LinkedPersonal"
-                        placeholder="Personal Linked Profile">
+                        placeholder="Personal LinkedIn Profile">
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-                      <label for="businessLinkedIn" class="custom-input-label">Business LinkedIn Profile</label>
+                      <label for="businessLinkedIn" class="custom-input-label">LinkedIn Business Page</label>
                       <input type="text" class="form-control custom-input" id="businessLinkedIn" aria-describedby="businessLinkedIn"
-                      placeholder="Business LinkedIn Profile">
+                      placeholder="LinkedIn Business Page">
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <label for="youtubeChannel" class="custom-input-label">Youtube Channel</label>
                         <input type="text" class="form-control custom-input" id="youtubeChannel" aria-describedby="youtubeChannel"
                           placeholder="Youtube Channel">
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <label for="vimeoChannel" class="custom-input-label">Vimeo Channel</label>
                         <input type="text" class="form-control custom-input" id="vimeoChannel" aria-describedby="vimeoChannel"
@@ -223,7 +226,7 @@
                   </div>
 
                   <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                           <label for="facebookPersonal" class="custom-input-label">Business Website</label>
                           <input type="text" class="form-control custom-input" id="facebookPersonal" aria-describedby="facebookPersonal"
@@ -232,24 +235,23 @@
                       </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <h1 class="form-heading noPadding">Portfolio &amp; Work Samples</h1>
-                            <label for="validPassport" class="custom-input-label">You can Upload your Photographs and Paste your Youtube/Vimeo Links as
-                                your Video Portfolio</label>
+                            <label for="validPassport" class="custom-input-label">Upload your photos and paste YouTube or Vimeo links to highlight your work</label>
                           </div>
                     </div>
                     <div class="row  mBottom20 mtop30">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
                           <h4 class="aperu-regular makeBlue">Photographs</h4>
                         </div>
               
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
                          <button class="primary-dws-button aperu-regular pull-right">Add Photographs</button>
                         </div>
                       </div>
 
                       <div class="row imageGallery">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="thumb-img">
                            <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
                           </div>
@@ -269,7 +271,7 @@
                           </div>
 
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
                             <div class="thumb-img">
                              <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
                             </div>
@@ -292,18 +294,18 @@
                       </div>
 
                       <div class="row  mBottom20 mtop30">
-                          <div class="col-md-6">
+                          <div class="col-md-6 col-sm-12 col-xs-12">
                             <h4 class="aperu-regular makeBlue">Videos</h4>
-                            <label for="validPassport" class="custom-input-label">You can add Youtube &amp; Vimeo Links along with the Title & Description.</label>
+                            <!-- <label for="validPassport" class="custom-input-label">You can add Youtube &amp; Vimeo Links along with the Title & Description.</label> -->
                           </div>
                 
-                          <div class="col-md-6">
+                          <div class="col-md-6 col-sm-12 col-xs-12">
                            <button class="primary-dws-button aperu-regular pull-right">Add Videos</button>
                           </div>
                         </div>
   
                         <div class="row imageGallery">
-                          <div class="col-md-3">
+                          <div class="col-md-3 col-sm-6 col-xs-12">
                             <div class="thumb-img">
                              <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
                             </div>
@@ -320,7 +322,7 @@
                             </div>
   
                           </div>
-                          <div class="col-md-3">
+                          <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="thumb-img">
                                <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
                               </div>
@@ -353,7 +355,7 @@
         <button>Previous Step</button>
       </div>
       <div class="saveButton">
-        <button>Save &amp; Continue</button>
+        <button>Save</button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>

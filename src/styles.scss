@@ -307,7 +307,23 @@ textarea.custom-textarea:focus {
     width: 104px;
     height: 104px;
     border-radius: 28px;
-    box-shadow: 0px 11px 46px 0px rgba(0, 0, 0, 0.2)
+    box-shadow: 0px 11px 46px 0px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.pdf-uploader, .image-uploader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  width: 164px; 
+  height: 159px;
+  box-shadow: 0px 11px 46px 0px rgba(0, 0, 0, 0.2);
+
+  img {
+    width: 58px; 
+    height: 66px;
   }
 }
 
@@ -343,6 +359,9 @@ textarea.custom-textarea:focus {
 .mTop15 {
   margin-top: 15px !important;
 }
+.mTop100 {
+  margin-top: 100px !important;
+}
 
 .mBottom25 {
   margin-bottom: 25px !important;
@@ -352,9 +371,9 @@ textarea.custom-textarea:focus {
   margin-bottom: 20px !important;
 }
 
-input[type=number] {
-  font-family: 'Karla-Bold';
-}
+// input[type=number] {
+//   font-family: 'Karla-Bold';
+// }
 
 div.ng-select-container {
   height: 56px !important;
@@ -551,6 +570,7 @@ div.custom-table {
 .hide-overflow {
   height: 44px;
   overflow: hidden;
+  display: block;
 }
 
 .docs-dec {

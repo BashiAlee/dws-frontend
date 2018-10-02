@@ -14,15 +14,15 @@
       </div>
       <p class="user-name">Sam Buxton</p>
       <p class="user-id">DWS208189890</p>
-      <p class="member-since">Member Since :  <span>14th December 2018.</span></p>
-      <p class="user-description">You can use DWS Member ID Number as your Login Username also.</p>
+      <p class="member-since">Member Since :  <span>Dec / 02 / 2018.</span></p>
+      <p class="user-description">You may also login using your DWS Member ID Number in the Username field.</p>
     </div>
 
     <div class="user-personal-info">
       <div class="container">
    
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="firstName" class="custom-input-label">First Name</label>
                 <input type="text" class="form-control custom-input" id="firstName" aria-describedby="firstName"
@@ -33,7 +33,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="middleName" class="custom-input-label">Middle Name</label>
                 <input type="text" class="form-control custom-input" id="middleName" aria-describedby="middleName"
@@ -45,9 +45,9 @@
               </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="form-group">
-                <label for="lastName" class="custom-input-label">last Name</label>
+                <label for="lastName" class="custom-input-label">Last Name</label>
                 <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
                 formControlName="lastname"   
                 placeholder="Last Name">
@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="firstName" class="custom-input-label">Suffix</label>
                 <ng-select formControlName="nameSuffix"  [searchable]="false">
@@ -69,9 +69,9 @@
                   </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="form-group">
-                <label for="date" class="custom-input-label">Date of birth</label>
+                <label for="date" class="custom-input-label">Date of Birth</label>
                 <input type="date" class="form-control custom-input" id="date" aria-describedby="data"
                 formControlName="dob">
                 <div *ngIf="form.dob.invalid && (form.dob.dirty || form.dob.touched)" class="invalid-feedback">
@@ -89,22 +89,22 @@
       <div class="container">
         <h1 class="form-heading">Physical Address</h1>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
               <input type="text" class="form-control custom-input" id="addressone" aria-describedby="addressone"
               formControlName="p1StreetAddress"
-                placeholder="Address line 1">
+                placeholder="Address Line 1">
                 <div *ngIf="form.p1StreetAddress.invalid && (form.p1StreetAddress.dirty || form.p1StreetAddress.touched)" class="invalid-feedback">
                   <div *ngIf="form.p1StreetAddress.errors.required">Street Address is required</div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addresstwo" class="custom-input-label">Address Line 2</label>
               <input type="text" class="form-control custom-input" id="addresstwo" aria-describedby="addresstwo"
-                placeholder="Address line 2"
+                placeholder="Address Line 2"
                 formControlName="p2StreetAddress">
                 <div *ngIf="form.p2StreetAddress.invalid && (form.p2StreetAddress.dirty || form.p2StreetAddress.touched)" class="invalid-feedback">
                   <div *ngIf="form.p2StreetAddress.errors.required">Street Address is required</div>
@@ -113,7 +113,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
               <ng-select formControlName="p1Country" [searchable]="false">
@@ -124,7 +124,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="city" class="custom-input-label">City</label>
               <input type="text" class="form-control custom-input" id="city" aria-describedby="city" 
@@ -135,7 +135,7 @@
             </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
               <ng-select formControlName="p1State" [searchable]="false">
@@ -148,12 +148,12 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="zip" class="custom-input-label">Zip</label>
               <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" 
               formControlName="p1Zip"
-              placeholder="zip">
+              placeholder="Zip">
               <div *ngIf="form.p1Zip.invalid && (form.p1Zip.dirty || form.p1Zip.touched)" class="invalid-feedback">
                 <div *ngIf="form.p1Zip.errors.required">Zip is required</div>
             </div>
@@ -166,7 +166,7 @@
       <div class="container">
         <h1 class="form-heading">Mailing Address</h1>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="custom-checkbox">
               <label class="container">Same as Physical Address
                 <input type="checkbox" checked="checked">
@@ -176,21 +176,21 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
               <input type="text" class="form-control custom-input" id="addressone"   formControlName="m1StreetAddress" aria-describedby="addressone"
-                placeholder="Address line 1">
+                placeholder="Address Line 1">
                 <div *ngIf="form.m1StreetAddress.invalid && (form.m1StreetAddress.dirty || form.m1StreetAddress.touched)" class="invalid-feedback">
                   <div *ngIf="form.m1StreetAddress.errors.required">Street Address is required</div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addresstwo" class="custom-input-label">Address Line 2</label>
               <input type="text" class="form-control custom-input" id="addresstwo"  formControlName="m2StreetAddress" aria-describedby="addresstwo"
-                placeholder="Address line 2">
+                placeholder="Address Line 2">
                 <div *ngIf="form.m2StreetAddress.invalid && (form.m2StreetAddress.dirty || form.m2StreetAddress.touched)" class="invalid-feedback">
                   <div *ngIf="form.m2StreetAddress.errors.required">Street Address is required</div>
               </div>
@@ -198,7 +198,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
               <ng-select  formControlName="m1Country" [searchable]="false">
@@ -209,7 +209,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="city" class="custom-input-label">City</label>
               <input type="text" class="form-control custom-input" id="city" formControlName="m1City" aria-describedby="city" placeholder="City">
@@ -218,7 +218,7 @@
             </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
               <ng-select formControlName="m1State" [searchable]="false">
@@ -231,10 +231,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="zip" class="custom-input-label">Zip</label>
-              <input type="text" class="form-control custom-input" id="zip" formControlName="m1Zip" aria-describedby="zip" placeholder="zip">
+              <input type="text" class="form-control custom-input" id="zip" formControlName="m1Zip" aria-describedby="zip" placeholder="Zip">
               <div *ngIf="form.m1Zip.invalid && (form.m1Zip.dirty || form.m1Zip.touched)" class="invalid-feedback">
                 <div *ngIf="form.m1Zip.errors.required">Zip is required</div>
             </div>
@@ -247,7 +247,7 @@
     <div class="other-info">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="PrimaryEmail" class="custom-input-label">Primary Email</label>
               <input type="email" class="form-control custom-input" id="zip" aria-describedby="PrimaryEmail"
@@ -259,7 +259,7 @@
             </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="PrimaryPhone" class="custom-input-label">Primary Phone</label>
               <input type="number" class="form-control custom-input" id="PrimaryPhone"
@@ -273,9 +273,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-              <label for="general-info" class="form-heading">General Information</label>
+              <label for="general-info" class="form-heading">General Information / BIO</label>
               <textarea class="form-control custom-textarea" id="general-info"
               formControlName="gernalBiography"
               ></textarea>
@@ -284,7 +284,7 @@
             </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="notes" class="form-heading">Notes</label>
               <textarea class="form-control custom-textarea" id="notes"
@@ -309,7 +309,7 @@
       <button>Previous Step</button>
     </div>
     <div class="saveButton">
-      <button [disabled]="personalInformation.invalid" [class.disabledButton]="personalInformation.invalid">Save &amp; Continue</button>
+      <button [disabled]="personalInformation.invalid" [class.disabledButton]="personalInformation.invalid">Save</button>
     </div>
     <p>Save your Personal Information and Continue to next Step.</p>
   </div>

@@ -2,14 +2,14 @@
     <div class="personal-information">
       <div class="document-declaration-details makeCenter">
         <p class="user-name">Documents &amp; Declaration</p>
-        <p class="user-description">Please Provide the Correct Information about your documents &amp; declaration</p>
+        <p class="user-description"> Please upload the following documents and agree to the declaration below</p>
       </div>
   
       <div class="user-personal-info">
         <div class="container">
 
           <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-12 col-xs-12">
                   <label for="Veteran" class="custom-input-label">Veteran?</label>
                   <div class="custom-radio">
                     <label class="container">Yes
@@ -25,8 +25,8 @@
                 </div>
           </div>
           <div class="row">
-              <div class="col-md-6">
-                  <label for="LiabilityInsurance" class="custom-input-label">Do You Have Aviation Liability Insurance?</label>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                  <label for="LiabilityInsurance" class="custom-input-label">Do you have aviation liability insurance?</label>
                   <div class="custom-radio">
                     <label class="container">Yes
                       <input type="radio" name="LiabilityInsurance" value="1" [(ngModel)]="isLiabilityInsurance" [ngModelOptions]="{standalone: true}" >
@@ -42,11 +42,10 @@
           </div>
   
           <div class="row justify-content-center" *ngIf="isLiabilityInsurance=='1'">
-            <div class="col-md-6">
-                <label for="insuranceCertificate" class="custom-input-label hide-overflow">Upload a PDF of your Aviation Liability Insurance Certificate with
-                    DWS listed as Additional Insured</label>
-              <div class="displayPicture">
-                <img src="../../../../assets/images/avatar.png" alt="">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your aviation liability insurance certificate </label>
+              <div class="pdf-uploader">
+                <img src="../../../../assets/images/pdf-file.svg" alt="">
                 <div class="image-upload">
                   <label for="file-input">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -57,10 +56,12 @@
               </div>
               <p class="aperu-mono mTop15 makeRed">file.pdf</p>
             </div>
-            <div class="col-md-6">
-                <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF of your Aviation Liability Insurance Certificate</label>
-              <div class="displayPicture">
-                <img src="../../../../assets/images/avatar.png" alt="">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <label for="insuranceCertificate" class="custom-input-label hide-overflow">Upload a PDF copy of your
+                    aviation liability insurance certificate with Drone Workforce Solutions listed as an additional insured</label>
+
+              <div class="pdf-uploader">
+                <img src="../../../../assets/images/pdf-file.svg" alt="">
                 <div class="image-upload">
                   <label for="file-input">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -75,8 +76,8 @@
           </div>
             <div class="row">
                     
-                <div class="col-md-6">
-                    <label for="passportImage" class="custom-input-label">Driver’s License (Upload Screenshot of your Driving License)</label>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <label for="passportImage" class="custom-input-label">Driver’s License (upload a photo or scan of your driver’s license if required by DWS).</label>
                   <div class="passportImage">
                     <img src="../../../../assets/images/image-placeholder.png" alt="">
                     <div class="image-upload">
@@ -90,10 +91,10 @@
                 </div>
               </div>
               <div class="row justify-content-center mtop30">
-                  <div class="col-md-6">
-                      <label for="insuranceCertificate" class="custom-input-label hide-overflow">Upload an image of your remote pilot Certificate.  Browse to upload jpg or png </label>
-                    <div class="displayPicture">
-                      <img src="../../../../assets/images/avatar.png" alt="">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                      <label for="insuranceCertificate" class="custom-input-label hide-overflow">Upload a photo or scan of your remote pilot certificate.</label>
+                    <div class="image-uploader">
+                      <img src="../../../../assets/images/photo-camera.svg" alt="">
                       <div class="image-upload">
                         <label for="file-input">
                           <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -104,10 +105,10 @@
                     </div>
                     <p class="aperu-mono mTop15 makeRed">file.png</p>
                   </div>
-                  <div class="col-md-6">
-                      <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your most recent recurrent exam result (If applicable) Browse to upload</label>
-                    <div class="displayPicture">
-                      <img src="../../../../assets/images/avatar.png" alt="">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                      <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your most recent recurrent exam result (if applicable)</label>
+                    <div class="pdf-uploader">
+                      <img src="../../../../assets/images/pdf-file.svg" alt="">
                       <div class="image-upload">
                         <label for="file-input">
                           <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -122,7 +123,7 @@
                 </div>
 
               <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <label for="businessType" class="custom-input-label mtop30">Waivers Currently Held</label>
                         <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
@@ -133,7 +134,7 @@
               </div>
 
               <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <h3  class="form-heading">Additional Notes</h3>
                       <textarea class="form-control custom-textarea" id="additional-notes"></textarea>
@@ -141,7 +142,7 @@
                   </div>
                 </div>
                 <div class="row docs-dec">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <h3 class="mBottom25 mtop30">Declaration &amp; Certification</h3>
                         <p>I have completed and submitted the information as requested by Drone Workforce Solutions, LLC and hereby certify that the information contained herein and all attachments submitted are true, correct and accurate to the best of my knowledge and belief. I understand that this Declaration and Certification has been established by Drone Workforce Solutions, LLC. I further understand that completion and submission of this application, together with all attachments hereto, is not necessarily the sole criteria for determining certification to work with Drone Workforce Solutions, LLC, and no promises have been made for obtaining work from Drone Workforce Solutions.</p>
@@ -155,7 +156,7 @@
                     </div>
                   </div>
                   <div class="row achievement-dec">
-                      <div class="col-md-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                           <h3 class="mBottom25 mtop30">Achievement</h3>
                           <p>By clicking this box I acknowledge and agree that I have carefully reviewed the list of required materials, documentation and information I have provided to Drone Workforce Solutions, LLC, and the materials, documentation and information submitted and required is true and correct.</p>
@@ -167,7 +168,7 @@
                       </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
                           <div class="custom-checkbox">
                             <label class="container">Agreed
                               <input type="checkbox">
@@ -191,7 +192,7 @@
         <button>Previous Step</button>
       </div>
       <div class="saveButton">
-        <button>Save &amp; Continue</button>
+        <button>Save</button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>

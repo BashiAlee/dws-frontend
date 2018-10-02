@@ -6,11 +6,17 @@ declare var $: any;
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
   }
   
-
+  moveForward() {
+    var leftPos = $('.custom-tabs').scrollLeft();
+    $(".custom-tabs").animate({scrollLeft: leftPos + 70}, 400);
+  }
+  moveBackward() {
+    var leftPos = $('.custom-tabs').scrollLeft();
+    $(".custom-tabs").animate({scrollLeft: leftPos - 70}, 400);
+  }
 }

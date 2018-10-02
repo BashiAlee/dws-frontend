@@ -22,7 +22,9 @@ export class PersonalInformationComponent implements OnInit {
       { name: 'Sr.' }
   ]
   constructor(private formBuilder: FormBuilder, private router: Router,
-    private route: ActivatedRoute, private profileSevice: ProfileService) { }
+    private route: ActivatedRoute, private profileSevice: ProfileService) { 
+
+    }
 
   ngOnInit() {
     
@@ -36,7 +38,7 @@ export class PersonalInformationComponent implements OnInit {
       firstname: ['', Validators.required],
       middleName: [''],
       lastname: ['', Validators.required],
-      nameSuffix: ['', Validators.required],
+      nameSuffix: [this.suffix[0].name],
       dob: [''],
       p1StreetAddress: ['', Validators.required],
       p2StreetAddress: [''],

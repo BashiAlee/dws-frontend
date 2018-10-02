@@ -110,3 +110,45 @@
 }
 
 
+.BackBtn {
+  display: none;
+  position: fixed;
+  margin-top: 7px;
+  z-index: 999999999;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  border: 1px solid $primary-color;
+  i {
+    font-size: 15px;
+    color: $primary-color;
+  }
+}
+
+.ForwardBtn {
+  display: none;
+  position: fixed;
+  /* top: 1px; */
+  /* bottom: 0; */
+  /* left: 0; */
+  right: 0;
+  margin-top: 7px;
+  z-index: 999999999;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  border: 1px solid $primary-color;
+
+  i {
+    font-size: 15px;
+    color: $primary-color;
+  }
+}
+
+.custom-tabs {
+  -ms-overflow-style: none;  // IE 10+
+  overflow: -moz-scrollbars-none;  // Firefox
+}
+.custom-tabs::-webkit-scrollbar { 
+  display: none;  // Safari and Chrome
+}

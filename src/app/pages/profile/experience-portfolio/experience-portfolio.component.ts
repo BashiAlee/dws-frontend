@@ -14,22 +14,25 @@ export class ExperiencePortfolioComponent implements OnInit {
 
   distanceToTravel = [
     {
-      value: "1-2"
+      value: "1-2 miles"
     },
     {
-      value: "2-20"
+      value: "2-20 miles"
     },
     {
-      value: "21-40"
+      value: "21-40 miles"
     },
     {
-      value: "41-60"
+      value: "41-60 miles"
     },
     {
-      value: "61-80"
+      value: "61-80 miles"
     },
     {
-      value: "81-100"
+      value: "81-100 miles"
+    },
+    {
+      value: "Nationwide"
     }
   ]
 
@@ -54,6 +57,9 @@ export class ExperiencePortfolioComponent implements OnInit {
     }
   ]
   workExperience = [
+    {
+      value: "Less than 1"
+    },
     {
       value: "1-2"
     },

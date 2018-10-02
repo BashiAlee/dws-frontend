@@ -1,12 +1,13 @@
 
 <div class="profile-main wow fadeInDown">
-    <div class="topContent">
+    <!-- <div class="topContent">
             <h1>Complete Your Profile</h1>
             <p>Start by Completing Your Profile. It Consists of Five Steps Below.
                 You Can Edit Your Information Anytime later.</p>
-    </div>
+    </div> -->
 
-            <div class="custom-tabs" >
+            <div class="custom-tabs mTop100" >
+                    <button  class="BackBtn" (click)="moveBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
                     <ul>
                       <li ><a  [routerLink]="['personal-information']" [routerLinkActive]="['active-link']">Personal Information</a></li>
                       <li ><a [routerLink]="['business-information']"  [routerLinkActive]="['active-link']">Business Information</a></li>
@@ -14,8 +15,9 @@
                       <li><a  [routerLink]="['experience-portfolio']" [routerLinkActive]="['active-link']">Experience  &amp; Work Portfolio</a></li>
                       <li><a  [routerLink]="['document-declaration']" [routerLinkActive]="['active-link']">Documents &amp; Declaration</a></li>
                     </ul>
+                    <button class="ForwardBtn"  (click)="moveForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                   </div>
-          
+                  
               <div class="col-md-12 wow fadeInDown">
                   <router-outlet></router-outlet>
               </div>
