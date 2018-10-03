@@ -30,6 +30,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileService } from '../../services/profile/profile.service';
 import { HttpModule } from '@angular/http';
+import { ModalModule } from 'ngx-bootstrap';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +38,8 @@ import { HttpModule } from '@angular/http';
     ProfileRoutingModule,
     NgSelectModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    ModalModule.forRoot()
   ],
   declarations: [
     DocumentDeclarationComponent, 

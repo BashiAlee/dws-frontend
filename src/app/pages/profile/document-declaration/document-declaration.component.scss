@@ -29,3 +29,17 @@
     color: $input-label;
   }
 }
+
+div.vision-modal-body{
+  h3 {
+    font-family: 'Apercu-Bold';
+  }
+
+  p {
+    font-family: 'Apercu-Regular';
+  }
+}
+
+div.vision-modal-content {
+  padding: 50px;
+}

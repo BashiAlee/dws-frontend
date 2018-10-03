@@ -9,6 +9,9 @@ import { ProfileModule } from './pages/profile/profile.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { LoginComponent } from './pages/login/login.component';
+import { BlankLayoutComponent } from './components/layout/blank-layout/blank-layout.component';
+import { MainLayoutComponent } from './components/layout/main-layout/main-layout.component';
 
 
 
@@ -18,7 +21,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoginComponent,
+    BlankLayoutComponent,
+    MainLayoutComponent
   ],
   imports: [
     BrowserModule,

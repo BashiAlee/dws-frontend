@@ -3,11 +3,29 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileModule } from './pages/profile/profile.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LoginComponent } from './pages/login/login.component';
+import { BlankLayoutComponent } from './components/layout/blank-layout/blank-layout.component';
+import { MainLayoutComponent } from './components/layout/main-layout/main-layout.component';
 
 const routes: Routes = [
-  { path: '', redirectTo:'profile/:id', pathMatch:'full' },
-  { path: 'dashboard', component: DashboardComponent },
-  {path:'profile/:id' ,component: ProfileComponent, loadChildren: ()=>ProfileModule},
+  { 
+    path: '', 
+    
+    component: MainLayoutComponent,
+    children: [
+      { path: '', component: DashboardComponent },
+      { path: 'profile', redirectTo:'profile/:id', pathMatch:'full' },
+      {path:'profile/:id' ,component: ProfileComponent, loadChildren: ()=>ProfileModule},
+    ]
+},
+
+  { 
+    path: '', 
+    component: BlankLayoutComponent,
+    children: [
+      { path: 'login', component: LoginComponent }
+    ]
+},
 ];
 
 @NgModule({

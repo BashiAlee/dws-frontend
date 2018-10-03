@@ -14,7 +14,7 @@
       </div>
       <p class="user-name">Sam Buxton</p>
       <p class="user-id">DWS208189890</p>
-      <p class="member-since">Member Since :  <span>Dec / 02 / 2018.</span></p>
+      <p class="member-since">Member Since :  <span>02/02/2018.</span></p>
       <p class="user-description">You may also login using your DWS Member ID Number in the Username field.</p>
     </div>
 
@@ -150,12 +150,12 @@
         <div class="row">
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
-              <label for="zip" class="custom-input-label">Zip</label>
+              <label for="zip" class="custom-input-label">Zip Code</label>
               <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" 
               formControlName="p1Zip"
-              placeholder="Zip">
+              placeholder="Zip Code">
               <div *ngIf="form.p1Zip.invalid && (form.p1Zip.dirty || form.p1Zip.touched)" class="invalid-feedback">
-                <div *ngIf="form.p1Zip.errors.required">Zip is required</div>
+                <div *ngIf="form.p1Zip.errors.required">Zip Code is required</div>
             </div>
             </div>
           </div>
@@ -233,10 +233,10 @@
         <div class="row">
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
-              <label for="zip" class="custom-input-label">Zip</label>
-              <input type="text" class="form-control custom-input" id="zip" formControlName="m1Zip" aria-describedby="zip" placeholder="Zip">
+              <label for="zip" class="custom-input-label">Zip Code</label>
+              <input type="text" class="form-control custom-input" id="zip" formControlName="m1Zip" aria-describedby="zip" placeholder="Zip Code">
               <div *ngIf="form.m1Zip.invalid && (form.m1Zip.dirty || form.m1Zip.touched)" class="invalid-feedback">
-                <div *ngIf="form.m1Zip.errors.required">Zip is required</div>
+                <div *ngIf="form.m1Zip.errors.required">Zip Code is required</div>
             </div>
             </div>
           </div>

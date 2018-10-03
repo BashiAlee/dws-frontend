@@ -1,0 +1,39 @@
+@import '../../../../variables';// .alignItem {
+    //   display: flex;
+    
+    //   app-sidebar {
+    //     width: 12%;
+    //   }
+    //   .alignRight {
+    //     flex: 1;
+    //   }
+    // }
+    
+    .mainContent {
+      background: $background-color;
+      padding-left: 0px;
+      flex: 1;
+    }
+    
+    .alignItems {
+      display: flex;
+      // grid-template-columns: 18% 82%;
+    }
+    
+    
+    
+    .sidebar {
+      transition: all 0.2s linear;
+      width: 300px;
+      border-right: 1px solid $border-color-navbar;
+    }
+    
+    div.collapseCss {
+      // grid-template-columns: 6% 94%;
+      // grid-template-columns: 115px auto;
+    
+      .sidebar {
+        width: 120px;
+      }
+    }
+    
