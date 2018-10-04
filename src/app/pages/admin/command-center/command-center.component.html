@@ -1,0 +1,45 @@
+
+
+    <div class="container">
+   <div class="topContent">
+            <h1>Command Center</h1>
+            <p>See where all of the DWS registered drones are.</p>
+    </div>
+
+    <div class="command-center">
+      <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="state" class="custom-input-label makeBlack">State</label>
+                <ng-select [searchable]="false">
+                      <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
+                  </ng-select>
+                  <!-- <div *ngIf="form.m1State.invalid && (form.m1State.dirty || form.m1State.touched)" class="invalid-feedback">
+                    <div *ngIf="form.m1State.errors.required">State is required</div>
+                </div> -->
+              </div>
+
+        </div>
+        <div class="col-md-4">
+         
+            <div class="form-group">
+                <input type="text" class="form-control custom-input alignToBottom" id="city" aria-describedby="city"
+                  placeholder="City Name">
+              </div>
+        </div>
+        <div class="col-md-4">
+          <button class="custom-primary-button">Filter</button>
+        </div>
+      </div>
+
+      <div class="makeBgWhite">
+          <highcharts-chart
+          [Highcharts]="Highcharts"
+          [constructorType]="'mapChart'"
+          [options]="chartMap"
+          
+          style="width: 100%; height: 650px; display: block;"
+          ></highcharts-chart>
+      </div>
+    </div>
+    </div>

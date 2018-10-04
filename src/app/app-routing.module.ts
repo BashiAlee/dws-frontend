@@ -7,6 +7,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { BlankLayoutComponent } from './components/layout/blank-layout/blank-layout.component';
 import { MainLayoutComponent } from './components/layout/main-layout/main-layout.component';
 
+import { CommandCenterComponent } from './pages/admin/command-center/command-center.component';
+
 const routes: Routes = [
   { 
     path: '', 
@@ -17,6 +19,14 @@ const routes: Routes = [
       { path: 'profile', redirectTo:'profile/:id', pathMatch:'full' },
       {path:'profile/:id' ,component: ProfileComponent, loadChildren: ()=>ProfileModule},
     ]
+},
+{ 
+  path: 'admin', 
+  
+  component: MainLayoutComponent,
+  children: [
+    { path: 'command-center', component: CommandCenterComponent },
+  ]
 },
 
   { 

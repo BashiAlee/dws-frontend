@@ -1,4 +1,4 @@
-@media screen and (max-width: 1680px) {
+@media only screen and (max-width: 1680px) {
     div.inner-header {
         nav.custom-navbar {
             grid-template-columns: 50% 50%;
@@ -6,7 +6,7 @@
     }
 
   }
-  @media screen and (max-width: 1500px) {
+  @media only screen and (max-width: 1500px) {
     div.custom-tabs {
         button {
             display: block !important;
@@ -14,7 +14,10 @@
     }
 
   }
-  @media screen and (max-width: 1150px) {
+
+
+
+  @media only screen and (max-width: 1150px) {
     div.inner-header {
         nav.custom-navbar {
             grid-template-columns: 30% 70%;
@@ -22,7 +25,23 @@
     }
 
 }
-@media screen and (max-width:900px){
+@media only screen and (max-width: 1024px) {
+    div.custom-table  {
+        div.table {
+            padding: 30px;
+            max-height: 280px !important;
+            overflow-y: scroll !important;
+        }
+
+        div.table-body {
+            overflow-y: unset !important;
+            max-height: inherit!important;
+        }
+
+    }
+
+}
+@media only screen and (max-width:900px){
     div.inner-header {
         nav.custom-navbar {
             grid-template-columns:100%;
@@ -33,6 +52,91 @@
         }
     }
 }
-  @media screen and (max-width:768px){
+  @media only screen and (max-width:768px){
+
+    div.call-to-action  {
+        
+        display: block;
+        text-align: center;
+
+        div.goBack {
+            margin-bottom: 20px;
+        }
+        div.saveButton {
+            margin: 0;
+        }
+
+        p {
+            width: 100%;
+        }
+    }
+
+    div.notification {
+        div.dropdown-menu-right {
+            right: auto;
+            left: auto;
+        }
+        div.notification-dropdown {
+            min-width: 273px !important;
+            }    }
+
+    div.messages {
+        div.dropdown-menu-right {
+            right: auto;
+            left: auto;
+        }
+        div.notification-dropdown {
+            min-width: 273px !important;
+        }
+    }
+
     
+}
+@media only screen and (max-width:480px){
+    div.rightContent {
+        justify-content: center !important;
+        div.dropdown-details {
+            button.toggler {
+    
+                margin-left: 9px !important;
+     
+            }
+        }
+
+        div.main-notification {
+            div.notification,div.messages {
+                margin-right: 19px !important;
+            }
+        }
+
+        div.profile-section {
+            .detail {
+                margin-left: 11px !important;
+
+                .user-name {
+                    font-size: 14px !important;
+                }
+            }
+        }
+    }
+    div.notification {
+        div.dropdown-menu-right {
+            right: auto;
+            left: auto;
+        }
+        div.notification-dropdown {
+            min-width: 233px !important;
+            left: -18px;
+            }    }
+
+    div.messages {
+        div.dropdown-menu-right {
+            right: auto;
+            left: auto;
+        }
+        div.notification-dropdown {
+            min-width: 233px !important;
+            left: -18px;
+        }
+    }
 }

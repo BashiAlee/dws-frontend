@@ -39,6 +39,7 @@ import { ModalModule } from 'ngx-bootstrap';
     NgSelectModule,
     ReactiveFormsModule,
     HttpModule,
+  
     ModalModule.forRoot()
   ],
   declarations: [

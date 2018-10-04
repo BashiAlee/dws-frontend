@@ -240,6 +240,7 @@ textarea.custom-textarea:focus {
     margin-right: 15px;
 
     button {
+      width: 233px;
       box-shadow: 0px 11px 46px 0px rgba(190, 66, 241, 0.2);
       background: $previous-button-bg;
       color: $white;
@@ -253,7 +254,7 @@ textarea.custom-textarea:focus {
     margin-left: 15px;
 
     button {
-
+      width: 233px;
       box-shadow: 0px 11px 16px 0px rgba(190, 66, 241, 0.35);
       background: $save-button-bg;
       color: $white;
@@ -400,7 +401,7 @@ div.custom-table {
 
     span {
 
-
+      width: 200px;
       border-top: none;
       border-bottom: none;
     }
@@ -418,7 +419,7 @@ div.custom-table {
 
   span {
 
-
+    width: 200px;
     border-top: none;
   }
 
@@ -630,4 +631,83 @@ input[type=number] {
 .errorMsg {
   font-family: 'Apercu-Regular';
   color: #ff566a;
+}
+
+.toggle-button {
+  align-items: center;
+  justify-content: flex-end;
+  display: flex;
+  float: right;
+  flex: 1;
+  margin-right: 23px;
+
+
+  i {
+    color: $primary-color !important;
+    font-size: 21px;
+    position: relative;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .notify-icon-red {
+    position: absolute;
+    top: -4px;
+    width: 10px;
+    /* left: 0; */
+    right: -4px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff566a;
+    width: 10px;
+    height: 10px;
+
+    
+  }
+}
+
+.topContent {
+
+  text-align: center;
+
+  h1 {
+    font-family: 'Apercu-Medium';
+    padding-top: 100px;
+    padding-bottom: 25px;
+    font-size: 34px;
+  }
+
+  p {
+    width: 42%;
+    margin: 0 auto;
+    font-size: 18px;
+    font-family: 'Apercu-Regular';
+    padding-bottom: 30px;
+    color: $p-color;
+  }
+}
+.makeBlack {
+  color: $black;
+}
+
+.custom-primary-button {
+  margin-left: 28px;
+  background: $primary-color;
+  font-family: 'Apercu-Medium';
+  color: $white;
+  font-size: 18px;
+  box-shadow: 0px 8px 14px 0px rgba(41, 171, 226, 0.25);
+  width: 181px;
+  height: 58px;
+  border-radius: 7px;
+  position: absolute;
+  bottom: 0;
+  top: 30px;
+}
+.alignToBottom {
+  position: absolute;
+  bottom: 0;
+  top: 32px;
 }
