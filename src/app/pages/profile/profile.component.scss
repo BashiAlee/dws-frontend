@@ -93,11 +93,13 @@
 .BackBtn {
   display: none;
   position: fixed;
-  margin-top: 7px;
+  // margin-top: 7px;
   z-index: 999999999;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  opacity: 0.8;
+  width: 39px;
+  height: 52px;
+  border-bottom-right-radius: 50%;
+  border-top-right-radius: 50%;
   border: 1px solid $primary-color;
   i {
     font-size: 15px;
@@ -112,11 +114,14 @@
   /* bottom: 0; */
   /* left: 0; */
   right: 0;
-  margin-top: 7px;
+  opacity: 0.8;
+  // margin-top: 7px;
   z-index: 999999999;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  border-bottom-left-radius: 50%;
+  border-top-left-radius: 50%;
+  width: 39px;
+  height: 52px;
+
   border: 1px solid $primary-color;
 
   i {

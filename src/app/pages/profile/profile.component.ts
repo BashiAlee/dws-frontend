@@ -14,9 +14,11 @@ export class ProfileComponent implements OnInit {
   moveForward() {
     var leftPos = $('.custom-tabs').scrollLeft();
     $(".custom-tabs").animate({scrollLeft: leftPos + 70}, 400);
+    console.log("For",leftPos )
   }
   moveBackward() {
     var leftPos = $('.custom-tabs').scrollLeft();
     $(".custom-tabs").animate({scrollLeft: leftPos - 70}, 400);
+    console.log("Back",leftPos )
   }
 }
