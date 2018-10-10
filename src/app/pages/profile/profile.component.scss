@@ -92,7 +92,7 @@
 
 .BackBtn {
   display: none;
-  position: fixed;
+  position:  absolute;
   // margin-top: 7px;
   z-index: 999999999;
   opacity: 0.8;
@@ -109,7 +109,7 @@
 
 .ForwardBtn {
   display: none;
-  position: fixed;
+  position: absolute;
   /* top: 1px; */
   /* bottom: 0; */
   /* left: 0; */

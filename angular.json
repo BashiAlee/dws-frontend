@@ -29,13 +29,16 @@
             "styles": [
               "src/styles.scss",
               "src/assets/3rdParty/css/animate.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
               
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "src/assets/3rdParty/js/wow.js"
+              "src/assets/3rdParty/js/wow.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/moment/min/moment.min.js"
             ]
           },
           "configurations": {

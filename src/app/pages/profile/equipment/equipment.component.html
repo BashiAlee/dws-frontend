@@ -13,18 +13,20 @@
                 </div>
       
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                 <button class="primary-dws-button aperu-regular pull-right" (click)="showAddDrone=!showAddDrone">Add Drone</button>
+                 <button class="primary-dws-button aperu-regular pull-right" (click)="toggleDrone()">Add Drone</button>
                 </div>
               </div>
-              <div class="add-drone-details" *ngIf="showAddDrone">
+              <div class="add-drone-details" *ngIf="showAddDrone" [formGroup]="addDrone">
                 <div class="seperator"></div>
                   <div class="row add-top-border" >
                       <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="form-group">
                           <label for="title" class="custom-input-label">Title</label>
-                          <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [clearable]="false" [searchable]="false">
-                            <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
-                        </ng-select>
+                          <input type="text" class="form-control custom-input" aria-describedby="title"
+                            placeholder="Title" formControlName="DroneTitle">
+                            <div *ngIf="submittedDrone && dronesForm.DroneTitle.errors" class="invalid-feedback">
+                                <div *ngIf="dronesForm.DroneTitle.errors.required">Title is required</div>
+                            </div>
                         </div>
                       </div>
             
@@ -32,7 +34,10 @@
                         <div class="form-group">
                           <label for="serialnumber" class="custom-input-label">Serial Number (S/N)</label>
                           <input type="text" class="form-control custom-input" id="serialnumber" aria-describedby="serialnumber"
-                            placeholder="Serial Number">
+                            placeholder="Serial Number" formControlName="SerialNumber">
+                            <div *ngIf="submittedDrone && dronesForm.SerialNumber.errors" class="invalid-feedback">
+                                <div *ngIf="dronesForm.SerialNumber.errors.required">Serial Number is required</div>
+                            </div>
                         </div>
                       </div>
             
@@ -40,21 +45,34 @@
                         <div class="form-group">
                           <label for="Description" class="custom-input-label">Description</label>
                           <input type="text" class="form-control custom-input" id="Description" aria-describedby="Description"
-                            placeholder="Description">
+                            placeholder="Description" formControlName="Description">
+                            <div *ngIf="submittedDrone && dronesForm.Description.errors" class="invalid-feedback">
+                                <div *ngIf="dronesForm.Description.errors.required">Description is required</div>
+                            </div>
                         </div>
                       </div>
                     </div>
             
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
-                        <button class="button-secondary-dws">Add to Drones</button>
+                          
+                        <button *ngIf="!updateDrone"class="button-secondary-dws" (click)="addNewDrone()">Add to Drones</button>
+                        <button *ngIf="updateDrone"class="button-secondary-dws" (click)="updateDroneByID()">Update Drones</button>
                       </div>
                     </div>
               </div>
             </div>
-      
             <div class="custom-table">
-              <div class="table">
+                <div class="table" *ngIf="loaders.droneLoader">
+                    <div class="spinner">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
+                      </div>
+                </div>
+              <div class="table makeCenter" *ngIf="!loaders.droneLoader && !drones.length">
+                <p>Not Found</p>
+              </div>
+              <div class="table" *ngIf="drones && drones.length && !loaders.droneLoader">
                 <div class="table-header mBottom25 for-four-columns ">
                   <span>Title</span>
                   <span>Description</span>
@@ -62,12 +80,12 @@
                   <span class="makeCenter">Action</span>
                 </div>
                 <div class="table-body">
-                  <div class="table-row mBottom25 for-four-columns " *ngFor="let drone of drones">
-                    <span [innerHtml]="drone.title"></span>
-                    <span [innerHtml]="drone.description"></span>
-                    <span class="karla-bold" [innerHtml]="drone.serial_number"></span>
+                  <div class="table-row mBottom25 for-four-columns" *ngFor="let drone of drones">
+                    <span [innerHtml]="drone.DroneTitle"></span>
+                    <span [innerHtml]="drone.Description?drone.Description: '-' "></span>
+                    <span class="karla-bold" [innerHtml]="drone.SerialNumber"></span>
                     <span class="makeCenter"> 
-                      <div class="editRow" (click)="editRow(drone, showAddDrone)"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                      <div class="editRow" (click)="editRow(drone,'drone')"><i class="fa fa-pencil" aria-hidden="true"></i></div>
                       <div class="deleteRow"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
                     </span>
                   </div>
@@ -147,18 +165,20 @@
                 </div>
       
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                 <button class="primary-dws-button aperu-regular pull-right" (click)="otherEquipment=!otherEquipment">Add Other Equipment</button>
+                 <button class="primary-dws-button aperu-regular pull-right" (click)="toggleEquipment()">Add Other Equipment</button>
                 </div>
               </div>
-              <div class="add-battery-detail" *ngIf="otherEquipment">
+              <div class="add-battery-detail" *ngIf="otherEquipment"  [formGroup]="addEquipment">
                   <div class="seperator"></div>
                   <div class="row add-top-border" >
                       <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                           <label for="title" class="custom-input-label">Title</label>
-                          <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}">
-                            <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
-                        </ng-select>
+                          <input type="text" class="form-control custom-input" aria-describedby="title"
+                            placeholder="Title" formControlName="EquipmentTitle">
+                            <div *ngIf="submittedEquipment && equipmentForm.EquipmentTitle.errors" class="invalid-feedback">
+                                <div *ngIf="equipmentForm.EquipmentTitle.errors.required">Title is required</div>
+                            </div>
                         </div>
                       </div>
       
@@ -167,14 +187,18 @@
                         <div class="form-group">
                           <label for="Description" class="custom-input-label">Description</label>
                           <input type="text" class="form-control custom-input" id="Description" aria-describedby="Description"
-                            placeholder="Description">
+                            placeholder="Description" formControlName="Description">
+                            <div *ngIf="submittedEquipment && equipmentForm.Description.errors" class="invalid-feedback">
+                                <div *ngIf="equipmentForm.Description.errors.required">Description is required</div>
+                            </div>
                         </div>
                       </div>
                     </div>
             
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
-                        <button class="button-secondary-dws">Add to Other Equipment</button>
+                        <button *ngIf="!updateEquipment" class="button-secondary-dws" (click)="addNewEquipment()">Add to Other Equipment</button>
+                        <button *ngIf="updateEquipment" class="button-secondary-dws" (click)="updateEquipmentByID()">Update Other Equipment</button>
                       </div>
                     </div>
               </div>
@@ -182,18 +206,27 @@
             </div>
       
             <div class="custom-table">
-              <div class="table">
+                <div class="table" *ngIf="loaders.equipmentLoader">
+                    <div class="spinner">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
+                      </div>
+                </div>
+              <div class="table makeCenter" *ngIf="!loaders.equipmentLoader && !equipments.length">
+                <p>Not Found</p>
+              </div>
+              <div class="table" *ngIf="equipments && equipments.length && !loaders.equipmentLoader">
                 <div class="table-header mBottom25 for-three-columns ">
                   <span>Title</span>
                   <span>Description</span>
                   <span class="makeCenter">Action</span>
                 </div>
                 <div class="table-body">
-                  <div class="table-row mBottom25 for-three-columns " *ngFor="let drone of drones">
-                    <span [innerHtml]="drone.title"></span>
-                    <span [innerHtml]="drone.description"></span>
+                  <div class="table-row mBottom25 for-three-columns " *ngFor="let equipment of equipments">
+                    <span [innerHtml]="equipment.EquipmentTitle"></span>
+                    <span [innerHtml]="equipment.Description?equipment.Description: '-' "></span>
                     <span class="makeCenter"> 
-                      <div class="editRow"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                      <div class="editRow" (click)="editRow(equipment,'equipment')"><i class="fa fa-pencil" aria-hidden="true"></i></div>
                       <div class="deleteRow"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
                     </span>
                   </div>

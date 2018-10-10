@@ -13,6 +13,7 @@ export class ProfileService {
   staticUrl: any;
   constructor(private http: Http) {
       this.apiUrl = environment.apiURL;
+      this.staticUrl = environment.uploadUrl;
    }
 
    getCountries() {
@@ -21,15 +22,76 @@ export class ProfileService {
      return response.json();
     }));
   }
-  getRegionByCode(code) {
-    return this.http.get(this.apiUrl + 'getRegion/'+code)
+  getStatesByCode(id) {
+    return this.http.get(this.apiUrl + 'getStatesByCountries/'+id)
     .pipe(map((response: any) => {
      return response.json();
     }));
   }
 
-  getProfileInfoByID(id) {
-    return this.http.get(this.apiUrl + 'personalInformation/'+id)
+  getProfilePersonalInfoByID(id) {
+    return this.http.get(this.apiUrl + 'getPilotPersonalInformationById/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  updatePersonalInformation(data) {
+    return this.http.post(this.apiUrl + 'updatePilotPersonalInformationById',data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  uploadProfilePicture(file) {
+    let formData = new FormData();
+    let headers = new Headers();
+    var target = file.target || file.srcElement
+    headers.append('Content-Type','multipart/form-data');
+    
+    formData.append('file',new Blob([target.files[0]]),target.files[0].name);
+
+    return this.http.post(this.staticUrl+'uploading',formData)
+    .pipe(map((response: any) => {
+  
+     return response.json();
+  }));
+  }
+
+  getDronesByID(id) {
+    return this.http.get(this.apiUrl + 'getDroneById/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  getEquipmentsById(id) {
+    return this.http.get(this.apiUrl + 'getEquipmentById/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  addNewPilotEquipment(data) {
+    return this.http.post(this.apiUrl + 'addEquipment', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  addNewPilotDrone(data) {
+    return this.http.post(this.apiUrl + 'addDrone', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  updatePilotDrone(data) {
+    return this.http.post(this.apiUrl + 'updateDroneById', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  updatePilotEquipment(data) {
+    return this.http.post(this.apiUrl + 'updateEquipmentById', data)
     .pipe(map((response: any) => {
      return response.json();
     }));

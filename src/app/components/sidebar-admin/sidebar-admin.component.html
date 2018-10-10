@@ -76,14 +76,14 @@
                 </a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#">
+                  <a class="nav-link"[routerLink]="['pilot-list']" [routerLinkActive]="['active-sidebarlink']">
                     <span><i class="fa fa-user-o" aria-hidden="true"></i>
                       <span class="inner-item" *ngIf="isOpen">Pilots</span>
                       </span>
                   </a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link">
                   <span><i class="fa fa-comment-o"></i> 
                     <span class="inner-item" *ngIf="isOpen">Communications</span></span>
                 </a>

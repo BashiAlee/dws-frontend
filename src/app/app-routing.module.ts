@@ -8,6 +8,7 @@ import { BlankLayoutComponent } from './components/layout/blank-layout/blank-lay
 import { MainLayoutComponent } from './components/layout/main-layout/main-layout.component';
 
 import { CommandCenterComponent } from './pages/admin/command-center/command-center.component';
+import { PilotListComponent } from './pages/admin/pilot-list/pilot-list.component';
 
 const routes: Routes = [
   { 
@@ -26,6 +27,7 @@ const routes: Routes = [
   component: MainLayoutComponent,
   children: [
     { path: 'command-center', component: CommandCenterComponent },
+    { path: 'pilot-list', component: PilotListComponent }
   ]
 },
 

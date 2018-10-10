@@ -1,0 +1,113 @@
+
+
+    <div class="container">
+      <div class="topContent">
+               <h1>Pilots</h1>
+               <p>See where all of the DWS registered drones are..</p>
+       </div>
+   
+       <div class="command-center">
+         <div class="row">
+           <div class="col-md-4">
+               <div class="form-group">
+                   <label for="state" class="custom-input-label makeBlack">Search Pilot by</label>
+                   <ng-select [searchable]="false">
+                         <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
+                     </ng-select>
+                     <!-- <div *ngIf="form.m1State.invalid && (form.m1State.dirty || form.m1State.touched)" class="invalid-feedback">
+                       <div *ngIf="form.m1State.errors.required">State is required</div>
+                   </div> -->
+                 </div>
+   
+           </div>
+           <div class="col-md-4">
+            
+               <div class="form-group">
+                   <input type="text" class="form-control custom-input alignToBottom" id="city" aria-describedby="city"
+                     placeholder="City Name">
+                 </div>
+           </div>
+           <div class="col-md-4">
+             <button class="custom-primary-button">Filter</button>
+           </div>
+         </div>
+
+         <div class="row">
+           <div class="col-md-12">
+            <table datatable [dtOptions]="dtOptions" class="row-border hover custom-datatable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First name</th>
+                  <th>Last name</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Foo</td>
+                  <td>Bar</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Someone</td>
+                  <td>Youknow</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Iamout</td>
+                  <td>Ofinspiration</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Yoda</td>
+                  <td>Skywalker</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Patrick</td>
+                  <td>Dupont</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Barack</td>
+                  <td>Obama</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>François</td>
+                  <td>Holland</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Michel</td>
+                  <td>Popo</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Chuck</td>
+                  <td>Norris</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Simon</td>
+                  <td>Robin</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>Louis</td>
+                  <td>Lin</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Zelda</td>
+                  <td>Link</td>
+                </tr>
+              </tbody>
+            </table>
+           </div>
+         </div> 
+   
+       </div>
+       </div>

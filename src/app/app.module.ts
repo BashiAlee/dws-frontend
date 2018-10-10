@@ -16,7 +16,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { SidebarAdminComponent } from './components/sidebar-admin/sidebar-admin.component';
 import { CommandCenterComponent } from './pages/admin/command-center/command-center.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { PilotListComponent } from './pages/admin/pilot-list/pilot-list.component';
 
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -29,14 +31,16 @@ import { NgSelectModule } from '@ng-select/ng-select';
     BlankLayoutComponent,
     MainLayoutComponent,
     SidebarAdminComponent,
-    CommandCenterComponent
+    CommandCenterComponent,
+    PilotListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ProfileModule,
     HighchartsChartModule,
-    NgSelectModule
+    NgSelectModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
