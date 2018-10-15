@@ -250,7 +250,7 @@
                         </div>
               
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                         <button class="primary-dws-button aperu-regular pull-right" (click)="togglePhotos()">Add Photographs</button>
+                         <button class="primary-dws-button aperu-regular pull-right" (click)="togglePhotos()">Upload Your Photo</button>
                         </div>
                       </div>
                       <div class="add-drone-details" *ngIf="showAddPhoto" [formGroup]="addPhotos">
@@ -337,7 +337,7 @@
                           </div>
                 
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                           <button class="primary-dws-button aperu-regular pull-right" (click)="toggleVideo()">Add Videos</button>
+                           <button class="primary-dws-button aperu-regular pull-right" (click)="toggleVideo()">Link Video</button>
                           </div>
                         </div>
                         <div class="add-drone-details" *ngIf="showAddVideo" [formGroup]="addVideo">
@@ -432,8 +432,11 @@
       <div class="goBack">
         <button>Previous Step</button>
       </div>
-      <div class="saveButton">
+      <div class="saveButton" *ngIf="!loading">
         <button (click)="save()">Save</button>
+      </div>
+      <div class="saveButton disableDiv" *ngIf="loading">
+        <button ><i class="fa fa-circle-o-notch fa-spin"></i></button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>

@@ -11,7 +11,7 @@ declare var $: any;
 export class ProfileComponent implements OnInit {
   id: any;
   isAdmin: any;
-
+  loaders: any = {};
   constructor(private route: ActivatedRoute, private router: Router, private pilotService: PilotService) {
 
     if(this.router.url.split('/')[1] =='admin') {
@@ -39,22 +39,26 @@ export class ProfileComponent implements OnInit {
   }
 
   approveProfile() {
+    this.loaders.approveProfile = true;
     this.pilotService.approveProfile(this.router.url.split('/')[3])
     .subscribe(
       data => {
         if(data.status) {
           alert("Approved")
+          this.loaders.approveProfile = false;
         }
       }
     )
   }
 
   rejectProfile() {
+    this.loaders.rejectProfile = true;
     this.pilotService.rejectProfile(this.router.url.split('/')[3])
     .subscribe(
       data => {
         if(data.status) {
           alert("Rejected")
+          this.loaders.rejectProfile = false;
         }
       }
     )

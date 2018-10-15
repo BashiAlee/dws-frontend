@@ -15,6 +15,8 @@ import { VerificationComponent } from './pages/verification/verification.compone
 import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
 import { EmptyLayoutComponent } from './components/layout/empty-layout/empty-layout.component';
 import { AdminAuthGuard } from './components/admin-auth/admin-auth.guard';
+import { SendEmailComponent } from './pages/send-email/send-email.component';
+import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 
 const routes: Routes = [
   { 
@@ -68,6 +70,18 @@ const routes: Routes = [
   path: 'email-verification', 
   
   component: VerificationComponent,
+
+},
+{ 
+  path: 'send-email', 
+  
+  component: SendEmailComponent,
+
+},
+{ 
+  path: 'forget-password', 
+  
+  component: ForgetPasswordComponent,
 
 },
 

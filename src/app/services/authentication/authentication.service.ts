@@ -50,4 +50,24 @@ export class AuthenticationService {
      return response.json();
     }));
   }
+
+  sendEmail(data) {
+    return this.http.post(this.apiUrl + 'pilot/forgotPassword',data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  verifyForgotPassword(token) {
+    return this.http.get(this.apiUrl + 'pilot/verifyTokenForgotPassword/'+token)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  changePassword(data) {
+    return this.http.post(this.apiUrl + 'pilot/changePassword',data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
 }

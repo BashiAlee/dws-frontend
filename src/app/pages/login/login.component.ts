@@ -13,7 +13,7 @@ export class LoginComponent{
   success: any;
   error: any;
   loginForm: FormGroup;
-
+  loading: any;
   constructor(private formBuilder: FormBuilder, private auth: AuthenticationService, private router: Router) {
     // localStorage.removeItem('user')
   }
@@ -28,6 +28,7 @@ export class LoginComponent{
   get form() {return this.loginForm.controls}
 
   login() {
+    this.loading = true;
     this.success = '';
     this.error = '';
     this.auth.login(this.loginForm.value)
@@ -35,6 +36,7 @@ export class LoginComponent{
       data => {
   
         if(data.status) {
+          this.loading = false;
           this.success = data.message;
           this.user = data.result;
 
@@ -42,6 +44,7 @@ export class LoginComponent{
 
           this.router.navigate(['/user']);
         } else if(!data.status) {
+          this.loading = false;
           this.error = data.message;
         }
       }

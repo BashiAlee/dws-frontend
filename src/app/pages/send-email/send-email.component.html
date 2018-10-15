@@ -1,0 +1,43 @@
+<div class="sign-up" >
+  <div class=" container">
+     <div class="row">
+        <div class="col-md-12">
+           <div class="form-sign-up">
+              <h2 class="wow fadeInDown">Forgot Password</h2>
+              <h4 class="wow fadeInDown">Type your Email.</h4>
+              <br>
+              <hr>
+              <br>
+
+                <form id="loginForm" [formGroup]="email">
+                 <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                       <div class="form-group wow fadeInDown">
+                          <label for="email">Email</label>
+                          <input type="text" id="firstname" class="form-control" placeholder="Email" formControlName="Email">
+                          <div *ngIf="form.Email.invalid && (form.Email.dirty || form.Email.touched)" class="invalid-feedback">
+                              <div *ngIf="form.Email.errors.required">Email is required</div>
+                              <div *ngIf="form.Email.errors.email">Email must be a valid email address</div>
+                          </div>
+                       </div>
+                    </div>
+
+                    <div class="form-group wow fadeInDown">
+                        <p *ngIf="error" class="errorMessage">{{error}}</p>
+                        <p *ngIf="success" class="successMessage">{{success}}</p>
+                    </div>
+                 </div>
+
+
+                 <button type="button" id="submitLoginForm" class="btn btn-sign-up mt20 wow fadeInDown" (click)="sendEmail()">Send Email</button>
+              </form>
+
+           </div>
+        </div>
+        <!-- col-8 -->
+     </div>
+     <!-- row -->
+  </div>
+  <!-- container -->
+</div>
+<how-it-works></how-it-works>

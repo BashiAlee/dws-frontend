@@ -37,7 +37,8 @@
                        </div>
      
 
-                       <button type="button" id="submitLoginForm" class="btn btn-sign-up mt20 wow fadeInDown" (click)="login()">SIGN IN</button>
+                       <button type="button" id="submitLoginForm" *ngIf="!loading"class="btn btn-sign-up mt20 wow fadeInDown" (click)="login()">SIGN IN</button>
+                       <a class="btn btn-sign-up mt20 wow fadeInDown loaderBtn"  *ngIf="loading"><i class="fa fa-circle-o-notch fa-spin"></i></a>
                     </form>
 
                  </div>

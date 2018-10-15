@@ -30,6 +30,7 @@ export class EquipmentComponent implements OnInit {
   Notes: any;
   isAdmin: any;
   id: any;
+  loading: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-lg"
   };
@@ -133,6 +134,8 @@ export class EquipmentComponent implements OnInit {
       .subscribe(
         data => {
           if(data.status) {
+            this.submittedEquipment = false;
+            this.addEquipment.reset()
             this.getAllEquipmentsByID(this.id)
           }
         }
@@ -150,6 +153,8 @@ export class EquipmentComponent implements OnInit {
     .subscribe(
       data => {
         if(data.status) {
+          this.addDrone.reset()
+          this.submittedDrone = false;
           this.getAllDronesByID(this.id)
         }
       }
@@ -186,6 +191,7 @@ export class EquipmentComponent implements OnInit {
   }
 
   updateEquipmentNotes(){
+    this.loaders = true;
     var data = {
       UserId: this.id,
       Notes: this.Notes
@@ -200,12 +206,14 @@ export class EquipmentComponent implements OnInit {
             page: 'experience-portfolio',
             id: this.id
           }
+          this.loaders = false;
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
         } else if(!data.status) {
           const initialState = {
             type: 'error'
           }
+          this.loaders = false;
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
         }

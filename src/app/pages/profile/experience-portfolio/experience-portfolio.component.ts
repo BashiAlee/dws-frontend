@@ -26,6 +26,7 @@ export class ExperiencePortfolioComponent implements OnInit {
   imagesList: any = [];
   imageFiles: any = {};
   isAdmin: any;
+  loading: any;
   experiencePorfolioInformation: FormGroup;
   config = {
     class: "custom-modal modal-dialog-centered modal-lg"
@@ -372,7 +373,7 @@ export class ExperiencePortfolioComponent implements OnInit {
   }
 
   save() {
-
+    this.loading = true;
     this.experiencePorfolioInformation.value.ValidPassport = this.experiencePorfolioInformation.value.ValidPassport.toString();
     this.experiencePorfolioInformation.value.TravelOutsideUs = this.experiencePorfolioInformation.value.TravelOutsideUs.toString();
     this.experiencePorfolioInformation.patchValue({
@@ -393,6 +394,7 @@ export class ExperiencePortfolioComponent implements OnInit {
     .subscribe(
       data => {
         if(data.status) {
+          this.loading = false;
           const initialState = {
             type: 'success',
             page: 'document-declaration',
@@ -404,6 +406,7 @@ export class ExperiencePortfolioComponent implements OnInit {
           const initialState = {
             type: 'error'
           }
+          this.loading = false;
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
         }

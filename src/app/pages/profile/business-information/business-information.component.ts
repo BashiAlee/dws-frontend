@@ -23,6 +23,7 @@ export class BusinessInformationComponent implements OnInit {
   countriesList: any;
   businessInformation: FormGroup;
   id:any;
+  loading: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-lg"
   };
@@ -210,6 +211,7 @@ export class BusinessInformationComponent implements OnInit {
     }
 
     save() {
+      this.loading = true;
       // console.log(this.personalInformation.value)
       //   this.bsModalRef = this.modalService.show(ModalsComponent,this.config);
       //     this.bsModalRef.content.closeBtnName = 'Close';
@@ -248,12 +250,14 @@ export class BusinessInformationComponent implements OnInit {
                   page: 'equipment',
                   id: this.id
                 }
+                this.loading = false;
                 this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
                 this.bsModalRef.content.closeBtnName = 'Close';
               } else if(!data.status) {
                 const initialState = {
                   type: 'error'
                 }
+                this.loading = false;
                 this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
                 this.bsModalRef.content.closeBtnName = 'Close';
               }
@@ -265,6 +269,7 @@ export class BusinessInformationComponent implements OnInit {
             const initialState = {
               type: 'error'
             }
+            this.loading = false;
             this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
             this.bsModalRef.content.closeBtnName = 'Close';
           }
@@ -279,6 +284,7 @@ export class BusinessInformationComponent implements OnInit {
                 page: 'equipment',
                 id: this.id
               }
+              this.loading = false;
               this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
               this.bsModalRef.content.closeBtnName = 'Close';
             } else if(!data.status) {
