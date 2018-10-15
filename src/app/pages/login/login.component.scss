@@ -1,3 +1,4 @@
+@import "../../../variables";
 .sign-up{
     background: #EFF3F6;
     padding-bottom: 100px;
@@ -48,3 +49,14 @@
     width: 100%;
     padding-bottom: 12px;
 }
+.text-align-right{
+  text-align: right;
+}
+.text-color-blue {
+  color: $secondary-button-color;
+}
+ .custom-checkbox .checkmark, .custom-radio .checkmark{
+   left: 10px;
+ }
+
+
