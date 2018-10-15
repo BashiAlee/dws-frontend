@@ -19,6 +19,16 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { PilotListComponent } from './pages/admin/pilot-list/pilot-list.component';
 
 import { DataTablesModule } from 'angular-datatables';
+import { ModalsComponent } from './components/modals/modals.component';
+import { AuthenticationService } from './services/authentication/authentication.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './components/auth/auth.guard';
+import { BasicHeaderComponent } from './components/basic-header/basic-header.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
+import { VerificationComponent } from './pages/verification/verification.component';
+import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
+import { EmptyLayoutComponent } from './components/layout/empty-layout/empty-layout.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +42,14 @@ import { DataTablesModule } from 'angular-datatables';
     MainLayoutComponent,
     SidebarAdminComponent,
     CommandCenterComponent,
-    PilotListComponent
+    PilotListComponent,
+    ModalsComponent,
+    BasicHeaderComponent,
+    SignupComponent,
+    HowItWorksComponent,
+    VerificationComponent,
+    AdminLoginComponent,
+    EmptyLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +57,17 @@ import { DataTablesModule } from 'angular-datatables';
     ProfileModule,
     HighchartsChartModule,
     NgSelectModule,
-    DataTablesModule
+    DataTablesModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
+  entryComponents:[
+    ModalsComponent
+  ],
+  providers: [
+    AuthenticationService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

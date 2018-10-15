@@ -1,4 +1,4 @@
-<div class="container makeBgWhite">
+<div class="container makeBgWhite" [formGroup]="experiencePorfolioInformation" [class.disableDiv]="isAdmin">  
     <div class="personal-information">
       <div class="experience-portfolio-info-details makeCenter">
         <p class="user-name">Experience &amp; Work Portfolio</p>
@@ -10,9 +10,9 @@
               <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                       <div class="form-group">
-                        <label for="businessType" class="custom-input-label">Type of Work offered</label>
-                        <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
-                          <ng-option *ngFor="let work of typeOfWork">{{work.name}}</ng-option>
+                        <label for="workOffered" class="custom-input-label">Type of Work offered</label>
+                        <ng-select [(ngModel)]="selectedWorkOffered" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
+                          <ng-option *ngFor="let work of typeOfWork" [value]="work.WorkOffered">{{work.WorkOffered}}</ng-option>
                         </ng-select>
                       </div>
                     </div>
@@ -21,8 +21,8 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <label for="commercialSuasExp" class="custom-input-label">Years of Commercial sUAS Experience</label>
-                      <ng-select [searchable]="false">
-                        <ng-option *ngFor="let exp of workExperience">{{exp.value}}</ng-option>
+                      <ng-select [searchable]="false" formControlName="YearsOfExperience">
+                        <ng-option *ngFor="let exp of workExperience" [value]="exp.value">{{exp.value}}</ng-option>
                       </ng-select>
                     </div>
                   </div>
@@ -31,8 +31,8 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <label for="businessType" class="custom-input-label">Notify me of jobs within the following range.</label>
-                        <ng-select [clearable]="false" [searchable]="false">
-                          <ng-option *ngFor="let travel of distanceToTravel" >{{travel.value}}</ng-option>
+                        <ng-select [clearable]="false" [searchable]="false" formControlName="JobNotification">
+                          <ng-option *ngFor="let travel of distanceToTravel" [value]="travel.value">{{travel.value}}</ng-option>
                       </ng-select>
                       </div>
                     </div>
@@ -43,12 +43,12 @@
                   <label for="travelOutside" class="custom-input-label">Are you willing to travel outside of the United States?</label>
                   <div class="custom-radio">
                     <label class="container">Yes
-                      <input type="radio" name="travelOutside">
+                      <input type="radio" formControlName="TravelOutsideUs" value='1'>
                       <span class="checkmark"></span>
                     </label>
       
                     <label class="container">No
-                      <input type="radio" name="travelOutside">
+                      <input type="radio" formControlName="TravelOutsideUs" value='0'>
                       <span class="checkmark"></span>
                     </label>
                   </div>
@@ -61,12 +61,12 @@
                         <label for="validPassport" class="custom-input-label">Do you have a valid passport?</label>
                         <div class="custom-radio">
                           <label class="container">Yes
-                            <input type="radio" name="validPassport">
+                            <input type="radio" formControlName="ValidPassport" value='1'>
                             <span class="checkmark"></span>
                           </label>
             
                           <label class="container">No
-                            <input type="radio" name="validPassport">
+                            <input type="radio" formControlName="ValidPassport" value='0'>
                             <span class="checkmark"></span>
                           </label>
                         </div>
@@ -78,13 +78,15 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <label for="passportImage" class="custom-input-label"> If DWS requires you to upload a copy of your passport, please do so here</label>
                       <div class="passportImage">
-                        <img src="../../../../assets/images/image-placeholder.png" alt="">
+                        <img *ngIf="images.PassportImage" [src]="images.PassportImage" alt="">
+                        <img *ngIf="!images.PassportImage" src="../../../../assets/images/image-placeholder.png" alt="">
+                        
                         <div class="image-upload">
                           <label for="file-input">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                           </label>
           
-                          <input id="file-input" type="file" />
+                          <input id="file-input" type="file" (change)="uploadImage($event,'passport-pic')"/>
                         </div>
                       </div>
                     </div>
@@ -93,26 +95,28 @@
                       <h1 class="form-heading noPadding makeBlock mtop30 mBottom25">Headshot &amp; Personal Photo upload</h1>
                     <div class="col-md-3 col-sm-12 col-xs-12">
                       <div class="displayPicture">
-                        <img src="../../../../assets/images/avatar.png" alt="">
+                        <img *ngIf="images.HeadshotImage" [src]="images.HeadshotImage" alt="">
+                        <img *ngIf="!images.HeadshotImage" src="../../../../assets/images/avatar.png" alt="">
                         <div class="image-upload">
-                          <label for="file-input">
+                          <label for="file-input2">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                           </label>
           
-                          <input id="file-input" type="file" />
+                          <input id="file-input2" type="file" (change)="uploadImage($event,'headshot')"/>
                         </div>
                       </div>
                       <p class="aperu-medium mTop15">Head Shot</p>
                     </div>
                     <div class="col-md-3 col-sm-12 col-xs-12">
                       <div class="displayPicture">
-                        <img src="../../../../assets/images/avatar.png" alt="">
+                        <img *ngIf="images.OtherPersonalImage" [src]="images.OtherPersonalImage" alt="">
+                        <img *ngIf="!images.OtherPersonalImage" src="../../../../assets/images/avatar.png" alt="">
                         <div class="image-upload">
-                          <label for="file-input">
+                          <label for="file-input3">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                           </label>
           
-                          <input id="file-input" type="file" />
+                          <input id="file-input3" type="file" (change)="uploadImage($event,'personal-pic')"/>
                         </div>
           
                       </div>
@@ -162,14 +166,14 @@
                 <div class="form-group">
                   <label for="facebookPersonal" class="custom-input-label">Personal Facebook Timeline</label>
                   <input type="text" class="form-control custom-input" id="facebookPersonal" aria-describedby="facebookPersonal"
-                    placeholder="Personal Facebook Timeline">
+                    placeholder="Personal Facebook Timeline" formControlName="PersonalFacebook">
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label for="businessFb" class="custom-input-label">Facebook Business Page</label>
                   <input type="text" class="form-control custom-input" id="businessName" aria-describedby="businessName"
-                  placeholder="Facebook Business Page">
+                  placeholder="Facebook Business Page" formControlName="BusinessFacebook">
                 </div>
               </div>
             </div>
@@ -179,14 +183,14 @@
                   <div class="form-group">
                     <label for="InstagramHandle" class="custom-input-label">Instagram</label>
                     <input type="text" class="form-control custom-input" id="InstagramHandle" aria-describedby="InstagramHandle"
-                      placeholder="Instagram">
+                      placeholder="Instagram" formControlName="Instagram" >
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <label for="Twitter" class="custom-input-label">Twitter Handle</label>
                     <input type="text" class="form-control custom-input" id="Twitter" aria-describedby="Twitter"
-                    placeholder="Twitter Handle">
+                    placeholder="Twitter Handle" formControlName="TwitterHandle">
                   </div>
                 </div>
               </div>
@@ -196,14 +200,14 @@
                     <div class="form-group">
                       <label for="LinkedPersonal" class="custom-input-label">Personal LinkedIn Profile</label>
                       <input type="text" class="form-control custom-input" id="LinkedPersonal" aria-describedby="LinkedPersonal"
-                        placeholder="Personal LinkedIn Profile">
+                        placeholder="Personal LinkedIn Profile" formControlName="PersonalLinkedInProfile">
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <label for="businessLinkedIn" class="custom-input-label">LinkedIn Business Page</label>
                       <input type="text" class="form-control custom-input" id="businessLinkedIn" aria-describedby="businessLinkedIn"
-                      placeholder="LinkedIn Business Page">
+                      placeholder="LinkedIn Business Page" formControlName="LinkedInBusinessPage">
                     </div>
                   </div>
                 </div>
@@ -213,14 +217,14 @@
                       <div class="form-group">
                         <label for="youtubeChannel" class="custom-input-label">Youtube Channel</label>
                         <input type="text" class="form-control custom-input" id="youtubeChannel" aria-describedby="youtubeChannel"
-                          placeholder="Youtube Channel">
+                          placeholder="Youtube Channel" formControlName="YoutubeChannel">
                       </div>
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <label for="vimeoChannel" class="custom-input-label">Vimeo Channel</label>
                         <input type="text" class="form-control custom-input" id="vimeoChannel" aria-describedby="vimeoChannel"
-                        placeholder="Vimeo Channel">
+                        placeholder="Vimeo Channel" formControlName="ViemoChannel">
                       </div>
                     </div>
                   </div>
@@ -230,7 +234,7 @@
                         <div class="form-group">
                           <label for="facebookPersonal" class="custom-input-label">Business Website</label>
                           <input type="text" class="form-control custom-input" id="facebookPersonal" aria-describedby="facebookPersonal"
-                            placeholder="Business Website">
+                            placeholder="Business Website" formControlName="BusinessWebsite">
                         </div>
                       </div>
                     </div>
@@ -246,18 +250,63 @@
                         </div>
               
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                         <button class="primary-dws-button aperu-regular pull-right">Add Photographs</button>
+                         <button class="primary-dws-button aperu-regular pull-right" (click)="togglePhotos()">Add Photographs</button>
                         </div>
                       </div>
+                      <div class="add-drone-details" *ngIf="showAddPhoto" [formGroup]="addPhotos">
+                        <div class="seperator"></div>
+                          <div class="row add-top-border" >
+                              <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                  <label for="title" class="custom-input-label">Title</label>
+                                  <input type="text" class="form-control custom-input" aria-describedby="title"
+                                    placeholder="Title" formControlName="Title">
+                                    <div *ngIf="submittedDrone && dronesForm.DroneTitle.errors" class="invalid-feedback">
+                                        <div *ngIf="dronesForm.DroneTitle.errors.required">Title is required</div>
+                                    </div>
+                                </div>
+                              </div>
+                    
+                              <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                  <label for="serialnumber" class="custom-input-label">Video Link</label>
+                                  <input type="file" class="form-control custom-input" id="serialnumber" aria-describedby="serialnumber"
+                                    placeholder="Serial Number" (change)="uploadImage($event,'uploadImage')">
+                                    <div *ngIf="submittedDrone && dronesForm.SerialNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="dronesForm.SerialNumber.errors.required">Serial Number is required</div>
+                                    </div>
+                                </div>
+                              </div>
+                    
+                              <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                  <label for="Description" class="custom-input-label">Description</label>
+                                  <input type="text" class="form-control custom-input" id="Description" aria-describedby="Description"
+                                    placeholder="Description" formControlName="Description">
+                                    <div *ngIf="submittedDrone && dronesForm.Description.errors" class="invalid-feedback">
+                                        <div *ngIf="dronesForm.Description.errors.required">Description is required</div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                    
+                            <div class="row">
+                              <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
+                                  
+                                <button *ngIf="!updateDrone"class="button-secondary-dws" (click)="addPortfolioImageVideo('Image')">Add Photo</button>
+                                <button *ngIf="updateDrone"class="button-secondary-dws" (click)="updateDroneByID()">Update Photo</button>
+                              </div>
+                            </div>
+                            <div class="seperator"></div>
+                      </div>
 
-                      <div class="row imageGallery">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
+                      <div class="row imageGallery" *ngIf="imagesList && imagesList.length">
+                        <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let image of imagesList">
                           <div class="thumb-img">
-                           <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
+                           <div> <img [src]="image.Path" alt=""></div>
                           </div>
-                          <div class="thumb-title makeBlue mTop15"><p>Bird Eye View of Venice</p></div>
-                          <div class="thumb-description"><p>Captured this Image 2
-                              Years ago. Still Love it!</p></div>
+                          <div class="thumb-title makeBlue mTop15"><p>{{image.Title}}</p></div>
+                          <div class="thumb-description"><p>{{image.Description}}</p></div>
                           <div class="action-buttons">
                             <div class="makePurple zoom inline-block">
                                 <i class="fa fa-search-plus" aria-hidden="true"></i>
@@ -271,26 +320,14 @@
                           </div>
 
                         </div>
+                      </div>
+                      <div class="row imageGallery" *ngIf="imagesList && !imagesList.length">
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="thumb-img">
-                             <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
-                            </div>
-                            <div class="thumb-title makeBlue mTop15"><p>Bird Eye View of Venice</p></div>
-                            <div class="thumb-description"><p>Captured this Image 2
-                                Years ago. Still Love it!</p></div>
-                            <div class="action-buttons">
-                              <div class="makePurple zoom inline-block">
-                                  <i class="fa fa-search-plus" aria-hidden="true"></i>
-                              </div>
-                              <div class="makeBlue editImage inline-block">
-                                  <i class="fa fa-pencil" aria-hidden="true"></i>
-                              </div>
-                              <div class="makeRed deleteImags inline-block">
-                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
-                              </div>
-                            </div>
-  
+                          <p>No Images Exists</p>
+   
                           </div>
+
+                
                       </div>
 
                       <div class="row  mBottom20 mtop30">
@@ -300,18 +337,68 @@
                           </div>
                 
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                           <button class="primary-dws-button aperu-regular pull-right">Add Videos</button>
+                           <button class="primary-dws-button aperu-regular pull-right" (click)="toggleVideo()">Add Videos</button>
                           </div>
                         </div>
-  
-                        <div class="row imageGallery">
-                          <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="add-drone-details" *ngIf="showAddVideo" [formGroup]="addVideo">
+                          <div class="seperator"></div>
+                            <div class="row add-top-border" >
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                  <div class="form-group">
+                                    <label for="title" class="custom-input-label">Title</label>
+                                    <input type="text" class="form-control custom-input" aria-describedby="title"
+                                      placeholder="Title" formControlName="Title">
+                                      <div *ngIf="submittedDrone && dronesForm.DroneTitle.errors" class="invalid-feedback">
+                                          <div *ngIf="dronesForm.DroneTitle.errors.required">Title is required</div>
+                                      </div>
+                                  </div>
+                                </div>
+                      
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                  <div class="form-group">
+                                    <label for="serialnumber" class="custom-input-label">Video Link</label>
+                                    <input type="text" class="form-control custom-input" id="serialnumber" aria-describedby="serialnumber"
+                                      placeholder="Serial Number" formControlName="Path">
+                                      <div *ngIf="submittedDrone && dronesForm.SerialNumber.errors" class="invalid-feedback">
+                                          <div *ngIf="dronesForm.SerialNumber.errors.required">Path is required</div>
+                                      </div>
+                                  </div>
+                                </div>
+                      
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                  <div class="form-group">
+                                    <label for="Description" class="custom-input-label">Description</label>
+                                    <input type="text" class="form-control custom-input" id="Description" aria-describedby="Description"
+                                      placeholder="Description" formControlName="Description">
+                                      <div *ngIf="submittedDrone && dronesForm.Description.errors" class="invalid-feedback">
+                                          <div *ngIf="dronesForm.Description.errors.required">Description is required</div>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                      
+                              <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
+                                    
+                                  <button *ngIf="!updateDrone"class="button-secondary-dws" (click)="addPortfolioImageVideo('Video')">Add Video</button>
+                                  <button *ngIf="updateDrone"class="button-secondary-dws" (click)="updateDroneByID()">Update Video</button>
+                                </div>
+                              </div>
+                              <div class="seperator"></div>
+                        </div>
+        
+                        <div class="row imageGallery"  *ngIf="videosList && videosList.length">
+                          <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let videos of videosList">
                             <div class="thumb-img">
-                             <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
+                             <div> 
+                         
+                               <!-- <iframe [src]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)" style="width: 100%;" frameborder="0" allowfullscreen></iframe> -->
+                               <object style="width: 100%;" [data]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)">
+                               </object>
+                              </div>
                             </div>
-                            <div class="thumb-title makeBlue mTop15"><p>Bird Eye View of Venice</p></div>
-                            <div class="thumb-description"><p>Captured this Image 2
-                                Years ago. Still Love it!</p></div>
+                            <div class="thumb-title makeBlue mTop15"><p>{{videos.Title}}</p></div>
+                            <div class="thumb-description"><p>{{videos.Description}}</p></div>
                             <div class="action-buttons">
                               <div class="makeBlue editImage inline-block">
                                   <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -322,23 +409,14 @@
                             </div>
   
                           </div>
+                        </div>
+                        <div class="row imageGallery" *ngIf="videosList && !videosList.length">
                           <div class="col-md-3 col-sm-6 col-xs-12">
-                              <div class="thumb-img">
-                               <div> <img src="../../../../assets/images/avatar.png" alt=""></div>
-                              </div>
-                              <div class="thumb-title makeBlue mTop15"><p>Bird Eye View of Venice</p></div>
-                              <div class="thumb-description"><p>Captured this Image 2
-                                  Years ago. Still Love it!</p></div>
-                              <div class="action-buttons">
-                                <div class="makeBlue editImage inline-block">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                </div>
-                                <div class="makeRed deleteImags inline-block">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                </div>
-                              </div>
-    
+                            <p>No Videos Exists</p>
+     
                             </div>
+  
+                  
                         </div>
    
   
@@ -350,12 +428,12 @@
   </div>
   
   <div class="container">
-    <div class="call-to-action">
+    <div class="call-to-action" [class.disableDiv]="isAdmin">
       <div class="goBack">
         <button>Previous Step</button>
       </div>
       <div class="saveButton">
-        <button>Save</button>
+        <button (click)="save()">Save</button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>

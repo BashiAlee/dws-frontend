@@ -1,5 +1,6 @@
 
 import { Component, Input, Output, EventEmitter, OnInit  } from '@angular/core';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 declare var $: any;
 @Component({
@@ -8,9 +9,11 @@ declare var $: any;
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {  
+ id: any;
   @Input() isOpen: boolean;
   @Output() toggleEvent: EventEmitter<boolean> =   new EventEmitter();
-  constructor() { 
+  constructor(private authService :AuthenticationService) { 
+    this.id = this.authService.getCurrentUser().ID;
     var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     if(width < 768) {
       this.isOpen = false;

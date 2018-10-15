@@ -1,0 +1,36 @@
+<div class="container">
+    <h1 class="form-heading">login Form</h1>
+    <div class="login-form">
+    <div class="main-div">
+        <div class="panel">
+       <h2>Admin Login</h2>
+       <p>Please enter your email and password</p>
+       </div>
+        <form id="Login"  [formGroup]="loginForm">
+    
+            <div class="form-group">
+    
+    
+                <input type="text" id="firstname" class="form-control" placeholder="Email" formControlName="Email">
+                <div *ngIf="form.Email.invalid && (form.Email.dirty || form.Email.touched)" class="invalid-feedback">
+                    <div *ngIf="form.Email.errors.required">Email is required</div>
+                    <div *ngIf="form.Email.errors.email">Email must be a valid email address</div>
+                </div>
+
+                
+    
+            </div>
+    
+            <div class="form-group">
+    
+                <input type="password" id="lastname" class="form-control"  placeholder="Password" formControlName="Password" >
+                <div *ngIf="form.Password.invalid && (form.Password.dirty || form.Password.touched)" class="invalid-feedback">
+                    <div *ngIf="form.Password.errors.required">Password is required</div>
+                </div>
+    
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+    
+        </form>
+        </div>
+    </div></div>

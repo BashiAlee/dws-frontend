@@ -1,10 +1,16 @@
 
 <div class="profile-main wow fadeInDown">
-    <!-- <div class="topContent">
-            <h1>Complete Your Profile</h1>
-            <p>Start by Completing Your Profile. It Consists of Five Steps Below.
-                You Can Edit Your Information Anytime later.</p>
-    </div> -->
+    <div class="topContent" *ngIf="isAdmin">
+            <h1>Review Profile</h1>
+            <p>Review Pilots Profie and Let Pilot know if they are missing
+                    something important!</p>
+    </div>
+
+    <div class="buttons makeCenter" *ngIf="isAdmin">
+        <a class="btn-approve" (click)="approveProfile()">Approve this profile</a>
+        <a class="btn-reject" (click)="rejectProfile()">Reject this profile</a>
+        <a class="btn-message">Send Message</a>
+    </div>
 
             <div class="custom-tabs mTop100" >
                     <button  class="BackBtn" (click)="moveBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>

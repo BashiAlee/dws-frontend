@@ -1,0 +1,100 @@
+/******* How-work **********/
+.works{
+    padding-top: 70px;
+    padding-bottom: 120px;
+    background: url(../../../assets/images/howitworksbg.jpg);
+    // background: #DF5643;
+    //text-align: center;
+    //color: #fff;
+    background-size: 100% 100%;
+}
+.works .title{
+    font-family: 'RobotoCondensed-Light';
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 45px;
+    margin-bottom: 5px !important;
+}
+.works .description{
+    color: #fff;
+    margin-top: 0px;
+    margin-bottom: 2px;
+    font-family: 'RobotoCondensed-Light';
+    font-size: 24px;
+    //text-align: center;
+}
+.white-box{
+    padding: 30px 60px;
+    background: rgba(255,255,255,0.9);
+    margin-top: 60px;
+    padding-bottom: 100px;
+    border-radius: 6px;
+}
+.white-box img{
+    height: 50px;
+}
+.white-box h4{
+    color: #161616;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 25px;
+}
+.white-box h3{
+    color: #2895EB !important;
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+.white-box p{
+    font-size: 15px;
+    color: #545454;
+}
+.blue{
+    color: #3FBAD0 !important;
+}
+.btn-step{
+    color: #161616 !important;
+    font-size: 12px !important;
+    font-family: 'RobotoCondensed-Bold';
+    border:1px solid #CFF5CC;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: #CFF5CC;
+    margin-top: -3px;
+    margin-right: 30px;
+}
+.btn-sub{
+    background: #29ABE2;
+    border: 1px solid #29ABE2;
+    color: #fff !important;
+    padding: 14px 36px;
+    border-radius: 40px;
+    font-size: 18px !important;
+    text-decoration: none !important;
+}
+.btn-sub:hover{
+    background: #43B5E7 !important;
+}
+.right-one{
+    background: #F4EDFF !important;
+    color: #3FBAD0 !important;
+    border-color: #F4EDFF !important;
+}
+.for-customers h3{
+    color: #ED3E24 !important;
+}
+.for-customers .btn-step{
+    background: #FFF48A !important;
+    border: 1px solid #FFF48A !important;
+}
+.btn-hire{
+    background: #ED3E24;
+    border: 1px solid #ED3E24;
+    color: #fff !important;
+    padding: 14px 36px;
+    border-radius: 40px;
+    text-decoration: none !important;
+    font-size: 18px !important;
+}
+.btn-hire:hover{
+    background: #DF5643 !important;
+}

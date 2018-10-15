@@ -1,0 +1,96 @@
+
+      <div class="sign-up">
+        <div class=" container">
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="form-sign-up">
+                    <h2 class="wow fadeInDown">Sign Up</h2>
+                    <h4 class="wow fadeInDown">Begin as a DWS customer, Create your account.</h4>
+                    <br>
+                    <hr>
+                    <br>
+
+                      <form id="loginForm" [formGroup]="signupForm">
+                       <div class="row">
+                          <div class="col-sm-6 col-md-6">
+                             <div class="form-group wow fadeInDown">
+                                <label for="email">First Name *</label>
+                                <input type="text" id="firstname" class="form-control" placeholder="First Name" formControlName="FirstName">
+                                <div *ngIf="form.FirstName.invalid && (form.FirstName.dirty || form.FirstName.touched)" class="invalid-feedback">
+                                  <div *ngIf="form.FirstName.errors.required">First Name is required</div>
+                              </div>
+                             </div>
+                          </div>
+                          <div class="col-sm-6 col-md-6">
+                             <div class="form-group wow fadeInDown">
+                                <label for="email">Last Name *</label>
+                                <input type="text" id="lastname" class="form-control"  placeholder="Last Name" formControlName="LastName">
+                                <div *ngIf="form.LastName.invalid && (form.LastName.dirty || form.LastName.touched)" class="invalid-feedback">
+                                  <div *ngIf="form.LastName.errors.required">Last Name is required</div>
+                              </div>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="row">
+                          <div class="col-sm-6 col-md-6">
+                             <div class="form-group wow fadeInDown">
+                                <label for="email">Password *</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                                formControlName="Password"
+                                >
+                                <div *ngIf="form.Password.invalid && (form.Password.dirty || form.Password.touched)" class="invalid-feedback">
+                                  <div *ngIf="form.Password.errors.required">Password is required</div>
+                              </div>
+
+                              <div *ngIf="form.Password.value!=form.ConfirmPassword.value" class="invalid-feedback">
+                               Password doesn't match
+                              </div>
+                             </div>
+                          </div>
+                          <div class="col-sm-6 col-md-6">
+                             <div class="form-group wow fadeInDown">
+                                <label for="email">Confirm Password *</label>
+                                <input type="password" class="form-control" id="conPass" name="conPass" placeholder="Confirm Password" formControlName="ConfirmPassword">
+                                <div *ngIf="form.ConfirmPassword.invalid && (form.ConfirmPassword.dirty || form.ConfirmPassword.touched)" class="invalid-feedback">
+                                  <div *ngIf="form.ConfirmPassword.errors.required">Password is required</div>
+                              </div>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="form-group wow fadeInDown">
+                          <label for="email">Email Address *</label>
+                          <input type="email" class="form-control" id="myEmail" placeholder="Email Address"  formControlName="Email">
+                          <div *ngIf="form.Email.invalid && (form.Email.dirty || form.Email.touched)" class="invalid-feedback">
+                            <div *ngIf="form.Email.errors.required">Email is required</div>
+                            <div *ngIf="form.Email.errors.email">Email must be a valid email address</div>
+                        </div>
+                       </div>
+                       <div class="form-group wow fadeInDown">
+                          <label for="email">Company *</label>
+                          <input type="text" class="form-control"  id="companyName" placeholder="Company Name">
+                       </div>
+                       <div class="form-group wow fadeInDown">
+                          <label for="email">Phone Number *</label>
+                          <input type="tel" class="form-control"  id="phone" placeholder="Phone Number"  formControlName="Phone">
+                          <div *ngIf="form.Phone.invalid && (form.Phone.dirty || form.Phone.touched)" class="invalid-feedback">
+                            <div *ngIf="form.Phone.errors.required">Phone Number is required</div>
+                            <!-- <div *ngIf="form.Phone.errors.pattern">Phone Number is Invalid</div> -->
+                        </div>
+                       </div>
+                       <div class="form-group wow fadeInDown">
+                         <p *ngIf="error" class="errorMessage">{{error}}</p>
+                         <p *ngIf="success" class="successMessage">{{success}}</p>
+                     </div>
+                       <button type="button" id="submitLoginForm" class="btn btn-sign-up mt20 wow fadeInDown" (click)="signUp()">CONFIRM YOUR EMAIL & CONTINUE</button>
+                    </form>
+
+                 </div>
+              </div>
+              <!-- col-8 -->
+           </div>
+           <!-- row -->
+        </div>
+        <!-- container -->
+     </div>
+
+     <how-it-works></how-it-works>

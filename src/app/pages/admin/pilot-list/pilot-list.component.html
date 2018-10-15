@@ -34,80 +34,60 @@
 
          <div class="row">
            <div class="col-md-12">
+             
             <table datatable [dtOptions]="dtOptions" class="row-border hover custom-datatable">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>First name</th>
-                  <th>Last name</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Country</th>
+                  <th>State</th>
+                  <th>City</th>
+                  <th>Action</th>
                   
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Foo</td>
-                  <td>Bar</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Someone</td>
-                  <td>Youknow</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Iamout</td>
-                  <td>Ofinspiration</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Yoda</td>
-                  <td>Skywalker</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Patrick</td>
-                  <td>Dupont</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>Barack</td>
-                  <td>Obama</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>François</td>
-                  <td>Holland</td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>Michel</td>
-                  <td>Popo</td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>Chuck</td>
-                  <td>Norris</td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>Simon</td>
-                  <td>Robin</td>
-                </tr>
-                <tr>
-                  <td>11</td>
-                  <td>Louis</td>
-                  <td>Lin</td>
-                </tr>
-                <tr>
-                  <td>12</td>
-                  <td>Zelda</td>
-                  <td>Link</td>
+                <tr *ngFor="let list of pilotList">
+                  <td>{{list.Users.FirstName+' '+list.Users.LastName}}</td>
+                  <td>{{list.Users.Email}}</td>
+                  <td>{{list.PrimaryPhone}}</td>
+                  <td>{{list.Country.Name}}</td>
+                  <td>{{list.State.Name}}</td>
+                  <td>{{list.PhysicallCity}}</td>
+                  <td><a [routerLink]="['/admin/profile',list.UserId]" class="details-btn">Details</a></td>
                 </tr>
               </tbody>
             </table>
            </div>
          </div> 
+         <!-- <div class="custom-table">
+
+        <div class="table" *ngIf="pilotList && pilotList.length">
+          <div class="table-header mBottom25 for-seven-columns ">
+            <span>Name</span>
+            <span>Email</span>
+            <span>Phone</span>
+            <span>Country</span>
+            <span>State</span>
+            <span>City</span>
+            <span>Action</span>
+
+          </div>
+          <div class="table-body">
+            <div class="table-row mBottom25 for-seven-columns " *ngFor="let list of pilotList">
+              <span>{{list.Users.FirstName+' '+list.Users.LastName}}</span>
+                  <span>{{list.Users.Email}}</span>
+                  <span>{{list.PrimaryPhone}}</span>
+                  <span>{{list.PhysicallCountry}}</span>
+                  <span>{{list.PhysicallState}}</span>
+                  <span>{{list.PhysicallCity}}</span>
+                  <span><a class="details-btn">Details</a></span>
+            </div>
+          </div>
+        </div>
+      </div> -->
    
        </div>
        </div>

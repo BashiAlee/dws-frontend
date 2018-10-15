@@ -137,3 +137,23 @@
 .custom-tabs::-webkit-scrollbar { 
   display: none;  // Safari and Chrome
 }
+.buttons {
+  .btn-message {
+    background: $success;
+    color: $white;
+  }
+
+  .btn-approve{
+    background:$delete-icon-color;
+    color: $white;
+   }
+  a {
+    padding: 20px;
+    border-radius: 30px;
+    margin: 20px;
+  }
+  .btn-reject {
+    background: #f00;
+    color: $white;
+  }
+}

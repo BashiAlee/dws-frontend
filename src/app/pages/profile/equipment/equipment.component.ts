@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../services/profile/profile.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalsComponent } from '../../../components/modals/modals.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Component({
   selector: 'app-equipment',
   templateUrl: './equipment.component.html',
@@ -8,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EquipmentComponent implements OnInit {
   drones: any;
+  bsModalRef: BsModalRef;
   submittedEquipment: any = false;
   submittedDrone: any = false;
   addDrone: FormGroup;
@@ -21,26 +27,41 @@ export class EquipmentComponent implements OnInit {
   loaders: any;
   selectedDrone: any;
   selectedEquipment: any;
-  constructor(private profileService: ProfileService, private formBuilder: FormBuilder) {
+  Notes: any;
+  isAdmin: any;
+  id: any;
+  config = {
+    class: "custom-modal modal-dialog-centered modal-lg"
+  };
+  constructor(private profileService: ProfileService, private formBuilder: FormBuilder,
+    private route: ActivatedRoute,private router: Router,
+    private modalService: BsModalService,
+    private authService: AuthenticationService) {
+      this.route.parent.url.subscribe((urlPath) => {
+        this.id = parseInt(urlPath[1].path);
+      })
     
     this.addDrone = this.formBuilder.group({
-      UserId: [1],
-      PilotId: [1],
+      UserId: [this.id],
+      PilotId: [],
       DroneTitle: ['',Validators.required],
       Description:['',Validators.required],
       SerialNumber: ['',Validators.required]
     })
     this.addEquipment = this.formBuilder.group({
-      UserId: [1],
-      PilotId: [1],
+      UserId: [this.id],
+      PilotId: [],
       EquipmentTitle: ['',Validators.required],
       Description: ['',Validators.required]
     })
 
 
     this.loaders = {};
-    this.getAllDronesByID('1');
-    this.getAllEquipmentsByID('1');
+    this.getAllDronesByID(this.id);
+    this.getAllEquipmentsByID(this.id);
+    if(this.router.url.split('/')[1] =='admin') {
+      this.isAdmin = true;
+    }
    }
 
   ngOnInit() {
@@ -94,6 +115,7 @@ export class EquipmentComponent implements OnInit {
         if(data.status) {
           this.loaders.equipmentLoader = false;
           this.equipments = data.result;
+          this.Notes = this.equipments[0].Notes;
         } else if(!data.status) {
           this.loaders.equipmentLoader = false;
           this.equipments = [];
@@ -111,7 +133,7 @@ export class EquipmentComponent implements OnInit {
       .subscribe(
         data => {
           if(data.status) {
-            this.getAllEquipmentsByID('1')
+            this.getAllEquipmentsByID(this.id)
           }
         }
       );
@@ -128,7 +150,7 @@ export class EquipmentComponent implements OnInit {
     .subscribe(
       data => {
         if(data.status) {
-          this.getAllDronesByID('1')
+          this.getAllDronesByID(this.id)
         }
       }
     );
@@ -145,7 +167,7 @@ export class EquipmentComponent implements OnInit {
     this.profileService.updatePilotEquipment(data)
     .subscribe( data=> {
       if(data.status) {
-        this.getAllEquipmentsByID('1');
+        this.getAllEquipmentsByID(this.id);
       }
     })
   }
@@ -158,10 +180,42 @@ export class EquipmentComponent implements OnInit {
     this.profileService.updatePilotDrone(data)
     .subscribe( data=> {
       if(data.status) {
-        this.getAllDronesByID('1');
+        this.getAllDronesByID(this.id);
       }
     })
   }
+
+  updateEquipmentNotes(){
+    var data = {
+      UserId: this.id,
+      Notes: this.Notes
+    }
+
+    this.profileService.updateEquipmentNotes(data)
+    .subscribe(
+      data => {
+        if(data.status) {
+          const initialState = {
+            type: 'success',
+            page: 'experience-portfolio',
+            id: this.id
+          }
+          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          this.bsModalRef.content.closeBtnName = 'Close';
+        } else if(!data.status) {
+          const initialState = {
+            type: 'error'
+          }
+          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          this.bsModalRef.content.closeBtnName = 'Close';
+        }
+      }
+    )
+
+
+  }
+
+  
 
 
 }

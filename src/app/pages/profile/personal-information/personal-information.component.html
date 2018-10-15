@@ -1,20 +1,21 @@
 <form [formGroup]="personalInformation">
-<div class="container makeBgWhite">
+<div class="container makeBgWhite" [class.disableDiv]="isAdmin">
   <div class="personal-information">
     <div class="profile-details makeCenter" formGroupName="Users">
       <div class="displayPicture">
-        <img [src]="profileImage" alt="">
+        <img *ngIf="profileImage" [src]="profileImage" alt="displayPicture">
+        <img *ngIf="!profileImage" src="../../../../assets/images/avatar.png" alt="displayPicture">
         <div class="image-upload">
           <label for="file-input">
             <i class="fa fa-pencil" aria-hidden="true"></i>
           </label>
 
-          <input id="file-input" (change)="uploadImage($event)" type="file"/>
+          <input id="file-input" (change)="uploadImage($event)" type="file" accept="image/*"/>
         </div>
       </div>
-      <p class="user-name">Sam Buxton</p>
-      <p class="user-id">DWS208189890</p>
-      <p class="member-since">Member Since :  <span>02/02/2018.</span></p>
+      <p class="user-name">{{personalInformation.value.Users.FirstName+' '+personalInformation.value.Users.LastName }}</p>
+      <p class="user-id">{{personalInformation.value.Users.MemberId}}</p>
+      <p class="member-since" *ngIf="personalData">Member Since :  <span>{{personalData.Users.MemberSince | date: 'MM/dd/yyyy'}}</span></p>
       <p class="user-description">You may also login using your DWS Member ID Number in the Username field.</p>
     </div>
 
@@ -62,7 +63,7 @@
               <div class="form-group">
                 <label for="firstName" class="custom-input-label">Suffix</label>
                 <ng-select formControlName="Suffix"  [searchable]="false">
-                        <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
+                        <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
                     </ng-select>
                     <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
                       <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
@@ -116,7 +117,7 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
-              <ng-select formControlName="PhysicallCountry" [searchable]="false">
+              <ng-select formControlName="PhysicallCountry" [searchable]="false" (change)="getStatesByCode('physical',personalInformation.value.PhysicallCountry, 'change')">
                     <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.PhysicallCountry.invalid && (form.PhysicallCountry.dirty || form.PhysicallCountry.touched)" class="invalid-feedback">
@@ -139,7 +140,7 @@
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
               <ng-select formControlName="PhysicallState" [searchable]="false">
-                    <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
+                    <ng-option *ngFor="let states of physicalRegionList" [value]="states.ID">{{states.Name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.PhysicallState.invalid && (form.PhysicallState.dirty || form.PhysicallState.touched)" class="invalid-feedback">
                   <div *ngIf="form.PhysicallState.errors.required">State is required</div>
@@ -169,13 +170,13 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="custom-checkbox">
               <label class="container">Same as Physical Address
-                <input type="checkbox" checked="checked" formControlName="SameAsPhysical"> 
+                <input type="checkbox" checked="checked" formControlName="SameAsPhysical" (click)="cloneValues(personalInformation.value.SameAsPhysical)"> 
                 <p class="checkmark"></p>
               </label>
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="!personalInformation.value.SameAsPhysical">
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
@@ -197,11 +198,11 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="!personalInformation.value.SameAsPhysical">
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
-              <ng-select  formControlName="MailingCountry" [searchable]="false">
+              <ng-select  formControlName="MailingCountry" [searchable]="false" (change)="getStatesByCode('mailing', personalInformation.value.MailingCountry,'change')">
                     <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.MailingCountry.invalid && (form.MailingCountry.dirty || form.MailingCountry.touched)" class="invalid-feedback">
@@ -209,7 +210,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="col-md-4 col-sm-6 col-xs-12" *ngIf="!personalInformation.value.SameAsPhysical">
             <div class="form-group">
               <label for="city" class="custom-input-label">City</label>
               <input type="text" class="form-control custom-input" id="city" formControlName="MailingCity" aria-describedby="city" placeholder="City">
@@ -218,11 +219,11 @@
             </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="col-md-4 col-sm-6 col-xs-12" *ngIf="!personalInformation.value.SameAsPhysical">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
-              <ng-select formControlName="MailingState" [searchable]="false">
-                    <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
+              <ng-select formControlName="MailingState" [searchable]="false" >
+                    <ng-option *ngFor="let mState of mailingRegionList" [value]="mState.ID" >{{mState.Name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.MailingState.invalid && (form.MailingState.dirty || form.MailingState.touched)" class="invalid-feedback">
                   <div *ngIf="form.MailingState.errors.required">State is required</div>
@@ -230,7 +231,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="!personalInformation.value.SameAsPhysical">
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="zip" class="custom-input-label">Zip Code</label>
@@ -304,7 +305,7 @@
 </div>
 
 <div class="container">
-  <div class="call-to-action">
+  <div class="call-to-action" [class.disableDiv]="isAdmin">
     <div class="goBack">
       <button>Previous Step</button>
     </div>

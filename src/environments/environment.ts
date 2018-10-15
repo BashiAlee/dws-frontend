@@ -7,6 +7,9 @@ export const environment = {
   apiURL: "http://172.25.33.31:8080/dws/",
   uploadUrl: "http://172.25.33.31:8081/dws/"
 
+  // apiURL: 'http://18.188.240.44:8080/dws/',
+  // uploadUrl: 'http://18.188.240.44:8081/dws/'
+
 
 };
 

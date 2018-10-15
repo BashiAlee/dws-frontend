@@ -28,9 +28,29 @@ export class ProfileService {
      return response.json();
     }));
   }
-
+  
   getProfilePersonalInfoByID(id) {
     return this.http.get(this.apiUrl + 'getPilotPersonalInformationById/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  getProfileBusinessInfoByID(id) {
+    return this.http.get(this.apiUrl + 'getPilotBusinessInformationById/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  
+  getPortfolioVideosImagesByID(id) {
+    return this.http.get(this.apiUrl + 'getPortfolioVideosAndImages/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  getExperiencePorfileWorkByID(id) {
+    return this.http.get(this.apiUrl + 'getExperienceWorkPortfolio/'+id)
     .pipe(map((response: any) => {
      return response.json();
     }));
@@ -38,6 +58,12 @@ export class ProfileService {
 
   updatePersonalInformation(data) {
     return this.http.post(this.apiUrl + 'updatePilotPersonalInformationById',data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  updateBusinessInformation(data) {
+    return this.http.post(this.apiUrl + 'updatePilotBusinessInformationById',data)
     .pipe(map((response: any) => {
      return response.json();
     }));
@@ -50,7 +76,7 @@ export class ProfileService {
     headers.append('Content-Type','multipart/form-data');
     
     formData.append('file',new Blob([target.files[0]]),target.files[0].name);
-
+    
     return this.http.post(this.staticUrl+'uploading',formData)
     .pipe(map((response: any) => {
   
@@ -92,6 +118,84 @@ export class ProfileService {
   }
   updatePilotEquipment(data) {
     return this.http.post(this.apiUrl + 'updateEquipmentById', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  
+  addProfilioImagesVideos(data) {
+    return this.http.post(this.apiUrl + 'addPortfolioVideosAndImages', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  
+  updateExperienceWorkPortfolio(data) {
+    return this.http.post(this.apiUrl + 'updateExperienceWorkPortfolio', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  getWorkOfferedByID(id) {
+    return this.http.get(this.apiUrl + 'getWorkOffered/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  addWorkOffered(data) {
+    return this.http.post(this.apiUrl + 'addWorkOffered', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  addWaiver(data) {
+    return this.http.post(this.apiUrl + 'addWaiver', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  uploadPDF(file) {
+    let formData = new FormData();
+    let headers = new Headers();
+    var target = file.target || file.srcElement
+    headers.append('Content-Type','multipart/form-data');
+    
+    formData.append('file',new Blob([target.files[0]]),target.files[0].name);
+    
+    return this.http.post(this.staticUrl+'uploading',formData)
+    .pipe(map((response: any) => {
+  
+     return response.json();
+  }));
+  }
+
+  getProfileDocumentsByID(id) {
+    return this.http.get(this.apiUrl + 'getDocumenatation/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  getDocumentsWaiversByID(id) {
+    return this.http.get(this.apiUrl + 'getWaiver/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  updateDocumentation(data) {
+    return this.http.post(this.apiUrl + 'updateDocumenatation', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  updateEquipmentNotes(data) {
+    return this.http.post(this.apiUrl + 'updateNotes', data)
     .pipe(map((response: any) => {
      return response.json();
     }));

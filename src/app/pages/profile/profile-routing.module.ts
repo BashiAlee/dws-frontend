@@ -5,6 +5,7 @@ import { DocumentDeclarationComponent } from './document-declaration/document-de
 import { EquipmentComponent } from './equipment/equipment.component';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { ExperiencePortfolioComponent } from './experience-portfolio/experience-portfolio.component';
+import { AuthGuard } from '../../components/auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo:'personal-information', pathMatch:'full' },

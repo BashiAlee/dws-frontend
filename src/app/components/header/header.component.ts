@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  userInfo: any;
+  isAdmin: any;
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
+    if(this.router.url.split('/')[1]=='admin') {
+      this.userInfo = JSON.parse(localStorage.getItem('admin'));
+    } else {
+      this.userInfo = this.authService.getCurrentUser();
+    }
+   
   }
 
 }

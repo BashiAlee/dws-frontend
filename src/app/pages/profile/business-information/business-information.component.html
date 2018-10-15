@@ -1,4 +1,5 @@
-<div class="container makeBgWhite">
+<form [formGroup]="businessInformation" >
+<div class="container makeBgWhite"[class.disableDiv]="isAdmin" >
   <div class="personal-information">
     <div class="business-info-details makeCenter">
       <!-- <div class="displayPicture">
@@ -21,13 +22,14 @@
         <div class="row justify-content-center">
           <div class="col-md-3 makeCenter">
             <div class="displayPicture">
-              <img src="../../../../assets/images/avatar.png" alt="">
+              <img *ngIf="businessImage" [src]="businessImage" alt="business logo">
+              <img *ngIf="!businessImage" src="../../../../assets/images/avatar.png" alt="business logo">
               <div class="image-upload">
                 <label for="file-input">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </label>
 
-                <input id="file-input" type="file" />
+                <input id="file-input" type="file" (change)="uploadImage($event)" accept="image/*"/>
               </div>
             </div>
             <p class="aperu-medium mTop15">Business Logo</p>
@@ -47,25 +49,25 @@
             <p class="aperu-medium mTop15">Business Logo (Secondary)</p>
           </div> -->
         </div>
-        <form>
+    
           <div class="row">
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
                 <label for="businessName" class="custom-input-label">Business Name</label>
                 <input type="text" class="form-control custom-input" id="businessName" aria-describedby="businessName"
-                  placeholder="Business Name">
+                  placeholder="Business Name" formControlName="BusinessName" >
               </div>
             </div>
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
                 <label for="businessType" class="custom-input-label">Business Type</label>
-                <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
-                  <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+                <ng-select formControlName="BusinessType" [searchable]="false">
+                  <ng-option *ngFor="let type of businessTypes" [value]="type.code">{{type.name}}</ng-option>
                 </ng-select>
               </div>
             </div>
           </div>
-        </form>
+     
 
       </div>
     </div>
@@ -78,14 +80,14 @@
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
               <input type="text" class="form-control custom-input" id="addressone" aria-describedby="addressone"
-                placeholder="Address line 1">
+                placeholder="Address line 1" formControlName="PhysicallAddressLine1">
             </div>
           </div>
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addresstwo" class="custom-input-label">Address Line 2</label>
               <input type="text" class="form-control custom-input" id="addresstwo" aria-describedby="addresstwo"
-                placeholder="Address line 2">
+                placeholder="Address line 2" formControlName="PhysicallAddressLine2">
             </div>
           </div>
         </div>
@@ -93,22 +95,22 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
-              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
-                <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+              <ng-select formControlName="PhysicallCountry" [searchable]="false" (change)="getStatesByCode('physical',businessInformation.value.PhysicallCountry, 'change')">
+                <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
               </ng-select>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="city" class="custom-input-label">City</label>
-              <input type="text" class="form-control custom-input" id="city" aria-describedby="city" placeholder="City">
+              <input type="text" class="form-control custom-input" formControlName="PhysicallCity" id="city" aria-describedby="city" placeholder="City">
             </div>
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
-              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
-                <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+              <ng-select formControlName="PhysicallState" [searchable]="false">
+                <ng-option *ngFor="let states of physicalRegionList" [value]="states.ID">{{states.Name}}</ng-option>
               </ng-select>
             </div>
           </div>
@@ -117,7 +119,7 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="zip" class="custom-input-label"> ZIP Code</label>
-              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" placeholder=" ZIP Code">
+              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip"formControlName="PhysicallZip" placeholder=" ZIP Code">
             </div>
           </div>
         </div>
@@ -130,57 +132,57 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="custom-checkbox">
               <label class="container">Same as Physical Address
-                <input type="checkbox" checked="checked">
+                <input type="checkbox" checked="checked" formControlName="SameAsPhysical" (click)="cloneValues(businessInformation.value.SameAsPhysical)" value="1">
                 <p class="checkmark"></p>
               </label>
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="!businessInformation.value.SameAsPhysical">
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
               <input type="text" class="form-control custom-input" id="addressone" aria-describedby="addressone"
-                placeholder="Address line 1">
+                placeholder="Address line 1" formControlName="MailingAddressLine1">
             </div>
           </div>
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addresstwo" class="custom-input-label">Address Line 2</label>
               <input type="text" class="form-control custom-input" id="addresstwo" aria-describedby="addresstwo"
-                placeholder="Address line 2">
+                placeholder="Address line 2" formControlName="MailingAddressLine2">
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="!businessInformation.value.SameAsPhysical">
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
-              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
-                <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+              <ng-select formControlName="MailingCountry" [searchable]="false" (change)="getStatesByCode('mailing', businessInformation.value.MailingCountry,'change')">
+                <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
               </ng-select>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="city" class="custom-input-label">City</label>
-              <input type="text" class="form-control custom-input" id="city" aria-describedby="city" placeholder="City">
+              <input type="text" class="form-control custom-input" id="city" aria-describedby="city" formControlName="MailingCity" placeholder="City">
             </div>
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
-              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
-                <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+              <ng-select formControlName="MailingState" [searchable]="false">
+                <ng-option *ngFor="let mState of mailingRegionList" [value]="mState.ID" >{{mState.Name}}</ng-option>
               </ng-select>
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="!businessInformation.value.SameAsPhysical">
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="zip" class="custom-input-label">Zip</label>
-              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" placeholder="zip">
+              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" placeholder="zip" formControlName="MailingZip">
             </div>
           </div>
         </div>
@@ -193,15 +195,15 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="businessPhoneNumberP" class="custom-input-label">Business Phone Number (Primary)</label>
-              <input type="number" class="form-control custom-input" id="zip" aria-describedby="businessPhoneNumberP"
-                placeholder="Business Phone Number (Primary)">
+              <input type="text" class="form-control custom-input" id="zip" aria-describedby="businessPhonetextP"
+                placeholder="Business Phone Number (Primary)" formControlName="BusinessPhoneNumberPrimary">
             </div>
           </div>
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="businessPhoneNumberS" class="custom-input-label">Business Phone Number (Secondary)</label>
-              <input type="number" class="form-control custom-input" id="businessPhoneNumberS" aria-describedby="businessPhoneNumberS"
-                placeholder="Business Phone Number (Secondary)">
+              <input type="text" class="form-control custom-input" id="businessPhoneNumberS" aria-describedby="businessPhoneNumberS"
+                placeholder="Business Phone Number (Secondary)" formControlName="BusinessPhoneNumberSecondary">
             </div>
           </div>
         </div>
@@ -209,8 +211,8 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="stateRegistered" class="custom-input-label">State Registered In</label>
-              <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false">
-                <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
+              <ng-select formControlName="StateRegisteredIn" [searchable]="false">
+               <ng-option *ngFor="let states of physicalRegionList" [value]="states.ID">{{states.Name}}</ng-option>
               </ng-select>
             </div>
           </div>
@@ -218,7 +220,7 @@
             <div class="form-group">
               <label for="BusinessStartDate" class="custom-input-label">Business Start Date</label>
               <input type="date" class="form-control custom-input" id="BusinessStartDate" aria-describedby="BusinessStartDate"
-                placeholder="BusinessStartDate">
+                placeholder="BusinessStartDate" formControlName="BusinessStartDate">
             </div>
           </div>
         </div>
@@ -227,12 +229,12 @@
             <label for="liabilityRadio" class="custom-input-label">General Liability Insurance</label>
             <div class="custom-radio">
               <label class="container">Yes
-                <input type="radio" name="liabilityRadio">
+                <input type="radio" formControlName="GeneralLiabilityInsurance" value='1'>
                 <span class="checkmark"></span>
               </label>
 
               <label class="container">No
-                <input type="radio" name="liabilityRadio">
+                <input type="radio" formControlName="GeneralLiabilityInsurance" value='0'>
                 <span class="checkmark"></span>
               </label>
             </div>
@@ -241,12 +243,12 @@
               <label for="liabilityRadio" class="custom-input-label">Professional Liability Insurance</label>
               <div class="custom-radio">
                 <label class="container">Yes
-                  <input type="radio" name="ProfessionalliabilityRadio">
+                  <input type="radio" formControlName="ProfessionalLiabilityInsurance" value='1' >
                   <span class="checkmark"></span>
                 </label>
   
                 <label class="container">No
-                  <input type="radio" name="ProfessionalliabilityRadio">
+                  <input type="radio" formControlName="ProfessionalLiabilityInsurance" value='0'>
                   <span class="checkmark"></span>
                 </label>
               </div>
@@ -257,12 +259,12 @@
               <label for="CompInsurance" class="custom-input-label">Workman’s Comp Insurance</label>
               <div class="custom-radio">
                 <label class="container">Yes
-                  <input type="radio" name="CompInsurance">
+                  <input type="radio"  formControlName="WorksmanCompInsurance" value='1'>
                   <span class="checkmark"></span>
                 </label>
   
                 <label class="container">No
-                  <input type="radio" name="CompInsurance">
+                  <input type="radio" formControlName="WorksmanCompInsurance" value='0'>
                   <span class="checkmark"></span>
                 </label>
               </div>
@@ -271,12 +273,12 @@
                 <label for="AutoInsurance" class="custom-input-label">Commercial Auto Insurance</label>
                 <div class="custom-radio">
                   <label class="container">Yes
-                    <input type="radio" name="AutoInsurance">
+                    <input type="radio" formControlName="CommercialAutoInsurance" value='1'>
                     <span class="checkmark"></span>
                   </label>
     
                   <label class="container">No
-                    <input type="radio" name="AutoInsurance">
+                    <input type="radio" formControlName="CommercialAutoInsurance" value='0'>
                     <span class="checkmark"></span>
                   </label>
                 </div>
@@ -286,7 +288,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="additional-notes"  class="form-heading">Additional Notes</label>
-              <textarea class="form-control custom-textarea" id="additional-notes"></textarea>
+              <textarea class="form-control custom-textarea" id="additional-notes" formControlName="Notes"></textarea>
             </div>
           </div>
         </div>
@@ -298,13 +300,14 @@
 </div>
 
 <div class="container">
-  <div class="call-to-action">
+  <div class="call-to-action" [class.disableDiv]="isAdmin">
     <div class="goBack">
       <button>Previous Step</button>
     </div>
     <div class="saveButton">
-      <button>Save</button>
+      <button (click)="save()">Save</button>
     </div>
     <p>Save your Personal Information and Continue to next Step.</p>
   </div>
 </div>
+</form>

@@ -124,12 +124,13 @@
       </div>
       <div class="profile-section">
         <div class="picture">
-          <img src="https://www.w3schools.com/bootstrap/sanfran.jpg" alt="Cinque Terre">
+          <img *ngIf="userInfo.ProfileImage" [src]="userInfo.ProfileImage" alt="dp">
+          <img *ngIf="!userInfo.ProfileImage" src="../../../assets/images/avatar.png" alt="dp">
         </div>
 
         <div class="detail">
-          <p class="user-name">Sam Buxton</p>
-          <p class="user-type">Pilot</p>
+          <p class="user-name">{{userInfo.FirstName+' '+userInfo.LastName}}</p>
+          <p class="user-type">{{userInfo.Role}}</p>
         </div>
       </div>
       
@@ -140,7 +141,7 @@
           </button>
           <div class="dropdown-menu dropdown-menu-right">
 
-            <button class="dropdown-item" type="button">Logout</button>
+            <button class="dropdown-item" type="button" (click)="authService.logout()">Logout</button>
           </div>
         </div>
       </div>

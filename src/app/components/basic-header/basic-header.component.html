@@ -1,0 +1,132 @@
+<nav class="navbar navbar-expand-lg mynav">
+  <div class="container">
+      <div class="navbar-header">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fa fa-bars" aria-hidden="true">
+               
+                </i>
+          </button>
+          <a class="" ><img src="../../../assets/images/logo.svg" class="logo" /></a>
+        </div>
+  
+        <div class="collapse navbar-collapse makeRightFlex" id="navbarSupportedContent">
+            <ul class="nav navbar-nav navbar-right alignMiddleCenter">
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="steve">ABOUT</span>
+                  <span class="fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                     <div class="row">
+                        <div class="col-sm-6 col-xs-6">
+                           <a>
+                              <div class="menu-white-box">
+                                 <img src="../../../assets/images/menu-pilots.png" class="" />
+                                 <p>DWS PILOTS</p>
+                              </div>
+                           </a>
+                           <!-- menu-white-box -->
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                           <a >
+                              <div class="menu-white-box">
+                                 <img src="../../../assets/images/menu-dws-customers.png" class="" />
+                                 <p>DWS CUSTOMERS</p>
+                              </div>
+                           </a>
+                           <!-- menu-white-box -->
+                        </div>
+                     </div>
+                     <!-- row -->
+                     <div class="row mt5">
+                        <div class="col-sm-6 col-xs-6">
+                           <a>
+                              <div class="menu-white-box">
+                                 <img src="../../../assets/images/menu-our-company.png" class="" />
+                                 <p>OUR COMPANY</p>
+                              </div>
+                           </a>
+                           <!-- menu-white-box -->
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                           <a href="">
+                              <div class="menu-white-box menu-gradient-box">
+                                 <p> <a href="#contact-form" class="contact-scroll"> MORE QUESTIONS? </a> </p>
+                                 <p>
+                           <a  class="contact-scroll">CONTACT <span class="fa fa-long-arrow-right"></span></a></p>
+                           </div> </a><!-- menu-white-box -->
+                        </div>
+                     </div>
+                     <!-- row -->
+                  </ul>
+                  <!-- ul-menu -->
+               </li>
+               <!-- dropdown -->
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="steve">JOIN</span>
+                  <span class="fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                     <div class="row">
+                        <div class="col-sm-6 col-xs-6">
+                           <a [routerLink]="['/signuppilot']">
+                              <div class="menu-white-box menu-gradient-box">
+                                 <img src="../../../assets/images/menu-Applyaspilot.png" class="" />
+                                 <p>APPLY AS A <span class="block"></span>PILOT</p>
+                              </div>
+                           </a>
+                           <!-- menu-white-box -->
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                           <a [routerLink]="['/signupcustomer']">
+                              <div class="menu-white-box menu-gradient-box redbg">
+                                 <img src="../../../assets/images/menu-join-as-customer.png" class="" />
+                                 <p>JOIN AS A <span class="block"></span>CUSTOMER</p>
+                              </div>
+                           </a>
+                           <!-- menu-white-box -->
+                        </div>
+                     </div>
+                     <!-- row -->
+                  </ul>
+                  <!-- ul-menu -->
+               </li>
+               <!-- dropdown -->
+               <li><a href="#contact-form" class="contact-scroll">CONTACT</a></li>
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="steve">LOGIN</span>
+                  <span class="fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu aboutmediaDrop">
+                     <div class="row">
+                        <div class="col-sm-6 col-xs-6">
+                           <a [routerLink]="['/loginpilot']">
+                              <div class="menu-white-box menu-gradient-box">
+                                 <img src="../../../assets/images/menu-Applyaspilot.png" class="" />
+                                 <p>PILOT</p>
+                              </div>
+                           </a>
+                           <!-- menu-white-box -->
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                           <a [routerLink]="['/logincustomer']">
+                              <div class="menu-white-box menu-gradient-box redbg">
+                                 <img src="../../../assets/images/menu-join-as-customer.png" class="" />
+                                 <p>CUSTOMER</p>
+                              </div>
+                           </a>
+                           <!-- menu-white-box -->
+                        </div>
+                     </div>
+                     <!-- row -->
+                  </ul>
+                  <!-- ul-menu -->
+               </li>
+               <!-- dropdown -->
+               <li><a [routerLink]="['/signupcustomer']" class="btn loginBtn">HIRE DWS</a></li>
+            </ul>
+         </div>
+  </div>
+  </nav>

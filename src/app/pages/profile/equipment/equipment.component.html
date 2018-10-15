@@ -1,4 +1,4 @@
-<div class="container makeBgWhite">
+<div class="container makeBgWhite" [class.disableDiv]="isAdmin">
     <div class="personal-information">
       <div class="equipment-info-details makeCenter">
         <p class="user-name">Equipment</p>
@@ -238,7 +238,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="form-group">
               <h3  class="form-heading">Additional Notes</h3>
-              <textarea class="form-control custom-textarea" id="additional-notes"></textarea>
+              <textarea class="form-control custom-textarea" id="additional-notes" [(ngModel)]="Notes"></textarea>
             </div>
           </div>
         </div>
@@ -247,12 +247,12 @@
   </div>
   
   <div class="container">
-    <div class="call-to-action">
+    <div class="call-to-action" [class.disableDiv]="isAdmin">
       <div class="goBack">
         <button>Previous Step</button>
       </div>
       <div class="saveButton">
-        <button>Save</button>
+        <button (click)="updateEquipmentNotes()">Save</button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>

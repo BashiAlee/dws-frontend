@@ -1,4 +1,4 @@
-<div class="container makeBgWhite">
+<div class="container makeBgWhite" [formGroup]="documentInformation" [class.disableDiv]="isAdmin">
     <div class="personal-information">
       <div class="document-declaration-details makeCenter">
         <p class="user-name">Documents &amp; Declaration</p>
@@ -13,12 +13,12 @@
                   <label for="Veteran" class="custom-input-label">Veteran?</label>
                   <div class="custom-radio">
                     <label class="container">Yes
-                      <input type="radio" name="Veteran">
+                      <input type="radio" formControlName="Veteran" value='1'>
                       <span class="checkmark"></span>
                     </label>
       
                     <label class="container">No
-                      <input type="radio" name="Veteran">
+                      <input type="radio" formControlName="Veteran" value='0'>
                       <span class="checkmark"></span>
                     </label>
                   </div>
@@ -29,29 +29,30 @@
                   <label for="LiabilityInsurance" class="custom-input-label">Do you have aviation liability insurance?</label>
                   <div class="custom-radio">
                     <label class="container">Yes
-                      <input type="radio" name="LiabilityInsurance" value="1" [(ngModel)]="isLiabilityInsurance" [ngModelOptions]="{standalone: true}" >
+                      <input type="radio" formControlName="AviationLiabilityInsurance" value='1'>
                       <span class="checkmark"></span>
                     </label>
       
                     <label class="container">No
-                      <input type="radio" name="LiabilityInsurance"  value="0" [(ngModel)]="isLiabilityInsurance" [ngModelOptions]="{standalone: true}" >
+                      <input type="radio"  formControlName="AviationLiabilityInsurance" value='0'>
                       <span class="checkmark"></span>
                     </label>
                   </div>
                 </div>
           </div>
   
-          <div class="row justify-content-center" *ngIf="isLiabilityInsurance=='1'">
+          <div class="row justify-content-center" *ngIf="documentInformation.value.AviationLiabilityInsurance=='1'">
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your aviation liability insurance certificate </label>
               <div class="pdf-uploader">
                 <img src="../../../../assets/images/pdf-file.svg" alt="">
+                <a *ngIf="images.AviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
                 <div class="image-upload">
-                  <label for="file-input">
+                  <label for="file-input1">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </label>
   
-                  <input id="file-input" type="file" />
+                  <input id="file-input1" type="file" (change)="uploadImage($event, 'liability-certificate')"/>
                 </div>
               </div>
               <p class="aperu-mono mTop15 makeRed">file.pdf</p>
@@ -62,12 +63,13 @@
 
               <div class="pdf-uploader">
                 <img src="../../../../assets/images/pdf-file.svg" alt="">
+                <a *ngIf="images.CopyOfAviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.CopyOfAviationLiabilityInsurancePdf)">Download</a>
                 <div class="image-upload">
-                  <label for="file-input">
+                  <label for="file-input2">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </label>
   
-                  <input id="file-input" type="file" />
+                  <input id="file-input2" type="file" (change)="uploadImage($event, 'copy-liability-certificate')" />
                 </div>
   
               </div>
@@ -79,13 +81,14 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <label for="passportImage" class="custom-input-label">Driver’s License (upload a photo or scan of your driver’s license if required by DWS).</label>
                   <div class="passportImage">
-                    <img src="../../../../assets/images/image-placeholder.png" alt="">
+                    <img *ngIf="licenseImage" [src]="licenseImage" alt="">
+                    <img *ngIf="!licenseImage" src="../../../../assets/images/image-placeholder.png" alt="">
                     <div class="image-upload">
-                      <label for="file-input">
+                      <label for="file-input3">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       </label>
       
-                      <input id="file-input" type="file" />
+                      <input id="file-input3" type="file" accept="image/*" (change)="uploadImage($event, 'license')"/>
                     </div>
                   </div>
                 </div>
@@ -94,13 +97,14 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                       <label for="insuranceCertificate" class="custom-input-label hide-overflow">Upload a photo or scan of your remote pilot certificate.</label>
                     <div class="image-uploader">
-                      <img src="../../../../assets/images/photo-camera.svg" alt="">
+                      <img *ngIf="images.PilotCertificateImage" [src]="images.PilotCertificateImage" alt="">
+                      <img *ngIf="!images.PilotCertificateImage" src="../../../../assets/images/photo-camera.svg" alt="">
                       <div class="image-upload">
-                        <label for="file-input">
+                        <label for="file-input4">
                           <i class="fa fa-pencil" aria-hidden="true"></i>
                         </label>
         
-                        <input id="file-input" type="file" />
+                        <input id="file-input4" type="file"  accept="image/*" (change)="uploadImage($event, 'pilot-certificate')"/>
                       </div>
                     </div>
                     <p class="aperu-mono mTop15 makeRed">file.png</p>
@@ -109,12 +113,13 @@
                       <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your most recent recurrent exam result (if applicable)</label>
                     <div class="pdf-uploader">
                       <img src="../../../../assets/images/pdf-file.svg" alt="">
+                      <a *ngIf="images.RecurrentExamPdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.RecurrentExamPdf)">Download</a>
                       <div class="image-upload">
-                        <label for="file-input">
+                        <label for="file-input5">
                           <i class="fa fa-pencil" aria-hidden="true"></i>
                         </label>
         
-                        <input id="file-input" type="file" />
+                        <input id="file-input5" type="file" (change)="uploadImage($event, 'exam')" />
                       </div>
         
                     </div>
@@ -126,9 +131,9 @@
                   <div class="col-md-12 col-sm-12 col-xs-12">
                       <div class="form-group">
                         <label for="businessType" class="custom-input-label mtop30">Waivers Currently Held</label>
-                        <ng-select [(ngModel)]="selectedCarId" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
-                          <ng-option *ngFor="let suff of suffix">{{suff.name}}</ng-option>
-                        </ng-select>
+                        <ng-select [(ngModel)]="selectedWaivers" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
+                            <ng-option *ngFor="let waiver of waiversList" [value]="waiver.WaiversCurrentlyHeld">{{waiver.WaiversCurrentlyHeld}}</ng-option>
+                          </ng-select>
                       </div>
                     </div>
               </div>
@@ -137,7 +142,7 @@
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <h3  class="form-heading">Additional Notes</h3>
-                      <textarea class="form-control custom-textarea" id="additional-notes"></textarea>
+                      <textarea class="form-control custom-textarea" id="additional-notes" formControlName="Notes"></textarea>
                     </div>
                   </div>
                 </div>
@@ -171,7 +176,7 @@
                         <div class="col-md-6 col-sm-12 col-xs-12">
                           <div class="custom-checkbox">
                             <label class="container">Agreed
-                              <input type="checkbox">
+                              <input type="checkbox" formControlName="Agrement">
                               <p class="checkmark"></p>
                             </label>
                           </div>
@@ -187,12 +192,12 @@
   </div>
   
   <div class="container">
-    <div class="call-to-action">
+    <div class="call-to-action" [class.disableDiv]="isAdmin">
       <div class="goBack">
         <button>Previous Step</button>
       </div>
       <div class="saveButton">
-        <button>Save</button>
+        <button (click)="updateDocuments()">Save</button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>

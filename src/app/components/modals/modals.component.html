@@ -1,0 +1,69 @@
+<div class="modal-inner makeCenter" *ngIf="type=='success'">
+    <div class="modal-header">
+        <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+        <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body sucess">
+        <h3>Your Data Has Been Successfully Saved</h3>
+        <p>Continue to the Next Step & Complete
+            your Profile Application</p>
+      </div>
+
+      <div class="round-logo">
+
+        <img src="../../../assets/icons/Success.png" alt="success icon">
+      </div>
+      <div class="footer-content">
+          <button type="button" class="btn btn-default custom-modal-button success-btn" *ngIf="page && id" (click)="moveToNextRoute(page, id)">Next Step</button>
+          <a (click)="bsModalRef.hide()">Skip for now</a>
+        </div>
+     
+</div>
+
+<div class="modal-inner makeCenter error-custom-modal" *ngIf="type=='error'">
+  <div class="modal-header">
+      <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body error">
+      <h3>Something went wrong!</h3>
+      <p>Something is Broken. We Suggest you to 
+        try again later.</p>
+    </div>
+
+    <div class="round-logo">
+
+      <img src="../../../assets/icons/heart.png" alt="success icon">
+    </div>
+    <div class="footer-content">
+        <button type="button" class="btn btn-default custom-modal-button try-later" (click)="bsModalRef.hide()">Try Later</button>
+      </div>
+   
+</div>
+
+<div class="modal-inner makeCenter warning-custom-modal" *ngIf="type=='warning'">
+  <div class="modal-header">
+      <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body warning">
+      <h3>Warning!</h3>
+      <p>This is a Warning Message and it 
+        could be two liner also.</p>
+    </div>
+
+    <div class="round-logo">
+
+      <img src="../../../assets/icons/warning.png" alt="success icon">
+    </div>
+    <div class="footer-content">
+        <button type="button" class="btn btn-default custom-modal-button warning-btn" (click)="bsModalRef.hide()" >Got it</button>
+      </div>
+   
+</div>

@@ -53,7 +53,19 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'RobotoCondensed-Bold';
+  src:url("./assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'RobotoCondensed-Light';
+  src:url("./assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
 i {
   &:hover {
     cursor: pointer;
@@ -482,6 +494,9 @@ div.custom-table {
 .for-three-columns {
   grid-template-columns: repeat(3, 1fr);
 }
+.for-seven-columns {
+  grid-template-columns: repeat(7, 1fr);
+}
 
 .seperator {
   width: 100%;
@@ -780,4 +795,180 @@ div.dataTables_wrapper {
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
+}
+
+
+//custom modal start
+div.custom-modal {
+  .modal-content {
+    position: relative;
+    border-radius: 29px;
+    border: 4px solid $modal-border;
+
+    .modal-header,.modal-footer{
+      border: 0;
+    }
+
+    .modal-inner {
+      padding: 0px 0px 20px 0px;
+
+    }
+  }
+
+  .round-logo {
+    width: 150px; 
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid $modal-border;
+    background: $white;
+    position: absolute;
+    top: -78px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 60px;
+    }
+  }
+  .modal-body.sucess
+  {
+    h3 {
+color: $success;
+font-size: 28px;
+font-family: 'Apercu-Medium';
+    }
+    p {
+      color: $modal-text-color;
+      font-size: 24px;
+      font-family: 'Apercu-Regular';
+    }
+  }
+  .modal-body.error
+  {
+    h3 {
+color: $error-modal;
+font-size: 28px;
+font-family: 'Apercu-Medium';
+    }
+    p {
+      color: $modal-text-color;
+      font-size: 24px;
+      font-family: 'Apercu-Regular';
+    }
+  }
+  .modal-body.warning
+  {
+    h3 {
+color: $warning-modal;
+font-size: 28px;
+font-family: 'Apercu-Medium';
+    }
+    p {
+      color: $modal-text-color;
+      font-size: 24px;
+      font-family: 'Apercu-Regular';
+    }
+  }
+  .footer-content {
+    .custom-modal-button.success-btn{
+      display: block;
+      margin: 0 auto;
+      border-radius: 33px;
+      background: $success;
+      font-family: 'Apercu-Bold';
+      font-size: 18px;
+      color: $white;
+      width: 173px; 
+      height: 66px;
+      margin-bottom: 20px;
+    }
+    .custom-modal-button.try-later{
+      display: block;
+      margin: 0 auto;
+      border-radius: 33px;
+      background: $error-modal;
+      font-family: 'Apercu-Bold';
+      font-size: 18px;
+      color: $white;
+      width: 173px; 
+      height: 66px;
+      margin-bottom: 20px;
+    }
+    .custom-modal-button.warning-btn{
+      display: block;
+      margin: 0 auto;
+      border-radius: 33px;
+      background: $warning-modal;
+      font-family: 'Apercu-Bold';
+      font-size: 18px;
+      color: $white;
+      width: 173px; 
+      height: 66px;
+      margin-bottom: 20px;
+    }
+
+    a {
+      font-family: 'Apercu-Regular';
+      font-size: 16px;
+      color: $modal-text-color;
+    }
+  }
+
+}
+//custom modal end
+.successMessage {
+  background: $success;
+  color: $white;
+  text-align: center;
+  padding: 20px;
+}
+.errorMessage {
+  background: #f00;
+  color: $white;
+  text-align: center;
+  padding: 20px;
+}
+
+.alignMiddleCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.makeRightFlex {
+  justify-content: flex-end;
+}
+//data table pilot list
+
+div.command-center div.dataTables_wrapper.no-footer .dataTables_scrollBody{
+  border-bottom: 0 !important;
+}
+div.command-center div.dataTables_scroll {
+  border-radius: 10px !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+  border-color: rgb(216, 216, 228) !important;
+  background: $white;
+}
+div.dataTables_length {
+  label {
+    color: $black;
+    font-family: 'Apercu-Regular';
+    font-size: 14px;
+
+    select {
+      background: $white;
+      border-radius: 24px;
+    }
+  }
+}
+// Datatables end
+
+.disableDiv {
+    pointer-events: none !important;
+
 }
