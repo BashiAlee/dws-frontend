@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../services/profile/profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,8 @@ import { AuthenticationService } from '../../../services/authentication/authenti
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ModalsComponent } from '../../../components/modals/modals.component';
+import { Croppie } from 'croppie/croppie';
+import { CroppieDirective } from '../../../../angular-croppie-module/src/lib/croppie.directive';
 
 @Component({
   selector: 'app-experience-portfolio',
@@ -120,6 +122,15 @@ export class ExperiencePortfolioComponent implements OnInit {
       value: "10+"
     }
   ]
+  headShotPicture: any;
+  personalPicture: any;
+  messages: any = {};
+  imageChangedEvent: any;
+  croppedImageData: any = {};
+  imageChangedEventHeadShot: any;
+  imageChangedPersonalPicture: any;
+  croppedImageHeadShot: any;
+  croppedPersonalPicture: any;
   constructor(private formBuilder: FormBuilder, private profileService: ProfileService, 
     private route: ActivatedRoute, private sanitize: DomSanitizer, 
     private modalService: BsModalService,
@@ -225,8 +236,8 @@ export class ExperiencePortfolioComponent implements OnInit {
       data => {
         if(data.status) {
           this.porfolioData = data.result;
-          this.images.HeadshotImage = this.porfolioData.HeadshotImage;
-          this.images.OtherPersonalImage = this.porfolioData.OtherPersonalImage;
+          this.headShotPicture = this.porfolioData.HeadshotImage;
+          this.personalPicture = this.porfolioData.OtherPersonalImage;
           this.images.PassportImage = this.porfolioData.PassportImage;
           // this.porfolioData.ValidPassport =  this.porfolioData.ValidPassport == '1'
           // this.porfolioData.TravelOutsideUs =  this.porfolioData.TravelOutsideUs == '1'
@@ -459,6 +470,137 @@ export class ExperiencePortfolioComponent implements OnInit {
         this.bsModalRef.hide();
       }
     })
+  }
+
+  zoomImage(value) {
+    // var initialState  = value;
+    // var config  = {
+    //   class: 'custom-modal modal-dialog-centered modal-lg'
+    // }
+    // this.selectedData = initialState;
+    // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, config))
+  }
+  uploadCoverImage(file, type) {
+    if(type=='headshot') {
+      this.messages.headshotImageChoosed = true;
+      var target = file.target || file.srcElement
+      this.croppedImageData.imageHeadShotName = target.files[0].name;
+      this.imageChangedEventHeadShot = file;
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+  
+        reader.onload = (event: any) => {
+          this.croppieDirective.croppie.bind({ url: event.target.result});
+          // this.headShotPicture = event.target.result
+          // this.displayPicture = event.target.result;
+         
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
+    }
+    if(type =='other-personal') {
+      this.messages.personalImageChoosed = true;
+      var target = file.target || file.srcElement
+      this.croppedImageData.imageChangedPersonalPicture = target.files[0].name;
+      this.imageChangedPersonalPicture = file;
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+  
+        reader.onload = (event: any) => {
+          this.croppieDirective.croppie.bind({ url: event.target.result});
+          // this.headShotPicture = event.target.result
+          // this.displayPicture = event.target.result;
+         
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
+
+    }
+  }
+  uploadCroppedImage(file, type) {
+
+    if(type=='headshot'){
+      this.messages.uploadingHeadShotImage = true;
+      this.messages.headshotImageChoosed = false;
+      fetch(file.headshotbase64)
+      .then(res => res.blob())
+      .then(blob => {
+        var file1 = new File([blob], file.imageChangedEventHeadShot);
+        this.profileService.uploadCroppedImage(file1, file.imageChangedEventHeadShot)
+          .subscribe(data => {
+            if (data) {
+              if(data.status) {
+                this.experiencePorfolioInformation.patchValue({
+                  HeadshotImage: data.result
+                })
+              }
+              this.messages.uploadingHeadShotImage = false;
+            }
+  
+          })
+      })
+      
+    }
+    if(type=='other-personal'){
+      this.messages.uploadingPersonalImage = true;
+      this.messages.personalImageChoosed = false;
+      fetch(file.personalbase64)
+      .then(res => res.blob())
+      .then(blob => {
+        var file1 = new File([blob], file.imageChangedPersonalPicture);
+        this.profileService.uploadCroppedImage(file1, file.imageChangedPersonalPicture)
+          .subscribe(data => {
+            if (data) {
+              if(data.status) {
+                this.experiencePorfolioInformation.patchValue({
+                  OtherPersonalImage: data.result
+                })
+              }
+              this.messages.uploadingPersonalImage = false;
+            }
+  
+          })
+      })
+    }
+
+
+  }
+  
+  public croppieOptions: Croppie.CroppieOptions = {
+    boundary: { width: 250, height: 250 },
+    viewport: { width: 200, height: 200 },
+   
+    enableOrientation: true,
+  };
+  @ViewChild('croppie')
+  
+  
+  public croppieDirective: CroppieDirective;
+
+  handleUpdate(data, type) {
+    var x = this.croppieDirective.croppie.result('canvas','original').then(function (src) {
+      return src;
+      
+  });
+
+  this.deepdive(x, type);
+    
+  }
+
+  deepdive(e, type){  
+    e.then((value)=> {
+      if(type=='headshot'){
+        this.croppedImageData.headshotbase64 = value;
+        this.croppedImageHeadShot = value;
+        this.headShotPicture = value;
+      }
+      if(type=='other-personal') {
+        this.croppedImageData.personalbase64 = value;
+        this.croppedPersonalPicture = value;
+        this.personalPicture = value;
+      }
+    });
+
   }
 
 

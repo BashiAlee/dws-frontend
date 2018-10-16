@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../services/profile/profile.service';
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +6,9 @@ import { ModalsComponent } from '../../../components/modals/modals.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
+import { Croppie } from 'croppie/croppie';
+
+import { CroppieDirective } from '../../../../angular-croppie-module/src/lib/croppie.directive';
 
 @Component({
   selector: 'app-business-information',
@@ -24,6 +27,11 @@ export class BusinessInformationComponent implements OnInit {
   businessInformation: FormGroup;
   id:any;
   loading: any;
+  displayPicture: any;
+  messages: any = {};
+  croppedImageData: any = {};
+  imageChangedEvent: any;
+  croppedImage: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
@@ -127,7 +135,7 @@ export class BusinessInformationComponent implements OnInit {
               this.getStatesByCode('mailing',this.businessData.MailingCountry,'onload')
             }
             
-            this.businessImage = this.businessData.BusinessLogo;
+            this.displayPicture = this.businessData.BusinessLogo;
             this.businessInformation.patchValue(Object.assign({}, this.businessData));
 
           
@@ -301,6 +309,77 @@ export class BusinessInformationComponent implements OnInit {
   
   
     }
+
+    uploadCoverImage(file) {
+      this.messages.coverImageChoosed = true;
+      var target = file.target || file.srcElement
+      this.croppedImageData.imageName = target.files[0].name;
+      this.imageChangedEvent = file;
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+  
+        reader.onload = (event: any) => {
+          this.croppieDirective.croppie.bind({ url: event.target.result});
+          // this.displayPicture = event.target.result;
+         
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
+    }
+    uploadCroppedImage(file) {
+      this.messages.uploadingImage = true;
+      this.messages.coverImageChoosed = false;
+      fetch(file.base64)
+      .then(res => res.blob())
+      .then(blob => {
+        var file1 = new File([blob], file.imageName);
+        this.profileSevice.uploadCroppedImage(file1, file.imageName)
+          .subscribe(data => {
+            if (data) {
+              if(data.status) {
+                this.businessInformation.patchValue({
+                  BusinessLogo: data.result
+                })
+              }
+              this.messages.uploadingImage = false;
+            }
+  
+          })
+      })
+  
+    }
+    
+    public croppieOptions: Croppie.CroppieOptions = {
+      boundary: { width: 250, height: 250 },
+      viewport: { width: 200, height: 200 },
+     
+      enableOrientation: true,
+    };
+    @ViewChild('croppie')
+    
+    
+    public croppieDirective: CroppieDirective;
+  
+    handleUpdate(data) {
+      var x = this.croppieDirective.croppie.result('canvas','original').then(function (src) {
+        return src;
+        
+    });
+  
+    this.deepdive(x);
+      
+    }
+
+    deepdive(e){  
+      e.then((value)=> {
+        this.croppedImageData.base64 = value;
+       this.croppedImage = value;
+       this.displayPicture = value;
+      });
+  
+    }
+    
+    
   
 
 }

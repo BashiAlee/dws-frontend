@@ -31,6 +31,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileService } from '../../services/profile/profile.service';
 import { HttpModule } from '@angular/http';
 import { ModalModule } from 'ngx-bootstrap';
+import { CroppieModule } from '../../../angular-croppie-module/src/lib/croppie.module';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -39,8 +42,8 @@ import { ModalModule } from 'ngx-bootstrap';
     NgSelectModule,
     ReactiveFormsModule,
     HttpModule,
-  
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    CroppieModule
   ],
   declarations: [
     DocumentDeclarationComponent, 

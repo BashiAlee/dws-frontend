@@ -84,6 +84,19 @@ export class ProfileService {
   }));
   }
 
+  uploadCroppedImage(file,fileName) {
+   
+    let formData = new FormData();
+    let headers = new Headers();
+    headers.append('Content-Type','multipart/form-data');
+    formData.append('file',file,fileName);
+    return this.http.post(this.staticUrl+'uploading',formData)
+    .pipe(map((response: any) => {
+
+     return response.json();
+  }));
+  }
+
   getDronesByID(id) {
     return this.http.get(this.apiUrl + 'getDroneById/'+id)
     .pipe(map((response: any) => {

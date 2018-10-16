@@ -1005,3 +1005,20 @@ div.dataTables_length {
 .loaderBtn {
   pointer-events: none !important;
 }
+
+.crop-btn {
+  background: $primary-color;
+  margin-top: 9px;
+  color:$white;
+  margin-bottom: 8px;
+
+}
+
+.uploader {
+  i {
+    margin-top: 9px;
+    margin-bottom: 8px;
+    color: $primary-color;
+    font-size: 24px;
+  }
+}
