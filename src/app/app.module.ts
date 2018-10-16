@@ -29,6 +29,10 @@ import { HowItWorksComponent } from './components/how-it-works/how-it-works.comp
 import { VerificationComponent } from './pages/verification/verification.component';
 import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
 import { EmptyLayoutComponent } from './components/layout/empty-layout/empty-layout.component';
+import { SendEmailComponent } from './pages/send-email/send-email.component';
+import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+// import { CroppieModule } from '../angular-croppie-module/src/lib/croppie.module';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +53,9 @@ import { EmptyLayoutComponent } from './components/layout/empty-layout/empty-lay
     HowItWorksComponent,
     VerificationComponent,
     AdminLoginComponent,
-    EmptyLayoutComponent
+    EmptyLayoutComponent,
+    SendEmailComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +65,8 @@ import { EmptyLayoutComponent } from './components/layout/empty-layout/empty-lay
     NgSelectModule,
     DataTablesModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    // CroppieModule
   ],
   entryComponents:[
     ModalsComponent

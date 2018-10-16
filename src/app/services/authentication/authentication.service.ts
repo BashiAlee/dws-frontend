@@ -40,12 +40,33 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.clear();
+    localStorage.removeItem('user');
+    localStorage.removeItem('admin');
     this.router.navigate(['']);
   }
 
   verifyToken(token) {
     return this.http.get(this.apiUrl + 'pilot/verifyToken/'+token)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  sendEmail(data) {
+    return this.http.post(this.apiUrl + 'pilot/forgotPassword',data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  verifyForgotPassword(token) {
+    return this.http.get(this.apiUrl + 'pilot/verifyTokenForgotPassword/'+token)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  changePassword(data) {
+    return this.http.post(this.apiUrl + 'pilot/changePassword',data)
     .pipe(map((response: any) => {
      return response.json();
     }));

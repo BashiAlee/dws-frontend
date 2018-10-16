@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ProfileService } from '../../../services/profile/profile.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
@@ -30,9 +30,12 @@ export class EquipmentComponent implements OnInit {
   Notes: any;
   isAdmin: any;
   id: any;
+  loading: any;
   config = {
-    class: "custom-modal modal-dialog-centered modal-lg"
+    class: "custom-modal modal-dialog-centered modal-md"
   };
+
+  selectedData: any;
   constructor(private profileService: ProfileService, private formBuilder: FormBuilder,
     private route: ActivatedRoute,private router: Router,
     private modalService: BsModalService,
@@ -133,6 +136,12 @@ export class EquipmentComponent implements OnInit {
       .subscribe(
         data => {
           if(data.status) {
+            this.submittedEquipment = false;
+            // this.addEquipment.reset()
+            this.addEquipment.patchValue({
+              EquipmentTitle:'',
+              Description: ''
+            })
             this.getAllEquipmentsByID(this.id)
           }
         }
@@ -142,14 +151,22 @@ export class EquipmentComponent implements OnInit {
   }
 
   addNewDrone() {
+    console.log("hereee")
     this.submittedDrone = true;
     if (this.addDrone.invalid) {
+
       return;
   } else {
     this.profileService.addNewPilotDrone(this.addDrone.value)
     .subscribe(
       data => {
         if(data.status) {
+          this.addDrone.patchValue({
+            DroneTitle: '',
+            Description:'',
+            SerialNumber: ''
+          })
+          this.submittedDrone = false;
           this.getAllDronesByID(this.id)
         }
       }
@@ -186,6 +203,7 @@ export class EquipmentComponent implements OnInit {
   }
 
   updateEquipmentNotes(){
+    this.loaders = true;
     var data = {
       UserId: this.id,
       Notes: this.Notes
@@ -200,12 +218,14 @@ export class EquipmentComponent implements OnInit {
             page: 'experience-portfolio',
             id: this.id
           }
+          this.loaders = false;
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
         } else if(!data.status) {
           const initialState = {
             type: 'error'
           }
+          this.loaders = false;
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
         }
@@ -213,6 +233,41 @@ export class EquipmentComponent implements OnInit {
     )
 
 
+  }
+  openModalWithClass(template: TemplateRef<any>, type,id) {
+    var initialState = {
+      type: type,
+      id: id
+    }
+    var config  = {
+      class: 'custom-modal modal-dialog-centered modal-lg'
+    }
+    this.selectedData = initialState;
+    this.bsModalRef = this.modalService.show(template, Object.assign({}, config))
+
+  }
+
+  deleteByID() {
+    console.log("test",this.id)
+    if(this.selectedData.type=='drone') {
+      this.profileService.deleteDroneById(this.selectedData.id)
+      .subscribe(data => {
+        if(data.status) {
+          this.getAllDronesByID(this.id)
+          this.bsModalRef.hide();
+        }
+      })
+    }
+
+    if(this.selectedData.type=='equipment') {
+      this.profileService.deleteEquipmentById(this.selectedData.id)
+      .subscribe(data => {
+        if(data.status) {
+          this.getAllEquipmentsByID(this.id);
+          this.bsModalRef.hide();
+        }
+      })
+    }
   }
 
   

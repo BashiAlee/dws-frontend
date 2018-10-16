@@ -34,6 +34,34 @@
 
          <div class="row">
            <div class="col-md-12">
+<!--              
+            <table datatable [dtOptions]="dtOptions" class="row-border hover custom-datatable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Country</th>
+                  <th>State</th>
+                  <th>City</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let list of pilotList">
+                  <td>{{list.Users.FirstName+' '+list.Users.LastName}}</td>
+                  <td>{{list.Users.Email}}</td>
+                  <td>{{list.PrimaryPhone}}</td>
+                  <td>{{list.Country.Name}}</td>
+                  <td>{{list.State.Name}}</td>
+                  <td>{{list.PhysicallCity}}</td>
+                  <td>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</td>
+                  <td><a [routerLink]="['/admin/profile',list.UserId]" class="details-btn">Details</a></td>
+                </tr>
+              </tbody>
+            </table> -->
              <div class="main-div">
              <div class="table-div">
                <div class="table-head">

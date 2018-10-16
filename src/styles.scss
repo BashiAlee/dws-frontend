@@ -847,7 +847,7 @@ font-family: 'Apercu-Medium';
       font-family: 'Apercu-Regular';
     }
   }
-  .modal-body.error
+  .modal-body.error,.modal-body.delete
   {
     h3 {
 color: $error-modal;
@@ -916,6 +916,35 @@ font-family: 'Apercu-Medium';
       font-size: 16px;
       color: $modal-text-color;
     }
+    .yes-btn {
+      display: block;
+      margin: 0 auto;
+      border-radius: 33px;
+      background: $error-modal;
+      font-family: 'Apercu-Bold';
+      font-size: 18px;
+      color: $white;
+      width: 173px; 
+      height: 66px;
+      margin-bottom: 20px;
+    }
+    .no-btn {
+      display: block;
+      margin: 0 auto;
+      border-radius: 33px;
+      background: $save-button-bg;
+      font-family: 'Apercu-Bold';
+      font-size: 18px;
+      color: $white;
+      width: 173px; 
+      height: 66px;
+      margin-bottom: 20px;
+    }
+  }
+  .alignButton {
+    display: flex;
+    justify-content: center;
+    align-content: center;
   }
 
 }
@@ -971,4 +1000,8 @@ div.dataTables_length {
 .disableDiv {
     pointer-events: none !important;
 
+}
+
+.loaderBtn {
+  pointer-events: none !important;
 }

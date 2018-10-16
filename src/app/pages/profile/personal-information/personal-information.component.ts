@@ -28,9 +28,10 @@ export class PersonalInformationComponent implements OnInit {
       { name: 'Jr.' },
       { name: 'Sr.' }
   ]
+  loading: any;
 
   config = {
-    class: "custom-modal modal-dialog-centered modal-lg successModal"
+    class: "custom-modal modal-dialog-centered modal-md successModal"
   };
   isAdmin: any;
   constructor(private formBuilder: FormBuilder, private router: Router,
@@ -202,7 +203,7 @@ export class PersonalInformationComponent implements OnInit {
 
   save() {
     // console.log(this.personalInformation.value)
-
+    this.loading = true;
    
     // delete this.personalInformation.value.Users.MemberId
     this.personalInformation.value.PrimaryPhone = this.personalInformation.value.PrimaryPhone.toString();
@@ -210,6 +211,7 @@ export class PersonalInformationComponent implements OnInit {
       this.profileSevice.uploadProfilePicture(this.imageFile)
       .subscribe(data => {
         if(data.status) {
+          this.loading = false;
           const initialState = {
             type: 'success',
             page: 'business-information',
@@ -230,6 +232,7 @@ export class PersonalInformationComponent implements OnInit {
               }
               this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
               this.bsModalRef.content.closeBtnName = 'Close';
+              this.loading = false;
             }
             
             
@@ -238,6 +241,7 @@ export class PersonalInformationComponent implements OnInit {
           const initialState = {
             type: 'error'
           }
+          this.loading = false;
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
         }
@@ -252,6 +256,7 @@ export class PersonalInformationComponent implements OnInit {
             page: 'business-information',
             id: this.id
           }
+          this.loading = false;
           localStorage.setItem('user', JSON.stringify(data.result))
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
@@ -259,6 +264,7 @@ export class PersonalInformationComponent implements OnInit {
           const initialState = {
             type: 'error'
           }
+          this.loading = false;
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
         }

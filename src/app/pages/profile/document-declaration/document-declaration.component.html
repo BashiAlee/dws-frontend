@@ -46,13 +46,16 @@
                 <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your aviation liability insurance certificate </label>
               <div class="pdf-uploader">
                 <img src="../../../../assets/images/pdf-file.svg" alt="">
-                <a *ngIf="images.AviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
+                <object id="obj" type="application/pdf">
+                  <a *ngIf="images.AviationLiabilityInsurancePdf"  [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
+                </object>
+                
                 <div class="image-upload">
                   <label for="file-input1">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </label>
   
-                  <input id="file-input1" type="file" (change)="uploadImage($event, 'liability-certificate')"/>
+                  <input id="file-input1" type="file" (change)="uploadImage($event, 'liability-certificate')" accept="application/pdf"/>
                 </div>
               </div>
               <p class="aperu-mono mTop15 makeRed">file.pdf</p>
@@ -69,7 +72,7 @@
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </label>
   
-                  <input id="file-input2" type="file" (change)="uploadImage($event, 'copy-liability-certificate')" />
+                  <input id="file-input2" type="file" (change)="uploadImage($event, 'copy-liability-certificate')" accept="application/pdf" />
                 </div>
   
               </div>
@@ -119,7 +122,7 @@
                           <i class="fa fa-pencil" aria-hidden="true"></i>
                         </label>
         
-                        <input id="file-input5" type="file" (change)="uploadImage($event, 'exam')" />
+                        <input id="file-input5" type="file" (change)="uploadImage($event, 'exam')" accept="application/pdf"/>
                       </div>
         
                     </div>
@@ -196,8 +199,11 @@
       <div class="goBack">
         <button>Previous Step</button>
       </div>
-      <div class="saveButton">
+      <div class="saveButton" *ngIf="!loading">
         <button (click)="updateDocuments()">Save</button>
+      </div>
+      <div class="saveButton disableDiv" *ngIf="loading">
+        <button ><i class="fa fa-circle-o-notch fa-spin"></i></button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>

@@ -42,8 +42,9 @@ export class DocumentDeclarationComponent implements OnInit {
   licenseFile: any;
   licenseImage: any;
   images:any =  {};
+  loading: any;
   config = {
-    class: "custom-modal modal-dialog-centered modal-lg"
+    class: "custom-modal modal-dialog-centered modal-md"
   };
   id: any;
   isAdmin: any;
@@ -192,6 +193,7 @@ export class DocumentDeclarationComponent implements OnInit {
   }
 
   updateDocuments() {
+    this.loading = true;
     this.addWaiver();
     if (this.documentInformation.value.Agrement) {
       console.log("FFFf", this.documentInformation.value)
@@ -215,6 +217,7 @@ export class DocumentDeclarationComponent implements OnInit {
       .subscribe(
         data => {
           if(data.status) {
+            this.loading = false;
             const initialState = {
               type: 'success',
               page: '',
@@ -226,6 +229,7 @@ export class DocumentDeclarationComponent implements OnInit {
             const initialState = {
               type: 'error'
             }
+            this.loading = false;
             this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
             this.bsModalRef.content.closeBtnName = 'Close';
           }

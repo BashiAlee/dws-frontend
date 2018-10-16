@@ -75,7 +75,7 @@
 
                 <div class="row justify-content-start">
                     
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <label for="passportImage" class="custom-input-label"> If DWS requires you to upload a copy of your passport, please do so here</label>
                       <div class="passportImage">
                         <img *ngIf="images.PassportImage" [src]="images.PassportImage" alt="">
@@ -250,7 +250,7 @@
                         </div>
               
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                         <button class="primary-dws-button aperu-regular pull-right" (click)="togglePhotos()">Add Photographs</button>
+                         <button class="primary-dws-button aperu-regular pull-right" (click)="togglePhotos()">Upload Your Photo</button>
                         </div>
                       </div>
                       <div class="add-drone-details" *ngIf="showAddPhoto" [formGroup]="addPhotos">
@@ -269,11 +269,11 @@
                     
                               <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                  <label for="serialnumber" class="custom-input-label">Video Link</label>
+                                  <label for="serialnumber" class="custom-input-label">Upload your Photo </label>
                                   <input type="file" class="form-control custom-input" id="serialnumber" aria-describedby="serialnumber"
                                     placeholder="Serial Number" (change)="uploadImage($event,'uploadImage')">
                                     <div *ngIf="submittedDrone && dronesForm.SerialNumber.errors" class="invalid-feedback">
-                                        <div *ngIf="dronesForm.SerialNumber.errors.required">Serial Number is required</div>
+                                        <div *ngIf="dronesForm.SerialNumber.errors.required">Photo is required</div>
                                     </div>
                                 </div>
                               </div>
@@ -337,7 +337,7 @@
                           </div>
                 
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                           <button class="primary-dws-button aperu-regular pull-right" (click)="toggleVideo()">Add Videos</button>
+                           <button class="primary-dws-button aperu-regular pull-right" (click)="toggleVideo()">Link Video</button>
                           </div>
                         </div>
                         <div class="add-drone-details" *ngIf="showAddVideo" [formGroup]="addVideo">
@@ -404,7 +404,7 @@
                                   <i class="fa fa-pencil" aria-hidden="true"></i>
                               </div>
                               <div class="makeRed deleteImags inline-block">
-                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                  <i class="fa fa-trash-o" aria-hidden="true" (click)="openModalWithClass(delete,videos.ID)"></i>
                               </div>
                             </div>
   
@@ -432,10 +432,36 @@
       <div class="goBack">
         <button>Previous Step</button>
       </div>
-      <div class="saveButton">
+      <div class="saveButton" *ngIf="!loading">
         <button (click)="save()">Save</button>
+      </div>
+      <div class="saveButton disableDiv" *ngIf="loading">
+        <button ><i class="fa fa-circle-o-notch fa-spin"></i></button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>
   </div>
   
+
+  <ng-template #delete>
+    <div class="modal-header">
+      <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body delete makeCenter">
+      <h3>Are you Sure, You want to delete this entry?</h3>
+      <p>You will not be able to restore this back</p>
+    </div>
+  
+  
+    <div class="round-logo">
+  
+      <img src="../../../../assets/icons/warning.png" alt="success icon">
+    </div>
+    <div class="footer-content alignButton">
+        <button type="button" class="btn btn-default custom-modal-button yes-btn" (click)="deleteByID()">Yes</button>
+        <button type="button" class="btn btn-default custom-modal-button no-btn" (click)="bsModalRef.hide()">No</button>
+      </div>
+  </ng-template>

@@ -34,13 +34,13 @@
                          <div class="col-md-6">
                            <div class="custom-checkbox">
                              <label class="container">Remember me
-                               <input type="checkbox" checked="checked">
+                               <input type="checkbox"[(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}">
                                <p class="checkmark"></p>
                              </label>
                            </div>
                          </div>
                          <div class="col-md-6 text-align-right text-color-blue">
-                          forget password?
+                            <a [routerLink]="['/send-email']">forget password?</a>
                          </div>
                           <div class="form-group wow fadeInDown">
                               <p *ngIf="error" class="errorMessage">{{error}}</p>
@@ -49,7 +49,8 @@
                        </div>
 
 
-                       <button type="button" id="submitLoginForm" class="btn btn-sign-up mt20 wow fadeInDown" (click)="login()">SIGN IN</button>
+                       <button type="button" id="submitLoginForm" *ngIf="!loading"class="btn btn-sign-up mt20 wow fadeInDown" (click)="login()">SIGN IN</button>
+                       <a class="btn btn-sign-up mt20 wow fadeInDown loaderBtn"  *ngIf="loading"><i class="fa fa-circle-o-notch fa-spin"></i></a>
                     </form>
 
                  </div>

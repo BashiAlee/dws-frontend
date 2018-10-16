@@ -86,7 +86,7 @@
                     <span class="karla-bold" [innerHtml]="drone.SerialNumber"></span>
                     <span class="makeCenter"> 
                       <div class="editRow" (click)="editRow(drone,'drone')"><i class="fa fa-pencil" aria-hidden="true"></i></div>
-                      <div class="deleteRow"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+                      <div class="deleteRow" (click)="openModalWithClass(delete,'drone',drone.ID)"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
                     </span>
                   </div>
                 </div>
@@ -227,7 +227,7 @@
                     <span [innerHtml]="equipment.Description?equipment.Description: '-' "></span>
                     <span class="makeCenter"> 
                       <div class="editRow" (click)="editRow(equipment,'equipment')"><i class="fa fa-pencil" aria-hidden="true"></i></div>
-                      <div class="deleteRow"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+                      <div class="deleteRow" (click)="openModalWithClass(delete,'equipment',equipment.ID)"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
                     </span>
                   </div>
                 </div>
@@ -251,10 +251,37 @@
       <div class="goBack">
         <button>Previous Step</button>
       </div>
-      <div class="saveButton">
+      <div class="saveButton" *ngIf="!loading">
         <button (click)="updateEquipmentNotes()">Save</button>
+      </div>
+      <div class="saveButton disableDiv" *ngIf="loading">
+        <button ><i class="fa fa-circle-o-notch fa-spin"></i></button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>
   </div>
   
+<br>
+ 
+<ng-template #delete>
+  <div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body delete makeCenter">
+    <h3>Are you Sure, You want to delete this entry?</h3>
+    <p>You will not be able to restore this back</p>
+  </div>
+
+
+  <div class="round-logo">
+
+    <img src="../../../../assets/icons/warning.png" alt="success icon">
+  </div>
+  <div class="footer-content alignButton">
+      <button type="button" class="btn btn-default custom-modal-button yes-btn" (click)="deleteByID()">Yes</button>
+      <button type="button" class="btn btn-default custom-modal-button no-btn" (click)="bsModalRef.hide()">No</button>
+    </div>
+</ng-template>

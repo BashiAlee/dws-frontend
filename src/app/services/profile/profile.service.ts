@@ -200,4 +200,26 @@ export class ProfileService {
      return response.json();
     }));
   }
+
+  deleteDroneById(id) {
+    return this.http.delete(this.apiUrl + 'deleteDroneById/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  deleteEquipmentById(id) {
+    return this.http.delete(this.apiUrl + 'deleteEquipmentById/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  deletePortfolioVideosAndImages(id) {
+    return this.http.delete(this.apiUrl + 'deletePortfolioVideosAndImages/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+
 }
