@@ -21,7 +21,7 @@
 
         <div class="row justify-content-center">
           <div class="col-md-3 makeCenter">
-            <div class="displayPicture">
+            <!-- <div class="displayPicture">
               <img *ngIf="businessImage" [src]="businessImage" alt="business logo">
               <img *ngIf="!businessImage" src="../../../../assets/images/avatar.png" alt="business logo">
               <div class="image-upload">
@@ -31,7 +31,30 @@
 
                 <input id="file-input" type="file" (change)="uploadImage($event)" accept="image/*"/>
               </div>
-            </div>
+            </div> -->
+            <div class="displayPictureTop">
+                <div class="displayPicture">
+                  <img *ngIf="messages.coverImageChoosed" [src]="croppedImage" class="croppedImageDiv" />
+                  <img *ngIf="displayPicture && !messages.coverImageChoosed" [src]="displayPicture" alt="Display picture">
+                  <img *ngIf="!displayPicture && !messages.coverImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
+                  <div class="image-upload">
+                    <label for="file-input">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </label>
+                    <input id="file-input" (change)="uploadCoverImage($event)" type="file" accept="image/*" />
+                  </div>
+                </div>
+                <div class="display_pic-upload">
+                  <label for="pic" class="uploader" *ngIf="messages.uploadingImage"><i class="fa fa-circle-o-notch fa-spin"></i>
+                  </label>
+                </div>
+                <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event)" *ngIf="messages.coverImageChoosed" />
+                <button class="btn crop-btn" *ngIf="messages.coverImageChoosed && !messages.uploadingImage" (click)="uploadCroppedImage(croppedImageData)">Crop</button>
+                <div>
+      
+                </div>
+      
+              </div>
             <p class="aperu-medium mTop15">Business Logo</p>
           </div>
           <!-- <div class="col-md-3 makeCenter">

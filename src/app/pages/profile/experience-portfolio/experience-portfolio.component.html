@@ -94,7 +94,7 @@
                   <div class="row">
                       <h1 class="form-heading noPadding makeBlock mtop30 mBottom25">Headshot &amp; Personal Photo upload</h1>
                     <div class="col-md-3 col-sm-12 col-xs-12">
-                      <div class="displayPicture">
+                      <!-- <div class="displayPicture">
                         <img *ngIf="images.HeadshotImage" [src]="images.HeadshotImage" alt="">
                         <img *ngIf="!images.HeadshotImage" src="../../../../assets/images/avatar.png" alt="">
                         <div class="image-upload">
@@ -104,11 +104,34 @@
           
                           <input id="file-input2" type="file" (change)="uploadImage($event,'headshot')"/>
                         </div>
-                      </div>
+                      </div> -->
+                      <div class="displayPictureTop">
+                          <div class="displayPicture">
+                            <img *ngIf="messages.headshotImageChoosed" [src]="croppedImageHeadShot" class="croppedImageDiv" />
+                            <img *ngIf="headShotPicture && !messages.headshotImageChoosed" [src]="headShotPicture" alt="Display picture">
+                            <img *ngIf="!headShotPicture && !messages.headshotImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
+                            <div class="image-upload">
+                              <label for="file-input2">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </label>
+                              <input id="file-input2" (change)="uploadCoverImage($event, 'headshot')" type="file" accept="image/*" />
+                            </div>
+                          </div>
+                          <div class="display_pic-upload">
+                            <label for="pic" class="uploader" *ngIf="messages.uploadingHeadShotImage"><i class="fa fa-circle-o-notch fa-spin"></i>
+                            </label>
+                          </div>
+                          <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event,'headshot')" *ngIf="messages.headshotImageChoosed" />
+                          <button class="btn crop-btn" *ngIf="messages.headshotImageChoosed && !messages.uploadingHeadShotImage" (click)="uploadCroppedImage(croppedImageData, 'headshot')">Crop</button>
+                          <div>
+                
+                          </div>
+                
+                        </div>
                       <p class="aperu-medium mTop15">Head Shot</p>
                     </div>
                     <div class="col-md-3 col-sm-12 col-xs-12">
-                      <div class="displayPicture">
+                      <!-- <div class="displayPicture">
                         <img *ngIf="images.OtherPersonalImage" [src]="images.OtherPersonalImage" alt="">
                         <img *ngIf="!images.OtherPersonalImage" src="../../../../assets/images/avatar.png" alt="">
                         <div class="image-upload">
@@ -119,7 +142,30 @@
                           <input id="file-input3" type="file" (change)="uploadImage($event,'personal-pic')"/>
                         </div>
           
-                      </div>
+                      </div> -->
+                      <div class="displayPictureTop">
+                          <div class="displayPicture">
+                            <img *ngIf="messages.personalImageChoosed" [src]="croppedPersonalPicture" class="croppedImageDiv" />
+                            <img *ngIf="personalPicture && !messages.personalImageChoosed" [src]="personalPicture" alt="Display picture">
+                            <img *ngIf="!personalPicture && !messages.personalImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
+                            <div class="image-upload">
+                              <label for="file-input3">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </label>
+                              <input id="file-input3" (change)="uploadCoverImage($event, 'other-personal')" type="file" accept="image/*" />
+                            </div>
+                          </div>
+                          <div class="display_pic-upload">
+                            <label for="pic" class="uploader" *ngIf="messages.uploadingPersonalImage"><i class="fa fa-circle-o-notch fa-spin"></i>
+                            </label>
+                          </div>
+                          <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event,'other-personal')" *ngIf="messages.personalImageChoosed" />
+                          <button class="btn crop-btn" *ngIf="messages.personalImageChoosed && !messages.uploadingPersonalImage" (click)="uploadCroppedImage(croppedImageData, 'other-personal')">Crop</button>
+                          <div>
+                
+                          </div>
+                
+                        </div>
                       <p class="aperu-medium mTop15">Other Personal Picture</p>
                     </div>
                     <!-- <p class="errorMsg makeBlock mtop30">We Suggest you to Upload a Square Images</p> -->
@@ -309,13 +355,13 @@
                           <div class="thumb-description"><p>{{image.Description}}</p></div>
                           <div class="action-buttons">
                             <div class="makePurple zoom inline-block">
-                                <i class="fa fa-search-plus" aria-hidden="true"></i>
+                                <i class="fa fa-search-plus" aria-hidden="true" (click)="zoomImage(image)"></i>
                             </div>
                             <div class="makeBlue editImage inline-block">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </div>
                             <div class="makeRed deleteImags inline-block">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                <i class="fa fa-trash-o" aria-hidden="true" (click)="openModalWithClass(delete,image.ID)"></i>
                             </div>
                           </div>
 
@@ -392,9 +438,10 @@
                             <div class="thumb-img">
                              <div> 
                          
-                               <!-- <iframe [src]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)" style="width: 100%;" frameborder="0" allowfullscreen></iframe> -->
-                               <object style="width: 100%;" [data]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)">
-                               </object>
+                               <iframe [src]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)" style="width: 100%;" frameborder="0" allowfullscreen></iframe>
+                               
+                               <!-- <object style="width: 100%;" [data]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)">
+                               </object> -->
                               </div>
                             </div>
                             <div class="thumb-title makeBlue mTop15"><p>{{videos.Title}}</p></div>
