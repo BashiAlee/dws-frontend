@@ -14,7 +14,7 @@
                        <div class="row">
                           <div class="col-sm-6 col-md-6">
                              <div class="form-group wow fadeInDown">
-                                <label for="email">Email</label>
+                                <label for="email" >Email</label>
                                 <input type="text" id="firstname" class="form-control" placeholder="Email" formControlName="Email">
                                 <div *ngIf="form.Email.invalid && (form.Email.dirty || form.Email.touched)" class="invalid-feedback">
                                     <div *ngIf="form.Email.errors.required">Email is required</div>
@@ -47,7 +47,7 @@
                               <p *ngIf="success" class="successMessage">{{success}}</p>
                           </div>
                        </div>
-     
+
 
                        <button type="button" id="submitLoginForm" *ngIf="!loading"class="btn btn-sign-up mt20 wow fadeInDown" (click)="login()">SIGN IN</button>
                        <a class="btn btn-sign-up mt20 wow fadeInDown loaderBtn"  *ngIf="loading"><i class="fa fa-circle-o-notch fa-spin"></i></a>
