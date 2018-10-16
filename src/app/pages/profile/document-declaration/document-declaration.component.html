@@ -46,7 +46,10 @@
                 <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your aviation liability insurance certificate </label>
               <div class="pdf-uploader">
                 <img src="../../../../assets/images/pdf-file.svg" alt="">
-                <a *ngIf="images.AviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
+                <object id="obj" type="application/pdf">
+                  <a *ngIf="images.AviationLiabilityInsurancePdf"  [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
+                </object>
+                
                 <div class="image-upload">
                   <label for="file-input1">
                     <i class="fa fa-pencil" aria-hidden="true"></i>

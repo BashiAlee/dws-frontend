@@ -44,7 +44,7 @@ export class DocumentDeclarationComponent implements OnInit {
   images:any =  {};
   loading: any;
   config = {
-    class: "custom-modal modal-dialog-centered modal-lg"
+    class: "custom-modal modal-dialog-centered modal-md"
   };
   id: any;
   isAdmin: any;

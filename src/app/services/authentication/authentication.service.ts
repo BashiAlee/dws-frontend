@@ -40,7 +40,8 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.clear();
+    localStorage.removeItem('user');
+    localStorage.removeItem('admin');
     this.router.navigate(['']);
   }
 

@@ -44,6 +44,7 @@
                   <th>Country</th>
                   <th>State</th>
                   <th>City</th>
+                  <th>Status</th>
                   <th>Action</th>
                   
                 </tr>
@@ -56,6 +57,7 @@
                   <td>{{list.Country.Name}}</td>
                   <td>{{list.State.Name}}</td>
                   <td>{{list.PhysicallCity}}</td>
+                  <td>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</td>
                   <td><a [routerLink]="['/admin/profile',list.UserId]" class="details-btn">Details</a></td>
                 </tr>
               </tbody>

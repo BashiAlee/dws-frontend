@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../services/profile/profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,31 +27,32 @@ export class ExperiencePortfolioComponent implements OnInit {
   imageFiles: any = {};
   isAdmin: any;
   loading: any;
+  selectedData: any;
   experiencePorfolioInformation: FormGroup;
   config = {
-    class: "custom-modal modal-dialog-centered modal-lg"
+    class: "custom-modal modal-dialog-centered modal-md"
   };
   id: any;
   images: any = {};
 
   distanceToTravel = [
     {
-      value: "1-2 miles"
+      value: "10 miles"
     },
     {
-      value: "2-20 miles"
+      value: "25 miles"
     },
     {
-      value: "21-40 miles"
+      value: "50 miles"
     },
     {
-      value: "41-60 miles"
+      value: "100 miles"
     },
     {
-      value: "61-80 miles"
+      value: "250 miles"
     },
     {
-      value: "81-100 miles"
+      value: "500 miles"
     },
     {
       value: "Nationwide"
@@ -134,7 +135,7 @@ export class ExperiencePortfolioComponent implements OnInit {
 
   ngOnInit() {
 
- 
+    console.log("dfsdf", this.id)
     this.addVideo = this.formBuilder.group({
       UserId: [this.id],
       PilotId: [],
@@ -240,7 +241,7 @@ export class ExperiencePortfolioComponent implements OnInit {
   addPortfolioImageVideo(type) {
     if(type =='Video') {
       this.addVideo.patchValue({
-        UserId: this.porfolioData.UserId,
+        UserId: this.id,
         PilotId: this.porfolioData.PilotId,
         ID:this.porfolioData.ID,
         Type: 'Video'
@@ -262,7 +263,7 @@ export class ExperiencePortfolioComponent implements OnInit {
         data => {
           if(data.status) {
             this.addPhotos.patchValue({
-              UserId: this.porfolioData.UserId,
+              UserId: this.id,
               PilotId: this.porfolioData.PilotId,
               ID:this.porfolioData.ID,
               Path: data.result,
@@ -332,6 +333,16 @@ export class ExperiencePortfolioComponent implements OnInit {
       this.imageFiles.uploadPorfolioImage = file;
     }
     if(type== 'headshot'){
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (event:any) => {
+          console.log("DDD", event.target.result)
+          this.images.HeadshotImage = event.target.result;
+         
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
+    
       this.imageFiles.headshotImage = file;
       this.profileService.uploadProfilePicture(this.imageFiles.headshotImage)
       .subscribe(
@@ -346,6 +357,13 @@ export class ExperiencePortfolioComponent implements OnInit {
     }
     if(type=='personal-pic'){
       this.imageFiles.personalImage = file;
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (event:any) => {
+          this.images.OtherPersonalImage = event.target.result;
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
       this.profileService.uploadProfilePicture(this.imageFiles.personalImage)
       .subscribe(
         data => {
@@ -359,6 +377,13 @@ export class ExperiencePortfolioComponent implements OnInit {
     }
     if(type== 'passport-pic'){
       this.imageFiles.passportImage = file;
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (event:any) => {
+          this.images.PassportImage = event.target.result;
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
       this.profileService.uploadProfilePicture(this.imageFiles.passportImage)
       .subscribe(
         data => {
@@ -413,5 +438,29 @@ export class ExperiencePortfolioComponent implements OnInit {
       }
     )
   }
+
+  openModalWithClass(template: TemplateRef<any>,id) {
+    var initialState = {
+      id: id
+    }
+    var config  = {
+      class: 'custom-modal modal-dialog-centered modal-lg'
+    }
+    this.selectedData = initialState;
+    this.bsModalRef = this.modalService.show(template, Object.assign({}, config))
+
+  }
+
+  deleteByID() {
+    this.profileService.deletePortfolioVideosAndImages(this.selectedData.id)
+    .subscribe(data => {
+      if(data.status) {
+        this.getPortfolioImagesVideosByID(this.id)
+        this.bsModalRef.hide();
+      }
+    })
+  }
+
+
 
 }

@@ -25,7 +25,7 @@ export class BusinessInformationComponent implements OnInit {
   id:any;
   loading: any;
   config = {
-    class: "custom-modal modal-dialog-centered modal-lg"
+    class: "custom-modal modal-dialog-centered modal-md"
   };
   suffix = [
       { name: 'Jr.' },

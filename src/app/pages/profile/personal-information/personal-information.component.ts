@@ -31,7 +31,7 @@ export class PersonalInformationComponent implements OnInit {
   loading: any;
 
   config = {
-    class: "custom-modal modal-dialog-centered modal-lg successModal"
+    class: "custom-modal modal-dialog-centered modal-md successModal"
   };
   isAdmin: any;
   constructor(private formBuilder: FormBuilder, private router: Router,

@@ -31,6 +31,7 @@ import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.compo
 import { EmptyLayoutComponent } from './components/layout/empty-layout/empty-layout.component';
 import { SendEmailComponent } from './pages/send-email/send-email.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+// import { CroppieModule } from '../angular-croppie-module/src/lib/croppie.module';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
     NgSelectModule,
     DataTablesModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    // CroppieModule
   ],
   entryComponents:[
     ModalsComponent
