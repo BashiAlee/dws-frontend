@@ -54,9 +54,7 @@ div.command-center {
 
 
   .table-body{
-    display: grid;
-    grid-template-rows: repeat(30,auto);
-    height: 630px;
+
     overflow: auto;
     &::-webkit-scrollbar{
       width: 7px;
@@ -79,10 +77,11 @@ div.command-center {
   }
   .table-body-row{
     display: grid;
+    height: 65px;
     grid-template-columns: 13% 18% 14% 12% 13% 12% 12%;
     justify-content: space-between;
     align-items: center;
-    padding:15px 10px;
+    padding:2px 10px;
     border-radius: 5px;
     margin-right: 20px;
     cursor: pointer;
@@ -90,18 +89,27 @@ div.command-center {
     &:hover{
       background: $table-row-hover;
     }
+    div{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .action {
+      height: 65px;
+      line-height: 65px;
+    }
   }
   .table-heading{
     color: $table-heading;
   }
-  .detail-btn{
-    padding: 9px 18px;
-    background: $details-btn;
-    border: none;
-    border-radius: 20px;
-    outline: none;
-    color: white;
-  }
+}
+.detail-btn{
+  padding: 9px 18px;
+  background: $details-btn;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  color: white;
 }
 @media (max-width: 1330px) {
   .table-div{

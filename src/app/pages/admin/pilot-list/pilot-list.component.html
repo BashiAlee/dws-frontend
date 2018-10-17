@@ -71,7 +71,7 @@
                  <div class="table-heading">Country</div>
                  <div class="table-heading">State</div>
                  <div class="table-heading">City</div>
-                 <div class="table-heading">Status</div>
+                 <!-- <div class="table-heading">Status</div> -->
                  <div class="table-heading">Action</div>
                </div>
                <div class="table-body">
@@ -82,8 +82,8 @@
                   <div>{{list.Country.Name}}</div>
                   <div>{{list.State.Name}}</div>
                   <div>{{list.PhysicallCity}}</div>
-                  <div>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</div>
-                  <div><a [routerLink]="['/admin/profile',list.UserId]" class="details-btn">Details</a></div>
+                  <!-- <div>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</div> -->
+                  <div class="action"><a [routerLink]="['/admin/profile',list.UserId]" class="detail-btn">Details</a></div>
                </div>
                </div>
              </div>

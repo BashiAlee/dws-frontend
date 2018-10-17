@@ -57,7 +57,7 @@ export class LoginComponent{
 
           localStorage.setItem('user',JSON.stringify(this.user))
 
-          this.router.navigate(['/user']);
+          this.router.navigate(['/user/profile/'+this.user.ID]);
         } else if(!data.status) {
           this.loading = false;
           this.error = data.message;

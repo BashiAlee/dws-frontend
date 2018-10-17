@@ -1,25 +1,30 @@
+@import "../../../variables";
 .sign-up{
     background: #EFF3F6;
     padding-bottom: 100px;
     padding-top: 100px;
+  font-family: 'RobotoCondensed-light' !important;
+  font-weight: bolder;
 }
 .form-sign-up{
     background: #fff;
-    padding: 20px 40px;
+    padding: 30px 40px;
     padding-bottom: 80px;
 }
 .form-sign-up h2{
     color: #3EBAD0;
-    font-size: 35px;
+    font-size: 31px;
     text-transform: uppercase;
+    font-family: 'RobotoCondensed-light' !important;
 }
 .form-sign-up h4{
     color: #8585AD;
+  font-size: 21px;
+  font-family: 'RobotoCondensed-light' !important;
 }
 .form-sign-up label{
     color: #3B3C3C !important;
-    font-size: 18px;
-    margin-bottom: 15px;
+    font-size: 20px;
 }
 .forgot-p{
     position: relative;
@@ -31,13 +36,13 @@
     border-color: #F2F3F7;
     box-shadow: none;
     color: #000 !important;
-    font-size: 17px;
+    font-size: 18px;
     padding-left: 30px;
     margin-bottom: 25px;
     border-radius: 0;
 }
 .btn-sign-up{
-    font-size: 24px;
+    font-size: 23px;
     border: 1px solid #3EBAD0;
     padding: 14px 45px;
     background: #3EBAD0 !important;
@@ -48,3 +53,5 @@
     width: 100%;
     padding-bottom: 12px;
 }
+
+

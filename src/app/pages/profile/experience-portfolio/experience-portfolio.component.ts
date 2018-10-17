@@ -263,6 +263,12 @@ export class ExperiencePortfolioComponent implements OnInit {
           if(data.status) {
       
                 this.getPortfolioImagesVideosByID(this.id)
+                this.addVideo.patchValue({
+                  Title: '',
+                  Description:'',
+                  Path: '',
+                  Type: ''
+                });
          
           }
         }
@@ -287,6 +293,14 @@ export class ExperiencePortfolioComponent implements OnInit {
                     setTimeout(() => {
                       this.getPortfolioImagesVideosByID(this.id)
                     }, 5000);
+
+                    this.imageFiles.uploadPorfolioImage = '';
+                    this.addPhotos.patchValue({
+                      Path: '',
+                      Type: '',
+                      Description: '',
+                      Title: ''
+                    });
                 }
               }
             );

@@ -66,6 +66,13 @@
   font-weight: normal;
   font-style: normal;
 }
+
+html,body,app-root,.alignItems{
+  min-height: 100%;
+  height:auto;
+  width: 100%;
+}
+
 i {
   &:hover {
     cursor: pointer;
