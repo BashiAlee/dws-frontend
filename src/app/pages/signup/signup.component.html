@@ -40,11 +40,9 @@
                                 >
                                 <div *ngIf="form.Password.invalid && (form.Password.dirty || form.Password.touched)" class="invalid-feedback">
                                   <div *ngIf="form.Password.errors.required">Password is required</div>
+                                  <div *ngIf="form.Password.errors.minlength">Password Should be of minimum 8 characters</div>
                               </div>
 
-                              <div *ngIf="form.Password.value!=form.ConfirmPassword.value" class="invalid-feedback">
-                               Password doesn't match
-                              </div>
                              </div>
                           </div>
                           <div class="col-sm-6 col-md-6">
@@ -53,7 +51,11 @@
                                 <input type="password" class="form-control" id="conPass" name="conPass" placeholder="Confirm Password" formControlName="ConfirmPassword">
                                 <div *ngIf="form.ConfirmPassword.invalid && (form.ConfirmPassword.dirty || form.ConfirmPassword.touched)" class="invalid-feedback">
                                   <div *ngIf="form.ConfirmPassword.errors.required">Password is required</div>
+                                  <div *ngIf="form.Password.value!=form.ConfirmPassword.value" class="invalid-feedback">
+                                    Password doesn't match
+                                   </div>
                               </div>
+                        
                              </div>
                           </div>
                        </div>

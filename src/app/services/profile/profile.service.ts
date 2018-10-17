@@ -234,5 +234,12 @@ export class ProfileService {
     }));
   }
 
+  updatePortfolioVideosAndImages(data) {
+    return this.http.post(this.apiUrl + 'updatePortfolioVideosAndImages', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
 
 }

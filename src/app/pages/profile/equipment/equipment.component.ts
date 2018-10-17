@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalsComponent } from '../../../components/modals/modals.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+declare var $: any;
 @Component({
   selector: 'app-equipment',
   templateUrl: './equipment.component.html',
@@ -68,6 +69,10 @@ export class EquipmentComponent implements OnInit {
    }
 
   ngOnInit() {
+    $('html,body').animate({
+      scrollTop: $(".custom-tabs").offset().top
+    },
+    'slow');
   }
   toggleDrone() {
     this.updateDrone = false;
@@ -184,6 +189,10 @@ export class EquipmentComponent implements OnInit {
     this.profileService.updatePilotEquipment(data)
     .subscribe( data=> {
       if(data.status) {
+        this.addEquipment.patchValue({
+          EquipmentTitle:'',
+          Description: ''
+        })
         this.getAllEquipmentsByID(this.id);
       }
     })
@@ -197,6 +206,11 @@ export class EquipmentComponent implements OnInit {
     this.profileService.updatePilotDrone(data)
     .subscribe( data=> {
       if(data.status) {
+        this.addDrone.patchValue({
+          DroneTitle: '',
+          Description:'',
+          SerialNumber: ''
+        })
         this.getAllDronesByID(this.id);
       }
     })

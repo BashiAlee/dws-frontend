@@ -9,7 +9,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ModalsComponent } from '../../../components/modals/modals.component';
 import { Croppie } from 'croppie/croppie';
 import { CroppieDirective } from '../../../../angular-croppie-module/src/lib/croppie.directive';
-
+declare var $: any;
 @Component({
   selector: 'app-experience-portfolio',
   templateUrl: './experience-portfolio.component.html',
@@ -31,6 +31,10 @@ export class ExperiencePortfolioComponent implements OnInit {
   loading: any;
   selectedData: any;
   experiencePorfolioInformation: FormGroup;
+  submittedPhotos: any;
+  submittedVideos: any;
+  updateVideos: any;
+  updatePhotos: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
@@ -145,6 +149,10 @@ export class ExperiencePortfolioComponent implements OnInit {
     }
 
   ngOnInit() {
+    $('html,body').animate({
+      scrollTop: $(".custom-tabs").offset().top
+    },
+    'slow');
 
     console.log("dfsdf", this.id)
     this.addVideo = this.formBuilder.group({
@@ -197,10 +205,15 @@ export class ExperiencePortfolioComponent implements OnInit {
 
   toggleVideo() {
     this.showAddVideo = !this.showAddVideo;
+    this.updateVideos = false;
   }
   togglePhotos() {
     this.showAddPhoto = !this.showAddPhoto;
+    this.updatePhotos = false;
   }
+
+  get videosForm() { return this.addVideo.controls; }
+  get photosForm() { return this.addPhotos.controls; }
 
   getPortfolioImagesVideosByID(id) {
     this.imagesList = [];
@@ -250,7 +263,11 @@ export class ExperiencePortfolioComponent implements OnInit {
   }
 
   addPortfolioImageVideo(type) {
+    this.submittedVideos = true;
     if(type =='Video') {
+      if (this.addVideo.invalid) {
+        return;
+      }
       this.addVideo.patchValue({
         UserId: this.id,
         PilotId: this.porfolioData.PilotId,
@@ -275,6 +292,10 @@ export class ExperiencePortfolioComponent implements OnInit {
       );
     }
     if(type =='Image') {
+      this.submittedPhotos = true;
+      if (this.addPhotos.invalid) {
+        return;
+      }
       this.profileService.uploadProfilePicture(this.imageFiles.uploadPorfolioImage)
       .subscribe(
         data => {
@@ -533,6 +554,54 @@ export class ExperiencePortfolioComponent implements OnInit {
       }
 
     }
+  }
+  editRow(value, type) {
+    if(type=='photos') {
+      // this.selectedDrone = value;
+      this.showAddPhoto = true;
+      this.updatePhotos = true;
+      this.addPhotos.patchValue(Object.assign({}, value));
+    }
+    if(type=='videos') {
+      // this.selectedEquipment = value;
+      // this.updateEquipment = true;
+      this.showAddVideo = true;
+      this.updateVideos = true;
+      this.addVideo.patchValue(Object.assign({}, value));
+    }
+    
+  }
+  updatePhotosByID() {
+    var data = Object.assign({}, this.addPhotos.value)
+    this.profileService.updatePortfolioVideosAndImages(data)
+    .subscribe(
+      data => {
+        if(data.status) {
+          this.getPortfolioImagesVideosByID(this.id);
+          this.addPhotos.patchValue({
+            Path: '',
+            Description: '',
+            Title: ''
+          });
+        }
+      }
+    )
+  }
+  updateVideoByID() {
+    var data = Object.assign({}, this.addVideo.value)
+    this.profileService.updatePortfolioVideosAndImages(data)
+    .subscribe(
+      data => {
+        if(data.status) {
+          this.getPortfolioImagesVideosByID(this.id);
+          this.addVideo.patchValue({
+            Path: '',
+            Description: '',
+            Title: ''
+          });
+        }
+      }
+    )
   }
   uploadCroppedImage(file, type) {
 

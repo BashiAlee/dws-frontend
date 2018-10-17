@@ -32,8 +32,8 @@ export class SignupComponent implements OnInit {
       LastName: ['',Validators.required],
       Phone: ['',[Validators.required]],
       Role: [this.type,Validators.required],
-      Password: ['',Validators.required],
-      ConfirmPassword: ['',Validators.required]
+      Password: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
+      ConfirmPassword: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(100)]]
     })
   }
 

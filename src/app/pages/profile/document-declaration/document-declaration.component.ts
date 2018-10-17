@@ -43,6 +43,7 @@ export class DocumentDeclarationComponent implements OnInit {
   licenseImage: any;
   images:any =  {};
   loading: any;
+  loaders: any = {};
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
@@ -101,7 +102,11 @@ export class DocumentDeclarationComponent implements OnInit {
       PilotId: [],
       RecurrentExamPdf: [],
       AviationLiabilityInsurancePdf: [],
-      CopyOfAviationLiabilityInsurancePdf: []
+      CopyOfAviationLiabilityInsurancePdf: [],
+      PilotCertificateImageOrignalName: [],
+      RecurrentExamPdfOrignalName: [],
+      AviationLiabilityInsurancePdfOrignalName: [],
+      CopyOfAviationLiabilityInsurancePdfOrignalName: []
 
     });
 
@@ -116,7 +121,12 @@ export class DocumentDeclarationComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    $('html,body').animate({
+      scrollTop: $(".custom-tabs").offset().top
+    },
+    'slow');
+  }
 
   getDocumentDeclarationDataByID(id) {
     this.profileService.getProfileDocumentsByID(id)
@@ -260,7 +270,7 @@ export class DocumentDeclarationComponent implements OnInit {
     }
 
     if(type =='pilot-certificate'){
-
+    
       if (file.target.files && file.target.files[0]) {
         var reader = new FileReader();
         reader.onload = (event: any) => {
@@ -273,18 +283,22 @@ export class DocumentDeclarationComponent implements OnInit {
           data => {
             if (data.status) {
               this.documentInformation.patchValue({
-                PilotCertificateImage: data.result
+                PilotCertificateImage: data.result,
+                PilotCertificateImageOrignalName: data.fileName
+
               })
+       
+
             }
           }
         )
     }
     if(type =='exam'){
-      
+      this.loaders.examLoader = true;
       if (file.target.files && file.target.files[0]) {
         var reader = new FileReader();
         reader.onload = (event: any) => {
-          this.images.RecurrentExamPdf = event.target.result;
+          // this.images.RecurrentExamPdf = event.target.result;
         }
         reader.readAsDataURL(file.target.files[0]);
       }
@@ -293,17 +307,21 @@ export class DocumentDeclarationComponent implements OnInit {
           data => {
             if (data.status) {
               this.documentInformation.patchValue({
-                RecurrentExamPdf: data.result
+                RecurrentExamPdf: data.result,
+                RecurrentExamPdfOrignalName: data.fileName
               })
+              this.images.RecurrentExamPdf = data.result
+              this.loaders.examLoader = false;
             }
           }
         )
     }
     if(type =='liability-certificate'){
+      this.loaders.liabilityCertificateLoader = true;
       if (file.target.files  && file.target.files[0]) {
         var reader = new FileReader();
         reader.onload = (event: any) => {
-          this.images.AviationLiabilityInsurancePdf = event.target.result;
+          // this.images.AviationLiabilityInsurancePdf = event.target.result;
         }
         reader.readAsDataURL(file.target.files[0]);
       }
@@ -312,17 +330,22 @@ export class DocumentDeclarationComponent implements OnInit {
           data => {
             if (data.status) {
               this.documentInformation.patchValue({
-                AviationLiabilityInsurancePdf: data.result
+                AviationLiabilityInsurancePdf: data.result,
+                AviationLiabilityInsurancePdfOrignalName: data.fileName
+
               })
+              this.images.AviationLiabilityInsurancePdf = data.result;
+              this.loaders.liabilityCertificateLoader = false;
             }
           }
         )
     }
     if(type =='copy-liability-certificate'){
+      this.loaders.copyLiabilityCertificateLoader = true;
       if (file.target.files && file.target.files[0]) {
         var reader = new FileReader();
         reader.onload = (event: any) => {
-          this.images.CopyOfAviationLiabilityInsurancePdf = event.target.result;
+          // this.images.CopyOfAviationLiabilityInsurancePdf = event.target.result;
         }
         reader.readAsDataURL(file.target.files[0]);
       }
@@ -331,8 +354,11 @@ export class DocumentDeclarationComponent implements OnInit {
           data => {
             if (data.status) {
               this.documentInformation.patchValue({
-                CopyOfAviationLiabilityInsurancePdf: data.result
+                CopyOfAviationLiabilityInsurancePdf: data.result,
+                CopyOfAviationLiabilityInsurancePdfOrignalName: data.fileName
               })
+              this.images.CopyOfAviationLiabilityInsurancePdf = data.result;
+              this.loaders.copyLiabilityCertificateLoader = false;
             }
           }
         )

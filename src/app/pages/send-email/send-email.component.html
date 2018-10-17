@@ -23,12 +23,11 @@
                        </div>
                     </div>
 
-                    <div class="form-group wow fadeInDown">
-                        <p *ngIf="error" class="errorMessage">{{error}}</p>
-                        <p *ngIf="success" class="successMessage">{{success}}</p>
-                    </div>
                  </div>
-
+                 <div class="form-group wow fadeInDown">
+                    <p *ngIf="error" class="errorMessage">{{error}}</p>
+                    <p *ngIf="success" class="successMessage">{{success}}</p>
+                </div>
 
                  <button type="button" id="submitLoginForm" class="btn btn-sign-up mt20 wow fadeInDown" (click)="sendEmail()">Send Email</button>
               </form>
