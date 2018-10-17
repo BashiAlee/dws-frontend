@@ -190,6 +190,18 @@ export class DocumentDeclarationComponent implements OnInit {
         data => {}
       )
   }
+  zoomPic(url) {
+
+    var initialState  = {
+      data: url,
+      type: 'zoom-admin'
+    };
+    var config  = {
+      class: 'custom-modal modal-dialog-centered modal-lg'
+    }
+    this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+  
+}
 
 
   uploadPDF(file) {

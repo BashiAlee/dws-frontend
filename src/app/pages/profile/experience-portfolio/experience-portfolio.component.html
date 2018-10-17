@@ -78,7 +78,7 @@
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <label for="passportImage" class="custom-input-label"> If DWS requires you to upload a copy of your passport, please do so here</label>
                       <div class="passportImage">
-                        <img *ngIf="images.PassportImage" [src]="images.PassportImage" alt="">
+                        <img *ngIf="images.PassportImage" [src]="images.PassportImage" alt="" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(images.PassportImage)">
                         <img *ngIf="!images.PassportImage" src="../../../../assets/images/image-placeholder.png" alt="">
                         
                         <div class="image-upload">
@@ -108,7 +108,7 @@
                       <div class="displayPictureTop">
                           <div class="displayPicture">
                             <img *ngIf="messages.headshotImageChoosed" [src]="croppedImageHeadShot" class="croppedImageDiv" />
-                            <img *ngIf="headShotPicture && !messages.headshotImageChoosed" [src]="headShotPicture" alt="Display picture">
+                            <img *ngIf="headShotPicture && !messages.headshotImageChoosed" [src]="headShotPicture" alt="Display picture" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(headShotPicture)">
                             <img *ngIf="!headShotPicture && !messages.headshotImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
                             <div class="image-upload">
                               <label for="file-input2">
@@ -146,7 +146,7 @@
                       <div class="displayPictureTop">
                           <div class="displayPicture">
                             <img *ngIf="messages.personalImageChoosed" [src]="croppedPersonalPicture" class="croppedImageDiv" />
-                            <img *ngIf="personalPicture && !messages.personalImageChoosed" [src]="personalPicture" alt="Display picture">
+                            <img *ngIf="personalPicture && !messages.personalImageChoosed" [src]="personalPicture" alt="Display picture" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(personalPicture)">
                             <img *ngIf="!personalPicture && !messages.personalImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
                             <div class="image-upload">
                               <label for="file-input3">

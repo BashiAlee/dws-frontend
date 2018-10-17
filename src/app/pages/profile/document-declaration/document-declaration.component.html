@@ -49,7 +49,7 @@
                 <!-- <object id="obj" type="application/pdf">
                   <a *ngIf="images.AviationLiabilityInsurancePdf"  [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
                 </object> -->
-                <a *ngIf="images.AviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
+                <a [class.enableDiv]="isAdmin" *ngIf="images.AviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
                 
                 <div class="image-upload">
                   <label for="file-input1">
@@ -73,7 +73,7 @@
 
               <div class="pdf-uploader" *ngIf="!loaders.copyLiabilityCertificateLoader">
                 <img src="../../../../assets/images/pdf-file.svg" alt="">
-                <a *ngIf="images.CopyOfAviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.CopyOfAviationLiabilityInsurancePdf)">Download</a>
+                <a [class.enableDiv]="isAdmin" *ngIf="images.CopyOfAviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.CopyOfAviationLiabilityInsurancePdf)">Download</a>
                 <div class="image-upload">
                   <label for="file-input2">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -94,7 +94,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <label for="passportImage" class="custom-input-label">Driver’s License (upload a photo or scan of your driver’s license if required by DWS).</label>
                   <div class="passportImage">
-                    <img *ngIf="licenseImage" [src]="licenseImage" alt="">
+                    <img *ngIf="licenseImage" [src]="licenseImage" alt="" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(licenseImage)">
                     <img *ngIf="!licenseImage" src="../../../../assets/images/image-placeholder.png" alt="">
                     <div class="image-upload">
                       <label for="file-input3">
@@ -110,7 +110,7 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                       <label for="insuranceCertificate" class="custom-input-label hide-overflow">Upload a photo or scan of your remote pilot certificate.</label>
                     <div class="image-uploader">
-                      <img *ngIf="images.PilotCertificateImage" [src]="images.PilotCertificateImage" alt="">
+                      <img *ngIf="images.PilotCertificateImage" [src]="images.PilotCertificateImage" alt="" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(images.PilotCertificateImage)">
                       <img *ngIf="!images.PilotCertificateImage" src="../../../../assets/images/photo-camera.svg" alt="">
                       <div class="image-upload">
                         <label for="file-input4">
@@ -126,7 +126,7 @@
                       <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your most recent recurrent exam result (if applicable)</label>
                     <div class="pdf-uploader"  *ngIf="!loaders.examLoader">
                       <img src="../../../../assets/images/pdf-file.svg" alt="">
-                      <a *ngIf="images.RecurrentExamPdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.RecurrentExamPdf)">Download</a>
+                      <a [class.enableDiv]="isAdmin" *ngIf="images.RecurrentExamPdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.RecurrentExamPdf)">Download</a>
                       <div class="image-upload">
                         <label for="file-input5">
                           <i class="fa fa-pencil" aria-hidden="true"></i>

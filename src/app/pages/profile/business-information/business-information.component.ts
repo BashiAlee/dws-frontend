@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../services/profile/profile.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalsComponent } from '../../../components/modals/modals.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -34,6 +34,7 @@ export class BusinessInformationComponent implements OnInit {
   croppedImageData: any = {};
   imageChangedEvent: any;
   croppedImage: any;
+  isAdmin: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
@@ -80,7 +81,10 @@ export class BusinessInformationComponent implements OnInit {
       code: 'NP'
     }
   ];
-  constructor(private formBuilder: FormBuilder, private profileSevice: ProfileService,private route: ActivatedRoute, private modalService: BsModalService, private authService: AuthenticationService) { 
+  constructor(private formBuilder: FormBuilder, private router: Router,private profileSevice: ProfileService,private route: ActivatedRoute, private modalService: BsModalService, private authService: AuthenticationService) { 
+    if(this.router.url.split('/')[1] =='admin') {
+      this.isAdmin = true;
+    }
   }
 
   ngOnInit() {
@@ -223,6 +227,18 @@ export class BusinessInformationComponent implements OnInit {
         MailingZip: ''
       })
     }
+    zoomPic(url) {
+      console.log("DFDDDD", url)
+      var initialState  = {
+        data: url,
+        type: 'zoom-admin'
+      };
+      var config  = {
+        class: 'custom-modal modal-dialog-centered modal-lg'
+      }
+      this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+    
+  }
 
     save() {
       this.loading = true;

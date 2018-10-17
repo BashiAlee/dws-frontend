@@ -518,6 +518,18 @@ export class ExperiencePortfolioComponent implements OnInit {
     this.selectedData = initialState;
     this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
   }
+  zoomPic(url) {
+    console.log("DFDDDD", url)
+    var initialState  = {
+      data: url,
+      type: 'zoom-admin'
+    };
+    var config  = {
+      class: 'custom-modal modal-dialog-centered modal-lg'
+    }
+    this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+  
+}
   uploadCoverImage(file, type) {
     if(type=='headshot') {
       this.messages.headshotImageChoosed = true;
