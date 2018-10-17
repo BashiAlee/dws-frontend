@@ -40,7 +40,12 @@
             max-height: inherit!important;
         }
 
+
     }
+  .profile-buttons{
+    margin: 6px;
+    display: block;
+  }
 
 }
 @media only screen and (max-width:900px){
@@ -53,6 +58,10 @@
             display: none;
         }
     }
+  .profile-buttons{
+    display: block;
+    margin: 15px 100px;
+  }
 }
   @media only screen and (max-width:768px){
 
@@ -193,5 +202,12 @@
     h2,h4{
       text-align: center;
     }
+  }
+}
+
+@media screen and (max-width: 330px){
+  .profile-buttons{
+    display: block;
+    margin: 15px 30px;
   }
 }
