@@ -11,7 +11,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <h3 class="aperu-regular">Drones</h3>
                 </div>
-      
+
                 <div class="col-md-6 col-sm-12 col-xs-12">
                  <button class="primary-dws-button aperu-regular pull-right" (click)="toggleDrone()">Add Drone</button>
                 </div>
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                       </div>
-            
+
                       <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="form-group">
                           <label for="serialnumber" class="custom-input-label">Serial Number (S/N)</label>
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                       </div>
-            
+
                       <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="form-group">
                           <label for="Description" class="custom-input-label">Description</label>
@@ -52,10 +52,10 @@
                         </div>
                       </div>
                     </div>
-            
+
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
-                          
+
                         <button *ngIf="!updateDrone"class="button-secondary-dws" (click)="addNewDrone()">Add to Drones</button>
                         <button *ngIf="updateDrone"class="button-secondary-dws" (click)="updateDroneByID()">Update Drones</button>
                       </div>
@@ -84,7 +84,7 @@
                     <span [innerHtml]="drone.DroneTitle"></span>
                     <span [innerHtml]="drone.Description?drone.Description: '-' "></span>
                     <span class="karla-bold" [innerHtml]="drone.SerialNumber"></span>
-                    <span class="makeCenter"> 
+                    <span class="makeCenter">
                       <div class="editRow" (click)="editRow(drone,'drone')"><i class="fa fa-pencil" aria-hidden="true"></i></div>
                       <div class="deleteRow" (click)="openModalWithClass(delete,'drone',drone.ID)"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
                     </span>
@@ -100,7 +100,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <h3 class="aperu-regular">Batteries</h3>
                 </div>
-      
+
                 <div class="col-md-6 col-sm-12 col-xs-12">
                  <button class="primary-dws-button aperu-regular pull-right" (click)="showAddBattery=!showAddBattery">Add Battery</button>
                 </div>
@@ -116,8 +116,8 @@
                         </ng-select>
                         </div>
                       </div>
-      
-            
+
+
                       <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                           <label for="Description" class="custom-input-label">Description</label>
@@ -126,7 +126,7 @@
                         </div>
                       </div>
                     </div>
-            
+
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
                         <button class="button-secondary-dws">Add to Batteries</button>
@@ -135,7 +135,7 @@
               </div>
 
             </div>
-      
+
             <div class="custom-table">
               <div class="table">
                 <div class="table-header mBottom25 for-three-columns ">
@@ -147,7 +147,7 @@
                   <div class="table-row mBottom25 for-three-columns " *ngFor="let drone of drones">
                     <span [innerHtml]="drone.title"></span>
                     <span [innerHtml]="drone.description"></span>
-                    <span class="makeCenter"> 
+                    <span class="makeCenter">
                       <div class="editRow"><i class="fa fa-pencil" aria-hidden="true"></i></div>
                       <div class="deleteRow"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
                     </span>
@@ -163,7 +163,7 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <h3 class="aperu-regular">Other Equipment</h3>
                 </div>
-      
+
                 <div class="col-md-6 col-sm-12 col-xs-12">
                  <button class="primary-dws-button aperu-regular pull-right" (click)="toggleEquipment()">Add Other Equipment</button>
                 </div>
@@ -181,8 +181,8 @@
                             </div>
                         </div>
                       </div>
-      
-            
+
+
                       <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                           <label for="Description" class="custom-input-label">Description</label>
@@ -194,17 +194,18 @@
                         </div>
                       </div>
                     </div>
-            
+
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
                         <button *ngIf="!updateEquipment" class="button-secondary-dws" (click)="addNewEquipment()">Add to Other Equipment</button>
-                        <button *ngIf="updateEquipment" class="button-secondary-dws" (click)="updateEquipmentByID()">Update Other Equipment</button>
+                        <button *ngIf="updateEquipment" class="button-secondary-dws" (click)="updateEquipmentByID()">Update the Equipment</button>
+
                       </div>
                     </div>
               </div>
 
             </div>
-      
+
             <div class="custom-table">
                 <div class="table" *ngIf="loaders.equipmentLoader">
                     <div class="spinner">
@@ -225,7 +226,7 @@
                   <div class="table-row mBottom25 for-three-columns " *ngFor="let equipment of equipments">
                     <span [innerHtml]="equipment.EquipmentTitle"></span>
                     <span [innerHtml]="equipment.Description?equipment.Description: '-' "></span>
-                    <span class="makeCenter"> 
+                    <span class="makeCenter">
                       <div class="editRow" (click)="editRow(equipment,'equipment')"><i class="fa fa-pencil" aria-hidden="true"></i></div>
                       <div class="deleteRow" (click)="openModalWithClass(delete,'equipment',equipment.ID)"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
                     </span>
@@ -243,9 +244,9 @@
           </div>
         </div>
     </div>
-  
+
   </div>
-  
+
   <div class="container">
     <div class="call-to-action" [class.disableDiv]="isAdmin">
       <div class="goBack">
@@ -260,9 +261,9 @@
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>
   </div>
-  
+
 <br>
- 
+
 <ng-template #delete>
   <div class="modal-header">
     <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
@@ -272,7 +273,7 @@
   </div>
   <div class="modal-body delete makeCenter">
     <h3>Are you Sure, You want to delete this entry?</h3>
-    <p>You will not be able to restore this back</p>
+    <p>You will not be able to restore the item</p>
   </div>
 
 
