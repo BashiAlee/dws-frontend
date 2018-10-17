@@ -54,11 +54,17 @@
 .text-align-right{
   text-align: right;
 }
-.text-color-blue {
+.text-color-blue { 
   color: $secondary-button-color;
 }
- .custom-checkbox .checkmark, .custom-radio .checkmark{
-   left: 10px;
+.checkbox{
+   left: 20px;
+   width: 25px;
+   height: 25px;
+   top: 5px;
+  &:before{
+    left: 3px;
+    top: -3px;
+  }
  }
-
 

@@ -145,14 +145,14 @@ export class ExperiencePortfolioComponent implements OnInit {
       this.route.parent.url.subscribe((urlPath) => {
         this.id = parseInt(urlPath[1].path);
     })
-        
+    $('html, body').stop().animate({scrollTop: 0}, 500);   
     }
 
   ngOnInit() {
-    $('html,body').animate({
-      scrollTop: $(".custom-tabs").offset().top
-    },
-    'slow');
+    // $('html,body').animate({
+    //   scrollTop: $(".custom-tabs").offset().top
+    // },
+    // 'slow');
 
     console.log("dfsdf", this.id)
     this.addVideo = this.formBuilder.group({

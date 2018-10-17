@@ -119,13 +119,14 @@ export class DocumentDeclarationComponent implements OnInit {
     if(this.router.url.split('/')[1] =='admin') {
       this.isAdmin = true;
     }
+    $('html, body').stop().animate({scrollTop: 0}, 500);   
   }
 
   ngOnInit() {
-    $('html,body').animate({
-      scrollTop: $(".custom-tabs").offset().top
-    },
-    'slow');
+    // $('html,body').animate({
+    //   scrollTop: $(".custom-tabs").offset().top
+    // },
+    // 'slow');
   }
 
   getDocumentDeclarationDataByID(id) {
