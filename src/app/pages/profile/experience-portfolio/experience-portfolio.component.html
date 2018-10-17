@@ -354,7 +354,7 @@
                           <div class="thumb-title makeBlue mTop15"><p>{{image.Title}}</p></div>
                           <div class="thumb-description"><p>{{image.Description}}</p></div>
                           <div class="action-buttons">
-                            <div class="makePurple zoom inline-block">
+                            <div class="makePurple zoom inline-block" [class.enableDiv]="isAdmin">
                                 <i class="fa fa-search-plus" aria-hidden="true" (click)="zoomImage(image)"></i>
                             </div>
                             <div class="makeBlue editImage inline-block">
@@ -436,7 +436,7 @@
                         <div class="row imageGallery"  *ngIf="videosList && videosList.length">
                           <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let videos of videosList">
                             <div class="thumb-img">
-                             <div> 
+                             <div [class.enableDiv]="isAdmin"> 
                          
                                <iframe [src]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)" style="width: 100%;" frameborder="0" allowfullscreen></iframe>
                                
