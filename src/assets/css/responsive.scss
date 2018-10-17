@@ -14,9 +14,11 @@
     }
 
   }
-
-
-
+@media (max-width: 1330px) {
+  .table-div{
+    width: 1170px;
+  }
+}
   @media only screen and (max-width: 1150px) {
     div.inner-header {
         nav.custom-navbar {
@@ -55,7 +57,7 @@
   @media only screen and (max-width:768px){
 
     div.call-to-action  {
-        
+
         display: block;
         text-align: center;
 
@@ -137,16 +139,16 @@
         margin-left: 15px;
         height: 65px;
    }
-    
+
 }
 @media only screen and (max-width:480px){
     div.rightContent {
         justify-content: center !important;
         div.dropdown-details {
             button.toggler {
-    
+
                 margin-left: 9px !important;
-     
+
             }
         }
 
@@ -186,4 +188,10 @@
             left: -18px;
         }
     }
+  .form-sign-up{
+    padding: 22px 15px;
+    h2,h4{
+      text-align: center;
+    }
+  }
 }
