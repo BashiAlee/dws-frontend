@@ -119,13 +119,14 @@ export class DocumentDeclarationComponent implements OnInit {
     if(this.router.url.split('/')[1] =='admin') {
       this.isAdmin = true;
     }
+    $('html, body').stop().animate({scrollTop: 0}, 500);   
   }
 
   ngOnInit() {
-    $('html,body').animate({
-      scrollTop: $(".custom-tabs").offset().top
-    },
-    'slow');
+    // $('html,body').animate({
+    //   scrollTop: $(".custom-tabs").offset().top
+    // },
+    // 'slow');
   }
 
   getDocumentDeclarationDataByID(id) {
@@ -190,6 +191,18 @@ export class DocumentDeclarationComponent implements OnInit {
         data => {}
       )
   }
+  zoomPic(url) {
+
+    var initialState  = {
+      data: url,
+      type: 'zoom-admin'
+    };
+    var config  = {
+      class: 'custom-modal modal-dialog-centered modal-lg'
+    }
+    this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+  
+}
 
 
   uploadPDF(file) {

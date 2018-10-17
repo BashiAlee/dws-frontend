@@ -6,8 +6,8 @@
       <div class="profile-details makeCenter" formGroupName="Users">
         <div class="displayPictureTop">
           <div class="displayPicture">
-            <img *ngIf="messages.coverImageChoosed" [src]="croppedImage" class="croppedImageDiv" />
-            <img *ngIf="displayPicture && !messages.coverImageChoosed" [src]="displayPicture" alt="Display picture">
+            <img *ngIf="messages.coverImageChoosed" [src]="croppedImage" class="croppedImageDiv"  />
+            <img *ngIf="displayPicture && !messages.coverImageChoosed" [src]="displayPicture" alt="Display picture" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(displayPicture)">
             <img *ngIf="!displayPicture && !messages.coverImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
             <div class="image-upload">
               <label for="file-input">

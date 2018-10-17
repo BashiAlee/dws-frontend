@@ -17,7 +17,7 @@ import { CroppieDirective } from '../../../../angular-croppie-module/src/lib/cro
   templateUrl: './personal-information.component.html',
   styleUrls: ['./personal-information.component.scss']
 })
-export class PersonalInformationComponent implements OnInit, AfterViewInit {
+export class PersonalInformationComponent implements OnInit {
   personalInformation: FormGroup;
   bsModalRef: BsModalRef;
   countriesList: any;
@@ -134,30 +134,6 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
             //   }
             // })
             console.log("FFFF", this.personalInformation.value)
-            // this.personalInformation.patchValue({
-            //   firstname:this.personalData.firstname ,
-            //   middleName: this.personalData.middleName,
-            //   lastname: this.personalData.lastname,
-            //   nameSuffix: this.personalData.middleName,
-            //   dob:this.personalData.dob,
-            //   p1StreetAddress: this.personalData.p1StreetAddress,
-            //   p2StreetAddress:this.personalData.p2StreetAddress,
-            //   p1Country: this.personalData.p1Country,
-            //   p1City: this.personalData.p1City,
-            //   p1State: this.personalData.p1State,
-            //   p1Zip:this.personalData.p1Zip,
-            //   m1StreetAddress: this.personalData.m1StreetAddress,
-            //   m2StreetAddress:this.personalData.m2StreetAddress,
-            //   m1Country: this.personalData.m1Country,
-            //   m1City: this.personalData.m1City,
-            //   m1State: this.personalData.m1State,
-            //   m1Zip:this.personalData.m1Zip,
-            //   email: this.personalData.email,
-            //   phone: this.personalData.phone,
-            //   gernalBiography:this.personalData.gernalBiography,
-            //   pInfoNotes:this.personalData.pInfoNotes,
-            //   memberNumer:this.personalData.memberNumer
-            // });
         } else {
           this.personalData = [];
         }
@@ -399,26 +375,13 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
       viewport: { width: 200, height: 200 },
      
       enableOrientation: true,
-      // enforceBoundary: true,
-      // showZoomer: true,
-      // enableResize: true,
-      // mouseWheelZoom: 'ctrl'
     };
     @ViewChild('croppie')
-    // public ccccc: any;
     
     
     public croppieDirective: CroppieDirective;
   
-  
-    public ngAfterViewInit() {
-      
-      // this.croppieComponent.croppie.bind({ url: 'assets/angular.png' });
-    }
-  
     handleUpdate(data) {
-      
-      // console.log(this.croppieDirective.croppie.getResult());
       var x = this.croppieDirective.croppie.result('canvas','original').then(function (src) {
         return src;
         
@@ -435,6 +398,19 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
        this.displayPicture = value;
       });
   
+    }
+
+    zoomPic(url) {
+  
+        var initialState  = {
+          data: url,
+          type: 'zoom-admin'
+        };
+        var config  = {
+          class: 'custom-modal modal-dialog-centered modal-lg'
+        }
+        this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+      
     }
     
     
