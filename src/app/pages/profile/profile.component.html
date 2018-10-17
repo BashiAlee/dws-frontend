@@ -7,13 +7,14 @@
     </div>
 
     <div class="buttons makeCenter" *ngIf="isAdmin">
-        <a class="btn-approve" *ngIf="!loaders.approveProfile" (click)="approveProfile()">Approve this profile</a>
+        <a class="btn-approve profile-buttons" *ngIf="!loaders.approveProfile" (click)="approveProfile()">Approve this profile</a>
         <a class="btn-approve" *ngIf="loaders.approveProfile" ><i class="fa fa-circle-o-notch fa-spin"></i></a>
-        <a class="btn-message">Send Message</a>
-        <a class="btn-reject" *ngIf="!loaders.rejectProfile"(click)="rejectProfile()">Block this profile</a>
+        <a class="btn-message profile-buttons">Send Message</a>
+        <a class="btn-reject  profile-buttons" *ngIf="!loaders.rejectProfile"(click)="rejectProfile()">Block this profile</a>
         <a  class="btn-reject" *ngIf="loaders.rejectProfile" ><i class="fa fa-circle-o-notch fa-spin"></i></a>
-     
+
     </div>
+
 
             <div class="custom-tabs mTop100" >
                     <button  class="BackBtn" (click)="moveBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
@@ -26,12 +27,12 @@
                     </ul>
                     <button class="ForwardBtn"  (click)="moveForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                   </div>
-                  
+
               <div class="col-md-12 wow fadeInDown">
                   <router-outlet></router-outlet>
               </div>
-        
-      </div>
-        
 
-    
+      </div>
+
+
+

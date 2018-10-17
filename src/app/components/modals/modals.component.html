@@ -23,8 +23,9 @@
           <button type="button" class="btn btn-default custom-modal-button success-btn" *ngIf="page && id" (click)="moveToNextRoute(page, id)">Next Step</button>
           <a (click)="bsModalRef.hide()" *ngIf="page && id">Skip for now</a>
           <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Ok</a>
+
         </div>
-     
+
 </div>
 
 <div class="modal-inner makeCenter error-custom-modal" *ngIf="type=='error'">
@@ -36,7 +37,7 @@
     </div>
     <div class="modal-body error">
       <h3>Something went wrong!</h3>
-      <p>Something is Broken. We Suggest you to 
+      <p>Something is Broken. We Suggest you to
         try again later.</p>
     </div>
 
@@ -47,7 +48,7 @@
     <div class="footer-content">
         <button type="button" class="btn btn-default custom-modal-button try-later" (click)="bsModalRef.hide()">Try Later</button>
       </div>
-   
+
 </div>
 
 <div class="modal-inner makeCenter warning-custom-modal" *ngIf="type=='warning'">
@@ -59,7 +60,7 @@
     </div>
     <div class="modal-body warning">
       <h3>Warning!</h3>
-      <p>This is a Warning Message and it 
+      <p>This is a Warning Message and it
         could be two liner also.</p>
     </div>
 
@@ -70,7 +71,7 @@
     <div class="footer-content">
         <button type="button" class="btn btn-default custom-modal-button warning-btn" (click)="bsModalRef.hide()" >Got it</button>
       </div>
-   
+
 </div>
 
 <div class="modal-inner makeCenter" *ngIf="type=='approved'">
@@ -91,9 +92,9 @@
     </div>
     <div class="footer-content">
 
-        <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Ok</a>
+        <a (click)="bsModalRef.hide()" *ngIf="!page && !id">back to homepage</a>
       </div>
-   
+
 </div>
 
 <div class="modal-inner makeCenter error-custom-modal" *ngIf="type=='blocked'">
@@ -114,7 +115,7 @@
     <div class="footer-content">
       <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Ok</a>
       </div>
-   
+
 </div>
 
 <div class="modal-inner makeCenter" *ngIf="type=='zoom'">
@@ -129,6 +130,25 @@
           <img [src]="data.Path" alt="" style="width: 100%;">
         </div>
 
+
  
-     
+        
   </div>
+  <div class="modal-inner makeCenter" *ngIf="type=='zoom-admin'">
+
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Image</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img [src]="data" alt="" style="width: 100%;">
+    </div>
+
+
+</div>
+
+
+
+

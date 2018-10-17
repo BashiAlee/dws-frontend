@@ -34,7 +34,7 @@
 
          <div class="row">
            <div class="col-md-12">
-<!--              
+<!--
             <table datatable [dtOptions]="dtOptions" class="row-border hover custom-datatable">
               <thead>
                 <tr>
@@ -46,7 +46,7 @@
                   <th>City</th>
                   <th>Status</th>
                   <th>Action</th>
-                  
+
                 </tr>
               </thead>
               <tbody>
@@ -64,7 +64,8 @@
             </table> -->
              <div class="main-div">
              <div class="table-div">
-               <div class="table-head">
+               <div class="table-rows table-heading-row">
+
                  <div class="table-heading">Name</div>
                  <div class="table-heading">Email</div>
                  <div class="table-heading">Phone</div>
@@ -75,7 +76,7 @@
                  <div class="table-heading">Action</div>
                </div>
                <div class="table-body">
-               <div class="table-body-row" *ngFor="let list of pilotList">
+               <div class="table-rows table-body-rows" *ngFor="let list of pilotList">
                   <div>{{list.Users.FirstName+' '+list.Users.LastName}}</div>
                   <div>{{list.Users.Email}}</div>
                   <div>{{list.PrimaryPhone}}</div>
@@ -88,6 +89,12 @@
                </div>
              </div>
            </div>
+             <div class="entries-selector">
+               <p class="show-entries-p">Show entries per page</p>
+               <div class="selector-input-container">
+                 <input class="selector-input" type="number" value="10" min="0">
+               </div>
+             </div>
            </div>
          </div>
          <!-- <div class="custom-table">

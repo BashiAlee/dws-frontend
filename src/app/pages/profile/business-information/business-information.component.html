@@ -8,7 +8,7 @@
             <label for="file-input">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </label>
-  
+
             <input id="file-input" type="file" />
           </div>
         </div> -->
@@ -35,7 +35,7 @@
             <div class="displayPictureTop">
                 <div class="displayPicture">
                   <img *ngIf="messages.coverImageChoosed" [src]="croppedImage" class="croppedImageDiv" />
-                  <img *ngIf="displayPicture && !messages.coverImageChoosed" [src]="displayPicture" alt="Display picture">
+                  <img *ngIf="displayPicture && !messages.coverImageChoosed" [src]="displayPicture" alt="Display picture" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(displayPicture)">
                   <img *ngIf="!displayPicture && !messages.coverImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
                   <div class="image-upload">
                     <label for="file-input">
@@ -51,9 +51,9 @@
                 <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event)" *ngIf="messages.coverImageChoosed" />
                 <button class="btn crop-btn" *ngIf="messages.coverImageChoosed && !messages.uploadingImage" (click)="uploadCroppedImage(croppedImageData)">Crop</button>
                 <div>
-      
+
                 </div>
-      
+
               </div>
             <p class="aperu-medium mTop15">Business Logo</p>
           </div>
@@ -72,7 +72,7 @@
             <p class="aperu-medium mTop15">Business Logo (Secondary)</p>
           </div> -->
         </div>
-    
+
           <div class="row">
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
@@ -90,7 +90,7 @@
               </div>
             </div>
           </div>
-     
+
 
       </div>
     </div>
@@ -218,14 +218,14 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="businessPhoneNumberP" class="custom-input-label">Business Phone Number (Primary)</label>
-              <input type="text" class="form-control custom-input" id="zip" aria-describedby="businessPhonetextP"
+              <input type="number" class="form-control custom-input" id="zip" aria-describedby="businessPhonetextP"
                 placeholder="Business Phone Number (Primary)" formControlName="BusinessPhoneNumberPrimary">
             </div>
           </div>
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="businessPhoneNumberS" class="custom-input-label">Business Phone Number (Secondary)</label>
-              <input type="text" class="form-control custom-input" id="businessPhoneNumberS" aria-describedby="businessPhoneNumberS"
+              <input type="number" class="form-control custom-input" id="businessPhoneNumberS" aria-describedby="businessPhoneNumberS"
                 placeholder="Business Phone Number (Secondary)" formControlName="BusinessPhoneNumberSecondary">
             </div>
           </div>
@@ -269,7 +269,7 @@
                   <input type="radio" formControlName="ProfessionalLiabilityInsurance" value='1' >
                   <span class="checkmark"></span>
                 </label>
-  
+
                 <label class="container">No
                   <input type="radio" formControlName="ProfessionalLiabilityInsurance" value='0'>
                   <span class="checkmark"></span>
@@ -285,7 +285,7 @@
                   <input type="radio"  formControlName="WorksmanCompInsurance" value='1'>
                   <span class="checkmark"></span>
                 </label>
-  
+
                 <label class="container">No
                   <input type="radio" formControlName="WorksmanCompInsurance" value='0'>
                   <span class="checkmark"></span>
@@ -299,7 +299,7 @@
                     <input type="radio" formControlName="CommercialAutoInsurance" value='1'>
                     <span class="checkmark"></span>
                   </label>
-    
+
                   <label class="container">No
                     <input type="radio" formControlName="CommercialAutoInsurance" value='0'>
                     <span class="checkmark"></span>

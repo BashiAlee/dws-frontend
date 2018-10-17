@@ -1021,6 +1021,10 @@ div.dataTables_length {
 
 }
 
+.enableDiv {
+  pointer-events: visible !important;
+}
+
 .loaderBtn {
   pointer-events: none !important;
 }
