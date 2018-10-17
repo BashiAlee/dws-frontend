@@ -1045,3 +1045,7 @@ div.dataTables_length {
     font-size: 24px;
   }
 }
+
+button:disabled {
+  cursor: no-drop;
+}

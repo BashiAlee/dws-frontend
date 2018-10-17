@@ -11,7 +11,7 @@ import { AuthenticationService } from '../../../services/authentication/authenti
 import { Croppie } from 'croppie/croppie';
 
 import { CroppieDirective } from '../../../../angular-croppie-module/src/lib/croppie.directive';
-
+declare var $: any;
 @Component({
   selector: 'app-personal-information',
   templateUrl: './personal-information.component.html',
@@ -48,6 +48,7 @@ export class PersonalInformationComponent implements OnInit {
       if(this.router.url.split('/')[1] =='admin') {
         this.isAdmin = true;
       }
+      $('html, body').stop().animate({scrollTop: 0}, 500);  
       // this.personalData.CreatedAt = this.auth.getCurrentUser().CreatedAt;
     }
 

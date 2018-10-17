@@ -249,7 +249,7 @@
 
   <div class="container">
     <div class="call-to-action" [class.disableDiv]="isAdmin">
-      <div class="goBack">
+      <div class="goBack" (click)="goBack()">
         <button>Previous Step</button>
       </div>
       <div class="saveButton" *ngIf="!loading">
