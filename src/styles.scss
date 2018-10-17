@@ -68,9 +68,21 @@
 }
 
 html,body,app-root,.alignItems{
-  min-height: 100%;
-  height:auto;
-  width: 100%;
+  // min-height: 100vh;
+  // height:100%;
+  // width: 100%;
+}
+
+div.mainContent{
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.alignItems {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 i {

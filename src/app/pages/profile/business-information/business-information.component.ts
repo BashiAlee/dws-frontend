@@ -10,6 +10,8 @@ import { Croppie } from 'croppie/croppie';
 
 import { CroppieDirective } from '../../../../angular-croppie-module/src/lib/croppie.directive';
 
+declare var $: any;
+
 @Component({
   selector: 'app-business-information',
   templateUrl: './business-information.component.html',
@@ -82,6 +84,10 @@ export class BusinessInformationComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('html,body').animate({
+      scrollTop: $(".custom-tabs").offset().top
+    },
+    'slow');
     this.businessInformation = this.formBuilder.group({
       ID: [],
       PilotId: [],
