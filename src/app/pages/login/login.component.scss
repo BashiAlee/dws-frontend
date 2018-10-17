@@ -57,14 +57,15 @@
 .text-color-blue { 
   color: $secondary-button-color;
 }
+.custom-checkbox{
 .checkbox{
    left: 20px;
    width: 25px;
    height: 25px;
    top: 5px;
-  &:before{
+  &:after{
     left: 3px;
     top: -3px;
   }
  }
-
+}

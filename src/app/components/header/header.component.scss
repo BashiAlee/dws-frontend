@@ -229,8 +229,9 @@
 }
 .drop-menu{
   z-index: 1;
-  position: absolute;
+  position: fixed;
   display: none;
+  top: 86px;
   left: 0;
   background-color: #000000;
   color: white;
