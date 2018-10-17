@@ -37,6 +37,13 @@ div.command-center {
     }
 
 }
+.inputs-container1{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  align-items: end;
+  grid-gap: 2%;
+  margin: 0;
+}
 .main-div{
   overflow-x:auto;
   white-space: nowrap;
@@ -134,5 +141,20 @@ div.command-center {
   outline: none;
   background: white;
   -webkit-appearance: menulist-button;
+}
+.input-city{
+  padding: 0 18px;
+  height: 56px;
+}
+.filter-btn{
+  position: inherit;
+  margin-bottom: 16px;
+ margin-left: 0;
+  height: 56px;
+}
+@media only screen and (max-width: 940px){
+  .inputs-container1{
+    grid-template-columns: none;
+  }
 }
 

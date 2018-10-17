@@ -63,6 +63,14 @@
     margin: 15px 100px;
   }
 }
+
+@media only screen and (max-width: 860px){
+  .inputs-container1{
+    grid-template-columns: none;
+  }
+}
+
+
   @media only screen and (max-width:768px){
 
     div.call-to-action  {
