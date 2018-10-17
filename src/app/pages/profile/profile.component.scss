@@ -19,7 +19,7 @@
       text-align: center;
       height: 46px;
       padding-right: 25px;
-     
+
       flex: 0 0 auto;
       margin: 0 auto;
       margin-bottom: 39px;
@@ -134,7 +134,7 @@
   -ms-overflow-style: none;  // IE 10+
   overflow: -moz-scrollbars-none;  // Firefox
 }
-.custom-tabs::-webkit-scrollbar { 
+.custom-tabs::-webkit-scrollbar {
   display: none;  // Safari and Chrome
 }
 .buttons {
@@ -148,7 +148,7 @@
     color: $white;
    }
   a {
-    padding: 20px;
+    padding: 17px 40px;
     border-radius: 30px;
     margin: 20px;
   }

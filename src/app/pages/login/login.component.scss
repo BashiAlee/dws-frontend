@@ -22,7 +22,8 @@
 }
 .form-sign-up label{
     color: #3B3C3C !important;
-    font-size: 20px;
+    font-size: 21px;
+
 }
 .forgot-p{
     position: relative;
@@ -34,7 +35,7 @@
     border-color: #F2F3F7;
     box-shadow: none;
     color: #000 !important;
-    font-size: 18px;
+    font-size: 21px;
     padding-left: 30px;
     margin-bottom: 25px;
     border-radius: 0;
@@ -60,5 +61,16 @@
  .custom-checkbox .checkmark, .custom-radio .checkmark{
    left: 10px;
  }
+ .col-md-6 , .col-sm-6{
+   width: 100%;
+ }
 
+ @media screen and (max-width: 450px){
+   .form-sign-up{
+     padding: 22px 15px;
+     h2,h4{
+       text-align: center;
+     }
+   }
+ }
 
