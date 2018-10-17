@@ -12,6 +12,7 @@ export class SignupComponent implements OnInit {
   success: any;
   error: any;
   type: any;
+  loading: any;
   constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private route: ActivatedRoute, private router: Router) {
 
     console.log(this.router.url.split('/'),"sdfsdf")
@@ -31,14 +32,15 @@ export class SignupComponent implements OnInit {
       LastName: ['',Validators.required],
       Phone: ['',[Validators.required]],
       Role: [this.type,Validators.required],
-      Password: ['',Validators.required],
-      ConfirmPassword: ['',Validators.required]
+      Password: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
+      ConfirmPassword: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(100)]]
     })
   }
 
   get form() { return this.signupForm.controls; }
 
   signUp() {
+    this.loading = true;
     this.success = '';
     this.error = '';
     delete this.signupForm.value.ConfirmPassword;
@@ -46,9 +48,11 @@ export class SignupComponent implements OnInit {
     .subscribe(
       data => {
         if(data.status) {
+          this.loading = false;
           this.success = data.message;
         } else if(!data.status) {
           this.error = data.message;
+          this.loading = false;
         }
       }
     )

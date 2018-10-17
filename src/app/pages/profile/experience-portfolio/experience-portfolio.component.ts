@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../services/profile/profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,7 +7,9 @@ import { AuthenticationService } from '../../../services/authentication/authenti
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ModalsComponent } from '../../../components/modals/modals.component';
-
+import { Croppie } from 'croppie/croppie';
+import { CroppieDirective } from '../../../../angular-croppie-module/src/lib/croppie.directive';
+declare var $: any;
 @Component({
   selector: 'app-experience-portfolio',
   templateUrl: './experience-portfolio.component.html',
@@ -26,31 +28,37 @@ export class ExperiencePortfolioComponent implements OnInit {
   imagesList: any = [];
   imageFiles: any = {};
   isAdmin: any;
+  loading: any;
+  selectedData: any;
   experiencePorfolioInformation: FormGroup;
+  submittedPhotos: any;
+  submittedVideos: any;
+  updateVideos: any;
+  updatePhotos: any;
   config = {
-    class: "custom-modal modal-dialog-centered modal-lg"
+    class: "custom-modal modal-dialog-centered modal-md"
   };
   id: any;
   images: any = {};
 
   distanceToTravel = [
     {
-      value: "1-2 miles"
+      value: "10 miles"
     },
     {
-      value: "2-20 miles"
+      value: "25 miles"
     },
     {
-      value: "21-40 miles"
+      value: "50 miles"
     },
     {
-      value: "41-60 miles"
+      value: "100 miles"
     },
     {
-      value: "61-80 miles"
+      value: "250 miles"
     },
     {
-      value: "81-100 miles"
+      value: "500 miles"
     },
     {
       value: "Nationwide"
@@ -118,6 +126,15 @@ export class ExperiencePortfolioComponent implements OnInit {
       value: "10+"
     }
   ]
+  headShotPicture: any;
+  personalPicture: any;
+  messages: any = {};
+  imageChangedEvent: any;
+  croppedImageData: any = {};
+  imageChangedEventHeadShot: any;
+  imageChangedPersonalPicture: any;
+  croppedImageHeadShot: any;
+  croppedPersonalPicture: any;
   constructor(private formBuilder: FormBuilder, private profileService: ProfileService, 
     private route: ActivatedRoute, private sanitize: DomSanitizer, 
     private modalService: BsModalService,
@@ -132,8 +149,12 @@ export class ExperiencePortfolioComponent implements OnInit {
     }
 
   ngOnInit() {
+    $('html,body').animate({
+      scrollTop: $(".custom-tabs").offset().top
+    },
+    'slow');
 
- 
+    console.log("dfsdf", this.id)
     this.addVideo = this.formBuilder.group({
       UserId: [this.id],
       PilotId: [],
@@ -184,10 +205,15 @@ export class ExperiencePortfolioComponent implements OnInit {
 
   toggleVideo() {
     this.showAddVideo = !this.showAddVideo;
+    this.updateVideos = false;
   }
   togglePhotos() {
     this.showAddPhoto = !this.showAddPhoto;
+    this.updatePhotos = false;
   }
+
+  get videosForm() { return this.addVideo.controls; }
+  get photosForm() { return this.addPhotos.controls; }
 
   getPortfolioImagesVideosByID(id) {
     this.imagesList = [];
@@ -223,8 +249,8 @@ export class ExperiencePortfolioComponent implements OnInit {
       data => {
         if(data.status) {
           this.porfolioData = data.result;
-          this.images.HeadshotImage = this.porfolioData.HeadshotImage;
-          this.images.OtherPersonalImage = this.porfolioData.OtherPersonalImage;
+          this.headShotPicture = this.porfolioData.HeadshotImage;
+          this.personalPicture = this.porfolioData.OtherPersonalImage;
           this.images.PassportImage = this.porfolioData.PassportImage;
           // this.porfolioData.ValidPassport =  this.porfolioData.ValidPassport == '1'
           // this.porfolioData.TravelOutsideUs =  this.porfolioData.TravelOutsideUs == '1'
@@ -237,9 +263,13 @@ export class ExperiencePortfolioComponent implements OnInit {
   }
 
   addPortfolioImageVideo(type) {
+    this.submittedVideos = true;
     if(type =='Video') {
+      if (this.addVideo.invalid) {
+        return;
+      }
       this.addVideo.patchValue({
-        UserId: this.porfolioData.UserId,
+        UserId: this.id,
         PilotId: this.porfolioData.PilotId,
         ID:this.porfolioData.ID,
         Type: 'Video'
@@ -250,18 +280,28 @@ export class ExperiencePortfolioComponent implements OnInit {
           if(data.status) {
       
                 this.getPortfolioImagesVideosByID(this.id)
+                this.addVideo.patchValue({
+                  Title: '',
+                  Description:'',
+                  Path: '',
+                  Type: ''
+                });
          
           }
         }
       );
     }
     if(type =='Image') {
+      this.submittedPhotos = true;
+      if (this.addPhotos.invalid) {
+        return;
+      }
       this.profileService.uploadProfilePicture(this.imageFiles.uploadPorfolioImage)
       .subscribe(
         data => {
           if(data.status) {
             this.addPhotos.patchValue({
-              UserId: this.porfolioData.UserId,
+              UserId: this.id,
               PilotId: this.porfolioData.PilotId,
               ID:this.porfolioData.ID,
               Path: data.result,
@@ -274,6 +314,14 @@ export class ExperiencePortfolioComponent implements OnInit {
                     setTimeout(() => {
                       this.getPortfolioImagesVideosByID(this.id)
                     }, 5000);
+
+                    this.imageFiles.uploadPorfolioImage = '';
+                    this.addPhotos.patchValue({
+                      Path: '',
+                      Type: '',
+                      Description: '',
+                      Title: ''
+                    });
                 }
               }
             );
@@ -331,6 +379,16 @@ export class ExperiencePortfolioComponent implements OnInit {
       this.imageFiles.uploadPorfolioImage = file;
     }
     if(type== 'headshot'){
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (event:any) => {
+          console.log("DDD", event.target.result)
+          this.images.HeadshotImage = event.target.result;
+         
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
+    
       this.imageFiles.headshotImage = file;
       this.profileService.uploadProfilePicture(this.imageFiles.headshotImage)
       .subscribe(
@@ -345,6 +403,13 @@ export class ExperiencePortfolioComponent implements OnInit {
     }
     if(type=='personal-pic'){
       this.imageFiles.personalImage = file;
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (event:any) => {
+          this.images.OtherPersonalImage = event.target.result;
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
       this.profileService.uploadProfilePicture(this.imageFiles.personalImage)
       .subscribe(
         data => {
@@ -358,6 +423,13 @@ export class ExperiencePortfolioComponent implements OnInit {
     }
     if(type== 'passport-pic'){
       this.imageFiles.passportImage = file;
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (event:any) => {
+          this.images.PassportImage = event.target.result;
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
       this.profileService.uploadProfilePicture(this.imageFiles.passportImage)
       .subscribe(
         data => {
@@ -372,7 +444,7 @@ export class ExperiencePortfolioComponent implements OnInit {
   }
 
   save() {
-
+    this.loading = true;
     this.experiencePorfolioInformation.value.ValidPassport = this.experiencePorfolioInformation.value.ValidPassport.toString();
     this.experiencePorfolioInformation.value.TravelOutsideUs = this.experiencePorfolioInformation.value.TravelOutsideUs.toString();
     this.experiencePorfolioInformation.patchValue({
@@ -393,6 +465,7 @@ export class ExperiencePortfolioComponent implements OnInit {
     .subscribe(
       data => {
         if(data.status) {
+          this.loading = false;
           const initialState = {
             type: 'success',
             page: 'document-declaration',
@@ -404,11 +477,218 @@ export class ExperiencePortfolioComponent implements OnInit {
           const initialState = {
             type: 'error'
           }
+          this.loading = false;
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
         }
       }
     )
   }
+
+  openModalWithClass(template: TemplateRef<any>,id) {
+    var initialState = {
+      id: id
+    }
+    var config  = {
+      class: 'custom-modal modal-dialog-centered modal-lg'
+    }
+    this.selectedData = initialState;
+    this.bsModalRef = this.modalService.show(template, Object.assign({}, config))
+
+  }
+
+  deleteByID() {
+    this.profileService.deletePortfolioVideosAndImages(this.selectedData.id)
+    .subscribe(data => {
+      if(data.status) {
+        this.getPortfolioImagesVideosByID(this.id)
+        this.bsModalRef.hide();
+      }
+    })
+  }
+
+  zoomImage(value) {
+    var initialState  = {
+      data: value,
+      type: 'zoom'
+    };
+    var config  = {
+      class: 'custom-modal modal-dialog-centered modal-lg'
+    }
+    this.selectedData = initialState;
+    this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+  }
+  uploadCoverImage(file, type) {
+    if(type=='headshot') {
+      this.messages.headshotImageChoosed = true;
+      var target = file.target || file.srcElement
+      this.croppedImageData.imageHeadShotName = target.files[0].name;
+      this.imageChangedEventHeadShot = file;
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+  
+        reader.onload = (event: any) => {
+          this.croppieDirective.croppie.bind({ url: event.target.result});
+          // this.headShotPicture = event.target.result
+          // this.displayPicture = event.target.result;
+         
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
+    }
+    if(type =='other-personal') {
+      this.messages.personalImageChoosed = true;
+      var target = file.target || file.srcElement
+      this.croppedImageData.imageChangedPersonalPicture = target.files[0].name;
+      this.imageChangedPersonalPicture = file;
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+  
+        reader.onload = (event: any) => {
+          this.croppieDirective.croppie.bind({ url: event.target.result});
+          // this.headShotPicture = event.target.result
+          // this.displayPicture = event.target.result;
+         
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
+
+    }
+  }
+  editRow(value, type) {
+    if(type=='photos') {
+      // this.selectedDrone = value;
+      this.showAddPhoto = true;
+      this.updatePhotos = true;
+      this.addPhotos.patchValue(Object.assign({}, value));
+    }
+    if(type=='videos') {
+      // this.selectedEquipment = value;
+      // this.updateEquipment = true;
+      this.showAddVideo = true;
+      this.updateVideos = true;
+      this.addVideo.patchValue(Object.assign({}, value));
+    }
+    
+  }
+  updatePhotosByID() {
+    var data = Object.assign({}, this.addPhotos.value)
+    this.profileService.updatePortfolioVideosAndImages(data)
+    .subscribe(
+      data => {
+        if(data.status) {
+          this.getPortfolioImagesVideosByID(this.id);
+          this.addPhotos.patchValue({
+            Path: '',
+            Description: '',
+            Title: ''
+          });
+        }
+      }
+    )
+  }
+  updateVideoByID() {
+    var data = Object.assign({}, this.addVideo.value)
+    this.profileService.updatePortfolioVideosAndImages(data)
+    .subscribe(
+      data => {
+        if(data.status) {
+          this.getPortfolioImagesVideosByID(this.id);
+          this.addVideo.patchValue({
+            Path: '',
+            Description: '',
+            Title: ''
+          });
+        }
+      }
+    )
+  }
+  uploadCroppedImage(file, type) {
+
+    if(type=='headshot'){
+      this.messages.uploadingHeadShotImage = true;
+      this.messages.headshotImageChoosed = false;
+      fetch(file.headshotbase64)
+      .then(res => res.blob())
+      .then(blob => {
+        var file1 = new File([blob], file.imageChangedEventHeadShot);
+        this.profileService.uploadCroppedImage(file1, file.imageChangedEventHeadShot)
+          .subscribe(data => {
+            if (data) {
+              if(data.status) {
+                this.experiencePorfolioInformation.patchValue({
+                  HeadshotImage: data.result
+                })
+              }
+              this.messages.uploadingHeadShotImage = false;
+            }
+  
+          })
+      })
+      
+    }
+    if(type=='other-personal'){
+      this.messages.uploadingPersonalImage = true;
+      this.messages.personalImageChoosed = false;
+      fetch(file.personalbase64)
+      .then(res => res.blob())
+      .then(blob => {
+        var file1 = new File([blob], file.imageChangedPersonalPicture);
+        this.profileService.uploadCroppedImage(file1, file.imageChangedPersonalPicture)
+          .subscribe(data => {
+            if (data) {
+              if(data.status) {
+                this.experiencePorfolioInformation.patchValue({
+                  OtherPersonalImage: data.result
+                })
+              }
+              this.messages.uploadingPersonalImage = false;
+            }
+  
+          })
+      })
+    }
+
+
+  }
+  
+  public croppieOptions: Croppie.CroppieOptions = {
+    boundary: { width: 250, height: 250 },
+    viewport: { width: 200, height: 200 },
+   
+    enableOrientation: true,
+  };
+  @ViewChild('croppie')
+  
+  
+  public croppieDirective: CroppieDirective;
+
+  handleUpdate(data, type) {
+    var x = this.croppieDirective.croppie.result('canvas','original').then(function (src) {
+      return src;
+      
+  });
+
+  this.deepdive(x, type);
+    
+  }
+
+  deepdive(e, type){  
+    e.then((value)=> {
+      if(type=='headshot'){
+        this.croppedImageData.headshotbase64 = value;
+        this.croppedImageHeadShot = value;
+        this.headShotPicture = value;
+      }
+      if(type=='other-personal') {
+        this.croppedImageData.personalbase64 = value;
+        this.croppedPersonalPicture = value;
+        this.personalPicture = value;
+      }
+    });
+
+  }
+
+
 
 }

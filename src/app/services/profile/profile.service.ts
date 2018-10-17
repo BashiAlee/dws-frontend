@@ -84,6 +84,19 @@ export class ProfileService {
   }));
   }
 
+  uploadCroppedImage(file,fileName) {
+   
+    let formData = new FormData();
+    let headers = new Headers();
+    headers.append('Content-Type','multipart/form-data');
+    formData.append('file',file,fileName);
+    return this.http.post(this.staticUrl+'uploading',formData)
+    .pipe(map((response: any) => {
+
+     return response.json();
+  }));
+  }
+
   getDronesByID(id) {
     return this.http.get(this.apiUrl + 'getDroneById/'+id)
     .pipe(map((response: any) => {
@@ -200,4 +213,33 @@ export class ProfileService {
      return response.json();
     }));
   }
+
+  deleteDroneById(id) {
+    return this.http.delete(this.apiUrl + 'deleteDroneById/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  deleteEquipmentById(id) {
+    return this.http.delete(this.apiUrl + 'deleteEquipmentById/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  deletePortfolioVideosAndImages(id) {
+    return this.http.delete(this.apiUrl + 'deletePortfolioVideosAndImages/'+id)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  updatePortfolioVideosAndImages(data) {
+    return this.http.post(this.apiUrl + 'updatePortfolioVideosAndImages', data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+
 }

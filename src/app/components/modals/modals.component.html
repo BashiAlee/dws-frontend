@@ -5,10 +5,14 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body sucess">
+      <div class="modal-body sucess" *ngIf="page && id">
         <h3>Your Data Has Been Successfully Saved</h3>
         <p>Continue to the Next Step & Complete
             your Profile Application</p>
+      </div>
+
+      <div class="modal-body sucess" *ngIf="!page && !id">
+        <h3>Your Data is uploaded Successfully</h3>
       </div>
 
       <div class="round-logo">
@@ -17,7 +21,8 @@
       </div>
       <div class="footer-content">
           <button type="button" class="btn btn-default custom-modal-button success-btn" *ngIf="page && id" (click)="moveToNextRoute(page, id)">Next Step</button>
-          <a (click)="bsModalRef.hide()">Skip for now</a>
+          <a (click)="bsModalRef.hide()" *ngIf="page && id">Skip for now</a>
+          <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Ok</a>
         </div>
      
 </div>
@@ -67,3 +72,63 @@
       </div>
    
 </div>
+
+<div class="modal-inner makeCenter" *ngIf="type=='approved'">
+  <div class="modal-header">
+      <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body sucess">
+      <h3>Profile has been approved Successfully Saved</h3>
+
+    </div>
+
+    <div class="round-logo">
+
+      <img src="../../../assets/icons/Success.png" alt="success icon">
+    </div>
+    <div class="footer-content">
+
+        <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Ok</a>
+      </div>
+   
+</div>
+
+<div class="modal-inner makeCenter error-custom-modal" *ngIf="type=='blocked'">
+  <div class="modal-header">
+      <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body error">
+      <h3>Profile Successfully Blocked!</h3>
+    </div>
+
+    <div class="round-logo">
+
+      <img src="../../../assets/icons/heart.png" alt="success icon">
+    </div>
+    <div class="footer-content">
+      <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Ok</a>
+      </div>
+   
+</div>
+
+<div class="modal-inner makeCenter" *ngIf="type=='zoom'">
+
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{data.Title}}</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img [src]="data.Path" alt="" style="width: 100%;">
+        </div>
+
+ 
+     
+  </div>

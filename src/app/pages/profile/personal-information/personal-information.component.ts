@@ -1,6 +1,6 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute, ChildActivationStart } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../../../services/profile/profile.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -8,12 +8,16 @@ import { ModalsComponent } from '../../../components/modals/modals.component';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 
 
+import { Croppie } from 'croppie/croppie';
+
+import { CroppieDirective } from '../../../../angular-croppie-module/src/lib/croppie.directive';
+
 @Component({
   selector: 'app-personal-information',
   templateUrl: './personal-information.component.html',
   styleUrls: ['./personal-information.component.scss']
 })
-export class PersonalInformationComponent implements OnInit {
+export class PersonalInformationComponent implements OnInit, AfterViewInit {
   personalInformation: FormGroup;
   bsModalRef: BsModalRef;
   countriesList: any;
@@ -21,16 +25,21 @@ export class PersonalInformationComponent implements OnInit {
   mailingRegionList: any;
   personalData: any;
   imageFile: any;
+  imageChangedEvent: any;
   id: any;
   selectedSuffix;
   profileImage :any;
+  displayPicture: any;
+  croppedImage: any;
   suffix = [
       { name: 'Jr.' },
       { name: 'Sr.' }
   ]
-
+  loading: any;
+  messages: any = {};
+  croppedImageData: any = {};
   config = {
-    class: "custom-modal modal-dialog-centered modal-lg successModal"
+    class: "custom-modal modal-dialog-centered modal-md successModal"
   };
   isAdmin: any;
   constructor(private formBuilder: FormBuilder, private router: Router,
@@ -108,7 +117,7 @@ export class PersonalInformationComponent implements OnInit {
               this.getStatesByCode('mailing',this.personalData.MailingCountry,'onload')
             }
             
-            this.profileImage = this.personalData.Users.ProfileImage;
+            this.displayPicture = this.personalData.Users.ProfileImage;
             this.personalInformation.patchValue(Object.assign({}, this.personalData));
             // this.personalInformation.patchValue({
             //    UserId: this.authService.getCurrentUser().ID,
@@ -202,7 +211,7 @@ export class PersonalInformationComponent implements OnInit {
 
   save() {
     // console.log(this.personalInformation.value)
-
+    this.loading = true;
    
     // delete this.personalInformation.value.Users.MemberId
     this.personalInformation.value.PrimaryPhone = this.personalInformation.value.PrimaryPhone.toString();
@@ -210,6 +219,7 @@ export class PersonalInformationComponent implements OnInit {
       this.profileSevice.uploadProfilePicture(this.imageFile)
       .subscribe(data => {
         if(data.status) {
+          this.loading = false;
           const initialState = {
             type: 'success',
             page: 'business-information',
@@ -230,6 +240,7 @@ export class PersonalInformationComponent implements OnInit {
               }
               this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
               this.bsModalRef.content.closeBtnName = 'Close';
+              this.loading = false;
             }
             
             
@@ -238,6 +249,7 @@ export class PersonalInformationComponent implements OnInit {
           const initialState = {
             type: 'error'
           }
+          this.loading = false;
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
         }
@@ -252,6 +264,7 @@ export class PersonalInformationComponent implements OnInit {
             page: 'business-information',
             id: this.id
           }
+          this.loading = false;
           localStorage.setItem('user', JSON.stringify(data.result))
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
@@ -259,6 +272,7 @@ export class PersonalInformationComponent implements OnInit {
           const initialState = {
             type: 'error'
           }
+          this.loading = false;
           this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           this.bsModalRef.content.closeBtnName = 'Close';
         }
@@ -340,5 +354,89 @@ export class PersonalInformationComponent implements OnInit {
         MailingZip: ''
       })
     }
+
+    uploadCoverImage(file) {
+      this.messages.coverImageChoosed = true;
+      var target = file.target || file.srcElement
+      this.croppedImageData.imageName = target.files[0].name;
+      this.imageChangedEvent = file;
+      if (file.target.files && file.target.files[0]) {
+        var reader = new FileReader();
+  
+        reader.onload = (event: any) => {
+          this.croppieDirective.croppie.bind({ url: event.target.result});
+          // this.displayPicture = event.target.result;
+         
+        }
+        reader.readAsDataURL(file.target.files[0]);
+      }
+    }
+    uploadCroppedImage(file) {
+      this.messages.uploadingImage = true;
+      this.messages.coverImageChoosed = false;
+      fetch(file.base64)
+      .then(res => res.blob())
+      .then(blob => {
+        var file1 = new File([blob], file.imageName);
+        this.profileSevice.uploadCroppedImage(file1, file.imageName)
+          .subscribe(data => {
+            if (data) {
+              if(data.status) {
+                this.personalInformation.controls.Users.patchValue({
+                  ProfileImage: data.result
+                  })
+              }
+              this.messages.uploadingImage = false;
+            }
+  
+          })
+      })
+  
+    }
+    
+    public croppieOptions: Croppie.CroppieOptions = {
+      boundary: { width: 250, height: 250 },
+      viewport: { width: 200, height: 200 },
+     
+      enableOrientation: true,
+      // enforceBoundary: true,
+      // showZoomer: true,
+      // enableResize: true,
+      // mouseWheelZoom: 'ctrl'
+    };
+    @ViewChild('croppie')
+    // public ccccc: any;
+    
+    
+    public croppieDirective: CroppieDirective;
+  
+  
+    public ngAfterViewInit() {
+      
+      // this.croppieComponent.croppie.bind({ url: 'assets/angular.png' });
+    }
+  
+    handleUpdate(data) {
+      
+      // console.log(this.croppieDirective.croppie.getResult());
+      var x = this.croppieDirective.croppie.result('canvas','original').then(function (src) {
+        return src;
+        
+    });
+  
+    this.deepdive(x);
+      
+    }
+
+    deepdive(e){  
+      e.then((value)=> {
+        this.croppedImageData.base64 = value;
+       this.croppedImage = value;
+       this.displayPicture = value;
+      });
+  
+    }
+    
+    
 
 }

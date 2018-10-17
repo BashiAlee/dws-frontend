@@ -44,24 +44,34 @@
           <div class="row justify-content-center" *ngIf="documentInformation.value.AviationLiabilityInsurance=='1'">
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your aviation liability insurance certificate </label>
-              <div class="pdf-uploader">
+              <div class="pdf-uploader" *ngIf="!loaders.liabilityCertificateLoader">
                 <img src="../../../../assets/images/pdf-file.svg" alt="">
+                <!-- <object id="obj" type="application/pdf">
+                  <a *ngIf="images.AviationLiabilityInsurancePdf"  [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
+                </object> -->
                 <a *ngIf="images.AviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
+                
                 <div class="image-upload">
                   <label for="file-input1">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </label>
   
-                  <input id="file-input1" type="file" (change)="uploadImage($event, 'liability-certificate')"/>
+                  <input id="file-input1" type="file" (change)="uploadImage($event, 'liability-certificate')" accept="application/pdf"/>
                 </div>
               </div>
-              <p class="aperu-mono mTop15 makeRed">file.pdf</p>
+
+              <div class="uploader" *ngIf="loaders.liabilityCertificateLoader">
+                <i class="fa fa-circle-o-notch fa-spin"></i>
+              </div>
+
+
+              <p class="aperu-mono mTop15 makeRed">{{documentInformation.value.AviationLiabilityInsurancePdfOrignalName}}</p>
             </div>
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <label for="insuranceCertificate" class="custom-input-label hide-overflow">Upload a PDF copy of your
                     aviation liability insurance certificate with Drone Workforce Solutions listed as an additional insured</label>
 
-              <div class="pdf-uploader">
+              <div class="pdf-uploader" *ngIf="!loaders.copyLiabilityCertificateLoader">
                 <img src="../../../../assets/images/pdf-file.svg" alt="">
                 <a *ngIf="images.CopyOfAviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.CopyOfAviationLiabilityInsurancePdf)">Download</a>
                 <div class="image-upload">
@@ -69,11 +79,14 @@
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </label>
   
-                  <input id="file-input2" type="file" (change)="uploadImage($event, 'copy-liability-certificate')" />
+                  <input id="file-input2" type="file" (change)="uploadImage($event, 'copy-liability-certificate')" accept="application/pdf" />
                 </div>
   
               </div>
-              <p class="aperu-mono mTop15 makeRed">file.pdf</p>
+              <div class="uploader" *ngIf="loaders.copyLiabilityCertificateLoader">
+                <i class="fa fa-circle-o-notch fa-spin"></i>
+              </div>
+              <p class="aperu-mono mTop15 makeRed">{{documentInformation.value.CopyOfAviationLiabilityInsurancePdfOrignalName}}</p>
             </div>
           </div>
             <div class="row">
@@ -107,11 +120,11 @@
                         <input id="file-input4" type="file"  accept="image/*" (change)="uploadImage($event, 'pilot-certificate')"/>
                       </div>
                     </div>
-                    <p class="aperu-mono mTop15 makeRed">file.png</p>
+                    <p class="aperu-mono mTop15 makeRed">{{documentInformation.value.PilotCertificateImageOrignalName}}</p>
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                       <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your most recent recurrent exam result (if applicable)</label>
-                    <div class="pdf-uploader">
+                    <div class="pdf-uploader"  *ngIf="!loaders.examLoader">
                       <img src="../../../../assets/images/pdf-file.svg" alt="">
                       <a *ngIf="images.RecurrentExamPdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.RecurrentExamPdf)">Download</a>
                       <div class="image-upload">
@@ -119,11 +132,15 @@
                           <i class="fa fa-pencil" aria-hidden="true"></i>
                         </label>
         
-                        <input id="file-input5" type="file" (change)="uploadImage($event, 'exam')" />
+                        <input id="file-input5" type="file" (change)="uploadImage($event, 'exam')" accept="application/pdf"/>
                       </div>
         
                     </div>
-                    <p class="aperu-mono mTop15 makeRed">file.pdf</p>
+                    <div class="uploader" *ngIf="loaders.examLoader">
+                      <i class="fa fa-circle-o-notch fa-spin"></i>
+                    </div>
+
+                    <p class="aperu-mono mTop15 makeRed"> {{documentInformation.value.RecurrentExamPdfOrignalName}}</p>
                   </div>
                 </div>
 
@@ -196,8 +213,11 @@
       <div class="goBack">
         <button>Previous Step</button>
       </div>
-      <div class="saveButton">
+      <div class="saveButton" *ngIf="!loading">
         <button (click)="updateDocuments()">Save</button>
+      </div>
+      <div class="saveButton disableDiv" *ngIf="loading">
+        <button ><i class="fa fa-circle-o-notch fa-spin"></i></button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>
@@ -211,7 +231,7 @@
     </div>-->
     <div class="modal-content vision-modal-content">
   
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
         <span aria-hidden="true" style="float: right; margin-right: 10px;">&times;</span>
       </button>
       <div class="modal-body vision-modal-body">
@@ -367,7 +387,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button (click)="modalRef.hide()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button (click)="bsModalRef.hide()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   
@@ -380,7 +400,7 @@
     </div>-->
     <div class="modal-content vision-modal-content">
   
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
         <span aria-hidden="true" style="float: right; margin-right: 10px;">&times;</span>
       </button>
       <div class="modal-body vision-modal-body">
@@ -479,7 +499,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button (click)="modalRef.hide()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button (click)="bsModalRef.hide()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   

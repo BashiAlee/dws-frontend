@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PilotService } from '../../services/admin/pilots/pilots.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ModalsComponent } from '../../components/modals/modals.component';
 
 declare var $: any;
 @Component({
@@ -10,9 +12,13 @@ declare var $: any;
 })
 export class ProfileComponent implements OnInit {
   id: any;
+  bsModalRef: BsModalRef;
   isAdmin: any;
-
-  constructor(private route: ActivatedRoute, private router: Router, private pilotService: PilotService) {
+  loaders: any = {};
+  config = {
+    class: "custom-modal modal-dialog-centered modal-md"
+  };
+  constructor(private route: ActivatedRoute, private router: Router, private pilotService: PilotService, private modalService: BsModalService) {
 
     if(this.router.url.split('/')[1] =='admin') {
       this.isAdmin = true;
@@ -39,22 +45,34 @@ export class ProfileComponent implements OnInit {
   }
 
   approveProfile() {
+    const initialState = {
+      type: 'approved'
+    }
+    this.loaders.approveProfile = true;
     this.pilotService.approveProfile(this.router.url.split('/')[3])
     .subscribe(
       data => {
         if(data.status) {
-          alert("Approved")
+          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          this.bsModalRef.content.closeBtnName = 'Close';
+          this.loaders.approveProfile = false;
         }
       }
     )
   }
 
   rejectProfile() {
+    const initialState = {
+      type: 'blocked'
+    }
+    this.loaders.rejectProfile = true;
     this.pilotService.rejectProfile(this.router.url.split('/')[3])
     .subscribe(
       data => {
         if(data.status) {
-          alert("Rejected")
+          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          this.bsModalRef.content.closeBtnName = 'Close';
+          this.loaders.rejectProfile = false;
         }
       }
     )

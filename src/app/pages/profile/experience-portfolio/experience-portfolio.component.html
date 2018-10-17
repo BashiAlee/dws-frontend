@@ -75,7 +75,7 @@
 
                 <div class="row justify-content-start">
                     
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <label for="passportImage" class="custom-input-label"> If DWS requires you to upload a copy of your passport, please do so here</label>
                       <div class="passportImage">
                         <img *ngIf="images.PassportImage" [src]="images.PassportImage" alt="">
@@ -94,7 +94,7 @@
                   <div class="row">
                       <h1 class="form-heading noPadding makeBlock mtop30 mBottom25">Headshot &amp; Personal Photo upload</h1>
                     <div class="col-md-3 col-sm-12 col-xs-12">
-                      <div class="displayPicture">
+                      <!-- <div class="displayPicture">
                         <img *ngIf="images.HeadshotImage" [src]="images.HeadshotImage" alt="">
                         <img *ngIf="!images.HeadshotImage" src="../../../../assets/images/avatar.png" alt="">
                         <div class="image-upload">
@@ -104,11 +104,34 @@
           
                           <input id="file-input2" type="file" (change)="uploadImage($event,'headshot')"/>
                         </div>
-                      </div>
+                      </div> -->
+                      <div class="displayPictureTop">
+                          <div class="displayPicture">
+                            <img *ngIf="messages.headshotImageChoosed" [src]="croppedImageHeadShot" class="croppedImageDiv" />
+                            <img *ngIf="headShotPicture && !messages.headshotImageChoosed" [src]="headShotPicture" alt="Display picture">
+                            <img *ngIf="!headShotPicture && !messages.headshotImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
+                            <div class="image-upload">
+                              <label for="file-input2">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </label>
+                              <input id="file-input2" (change)="uploadCoverImage($event, 'headshot')" type="file" accept="image/*" />
+                            </div>
+                          </div>
+                          <div class="display_pic-upload">
+                            <label for="pic" class="uploader" *ngIf="messages.uploadingHeadShotImage"><i class="fa fa-circle-o-notch fa-spin"></i>
+                            </label>
+                          </div>
+                          <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event,'headshot')" *ngIf="messages.headshotImageChoosed" />
+                          <button class="btn crop-btn" *ngIf="messages.headshotImageChoosed && !messages.uploadingHeadShotImage" (click)="uploadCroppedImage(croppedImageData, 'headshot')">Crop</button>
+                          <div>
+                
+                          </div>
+                
+                        </div>
                       <p class="aperu-medium mTop15">Head Shot</p>
                     </div>
                     <div class="col-md-3 col-sm-12 col-xs-12">
-                      <div class="displayPicture">
+                      <!-- <div class="displayPicture">
                         <img *ngIf="images.OtherPersonalImage" [src]="images.OtherPersonalImage" alt="">
                         <img *ngIf="!images.OtherPersonalImage" src="../../../../assets/images/avatar.png" alt="">
                         <div class="image-upload">
@@ -119,7 +142,30 @@
                           <input id="file-input3" type="file" (change)="uploadImage($event,'personal-pic')"/>
                         </div>
           
-                      </div>
+                      </div> -->
+                      <div class="displayPictureTop">
+                          <div class="displayPicture">
+                            <img *ngIf="messages.personalImageChoosed" [src]="croppedPersonalPicture" class="croppedImageDiv" />
+                            <img *ngIf="personalPicture && !messages.personalImageChoosed" [src]="personalPicture" alt="Display picture">
+                            <img *ngIf="!personalPicture && !messages.personalImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
+                            <div class="image-upload">
+                              <label for="file-input3">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </label>
+                              <input id="file-input3" (change)="uploadCoverImage($event, 'other-personal')" type="file" accept="image/*" />
+                            </div>
+                          </div>
+                          <div class="display_pic-upload">
+                            <label for="pic" class="uploader" *ngIf="messages.uploadingPersonalImage"><i class="fa fa-circle-o-notch fa-spin"></i>
+                            </label>
+                          </div>
+                          <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event,'other-personal')" *ngIf="messages.personalImageChoosed" />
+                          <button class="btn crop-btn" *ngIf="messages.personalImageChoosed && !messages.uploadingPersonalImage" (click)="uploadCroppedImage(croppedImageData, 'other-personal')">Crop</button>
+                          <div>
+                
+                          </div>
+                
+                        </div>
                       <p class="aperu-medium mTop15">Other Personal Picture</p>
                     </div>
                     <!-- <p class="errorMsg makeBlock mtop30">We Suggest you to Upload a Square Images</p> -->
@@ -250,7 +296,7 @@
                         </div>
               
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                         <button class="primary-dws-button aperu-regular pull-right" (click)="togglePhotos()">Add Photographs</button>
+                         <button class="primary-dws-button aperu-regular pull-right" (click)="togglePhotos()">Upload Your Photo</button>
                         </div>
                       </div>
                       <div class="add-drone-details" *ngIf="showAddPhoto" [formGroup]="addPhotos">
@@ -261,20 +307,20 @@
                                   <label for="title" class="custom-input-label">Title</label>
                                   <input type="text" class="form-control custom-input" aria-describedby="title"
                                     placeholder="Title" formControlName="Title">
-                                    <div *ngIf="submittedDrone && dronesForm.DroneTitle.errors" class="invalid-feedback">
-                                        <div *ngIf="dronesForm.DroneTitle.errors.required">Title is required</div>
+                                    <div *ngIf="submittedPhotos && photosForm.Title.errors" class="invalid-feedback">
+                                        <div *ngIf="photosForm.Title.errors.required">Title is required</div>
                                     </div>
                                 </div>
                               </div>
                     
-                              <div class="col-md-4 col-sm-6 col-xs-12">
+                              <div class="col-md-4 col-sm-6 col-xs-12" *ngIf="!updatePhotos">
                                 <div class="form-group">
-                                  <label for="serialnumber" class="custom-input-label">Video Link</label>
+                                  <label for="serialnumber" class="custom-input-label">Upload your Photo </label>
                                   <input type="file" class="form-control custom-input" id="serialnumber" aria-describedby="serialnumber"
                                     placeholder="Serial Number" (change)="uploadImage($event,'uploadImage')">
-                                    <div *ngIf="submittedDrone && dronesForm.SerialNumber.errors" class="invalid-feedback">
-                                        <div *ngIf="dronesForm.SerialNumber.errors.required">Serial Number is required</div>
-                                    </div>
+                                    <!-- <div *ngIf="submittedPhotos && photosForm.SerialNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="photosForm.SerialNumber.errors.required">Photo is required</div>
+                                    </div> -->
                                 </div>
                               </div>
                     
@@ -283,8 +329,8 @@
                                   <label for="Description" class="custom-input-label">Description</label>
                                   <input type="text" class="form-control custom-input" id="Description" aria-describedby="Description"
                                     placeholder="Description" formControlName="Description">
-                                    <div *ngIf="submittedDrone && dronesForm.Description.errors" class="invalid-feedback">
-                                        <div *ngIf="dronesForm.Description.errors.required">Description is required</div>
+                                    <div *ngIf="submittedPhotos && photosForm.Description.errors" class="invalid-feedback">
+                                        <div *ngIf="photosForm.Description.errors.required">Description is required</div>
                                     </div>
                                 </div>
                               </div>
@@ -293,8 +339,8 @@
                             <div class="row">
                               <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
                                   
-                                <button *ngIf="!updateDrone"class="button-secondary-dws" (click)="addPortfolioImageVideo('Image')">Add Photo</button>
-                                <button *ngIf="updateDrone"class="button-secondary-dws" (click)="updateDroneByID()">Update Photo</button>
+                                <button *ngIf="!updatePhotos"class="button-secondary-dws" (click)="addPortfolioImageVideo('Image')">Add Photo</button>
+                                <button *ngIf="updatePhotos"class="button-secondary-dws" (click)="updatePhotosByID()">Update Photo</button>
                               </div>
                             </div>
                             <div class="seperator"></div>
@@ -309,13 +355,13 @@
                           <div class="thumb-description"><p>{{image.Description}}</p></div>
                           <div class="action-buttons">
                             <div class="makePurple zoom inline-block">
-                                <i class="fa fa-search-plus" aria-hidden="true"></i>
+                                <i class="fa fa-search-plus" aria-hidden="true" (click)="zoomImage(image)"></i>
                             </div>
                             <div class="makeBlue editImage inline-block">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-pencil" aria-hidden="true" (click)="editRow(image,'photos')"></i>
                             </div>
                             <div class="makeRed deleteImags inline-block">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                <i class="fa fa-trash-o" aria-hidden="true" (click)="openModalWithClass(delete,image.ID)"></i>
                             </div>
                           </div>
 
@@ -337,7 +383,7 @@
                           </div>
                 
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                           <button class="primary-dws-button aperu-regular pull-right" (click)="toggleVideo()">Add Videos</button>
+                           <button class="primary-dws-button aperu-regular pull-right" (click)="toggleVideo()">Link Video</button>
                           </div>
                         </div>
                         <div class="add-drone-details" *ngIf="showAddVideo" [formGroup]="addVideo">
@@ -348,8 +394,8 @@
                                     <label for="title" class="custom-input-label">Title</label>
                                     <input type="text" class="form-control custom-input" aria-describedby="title"
                                       placeholder="Title" formControlName="Title">
-                                      <div *ngIf="submittedDrone && dronesForm.DroneTitle.errors" class="invalid-feedback">
-                                          <div *ngIf="dronesForm.DroneTitle.errors.required">Title is required</div>
+                                      <div *ngIf="submittedVideos && videosForm.Title.errors" class="invalid-feedback">
+                                          <div *ngIf="videosForm.Title.errors.required">Title is required</div>
                                       </div>
                                   </div>
                                 </div>
@@ -358,9 +404,9 @@
                                   <div class="form-group">
                                     <label for="serialnumber" class="custom-input-label">Video Link</label>
                                     <input type="text" class="form-control custom-input" id="serialnumber" aria-describedby="serialnumber"
-                                      placeholder="Serial Number" formControlName="Path">
-                                      <div *ngIf="submittedDrone && dronesForm.SerialNumber.errors" class="invalid-feedback">
-                                          <div *ngIf="dronesForm.SerialNumber.errors.required">Path is required</div>
+                                      placeholder="Video link" formControlName="Path">
+                                      <div *ngIf="submittedVideos && videosForm.Path.errors" class="invalid-feedback">
+                                          <div *ngIf="videosForm.Path.errors.required">Path is required</div>
                                       </div>
                                   </div>
                                 </div>
@@ -370,8 +416,8 @@
                                     <label for="Description" class="custom-input-label">Description</label>
                                     <input type="text" class="form-control custom-input" id="Description" aria-describedby="Description"
                                       placeholder="Description" formControlName="Description">
-                                      <div *ngIf="submittedDrone && dronesForm.Description.errors" class="invalid-feedback">
-                                          <div *ngIf="dronesForm.Description.errors.required">Description is required</div>
+                                      <div *ngIf="submittedVideos && videosForm.Description.errors" class="invalid-feedback">
+                                          <div *ngIf="videosForm.Description.errors.required">Description is required</div>
                                       </div>
                                   </div>
                                 </div>
@@ -380,8 +426,8 @@
                               <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
                                     
-                                  <button *ngIf="!updateDrone"class="button-secondary-dws" (click)="addPortfolioImageVideo('Video')">Add Video</button>
-                                  <button *ngIf="updateDrone"class="button-secondary-dws" (click)="updateDroneByID()">Update Video</button>
+                                  <button *ngIf="!updateVideos"class="button-secondary-dws" (click)="addPortfolioImageVideo('Video')">Add Video</button>
+                                  <button *ngIf="updateVideos"class="button-secondary-dws" (click)="updateVideoByID()">Update Video</button>
                                 </div>
                               </div>
                               <div class="seperator"></div>
@@ -392,19 +438,20 @@
                             <div class="thumb-img">
                              <div> 
                          
-                               <!-- <iframe [src]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)" style="width: 100%;" frameborder="0" allowfullscreen></iframe> -->
-                               <object style="width: 100%;" [data]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)">
-                               </object>
+                               <iframe [src]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)" style="width: 100%;" frameborder="0" allowfullscreen></iframe>
+                               
+                               <!-- <object style="width: 100%;" [data]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)">
+                               </object> -->
                               </div>
                             </div>
                             <div class="thumb-title makeBlue mTop15"><p>{{videos.Title}}</p></div>
                             <div class="thumb-description"><p>{{videos.Description}}</p></div>
                             <div class="action-buttons">
                               <div class="makeBlue editImage inline-block">
-                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                                  <i class="fa fa-pencil" aria-hidden="true" (click)="editRow(videos,'videos')"></i>
                               </div>
                               <div class="makeRed deleteImags inline-block">
-                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                  <i class="fa fa-trash-o" aria-hidden="true" (click)="openModalWithClass(delete,videos.ID)"></i>
                               </div>
                             </div>
   
@@ -432,10 +479,36 @@
       <div class="goBack">
         <button>Previous Step</button>
       </div>
-      <div class="saveButton">
+      <div class="saveButton" *ngIf="!loading">
         <button (click)="save()">Save</button>
+      </div>
+      <div class="saveButton disableDiv" *ngIf="loading">
+        <button ><i class="fa fa-circle-o-notch fa-spin"></i></button>
       </div>
       <p>Save your Personal Information and Continue to next Step.</p>
     </div>
   </div>
   
+
+  <ng-template #delete>
+    <div class="modal-header">
+      <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body delete makeCenter">
+      <h3>Are you Sure, You want to delete this entry?</h3>
+      <p>You will not be able to restore this back</p>
+    </div>
+  
+  
+    <div class="round-logo">
+  
+      <img src="../../../../assets/icons/warning.png" alt="success icon">
+    </div>
+    <div class="footer-content alignButton">
+        <button type="button" class="btn btn-default custom-modal-button yes-btn" (click)="deleteByID()">Yes</button>
+        <button type="button" class="btn btn-default custom-modal-button no-btn" (click)="bsModalRef.hide()">No</button>
+      </div>
+  </ng-template>

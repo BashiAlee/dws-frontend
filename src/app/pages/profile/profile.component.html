@@ -7,9 +7,12 @@
     </div>
 
     <div class="buttons makeCenter" *ngIf="isAdmin">
-        <a class="btn-approve" (click)="approveProfile()">Approve this profile</a>
-        <a class="btn-reject" (click)="rejectProfile()">Reject this profile</a>
+        <a class="btn-approve" *ngIf="!loaders.approveProfile" (click)="approveProfile()">Approve this profile</a>
+        <a class="btn-approve" *ngIf="loaders.approveProfile" ><i class="fa fa-circle-o-notch fa-spin"></i></a>
         <a class="btn-message">Send Message</a>
+        <a class="btn-reject" *ngIf="!loaders.rejectProfile"(click)="rejectProfile()">Block this profile</a>
+        <a  class="btn-reject" *ngIf="loaders.rejectProfile" ><i class="fa fa-circle-o-notch fa-spin"></i></a>
+     
     </div>
 
             <div class="custom-tabs mTop100" >

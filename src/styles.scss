@@ -66,6 +66,25 @@
   font-weight: normal;
   font-style: normal;
 }
+
+html,body,app-root,.alignItems{
+  // min-height: 100vh;
+  // height:100%;
+  // width: 100%;
+}
+
+div.mainContent{
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.alignItems {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 i {
   &:hover {
     cursor: pointer;
@@ -847,7 +866,7 @@ font-family: 'Apercu-Medium';
       font-family: 'Apercu-Regular';
     }
   }
-  .modal-body.error
+  .modal-body.error,.modal-body.delete
   {
     h3 {
 color: $error-modal;
@@ -916,6 +935,35 @@ font-family: 'Apercu-Medium';
       font-size: 16px;
       color: $modal-text-color;
     }
+    .yes-btn {
+      display: block;
+      margin: 0 auto;
+      border-radius: 33px;
+      background: $error-modal;
+      font-family: 'Apercu-Bold';
+      font-size: 18px;
+      color: $white;
+      width: 173px; 
+      height: 66px;
+      margin-bottom: 20px;
+    }
+    .no-btn {
+      display: block;
+      margin: 0 auto;
+      border-radius: 33px;
+      background: $save-button-bg;
+      font-family: 'Apercu-Bold';
+      font-size: 18px;
+      color: $white;
+      width: 173px; 
+      height: 66px;
+      margin-bottom: 20px;
+    }
+  }
+  .alignButton {
+    display: flex;
+    justify-content: center;
+    align-content: center;
   }
 
 }
@@ -971,4 +1019,25 @@ div.dataTables_length {
 .disableDiv {
     pointer-events: none !important;
 
+}
+
+.loaderBtn {
+  pointer-events: none !important;
+}
+
+.crop-btn {
+  background: $primary-color;
+  margin-top: 9px;
+  color:$white;
+  margin-bottom: 8px;
+
+}
+
+.uploader {
+  i {
+    margin-top: 9px;
+    margin-bottom: 8px;
+    color: $primary-color;
+    font-size: 24px;
+  }
 }

@@ -3,8 +3,8 @@
   <div class="alignItems" [class.collapseCss]="!isOpen">
     <div class="sidebar d-none d-md-block">
 
-        <app-sidebar *ngIf="!isAdmin"(toggleEvent)="checkSidebar($event)"></app-sidebar>
-        <app-sidebar-admin *ngIf="isAdmin"(toggleEvent)="checkSidebar($event)"></app-sidebar-admin>
+        <app-sidebar *ngIf="!isAdmin" (toggleEvent)="checkSidebar($event)"></app-sidebar>
+        <app-sidebar-admin *ngIf="isAdmin" (toggleEvent)="checkSidebar($event)"></app-sidebar-admin>
         
     </div>
     <div class="inner-header mainContent">       
