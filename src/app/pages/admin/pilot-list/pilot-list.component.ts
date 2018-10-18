@@ -15,6 +15,7 @@ export class PilotListComponent implements OnInit {
       pageLength: 10
     };
     this.getAllPilots();
+    this.getAllStates();
   }
 
   getAllPilots() {
@@ -29,6 +30,15 @@ export class PilotListComponent implements OnInit {
         }
       }
     );
+  }
+
+  getAllStates() {
+    this.pilotService.getAllStates()
+    .subscribe(
+      data => {
+        console.log("dd", data)
+      }
+    )
   }
 
 }

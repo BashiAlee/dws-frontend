@@ -36,4 +36,18 @@ export class PilotService {
      return response.json();
     }));
   }
+
+  getAllStates() {
+    return this.http.get(this.apiUrl + 'getAllStates')
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+
+  searchPilotList(data) {
+    return this.http.post(this.apiUrl + 'admin/searchPilot',data)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
 }

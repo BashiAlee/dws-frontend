@@ -56,18 +56,26 @@
   text-align: right;
 }
 .text-color-blue {
-  color: $secondary-button-color;
+    a {
+        color: $primary-color;
+    }
+
 }
 .custom-checkbox{
 .checkbox{
-   left: 20px;
+   left: 0;
    width: 25px;
    height: 25px;
    top: 5px;
-  &:after{
-    left: 3px;
-    top: -3px;
-  }
+   &:after {
+    left: 5px;
+    top: 0px;  
+    font-size: 16px; 
+    }
+ }
+
+ .container {
+    padding-left: 31px;
  }
 
 
