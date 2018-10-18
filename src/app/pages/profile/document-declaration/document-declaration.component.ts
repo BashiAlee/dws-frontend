@@ -390,6 +390,8 @@ export class DocumentDeclarationComponent implements OnInit {
     }
   }
 
-
+  goBack() {
+    this.router.navigate(['/user/profile/'+this.id+'/experience-portfolio']);
+  }
 
 }

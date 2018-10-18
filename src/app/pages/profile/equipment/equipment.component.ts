@@ -285,7 +285,9 @@ export class EquipmentComponent implements OnInit {
     }
   }
 
-  
+  goBack() {
+    this.router.navigate(['/user/profile/'+this.id+'/business-information']);
+  }
 
 
 }
