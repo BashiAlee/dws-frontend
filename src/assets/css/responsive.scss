@@ -46,8 +46,13 @@
     margin: 6px;
     display: block;
   }
-
+  div.command-center{
+    div.row{
+      display: block!important;
+    }
+  }
 }
+
 @media only screen and (max-width:900px){
     div.inner-header {
         nav.custom-navbar {
@@ -148,6 +153,18 @@
         margin-left: 15px;
         height: 65px;
    }
+    div.topContent p{
+      width: 100%;
+      padding-bottom: 0;
+    }
+    .command-center{
+       .inputs-field[_ngcontent-c5] {
+         .custom-primary-button{
+           width: 100%;
+           margin: 0!important;
+         }
+       }
+    }
 
 }
 @media only screen and (max-width:480px){
