@@ -156,8 +156,6 @@ div.command-center {
 .custom-tabs {
   margin-bottom: 28px;
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
   margin: 0 auto;
   margin-top: 0;
   ul {
@@ -204,6 +202,17 @@ div.command-center {
 @media only screen and (max-width: 940px){
   .inputs-container1{
     grid-template-columns: none;
+  }
+}
+@media only screen and (max-width:600px) {
+  .custom-tabs{
+    display: block;
+    ul{
+      height: auto;
+      li{
+        margin: 13px 25px 13px 13px;
+      }
+    }
   }
 }
 

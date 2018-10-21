@@ -8,13 +8,32 @@ import { PilotService } from '../../../services/admin/pilots/pilots.service';
 })
 export class PilotListComponent implements OnInit {
   dtOptions: any;
+
   constructor(private pilotService: PilotService) { }
   pilotList: any;
+  search = [
+    {
+      name: "City"
+    },
+    {
+      name: "State"
+    },
+    {
+      name: "Country"
+    },
+    {
+      name: "Zipcode"
+    },
+    {
+      name: "Jobs"
+    }
+  ]
   ngOnInit() {
     this.dtOptions = {
       pageLength: 10
     };
     this.getAllPilots();
+    this.getAllStates();
   }
 
   getAllPilots() {
@@ -29,6 +48,15 @@ export class PilotListComponent implements OnInit {
         }
       }
     );
+  }
+
+  getAllStates() {
+    this.pilotService.getAllStates()
+    .subscribe(
+      data => {
+        console.log("dd", data)
+      }
+    )
   }
 
 }

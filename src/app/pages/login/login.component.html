@@ -42,15 +42,15 @@
                            </div>
                          </div>
                          <div class="col-md-6 text-align-right text-color-blue">
-                            <a [routerLink]="['/send-email']">forgot password?</a>
+                            <a [routerLink]="['/send-email']">Forgot Password?</a>
 
                          </div>
-                          <div class="form-group wow fadeInDown">
-                              <p *ngIf="error" class="errorMessage">{{error}}</p>
-                              <p *ngIf="success" class="successMessage">{{success}}</p>
-                          </div>
+               
                        </div>
-
+                       <div class="form-group wow fadeInDown">
+                        <p *ngIf="error" class="errorMessage">{{error}}</p>
+                        <p *ngIf="success" class="successMessage">{{success}}</p>
+                    </div>
 
                        <button type="button" id="submitLoginForm" *ngIf="!loading"class="btn btn-sign-up mt20 wow fadeInDown" (click)="login()">SIGN IN</button>
                        <a class="btn btn-sign-up mt20 wow fadeInDown loaderBtn"  *ngIf="loading"><i class="fa fa-circle-o-notch fa-spin"></i></a>

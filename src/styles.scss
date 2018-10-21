@@ -866,6 +866,19 @@ font-family: 'Apercu-Medium';
       font-family: 'Apercu-Regular';
     }
   }
+  .maintenance-message {
+    h3 {
+      color: $primary-color;
+      font-size: 28px;
+      font-family: 'Apercu-Medium';
+          }
+          p {
+            color: $modal-text-color;
+            font-size: 24px;
+            font-family: 'Apercu-Regular';
+          }
+
+  }
   .modal-body.error,.modal-body.delete
   {
     h3 {
@@ -926,6 +939,18 @@ font-family: 'Apercu-Medium';
       font-size: 18px;
       color: $white;
       width: 173px;
+      height: 66px;
+      margin-bottom: 20px;
+    }
+    .custom-modal-button.maintenance-btn{
+      display: block;
+      margin: 0 auto;
+      border-radius: 33px;
+      background: $primary-color;
+      font-family: 'Apercu-Bold';
+      font-size: 18px;
+      color: $white;
+      width: 260px;
       height: 66px;
       margin-bottom: 20px;
     }
@@ -1049,3 +1074,10 @@ div.dataTables_length {
 button:disabled {
   cursor: no-drop;
 }
+
+
+.disabledAnchor {
+  pointer-events: none !important;
+  opacity: 0.5;
+}
+

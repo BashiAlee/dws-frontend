@@ -15,12 +15,12 @@ export class SignupComponent implements OnInit {
   loading: any;
   constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private route: ActivatedRoute, private router: Router) {
 
-    console.log(this.router.url.split('/'),"sdfsdf")
+  
     if(this.router.url.split('/')[1]=='signuppilot') {
-      this.type = 'Pilot'
+      this.type = 'pilot'
     }
     if(this.router.url.split('/')[1]=='signupcustomer') {
-      this.type = 'Customer'
+      this.type = 'customer'
     }
    }
   ngOnInit() {

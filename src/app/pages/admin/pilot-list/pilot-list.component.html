@@ -21,7 +21,7 @@
                <div class="form-group">
                    <label for="state" class="custom-input-label makeBlack">Search Pilot by</label>
                    <ng-select [searchable]="false">
-                         <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
+                         <ng-option *ngFor="let se of search" >{{se.name}}</ng-option>
                      </ng-select>
                      <!-- <div *ngIf="form.m1State.invalid && (form.m1State.dirty || form.m1State.touched)" class="invalid-feedback">
                        <div *ngIf="form.m1State.errors.required">State is required</div>
@@ -93,7 +93,7 @@
                   <div>{{list.State.Name}}</div>
                   <div>{{list.PhysicallCity}}</div>
                   <!-- <div>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</div> -->
-                  <div class="action"><a [routerLink]="['/admin/profile',list.UserId]" class="detail-btn">Details</a></div>
+                  <div class="action"><a [routerLink]="['/admin/profile',list.UserId]" class="detail-btn" [class.disabledAnchor]="list.Suffix=='nil'">Details</a></div>
                </div>
                </div>
              </div>

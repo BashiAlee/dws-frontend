@@ -292,10 +292,10 @@ export class ExperiencePortfolioComponent implements OnInit {
       );
     }
     if(type =='Image') {
+      console.log("FFFF", this.addPhotos.value)
       this.submittedPhotos = true;
-      if (this.addPhotos.invalid) {
-        return;
-      }
+ 
+      console.log("DDDDDD")
       this.profileService.uploadProfilePicture(this.imageFiles.uploadPorfolioImage)
       .subscribe(
         data => {
@@ -307,6 +307,9 @@ export class ExperiencePortfolioComponent implements OnInit {
               Path: data.result,
               Type: 'Image'
             });
+            if (this.addPhotos.invalid) {
+              return;
+            }
             this.profileService.addProfilioImagesVideos(this.addPhotos.value)
             .subscribe(
               data => {
