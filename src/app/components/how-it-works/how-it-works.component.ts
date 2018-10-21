@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'how-it-works',
@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./how-it-works.component.scss']
 })
 export class HowItWorksComponent implements OnInit {
-
-  constructor() { }
+  @Input() type: string;
+  pageType: any;
+  constructor() {
+   }
 
   ngOnInit() {
+   this.pageType =  this.type;
   }
 
 }

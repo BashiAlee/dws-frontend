@@ -5,7 +5,7 @@
               <div class="col-md-12">
                  <div class="form-sign-up">
                     <h2 class="wow fadeInDown">Sign Up</h2>
-                    <h4 class="wow fadeInDown">Begin as a DWS customer, Create your account.</h4>
+                    <h4 class="wow fadeInDown">Begin as a DWS {{type}}, Create your account.</h4>
                     <br>
                     <hr>
                     <br>
@@ -67,7 +67,7 @@
                             <div *ngIf="form.Email.errors.email">Email must be a valid email address</div>
                         </div>
                        </div>
-                       <div class="form-group wow fadeInDown">
+                       <div class="form-group wow fadeInDown" *ngIf="this.type != 'pilot'">
                           <label for="email">Company *</label>
                           <input type="text" class="form-control"  id="companyName" placeholder="Company Name">
                        </div>
@@ -96,4 +96,4 @@
         <!-- container -->
      </div>
 
-     <how-it-works></how-it-works>
+     <how-it-works [type]='type'></how-it-works>

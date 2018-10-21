@@ -135,6 +135,7 @@ export class ExperiencePortfolioComponent implements OnInit {
   imageChangedPersonalPicture: any;
   croppedImageHeadShot: any;
   croppedPersonalPicture: any;
+  loaders: any = {};
   constructor(private formBuilder: FormBuilder, private profileService: ProfileService, 
     private route: ActivatedRoute, private sanitize: DomSanitizer, 
     private modalService: BsModalService,
@@ -216,6 +217,8 @@ export class ExperiencePortfolioComponent implements OnInit {
   get photosForm() { return this.addPhotos.controls; }
 
   getPortfolioImagesVideosByID(id) {
+    this.loaders.VideosLoader = true;
+    this.loaders.PhotosLoader = true;
     this.imagesList = [];
     this.videosList = [];
     this.profileService.getPortfolioVideosImagesByID(id)
@@ -227,16 +230,21 @@ export class ExperiencePortfolioComponent implements OnInit {
             var videoClient = value.Path.search("you");
             if(videoClient>-1) {
               value.Path = this.getYouTubeId(value.Path);
+              this.loaders.VideosLoader = false;
             } else {
               value.Path =  this.GetVimeoIDbyUrl(value.Path);
+              this.loaders.VideosLoader = false;
             }  
              this.videosList.push(value)
           }
           if(value.Type!="" && value.Type=="Image"){
              this.imagesList.push(value)
+             this.loaders.PhotosLoader = false;
           }
         });
        } else {
+        this.loaders.VideosLoader = false;
+        this.loaders.PhotosLoader = false;
          this.videosList = [];
          this.imagesList = [];
        }
@@ -265,7 +273,9 @@ export class ExperiencePortfolioComponent implements OnInit {
   addPortfolioImageVideo(type) {
     this.submittedVideos = true;
     if(type =='Video') {
+      this.loaders.addVideoLoader = true;
       if (this.addVideo.invalid) {
+        this.loaders.addVideoLoader = false;
         return;
       }
       this.addVideo.patchValue({
@@ -286,16 +296,19 @@ export class ExperiencePortfolioComponent implements OnInit {
                   Path: '',
                   Type: ''
                 });
+                this.loaders.addVideoLoader = false;
          
+          } else {
+            this.loaders.addVideoLoader = false;
           }
         }
       );
     }
     if(type =='Image') {
+      this.loaders.addPhotoLoader = true;
       console.log("FFFF", this.addPhotos.value)
       this.submittedPhotos = true;
  
-      console.log("DDDDDD")
       this.profileService.uploadProfilePicture(this.imageFiles.uploadPorfolioImage)
       .subscribe(
         data => {
@@ -308,7 +321,9 @@ export class ExperiencePortfolioComponent implements OnInit {
               Type: 'Image'
             });
             if (this.addPhotos.invalid) {
+              this.loaders.addPhotoLoader = false;
               return;
+              
             }
             this.profileService.addProfilioImagesVideos(this.addPhotos.value)
             .subscribe(
@@ -325,6 +340,9 @@ export class ExperiencePortfolioComponent implements OnInit {
                       Description: '',
                       Title: ''
                     });
+                    this.loaders.addPhotoLoader = false;
+                } else {
+                  this.loaders.addPhotoLoader = false;
                 }
               }
             );
@@ -587,6 +605,7 @@ export class ExperiencePortfolioComponent implements OnInit {
     
   }
   updatePhotosByID() {
+    this.loaders.addPhotoLoader = true;
     var data = Object.assign({}, this.addPhotos.value)
     this.profileService.updatePortfolioVideosAndImages(data)
     .subscribe(
@@ -598,11 +617,15 @@ export class ExperiencePortfolioComponent implements OnInit {
             Description: '',
             Title: ''
           });
+          this.loaders.addPhotoLoader = false;
+        } else {
+          this.loaders.addPhotoLoader = false;
         }
       }
     )
   }
   updateVideoByID() {
+    this.loaders.addVideoLoader = true;
     var data = Object.assign({}, this.addVideo.value)
     this.profileService.updatePortfolioVideosAndImages(data)
     .subscribe(
@@ -614,6 +637,9 @@ export class ExperiencePortfolioComponent implements OnInit {
             Description: '',
             Title: ''
           });
+          this.loaders.addVideoLoader = false;
+        } else {
+          this.loaders.addVideoLoader = false;
         }
       }
     )
