@@ -57,6 +57,7 @@ div.command-center {
   padding:5px 21px;
   grid-gap: 10px;
   border: 2px solid $modal-border;
+  height: 600px;
 
 
 
@@ -74,7 +75,7 @@ div.command-center {
   }
   .table-heading-row{
     padding-right:37px;
-    &:nth-child(last){
+    &>:last-child{
       text-align: center;
     }
   }
@@ -134,7 +135,7 @@ div.command-center {
   padding: 7px 24px;
 }
 .selector-input{
-  width: 40px;
+  width: 55px;
   height: 31px;
   border-radius: 20px;
   border: none;
@@ -152,6 +153,8 @@ div.command-center {
  margin-left: 0;
   height: 56px;
 }
+
+
 @media only screen and (max-width: 940px){
   .inputs-container1{
     grid-template-columns: none;

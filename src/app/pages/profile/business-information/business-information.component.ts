@@ -404,6 +404,9 @@ export class BusinessInformationComponent implements OnInit {
     }
     
     
+    goBack() {
+      this.router.navigate(['/user/profile/'+this.id+'/personal-information']);
+    }
   
 
 }

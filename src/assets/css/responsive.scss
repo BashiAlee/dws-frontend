@@ -4,7 +4,9 @@
             grid-template-columns: 50% 50%;
         }
     }
-
+  .profile-buttons{
+    margin: 20px;
+  }
   }
   @media only screen and (max-width: 1500px) {
     div.custom-tabs {
@@ -43,7 +45,7 @@
 
     }
   .profile-buttons{
-    margin: 6px;
+    margin: 15px 90px;
     display: block;
   }
 
@@ -216,6 +218,6 @@
 @media screen and (max-width: 330px){
   .profile-buttons{
     display: block;
-    margin: 15px 30px;
+    margin: 15px 80px;
   }
 }

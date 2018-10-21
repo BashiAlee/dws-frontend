@@ -5,6 +5,15 @@
                <h1>Pilots</h1>
                <p>See where all of the DWS registered drones are..</p>
        </div>
+      <div class="custom-tabs" >
+        <!--<button  class="BackBtn" (click)="moveBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>-->
+        <ul>
+          <li ><a  [routerLink]="['personal-information']" [routerLinkActive]="['active-link']">Personal Information</a></li>
+          <li ><a [routerLink]="['business-information']"  [routerLinkActive]="['active-link']">Business Information</a></li>
+        </ul>
+        <!--<button class="ForwardBtn"  (click)="moveForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>-->
+      </div>
+
 
        <div class="command-center">
          <div class="row inputs-container1">
