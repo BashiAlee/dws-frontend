@@ -16,7 +16,7 @@
     </div>
 
 
-            <div class="custom-tabs mTop100" >
+            <div class="custom-tabs mTop100" [class.disableDiv]="old">
                     <button  class="BackBtn" (click)="moveBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
                     <ul>
                       <li ><a  [routerLink]="['personal-information']" [routerLinkActive]="['active-link']">Personal Information</a></li>
@@ -28,7 +28,7 @@
                     <button class="ForwardBtn"  (click)="moveForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                   </div>
 
-              <div class="col-md-12 wow fadeInDown">
+              <div class="col-md-12 wow fadeInDown" [class.disableDiv]="old">
                   <router-outlet></router-outlet>
               </div>
 

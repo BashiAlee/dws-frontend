@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PilotService } from '../../services/admin/pilots/pilots.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ModalsComponent } from '../../components/modals/modals.component';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 declare var $: any;
 @Component({
@@ -15,18 +16,29 @@ export class ProfileComponent implements OnInit {
   bsModalRef: BsModalRef;
   isAdmin: any;
   loaders: any = {};
+  old: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
-  constructor(private route: ActivatedRoute, private router: Router, private pilotService: PilotService, private modalService: BsModalService) {
+  constructor(private route: ActivatedRoute, private router: Router, private pilotService: PilotService, private modalService: BsModalService, private authService: AuthenticationService) {
+    
 
     if(this.router.url.split('/')[1] =='admin') {
       this.isAdmin = true;
     }else {
       this.isAdmin = false;
+      this.old = this.authService.getCurrentUser().Old;
+      if(this.old) {
+
+        const initialState = {
+          type: 'old-user',
+        }
+        this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+        this.bsModalRef.content.closeBtnName = 'Close';
+        return;
+    }
     }
 
-    console.log("DD", this.isAdmin)
    }
   
   ngOnInit() {
