@@ -153,7 +153,53 @@ div.command-center {
  margin-left: 0;
   height: 56px;
 }
+.custom-tabs {
+  margin-bottom: 28px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin: 0 auto;
+  margin-top: 0;
+  ul {
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    text-align: center;
+    height: 46px;
+    padding-right: 25px;
 
+    flex: 0 0 auto;
+    margin: 0 auto;
+    margin-bottom: 39px;
+    // margin-bottom: 23px;
+
+    li {
+      display: inline-block;
+      // margin: 15px;
+      // margin-top: 12px;
+      // margin: 8px;
+      margin: 13px 17px 0px 0px;
+
+      a {
+        border: 1px solid $p-color;
+        // background-color: rgb(41, 171, 226);
+        color: $p-color;
+        // padding: 12px 20px 12px 20px;
+        padding: 12px 29px 12px 29px;
+
+        border-radius: 21px;
+        background: $white;
+        font-size: 16px;
+        font-family: 'Apercu-Medium';
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+}
 
 @media only screen and (max-width: 940px){
   .inputs-container1{
