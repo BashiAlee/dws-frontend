@@ -5,14 +5,23 @@
                <h1>Pilots</h1>
                <p>See where all of the DWS registered drones are..</p>
        </div>
+      <div class="custom-tabs" >
+        <!--<button  class="BackBtn" (click)="moveBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>-->
+        <ul>
+          <li ><a  class="active-link" [routerLink]="['personal-information']" [routerLinkActive]="['active-link']" >Personal Information</a></li>
+          <li ><a [routerLink]="['business-information']"  [routerLinkActive]="['active-link']">Business Information</a></li>
+        </ul>
+        <!--<button class="ForwardBtn"  (click)="moveForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>-->
+      </div>
+
 
        <div class="command-center">
-         <div class="row">
-           <div class="col-md-4">
+         <div class="row inputs-container1">
+           <div class="div-pilot-select">
                <div class="form-group">
                    <label for="state" class="custom-input-label makeBlack">Search Pilot by</label>
                    <ng-select [searchable]="false">
-                         <ng-option *ngFor="let suff of suffix" >{{suff.name}}</ng-option>
+                         <ng-option *ngFor="let se of search" >{{se.name}}</ng-option>
                      </ng-select>
                      <!-- <div *ngIf="form.m1State.invalid && (form.m1State.dirty || form.m1State.touched)" class="invalid-feedback">
                        <div *ngIf="form.m1State.errors.required">State is required</div>
@@ -20,15 +29,15 @@
                  </div>
 
            </div>
-           <div class="col-md-4">
+           <div class="input-city-div">
 
                <div class="form-group">
-                   <input type="text" class="form-control custom-input alignToBottom" id="city" aria-describedby="city"
+                   <input type="text" class="form-control custom-inputm input-city" id="city" aria-describedby="city"
                      placeholder="City Name">
                  </div>
            </div>
-           <div class="col-md-4">
-             <button class="custom-primary-button">Filter</button>
+           <div class="filter-button-div">
+             <button class="custom-primary-button filter-btn">Filter</button>
            </div>
          </div>
 
@@ -84,7 +93,7 @@
                   <div>{{list.State.Name}}</div>
                   <div>{{list.PhysicallCity}}</div>
                   <!-- <div>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</div> -->
-                  <div class="action"><a [routerLink]="['/admin/profile',list.UserId]" class="detail-btn">Details</a></div>
+                  <div class="action"><a [routerLink]="['/admin/profile',list.UserId]" class="detail-btn" [class.disabledAnchor]="list.Suffix=='nil'">Details</a></div>
                </div>
                </div>
              </div>
@@ -92,7 +101,18 @@
              <div class="entries-selector">
                <p class="show-entries-p">Show entries per page</p>
                <div class="selector-input-container">
-                 <select class="selector-input" type="number" value="10" min="0"></select>
+                 <select class="selector-input" type="number">
+                   <option>1</option>
+                   <option>2</option>
+                   <option>3</option>
+                   <option>4</option>
+                   <option>5</option>
+                   <option>6</option>
+                   <option>7</option>
+                   <option>8</option>
+                   <option>9</option>
+                   <option selected>10</option>
+                 </select>
                </div>
              </div>
            </div>

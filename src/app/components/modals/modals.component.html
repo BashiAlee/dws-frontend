@@ -92,7 +92,7 @@
     </div>
     <div class="footer-content">
 
-        <a (click)="bsModalRef.hide()" *ngIf="!page && !id">back to homepage</a>
+        <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Back to Home Page</a>
       </div>
 
 </div>
@@ -131,8 +131,8 @@
         </div>
 
 
- 
-        
+
+
   </div>
   <div class="modal-inner makeCenter" *ngIf="type=='zoom-admin'">
 
@@ -149,6 +149,30 @@
 
 </div>
 
+<div class="modal-inner makeCenter" *ngIf="type=='old-user'">
+  <div class="modal-header">
+      <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body maintenance-message">
+      <h3>Scheduled Maintenance Notice!</h3>
+      <p>DWS System is Undergoing a Scheduled Maintenance, Check back in within a day or two.</p>
+    </div>
+
+
+    <div class="round-logo">
+
+      <img src="../../../assets/icons/maintenance.png" alt="success icon">
+    </div>
+    <div class="footer-content">
+        <button type="button" class="btn btn-default custom-modal-button maintenance-btn" (click)="bsModalRef.hide()">Got it</button>
+
+
+      </div>
+
+</div>
 
 
 

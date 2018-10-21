@@ -23,7 +23,7 @@ const routes: Routes = [
     path: '', 
     component: BlankLayoutComponent,
     children: [
-      { path: '', redirectTo: 'logincustomer',pathMatch:'full' },
+      { path: '', redirectTo: 'loginpilot',pathMatch:'full' },
       { path: 'logincustomer', component: LoginComponent },
       { path: 'loginpilot', component: LoginComponent },
       { path: 'signupcustomer', component: SignupComponent },

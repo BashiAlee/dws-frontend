@@ -30,6 +30,11 @@ export class ModalsComponent implements OnInit {
     this.router.navigate(['/user/profile/+'+id+'/'+pageName]);
     this.bsModalRef.hide();
   }
+
+  movetoSignup() {
+    this.router.navigate(['/signuppilot']);
+    this.bsModalRef.hide();
+  }
   closeModal() {
     // BsModalRef.hide();
   }

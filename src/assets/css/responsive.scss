@@ -4,7 +4,9 @@
             grid-template-columns: 50% 50%;
         }
     }
-
+  .profile-buttons{
+    margin: 20px;
+  }
   }
   @media only screen and (max-width: 1500px) {
     div.custom-tabs {
@@ -43,7 +45,7 @@
 
     }
   .profile-buttons{
-    margin: 6px;
+    margin: 15px 90px;
     display: block;
   }
   div.command-center{
@@ -52,6 +54,21 @@
     }
   }
 }
+
+@media only screen and (max-width: 940px){
+  div.command-center  {
+    div.inputs-container1{
+      grid-template-columns: none;
+    }
+    div.filter-button-div{
+      .filter-btn{
+        width: 100%;
+      }
+    }
+  }
+
+}
+
 
 @media only screen and (max-width:900px){
     div.inner-header {
@@ -68,6 +85,8 @@
     margin: 15px 100px;
   }
 }
+
+
   @media only screen and (max-width:768px){
 
     div.call-to-action  {
@@ -83,8 +102,13 @@
         }
 
         p {
-            width: 100%;
+            width: 100% !important;
         }
+    }
+    .topContent{
+      p{
+        width: 100% !important;
+      }
     }
 
     div.notification {
@@ -220,11 +244,21 @@
       text-align: center;
     }
   }
+
+  .profile-buttons{
+    display: block;
+    margin: 15px 55px;
+    padding: 15px !important;
+  }
 }
 
 @media screen and (max-width: 330px){
-  .profile-buttons{
-    display: block;
-    margin: 15px 30px;
+  div.buttons
+  {
+    a.profile-buttons{
+      display: block;
+      padding:10px !important;
+      margin: 15px 43px;
+    }
   }
 }

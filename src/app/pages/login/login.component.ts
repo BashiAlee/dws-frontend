@@ -4,6 +4,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ModalsComponent } from '../../components/modals/modals.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,11 +14,17 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent{
   success: any;
+  bsModalRef: BsModalRef;
   error: any;
   loginForm: FormGroup;
   loading: any;
   rememberMe: any;
-  constructor(private formBuilder: FormBuilder, private auth: AuthenticationService, private router: Router) {
+  config = {
+    class: "custom-modal modal-dialog-centered modal-md successModal"
+  };
+  constructor(private formBuilder: FormBuilder, 
+    private modalService: BsModalService,
+    private auth: AuthenticationService, private router: Router) {
     // localStorage.removeItem('user')
   }
   user: any;
@@ -38,11 +47,6 @@ export class LoginComponent{
   get form() {return this.loginForm.controls}
 
   login() {
-    if(this.rememberMe) {
-      localStorage.setItem('rememberMe', JSON.stringify(this.loginForm.value))
-    } else {
-      localStorage.removeItem('rememberMe')
-    }
     this.loading = true;
     this.success = '';
     this.error = '';
@@ -51,6 +55,11 @@ export class LoginComponent{
       data => {
   
         if(data.status) {
+          if(this.rememberMe) {
+            localStorage.setItem('rememberMe', JSON.stringify(this.loginForm.value))
+          } else {
+            localStorage.removeItem('rememberMe')
+          }
           this.loading = false;
           this.success = data.message;
           this.user = data.result;
@@ -58,6 +67,9 @@ export class LoginComponent{
           localStorage.setItem('user',JSON.stringify(this.user))
 
           this.router.navigate(['/user/profile/'+this.user.ID]);
+
+
+
         } else if(!data.status) {
           this.loading = false;
           this.error = data.message;
