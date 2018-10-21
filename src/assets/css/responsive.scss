@@ -48,8 +48,28 @@
     margin: 15px 90px;
     display: block;
   }
+  div.command-center{
+    div.row{
+      display: block!important;
+    }
+  }
+}
+
+@media only screen and (max-width: 940px){
+  div.command-center  {
+    div.inputs-container1{
+      grid-template-columns: none;
+    }
+    div.filter-button-div{
+      .filter-btn{
+        width: 100%;
+      }
+    }
+  }
 
 }
+
+
 @media only screen and (max-width:900px){
     div.inner-header {
         nav.custom-navbar {
@@ -63,12 +83,6 @@
   .profile-buttons{
     display: block;
     margin: 15px 100px;
-  }
-}
-
-@media only screen and (max-width: 860px){
-  .inputs-container1{
-    grid-template-columns: none;
   }
 }
 
@@ -88,8 +102,13 @@
         }
 
         p {
-            width: 100%;
+            width: 100% !important;
         }
+    }
+    .topContent{
+      p{
+        width: 100% !important;
+      }
     }
 
     div.notification {
@@ -158,6 +177,18 @@
         margin-left: 15px;
         height: 65px;
    }
+    div.topContent p{
+      width: 100%;
+      padding-bottom: 0;
+    }
+    .command-center{
+       .inputs-field[_ngcontent-c5] {
+         .custom-primary-button{
+           width: 100%;
+           margin: 0!important;
+         }
+       }
+    }
 
 }
 @media only screen and (max-width:480px){
@@ -213,11 +244,27 @@
       text-align: center;
     }
   }
+
+  .profile-buttons{
+    display: block;
+    margin: 15px 55px;
+    padding: 15px !important;
+  }
+  .main-div{
+    padding: 30px!important;
+  }
 }
 
 @media screen and (max-width: 330px){
-  .profile-buttons{
-    display: block;
-    margin: 15px 80px;
+  div.buttons
+  {
+    a.profile-buttons{
+      display: block;
+      padding:10px !important;
+      margin: 15px 43px;
+    }
+  }
+  .login-form .main-div{
+    padding: 20px!important;
   }
 }

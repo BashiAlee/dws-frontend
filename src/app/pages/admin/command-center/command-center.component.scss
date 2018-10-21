@@ -1,0 +1,27 @@
+div.topContent p{
+  width: 100%;
+}
+.makeBgWhite{
+  padding: 20px 30px 50px 30px;
+}
+.command-center{
+  .row{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 2em;
+    margin: 40px 0;
+  }
+  .inputs-field{
+     max-width: 100%;
+    align-self: end;
+     .alignToBottom{
+       position: static;
+     }
+    .custom-primary-button{
+      margin: 18px 0;
+      position: static;
+      height: 54px;
+    }
+   }
+}
+
