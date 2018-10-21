@@ -250,6 +250,9 @@
     margin: 15px 55px;
     padding: 15px !important;
   }
+  .main-div{
+    padding: 30px!important;
+  }
 }
 
 @media screen and (max-width: 330px){
@@ -260,5 +263,8 @@
       padding:10px !important;
       margin: 15px 43px;
     }
+  }
+  .login-form .main-div{
+    padding: 20px!important;
   }
 }
