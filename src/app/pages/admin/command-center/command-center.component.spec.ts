@@ -10,7 +10,7 @@ describe('CommandCenterComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CommandCenterComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

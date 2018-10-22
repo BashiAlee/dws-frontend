@@ -66,6 +66,8 @@
     margin-top: -3px;
     margin-right: 30px;
 }
+
+
 .btn-sub{
     background: #29ABE2;
     border: 1px solid #29ABE2;
@@ -101,6 +103,16 @@
 }
 .btn-hire:hover{
     background: #43B5E7 !important;
+}
+
+div.works-customer {
+    .btn-step {
+        background: #FFF48A !important;
+    }
+
+    h3 {
+        color: #ED3E24 !important;
+    }
 }
 @media screen and (max-width:450px){
   .white-box{

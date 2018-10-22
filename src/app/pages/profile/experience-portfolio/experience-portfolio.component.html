@@ -339,14 +339,15 @@
                             <div class="row">
                               <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
                                   
-                                <button *ngIf="!updatePhotos"class="button-secondary-dws" (click)="addPortfolioImageVideo('Image')">Add Photo</button>
-                                <button *ngIf="updatePhotos"class="button-secondary-dws" (click)="updatePhotosByID()">Update Photo</button>
+                                <button *ngIf="!updatePhotos && !loaders.addPhotoLoader"class="button-secondary-dws" (click)="addPortfolioImageVideo('Image')">Add Photo</button>
+                                <button *ngIf="updatePhotos && !loaders.addPhotoLoader"class="button-secondary-dws" (click)="updatePhotosByID()">Update Photo</button>
+                                <button *ngIf="loaders.addPhotoLoader"class="button-secondary-dws disableDiv"><i class="fa fa-circle-o-notch fa-spin"></i></button>
                               </div>
                             </div>
                             <div class="seperator"></div>
                       </div>
 
-                      <div class="row imageGallery" *ngIf="imagesList && imagesList.length">
+                      <div class="row imageGallery" *ngIf="imagesList && imagesList.length && !loaders.PhotosLoader">
                         <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let image of imagesList">
                           <div class="thumb-img">
                            <div> <img [src]="image.Path" alt=""></div>
@@ -367,7 +368,13 @@
 
                         </div>
                       </div>
-                      <div class="row imageGallery" *ngIf="imagesList && !imagesList.length">
+                      <div class="row" *ngIf="loaders.PhotosLoader">
+                        <div class="spinner">
+                            <div class="double-bounce1"></div>
+                            <div class="double-bounce2"></div>
+                          </div>
+                    </div>
+                      <div class="row imageGallery" *ngIf="imagesList && !imagesList.length && !loaders.PhotosLoader">
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <p>No Images Exists</p>
    
@@ -426,22 +433,21 @@
                               <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
                                     
-                                  <button *ngIf="!updateVideos"class="button-secondary-dws" (click)="addPortfolioImageVideo('Video')">Add Video</button>
-                                  <button *ngIf="updateVideos"class="button-secondary-dws" (click)="updateVideoByID()">Update Video</button>
+                                  <button *ngIf="!updateVideos && !loaders.addVideoLoader"class="button-secondary-dws" (click)="addPortfolioImageVideo('Video')">Add Video</button>
+                                  <button *ngIf="updateVideos && !loaders.addVideoLoader"class="button-secondary-dws" (click)="updateVideoByID()">Update Video</button>
+                                  <button *ngIf="loaders.addVideoLoader"class="button-secondary-dws disableDiv"><i class="fa fa-circle-o-notch fa-spin"></i></button>
                                 </div>
                               </div>
                               <div class="seperator"></div>
                         </div>
         
-                        <div class="row imageGallery"  *ngIf="videosList && videosList.length">
+                        <div class="row imageGallery"  *ngIf="videosList && videosList.length && !loaders.VideosLoader">
                           <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let videos of videosList">
                             <div class="thumb-img">
                              <div [class.enableDiv]="isAdmin"> 
                          
                                <iframe [src]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)" style="width: 100%;" frameborder="0" allowfullscreen></iframe>
-                               
-                               <!-- <object style="width: 100%;" [data]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)">
-                               </object> -->
+            
                               </div>
                             </div>
                             <div class="thumb-title makeBlue mTop15"><p>{{videos.Title}}</p></div>
@@ -457,7 +463,13 @@
   
                           </div>
                         </div>
-                        <div class="row imageGallery" *ngIf="videosList && !videosList.length">
+                        <div class="row" *ngIf="loaders.VideosLoader">
+                          <div class="spinner">
+                              <div class="double-bounce1"></div>
+                              <div class="double-bounce2"></div>
+                            </div>
+                      </div>
+                        <div class="row imageGallery" *ngIf="videosList && !videosList.length && !loaders.VideosLoader">
                           <div class="col-md-3 col-sm-6 col-xs-12">
                             <p>No Videos Exists</p>
      

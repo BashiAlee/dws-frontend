@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HowItWorksComponent } from '../../components/how-it-works/how-it-works.component';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
