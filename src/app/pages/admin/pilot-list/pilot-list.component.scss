@@ -47,7 +47,7 @@ div.command-center {
 .main-div{
   overflow-x:auto;
   white-space: nowrap;
-
+  border: 2px solid $modal-border;
 }
 
 .table-div{
@@ -56,7 +56,6 @@ div.command-center {
   background: white;
   padding:5px 21px;
   grid-gap: 10px;
-  border: 2px solid $modal-border;
   height: 600px;
 
 
@@ -88,7 +87,6 @@ div.command-center {
   }
   .table-rows{
     display: grid;
-    height: 65px;
     grid-template-columns: 13% 11% 9% 10% 9% 8% 11% ;
     justify-content: space-between;
     align-items: center;
@@ -107,6 +105,7 @@ div.command-center {
   }
   .table-heading{
     color: $table-heading;
+    padding: 10px;
   }
 }
 .detail-btn{
@@ -141,7 +140,10 @@ div.command-center {
   border: none;
   outline: none;
   background: white;
-  -webkit-appearance: menulist-button;
+   color: #29abe2;
+  option {
+   color: #73738a;
+  }
 }
 .input-city{
   padding: 0 18px;
@@ -220,12 +222,14 @@ div.command-center {
 @media only screen and (max-width:600px) {
   .custom-tabs{
     display: block;
+    padding: 0;
     ul{
       height: auto;
+      padding: 0;
       li{
         margin: 13px 25px 20px 13px;
         a{
-          padding: 12px 39px 12px 39px;
+          padding: 12px 25px 12px 25px;
         }
       }
     }
