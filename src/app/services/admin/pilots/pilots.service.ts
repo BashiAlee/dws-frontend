@@ -17,8 +17,8 @@ export class PilotService {
       this.staticUrl = environment.uploadUrl;
    }
 
-  getAllPilots() {
-    return this.http.get(this.apiUrl + 'admin/allPilots')
+  getAllPilots(data) {
+    return this.http.get(this.apiUrl + 'admin/allPilots/' + data.from + '/' + data.to)
     .pipe(map((response: any) => {
      return response.json();
     }));

@@ -7,10 +7,10 @@
        </div>
       <div class="custom-tabs" >
         <!--<button  class="BackBtn" (click)="moveBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>-->
-        <ul>
+        <!-- <ul>
           <li ><a  class="active-link " [routerLink]="['personal-information']" [routerLinkActive]="['active-link']" >Personal Information</a></li>
           <li ><a [routerLink]="['business-information']"  [routerLinkActive]="['active-link']">Business Information</a></li>
-        </ul>
+        </ul> -->
         <!--<button class="ForwardBtn"  (click)="moveForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>-->
       </div>
 
@@ -86,12 +86,12 @@
                </div>
                <div class="table-body">
                <div class="table-rows table-body-rows" *ngFor="let list of pilotList">
-                  <div>{{list.Users.FirstName+' '+list.Users.LastName}}</div>
-                  <div>{{list.Users.Email}}</div>
-                  <div>{{list.PrimaryPhone}}</div>
-                  <div>{{list.Country.Name}}</div>
-                  <div>{{list.State.Name}}</div>
-                  <div>{{list.PhysicallCity}}</div>
+                  <div>{{list.FirstName+' '+list.MiddleName+' '+list.LastName}}</div>
+                  <div>{{list.Email}}</div>
+                  <div>{{list.Phone ? list.Phone: '-'}}</div>
+                  <div>{{list.PhysicallCountry ? list.PhysicallCountry: '-'}}</div>
+                  <div>{{list.PhysicallState ? list.PhysicallState: '-'}}</div>
+                  <div>{{list.PhysicallCity ? list.PhysicallCity: "-"}}</div>
                   <!-- <div>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</div> -->
                   <div class="action"><a [routerLink]="['/admin/profile',list.UserId]" class="detail-btn" [class.disabledAnchor]="list.Suffix=='nil'">Details</a></div>
                </div>
@@ -101,22 +101,16 @@
              <div class="entries-selector">
                <p class="show-entries-p">Show entries per page</p>
                <div class="selector-input-container">
-                 <select class="selector-input" type="number">
-                   <option>1</option>
-                   <option>2</option>
-                   <option>3</option>
-                   <option>4</option>
-                   <option>5</option>
-                   <option>6</option>
-                   <option>7</option>
-                   <option>8</option>
-                   <option>9</option>
-                   <option selected>10</option>
+                 <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getPilots(pageNumber,0)">
+                   <option value="10">10</option>
+                   <option value="20">20</option>
+                   <option value="30">30</option>
                  </select>
                </div>
              </div>
            </div>
          </div>
+        <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (click)="getSpecificPilots()"></pagination>
          <!-- <div class="custom-table">
 
         <div class="table" *ngIf="pilotList && pilotList.length">
