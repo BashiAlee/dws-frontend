@@ -59,7 +59,7 @@ export class ForgetPasswordComponent{
         if(data.status) {
           this.success = 'Password Updated'
           setTimeout(() => {
-            this.router.navigate(['/logincustomer']);
+            this.router.navigate(['/loginpilot']);
           }, 1000);
           // this.router.navigate(['/logincustomer']);
         } else if(!data.status) {

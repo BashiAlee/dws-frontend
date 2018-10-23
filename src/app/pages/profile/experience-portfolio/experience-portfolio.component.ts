@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../services/profile/profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ModalsComponent } from '../../../components/modals/modals.component';
 import { Croppie } from 'croppie/croppie';
 import { CroppieDirective } from '../../../../angular-croppie-module/src/lib/croppie.directive';
+
 declare var $: any;
 @Component({
   selector: 'app-experience-portfolio',
@@ -43,87 +44,169 @@ export class ExperiencePortfolioComponent implements OnInit {
 
   distanceToTravel = [
     {
-      value: "10 miles"
+      'name': '25 Miles',
+      'code': '1'
     },
     {
-      value: "25 miles"
+      'name': '50 Miles',
+      'code': '2'
     },
     {
-      value: "50 miles"
+      'name': '75 Miles',
+      'code': '3'
     },
     {
-      value: "100 miles"
+      'name': '100 Miles',
+      'code': '4'
     },
     {
-      value: "250 miles"
+      'name': '150 Miles',
+      'code': '5'
     },
     {
-      value: "500 miles"
+      'name': '200 Miles',
+      'code': '6'
     },
     {
-      value: "Nationwide"
-    }
+      'name': '300 Miles',
+      'code': '7'
+    },
+    {
+      'name': '500 Miles',
+      'code': '8'
+    },
+    {
+      'name': 'Nationwide',
+      'code': '9'
+    },
   ]
 
   typeOfWork = [
     {
-      WorkOffered: "Aerial Photography",
-      id: "1"
+      'name': 'Aerial Photography',
+      'code': 'AF'
     },
     {
-      WorkOffered: "Aerial Video",
-      id: "2"
+      'name': 'Aerial Video',
+      'code': 'AV'
     },
     {
-      WorkOffered: "Cinematography",
-      id: "3"
+      'name': 'Cinematography',
+      'code': 'CG'
     },
     {
-      WorkOffered: "Residential Real Estate",
-      id: "4"
+      'name': 'Residential Real Estate',
+      'code': 'RE'
     },
     {
-      WorkOffered: "Commercial Real Estate",
-      id:"5"
+      'name': 'Commerical Real Estate',
+      'code': 'CE'
     },
     {
-      WorkOffered: "Flight Training",
-      id: "6"
-    }
+      'name': 'Flight Training',
+      'code': 'FT'
+    },
+    {
+      'name': 'Events',
+      'code': 'E'
+    },
+    {
+      'name': 'Weddings',
+      'code': 'W'
+    },
+    {
+      'name': 'Agriculture',
+      'code': 'A'
+    },
+    {
+      'name': 'Construction',
+      'code': 'C'
+    },
+    {
+      'name': 'Telecom',
+      'code': 'T'
+    },
+    {
+      'name': 'Utility',
+      'code': 'U'
+    },
+    {
+      'name': 'Roof Inspection',
+      'code': 'RI'
+    },
+    {
+      'name': 'Mapping/Surveying',
+      'code': 'M/E'
+    },
+    {
+      'name': 'Maritime',
+      'code': 'MT'
+    },
+    {
+      'name': 'Infrastructure',
+      'code': 'I'
+    },
+    {
+      'name': 'Public Safety & Emergency Management',
+      'code': 'PSEM'
+    },
+    {
+      'name': 'Law Enforcement and security',
+      'code': 'LES'
+    },
+    {
+      'name': 'Insurance',
+      'code': 'INC'
+    },
+    {
+      'name': 'Other',
+      'code': 'O'
+    },
   ]
   workExperience = [
     {
-      value: "Less than 1"
+      'name': '0-1',
+      'code': '1'
     },
     {
-      value: "1-2"
+      'name': '1-2',
+      'code': '2'
     },
     {
-      value: "2-3"
+      'name': '2-3',
+      'code': '3'
     },
     {
-      value: "3-4"
+      'name': '3-4',
+      'code': '4'
     },
     {
-      value: "4-5"
+      'name': '4-5',
+      'code': '5'
     },
     {
-      value: "5-6"
+      'name': '5-6',
+      'code': '6'
     },
     {
-      value: "6-7"
+      'name': '6-7',
+      'code': '7'
     },
     {
-      value: "7-8"
+      'name': '7-8',
+      'code': '8'
     },
     {
-      value: "8-9"
+      'name': '8-9',
+      'code': '9'
     },
     {
-      value: "9-10"
+      'name': '9-10',
+      'code': '10'
     },
     {
-      value: "10+"
+      'name': '10+',
+      'code': '11'
     }
   ]
   headShotPicture: any;
@@ -136,6 +219,8 @@ export class ExperiencePortfolioComponent implements OnInit {
   croppedImageHeadShot: any;
   croppedPersonalPicture: any;
   loaders: any = {};
+  @ViewChild('myInput')
+myInputVariable: ElementRef;
   constructor(private formBuilder: FormBuilder, private profileService: ProfileService, 
     private route: ActivatedRoute, private sanitize: DomSanitizer, 
     private modalService: BsModalService,
@@ -236,11 +321,19 @@ export class ExperiencePortfolioComponent implements OnInit {
               this.loaders.VideosLoader = false;
             }  
              this.videosList.push(value)
+          } else {
+            this.loaders.VideosLoader = false;
           }
           if(value.Type!="" && value.Type=="Image"){
              this.imagesList.push(value)
              this.loaders.PhotosLoader = false;
+          } else {
+            this.loaders.PhotosLoader = false
           }
+          // if(value.Type!="") {
+          //   this.loaders.VideosLoader = false;
+          //   this.loaders.PhotosLoader = false;
+          // }
         });
        } else {
         this.loaders.VideosLoader = false;
@@ -257,6 +350,10 @@ export class ExperiencePortfolioComponent implements OnInit {
       data => {
         if(data.status) {
           this.porfolioData = data.result;
+
+          // this.check(this.porfolioData.HeadshotImage, this.headShotPicture)
+          // this.check(this.porfolioData.OtherPersonalImage,this.personalPicture)
+          // this.check(this.porfolioData.PassportImage,this.images.PassportImage)
           this.headShotPicture = this.porfolioData.HeadshotImage;
           this.personalPicture = this.porfolioData.OtherPersonalImage;
           this.images.PassportImage = this.porfolioData.PassportImage;
@@ -306,9 +403,7 @@ export class ExperiencePortfolioComponent implements OnInit {
     }
     if(type =='Image') {
       this.loaders.addPhotoLoader = true;
-      console.log("FFFF", this.addPhotos.value)
       this.submittedPhotos = true;
- 
       this.profileService.uploadProfilePicture(this.imageFiles.uploadPorfolioImage)
       .subscribe(
         data => {
@@ -320,6 +415,7 @@ export class ExperiencePortfolioComponent implements OnInit {
               Path: data.result,
               Type: 'Image'
             });
+            this.myInputVariable.nativeElement.value = "";
             if (this.addPhotos.invalid) {
               this.loaders.addPhotoLoader = false;
               return;
@@ -731,6 +827,19 @@ export class ExperiencePortfolioComponent implements OnInit {
   }
   goBack() {
     this.router.navigate(['/user/profile/'+this.id+'/equipment']);
+  }
+
+  check(url, val) {
+    this.authService.checkImageExists(url)
+    .subscribe(data =>{
+      val = url;
+      console.log("hereeee", url)
+      // this.userInfo.ProfileImage = url;
+    },
+    err => {
+      val = "";
+      // this.userInfo.ProfileImage = "";
+    })
   }
 
 

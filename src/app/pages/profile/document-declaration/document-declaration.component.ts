@@ -135,16 +135,18 @@ export class DocumentDeclarationComponent implements OnInit {
         data => {
           if (data.status) {
             this.documentData = data.result;
-            // this.licenseImage = this.documentData.DriversLisenceImage;
+            this.licenseImage = this.documentData.DriversLisenceImage;
             // this.documentData.Veteran =  this.documentData.Veteran == 'true';
             // this.documentData.AviationLiabilityInsurance =  this.documentData.AviationLiabilityInsurance == 'true';
             // this.documentData.Agrement = this.documentData.Agrement == 'true';
+            // this.check(this.documentData.PilotCertificateImage,this.images.PilotCertificateImage)
+            // this.check(this.documentData.DriversLisenceImage,this.licenseImage)
 
             this.images.PilotCertificateImage = this.documentData.PilotCertificateImage;
             this.images.RecurrentExamPdf = this.documentData.RecurrentExamPdf;
             this.images.AviationLiabilityInsurancePdf = this.documentData.AviationLiabilityInsurancePdf;
             this.images.CopyOfAviationLiabilityInsurancePdf = this.documentData.CopyOfAviationLiabilityInsurancePdf;
-            this.licenseImage = this.documentData.DriversLisenceImage;
+            // this.licenseImage = this.documentData.DriversLisenceImage;
             this.documentInformation.patchValue(Object.assign({}, this.documentData));
             this.documentInformation.patchValue({
               UserId: this.id
@@ -392,6 +394,17 @@ export class DocumentDeclarationComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/user/profile/'+this.id+'/experience-portfolio']);
+  }
+  check(url, val) {
+    this.authService.checkImageExists(url)
+    .subscribe(data =>{
+      val = url;
+      // this.userInfo.ProfileImage = url;
+    },
+    err => {
+      val = "";
+      // this.userInfo.ProfileImage = "";
+    })
   }
 
 }

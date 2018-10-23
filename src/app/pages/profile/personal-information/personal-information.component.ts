@@ -11,6 +11,7 @@ import { AuthenticationService } from '../../../services/authentication/authenti
 import { Croppie } from 'croppie/croppie';
 
 import { CroppieDirective } from '../../../../angular-croppie-module/src/lib/croppie.directive';
+
 declare var $: any;
 @Component({
   selector: 'app-personal-information',
@@ -117,8 +118,19 @@ export class PersonalInformationComponent implements OnInit {
             if(this.personalData.MailingCountry) {
               this.getStatesByCode('mailing',this.personalData.MailingCountry,'onload')
             }
-            
-            this.displayPicture = this.personalData.Users.ProfileImage;
+
+            if (!this.personalData.PhysicallCountry) {
+              this.personalData.PhysicallCountry = 231;
+              this.getStatesByCode('physical',this.personalData.PhysicallCountry,'onload')
+            }
+
+            if (!this.personalData.MailingCountry) {
+              this.personalData.MailingCountry = 231;
+              this.getStatesByCode('mailing',this.personalData.MailingCountry,'onload')
+            }
+            this.check(this.personalData.Users.ProfileImage)
+            // this.checkImageExists(this.personalData.Users.ProfileImage);
+            // this.displayPicture = this.personalData.Users.ProfileImage;
             this.personalInformation.patchValue(Object.assign({}, this.personalData));
             // this.personalInformation.patchValue({
             //    UserId: this.authService.getCurrentUser().ID,
@@ -413,7 +425,16 @@ export class PersonalInformationComponent implements OnInit {
         this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
       
     }
-    
-    
 
+    
+    
+    check(url) {
+      this.authService.checkImageExists(url)
+      .subscribe(data =>{
+        this.displayPicture = url;
+      },
+      err => {
+        this.displayPicture = "";
+      })
+    }
 }

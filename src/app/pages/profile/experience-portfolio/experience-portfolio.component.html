@@ -12,7 +12,7 @@
                       <div class="form-group">
                         <label for="workOffered" class="custom-input-label">Type of Work offered</label>
                         <ng-select [(ngModel)]="selectedWorkOffered" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
-                          <ng-option *ngFor="let work of typeOfWork" [value]="work.WorkOffered">{{work.WorkOffered}}</ng-option>
+                          <ng-option *ngFor="let work of typeOfWork" [value]="work.code">{{work.name}}</ng-option>
                         </ng-select>
                       </div>
                     </div>
@@ -22,7 +22,7 @@
                     <div class="form-group">
                       <label for="commercialSuasExp" class="custom-input-label">Years of Commercial sUAS Experience</label>
                       <ng-select [searchable]="false" formControlName="YearsOfExperience">
-                        <ng-option *ngFor="let exp of workExperience" [value]="exp.value">{{exp.value}}</ng-option>
+                        <ng-option *ngFor="let exp of workExperience" [value]="exp.code">{{exp.name}}</ng-option>
                       </ng-select>
                     </div>
                   </div>
@@ -32,7 +32,7 @@
                       <div class="form-group">
                         <label for="businessType" class="custom-input-label">Notify me of jobs within the following range.</label>
                         <ng-select [clearable]="false" [searchable]="false" formControlName="JobNotification">
-                          <ng-option *ngFor="let travel of distanceToTravel" [value]="travel.value">{{travel.value}}</ng-option>
+                          <ng-option *ngFor="let travel of distanceToTravel" [value]="travel.code">{{travel.name}}</ng-option>
                       </ng-select>
                       </div>
                     </div>
@@ -316,7 +316,7 @@
                               <div class="col-md-4 col-sm-6 col-xs-12" *ngIf="!updatePhotos">
                                 <div class="form-group">
                                   <label for="serialnumber" class="custom-input-label">Upload your Photo </label>
-                                  <input type="file" class="form-control custom-input" id="serialnumber" aria-describedby="serialnumber"
+                                  <input type="file" #myInput class="form-control custom-input" id="photoUploadFile" aria-describedby="serialnumber"
                                     placeholder="Serial Number" (change)="uploadImage($event,'uploadImage')">
                                     <!-- <div *ngIf="submittedPhotos && photosForm.SerialNumber.errors" class="invalid-feedback">
                                         <div *ngIf="photosForm.SerialNumber.errors.required">Photo is required</div>

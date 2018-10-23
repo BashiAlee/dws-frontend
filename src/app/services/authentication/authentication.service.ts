@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { map } from "rxjs/operators";
 import { environment } from "../../../environments/environment"
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -70,5 +71,12 @@ export class AuthenticationService {
     .pipe(map((response: any) => {
      return response.json();
     }));
+  }
+
+  checkImageExists(url): Observable<any> {
+    return this.http.get(url)
+    .pipe(map(response => {
+     return response;
+    }))
   }
 }

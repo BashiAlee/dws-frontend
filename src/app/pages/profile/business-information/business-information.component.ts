@@ -45,41 +45,45 @@ export class BusinessInformationComponent implements OnInit {
 
   businessTypes = [
     {
-      name: 'Sole Proprietorship',
-      code: 'SP'
+      'name': 'Sole Proprietorship',
+      'code': 'SP'
     },
     {
-      name: 'General Partnership',
-      code: 'GP'
+      'name': 'General Partnership',
+      'code': 'GP'
     },
     {
-      name: 'Limited Partnership',
-      code: 'LP'
+      'name': 'Limited Partnership',
+      'code': 'LP'
     },
     {
-      name: 'LLP',
-      code: 'LLP'
+      'name': 'LLP',
+      'code': 'LLP'
     },
     {
-      name: 'LLLP',
-      code: 'LLLP'
+      'name': 'LLLP',
+      'code': 'LLLP'
     },
     {
-      name: 'LLC',
-      code: 'LLC'
+      'name': 'LLC',
+      'code': 'LLC'
     },
     {
-      name: 'Corporation',
-      code: 'C'
+      'name': 'Corporation',
+      'code': 'C'
     },
     {
-      name: 'S-Corporation',
-      code: 'SC'
+      'name': 'S-Corporation',
+      'code': 'SC'
     },
     {
-      name: 'Non-Profit',
-      code: 'NP'
-    }
+      'name': 'Non-Profit',
+      'code': 'NP'
+    },
+    {
+      'name': 'Other',
+      'code': 'O'
+    },
   ];
   constructor(private formBuilder: FormBuilder, private router: Router,private profileSevice: ProfileService,private route: ActivatedRoute, private modalService: BsModalService, private authService: AuthenticationService) { 
     if(this.router.url.split('/')[1] =='admin') {
@@ -146,8 +150,8 @@ export class BusinessInformationComponent implements OnInit {
             if(this.businessData.MailingCountry) {
               this.getStatesByCode('mailing',this.businessData.MailingCountry,'onload')
             }
-            
-            this.displayPicture = this.businessData.BusinessLogo;
+            this.check(this.businessData.BusinessLogo)
+            // this.displayPicture = this.businessData.BusinessLogo;
             this.businessInformation.patchValue(Object.assign({}, this.businessData));
 
           
@@ -406,6 +410,16 @@ export class BusinessInformationComponent implements OnInit {
     
     goBack() {
       this.router.navigate(['/user/profile/'+this.id+'/personal-information']);
+    }
+
+    check(url) {
+      this.authService.checkImageExists(url)
+      .subscribe(data =>{
+        this.displayPicture = url;
+      },
+      err => {
+        this.displayPicture = "";
+      })
     }
   
 

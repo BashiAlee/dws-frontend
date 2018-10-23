@@ -28,7 +28,14 @@ export class LoginComponent{
     // localStorage.removeItem('user')
   }
   user: any;
+  type: any;
   ngOnInit() {
+    if(this.router.url.split('/')[1]=='loginpilot') {
+      this.type = 'PILOT'
+    }
+    if(this.router.url.split('/')[1]=='logincustomer') {
+      this.type = 'CUSTOMER'
+    }
     this.loginForm = this.formBuilder.group({
       Email: ['', [Validators.required, Validators.email]],
       Password: ['',Validators.required]

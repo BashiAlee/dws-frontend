@@ -1,4 +1,12 @@
 
+<div class="about-banner dws-pilot-banner pilot-banner">
+	<div class="about-banner">
+		<img src="../../../assets/images/About.jpg" style="width: 100%;" class="fr-fic fr-dii">
+		<div class="centered">
+		<h1 class="wow fadeInDown uppercase">SIGNUP AS A {{type}}</h1>
+		</div>
+	</div>
+</div>
       <div class="sign-up">
         <div class=" container">
            <div class="row">
@@ -83,10 +91,13 @@
                          <p *ngIf="error" class="errorMessage">{{error}}</p>
                          <p *ngIf="success" class="successMessage">{{success}}</p>
                      </div>
-                       <button type="button" id="submitLoginForm" *ngIf="!loading" class="btn btn-sign-up mt20 wow fadeInDown" (click)="signUp()">CONFIRM YOUR EMAIL & CONTINUE</button>
+                       <button type="button" id="submitLoginForm" *ngIf="!loading" class="btn btn-sign-up mt20 wow fadeInDown" (click)="signUp()" [class.disabled]="type=='customer'">CONFIRM YOUR EMAIL & CONTINUE</button>
                        <a class="btn btn-sign-up mt20 wow fadeInDown loaderBtn"  *ngIf="loading"><i class="fa fa-circle-o-notch fa-spin"></i></a>
                     </form>
-
+                    <p class="makeCenter">Already have an account? 
+                        <a *ngIf="type=='pilot'"[routerLink]="['/loginpilot']">Login</a>
+                        <a *ngIf="type=='customer'"[routerLink]="['/logincustomer']">Login</a>
+                      </p>
                  </div>
               </div>
               <!-- col-8 -->

@@ -16,9 +16,23 @@ export class HeaderComponent implements OnInit {
     if(this.router.url.split('/')[1]=='admin') {
       this.userInfo = JSON.parse(localStorage.getItem('admin'));
     } else {
+
       this.userInfo = this.authService.getCurrentUser();
+      this.check(this.userInfo.ProfileImage)
     }
    
   }
+
+  check(url) {
+    this.authService.checkImageExists(url)
+    .subscribe(data =>{
+      this.userInfo.ProfileImage = url;
+    },
+    err => {
+      this.userInfo.ProfileImage = "";
+    })
+  }
+
+  
 
 }

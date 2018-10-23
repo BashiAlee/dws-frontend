@@ -149,7 +149,7 @@
                       <div class="form-group">
                         <label for="businessType" class="custom-input-label mtop30">Waivers Currently Held</label>
                         <ng-select [(ngModel)]="selectedWaivers" [ngModelOptions]="{standalone: true}" [searchable]="false" [multiple]="true" class="custom-ngselect">
-                            <ng-option *ngFor="let waiver of waiversList" [value]="waiver.WaiversCurrentlyHeld">{{waiver.WaiversCurrentlyHeld}}</ng-option>
+                            <ng-option *ngFor="let waiver of waiversList" [value]="waiver.code">{{waiver.WaiversCurrentlyHeld}}</ng-option>
                           </ng-select>
                       </div>
                     </div>

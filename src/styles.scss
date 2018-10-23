@@ -1066,10 +1066,40 @@ div.dataTables_length {
 button:disabled {
   cursor: no-drop;
 }
-
+.disabled {
+  pointer-events: none;
+}
 
 .disabledAnchor {
   pointer-events: none !important;
   opacity: 0.5 !important;
 }
 
+
+.about-banner{
+  display: grid;
+    grid-template-columns: 1fr;
+
+    img {
+      width: 100%;
+      grid-row: 1/2;
+      grid-column: 1/2;
+      height: 220px;
+    }
+
+    .centered {
+      grid-row: 1/2;
+      grid-column: 1/2;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+.marginAuto {
+  margin:  0 auto;
+}
