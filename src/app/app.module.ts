@@ -31,6 +31,7 @@ import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.compo
 import { EmptyLayoutComponent } from './components/layout/empty-layout/empty-layout.component';
 import { SendEmailComponent } from './pages/send-email/send-email.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { PaginationModule } from 'ngx-bootstrap';
 // import { CroppieComponent } from './components/croppie/croppie.component';
 
 
@@ -57,7 +58,7 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
     AdminLoginComponent,
     EmptyLayoutComponent,
     SendEmailComponent,
-    ForgetPasswordComponent,
+    ForgetPasswordComponent
     // CroppieComponent
   ],
   imports: [
@@ -68,15 +69,11 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
     NgSelectModule,
     DataTablesModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PaginationModule.forRoot()
   ],
-  entryComponents:[
-    ModalsComponent
-  ],
-  providers: [
-    AuthenticationService,
-    AuthGuard
-  ],
+  entryComponents: [ModalsComponent],
+  providers: [AuthenticationService, AuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

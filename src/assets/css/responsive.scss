@@ -256,6 +256,15 @@
 }
 
 @media screen and (max-width: 330px){
+  div.entries-selector{
+    .selector-input-container{
+      padding: 9px 11px 9px 17px;
+      select.selector-input{
+        width: auto;
+        height: auto;
+    }
+    }
+  }
   div.buttons
   {
     a.profile-buttons{
