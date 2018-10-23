@@ -132,6 +132,26 @@ div.command-center {
   background: white;
   border-radius: 25px;
   padding: 7px 24px;
+  position: relative;
+  z-index: 0;
+  &::before{
+    content: '\25b2';
+    position: absolute;
+    top: 18%;
+    left: 64%;
+    color: #3FBAD0;
+    font-size: 12px;
+    z-index: 2;
+  }
+  &::after{
+    content: '\25BC';
+    position: absolute;
+    top: 44%;
+    left: 64%;
+    color: #3FBAD0;
+    font-size: 12px;
+    z-index: 2;
+  }
 }
 .selector-input{
   width: 55px;
@@ -139,8 +159,9 @@ div.command-center {
   border-radius: 20px;
   border: none;
   outline: none;
-  background: white;
-   color: #29abe2;
+  background:transparent;
+  -moz-appearance: none;
+  -webkit-appearance: none;
   option {
    color: #73738a;
   }
