@@ -150,8 +150,8 @@ export class BusinessInformationComponent implements OnInit {
             if(this.businessData.MailingCountry) {
               this.getStatesByCode('mailing',this.businessData.MailingCountry,'onload')
             }
-            this.check(this.businessData.BusinessLogo)
-            // this.displayPicture = this.businessData.BusinessLogo;
+            // this.check(this.businessData.BusinessLogo)
+            this.displayPicture = this.businessData.BusinessLogo;
             this.businessInformation.patchValue(Object.assign({}, this.businessData));
 
           

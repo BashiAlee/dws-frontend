@@ -23,6 +23,18 @@ export class PilotService {
      return response.json();
     }));
   }
+  getAllApprovedPilots(data) {
+    return this.http.get(this.apiUrl + 'admin/approvedPilots/' + data.from + '/' + data.to)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
+  getAllRejectedPilots(data) {
+    return this.http.get(this.apiUrl + 'admin/rejectedPilots/' + data.from + '/' + data.to)
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
 
   approveProfile(id) {
     return this.http.get(this.apiUrl + 'admin/approveProfile/'+id)

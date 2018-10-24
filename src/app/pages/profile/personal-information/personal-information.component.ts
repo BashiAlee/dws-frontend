@@ -111,6 +111,14 @@ export class PersonalInformationComponent implements OnInit {
       data => {
         if(data.status) {
             this.personalData = data.result;
+            if(!this.personalData.PhysicallCountry && !this.personalData.PhysicallState) {
+              const initialState = {
+                type: 'old-user-empty',
+              }
+              this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+              this.bsModalRef.content.closeBtnName = 'Close';
+              // return;
+            }
             // this.getRegionByCode(this.personalData.m1Country);
             if(this.personalData.PhysicallCountry) {
               this.getStatesByCode('physical',this.personalData.PhysicallCountry,'onload')
@@ -128,24 +136,12 @@ export class PersonalInformationComponent implements OnInit {
               this.personalData.MailingCountry = 231;
               this.getStatesByCode('mailing',this.personalData.MailingCountry,'onload')
             }
-            this.check(this.personalData.Users.ProfileImage)
+            // this.check(this.personalData.Users.ProfileImage)
             // this.checkImageExists(this.personalData.Users.ProfileImage);
-            // this.displayPicture = this.personalData.Users.ProfileImage;
+            this.displayPicture = this.personalData.Users.ProfileImage;
             this.personalInformation.patchValue(Object.assign({}, this.personalData));
-            // this.personalInformation.patchValue({
-            //    UserId: this.authService.getCurrentUser().ID,
-            //    ID: this.authService.getCurrentUser().ID
-            // })
-          
-            
-            // this.personalInformation.controls.Users.patchValue(Object.assign({}, this.authService.getCurrentUser()));
-            // var date = new Date(this.personalData.Users.Dob)
-            // delete this.personalInformation.value.Users.MemberId
-            // this.personalInformation.patchValue({
-            //   Users: {
-            //     // Dob: m
-            //   }
-            // })
+      
+
             console.log("FFFF", this.personalInformation.value)
         } else {
           this.personalData = [];

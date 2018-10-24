@@ -49,7 +49,7 @@
                   </label>
                 </div>
                 <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event)" *ngIf="messages.coverImageChoosed" />
-                <button class="btn crop-btn" *ngIf="messages.coverImageChoosed && !messages.uploadingImage" (click)="uploadCroppedImage(croppedImageData)">Crop</button>
+                <button class="btn crop-btn" *ngIf="messages.coverImageChoosed && !messages.uploadingImage" (click)="uploadCroppedImage(croppedImageData)">Crop &amp; Save</button>
                 <div>
 
                 </div>

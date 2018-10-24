@@ -16,7 +16,10 @@ export class PilotListComponent implements OnInit{
   pageNumber: any = 10;
   maxSize = 5;
   bigTotalItems: any;
-  bigCurrentPage = 2;
+  bigCurrentPage = 1;
+  pendingList: any;
+  approvedList: any;
+  isApprovedPilots: any = true;
 
 
  
@@ -84,25 +87,45 @@ export class PilotListComponent implements OnInit{
   }
 
   onPageLoad() {
-  
+    console.log("SDDDDD", this.isApprovedPilots)
     var fromLimit = this.bigCurrentPage.toString() +'0'
-    this.bigCurrentPage = 2;
 
     var data = {
         from: this.pageNumber, //skip
         to: parseInt(fromLimit) - 10 //limit
     }
-    this.getPilots(data.from,data.to)
+    if(this.isApprovedPilots) {
+      this.bigCurrentPage = 1;
+      this.pageNumber = 10;
+      this.getAllApprovedPilots(data.from,data.to)
+    } else {
+      this.bigCurrentPage = 1;
+      this.pageNumber = 10;
+      this.getAllRejectedPilots(data.from, data.to)
+    }
+   
   }
 
-  getAllPilots(num, val) {
+  getAllRejectedPilots(num, val) {
     var data = { from: val, to: num };
-    this.pilotService.getAllPilots(data).subscribe(data => {
+    this.pilotService.getAllRejectedPilots(data).subscribe(data => {
       if (data.status) {
-        this.pilotList = data.result;
+        this.pendingList = data.result;
         this.bigTotalItems = parseInt(data.totalRecord);
       } else if (!data.status) {
-        this.pilotList = [];
+        this.pendingList = [];
+        this.bigTotalItems = 0;
+      }
+    });
+  }
+  getAllApprovedPilots(num, val) {
+    var data = { from: val, to: num };
+    this.pilotService.getAllApprovedPilots(data).subscribe(data => {
+      if (data.status) {
+        this.approvedList = data.result;
+        this.bigTotalItems = parseInt(data.totalRecord);
+      } else if (!data.status) {
+        this.approvedList = [];
         this.bigTotalItems = 0;
       }
     });
@@ -115,25 +138,35 @@ export class PilotListComponent implements OnInit{
   }
 
   getPilots(num, val) {
-    this.getAllPilots(num, val);
+    this.getAllApprovedPilots(num, val);
   }
 
-  getSpecificPilots() {
-    this.router.navigate([], { queryParams: { 'page-no': this.bigCurrentPage }})
-    setTimeout(() => {
-      var fromLimit = this.bigCurrentPage.toString() +'0'
-      var url_string = window.location.href;
-      var url = new URL(url_string);
-      var pageNo = url.searchParams.get("page-no");
-      console.log("page Number:   ", url)
-      var data = {
-          from: this.pageNumber, //skip
-          to: parseInt(fromLimit) - 10 //limit
-      }
-      this.getPilots(data.from,data.to)
-    }, 100);
-
+  openApprovedPilot() {
+    this.isApprovedPilots = true;
+    this.onPageLoad();
   }
+
+  openPendingPilot() {
+    this.isApprovedPilots = false;
+    this.onPageLoad();
+  }
+
+  // getSpecificPilots() {
+  //   this.router.navigate([], { queryParams: { 'page-no': this.bigCurrentPage }})
+  //   setTimeout(() => {
+  //     var fromLimit = this.bigCurrentPage.toString() +'0'
+  //     var url_string = window.location.href;
+  //     var url = new URL(url_string);
+  //     var pageNo = url.searchParams.get("page-no");
+  //     console.log("page Number:   ", url)
+  //     var data = {
+  //         from: this.pageNumber, //skip
+  //         to: parseInt(fromLimit) - 10 //limit
+  //     }
+  //     this.getPilots(data.from,data.to)
+  //   }, 100);
+
+  // }
 
 
 }

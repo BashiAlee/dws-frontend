@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 
 
@@ -16,7 +17,7 @@ export class ModalsComponent implements OnInit {
   closeBtnName: string;
   config: any = {};
 
-  constructor(public bsModalRef: BsModalRef, private router: Router) {
+  constructor(public bsModalRef: BsModalRef, private router: Router, private authService: AuthenticationService) {
 
    }
 
@@ -41,5 +42,6 @@ export class ModalsComponent implements OnInit {
   // openModal(template: TemplateRef<any>) {
   //   this.modalRef = this.modelServie.show(template);
   // }
-
 }
+
+

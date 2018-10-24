@@ -174,5 +174,26 @@
 
 </div>
 
+<div class="modal-inner makeCenter warning-custom-modal"  *ngIf="type=='old-user-empty'">
+  <div class="modal-header">
+      <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body warning">
+      <h3>A Little Attention Required!</h3>
+      <p>Please add your Country and State information again. We updated our system to assist and serve you better based on your location.</p>
+    </div>
+
+    <div class="round-logo">
+
+      <img src="../../../assets/icons/warning.png" alt="success icon">
+    </div>
+    <div class="footer-content">
+        <button type="button" class="btn btn-default custom-modal-button warning-btn" (click)="bsModalRef.hide()" >Got it</button>
+      </div>
+
+</div>
 
 

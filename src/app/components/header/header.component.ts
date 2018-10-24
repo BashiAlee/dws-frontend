@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
     } else {
 
       this.userInfo = this.authService.getCurrentUser();
-      this.check(this.userInfo.ProfileImage)
+      // this.check(this.userInfo.ProfileImage)
     }
    
   }

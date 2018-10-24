@@ -1103,3 +1103,9 @@ button:disabled {
 .marginAuto {
   margin:  0 auto;
 }
+
+
+.notAvailable {
+  opacity: 0.5;
+  pointer-events: none;
+}

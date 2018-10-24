@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   bsModalRef: BsModalRef;
   isAdmin: any;
   loaders: any = {};
-  old: any;
+  user: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
@@ -27,16 +27,6 @@ export class ProfileComponent implements OnInit {
       this.isAdmin = true;
     }else {
       this.isAdmin = false;
-      this.old = this.authService.getCurrentUser().Old;
-      if(this.old) {
-
-        const initialState = {
-          type: 'old-user',
-        }
-        this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-        this.bsModalRef.content.closeBtnName = 'Close';
-        return;
-    }
     }
 
    }

@@ -26,7 +26,7 @@ export class SendEmailComponent implements OnInit {
     .subscribe(data => {
       if(data.status) {
         this.success = data.message;
-      } else if(data.status) {
+      } else if(!data.status) {
         this.error = data.message;
       }
     })
