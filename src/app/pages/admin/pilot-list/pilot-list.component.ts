@@ -74,17 +74,14 @@ export class PilotListComponent implements OnInit {
     console.log(this.pageNumber)
 
     if (this.bigCurrentPage > 0) {
-      this.router.navigate([], { queryParams: { 'page-no': this.bigCurrentPage })
-      // changes the route without moving from the current view or
-      // triggering a navigation event,
-      // this.router.navigate(["/admin/pilot-list?token=324345345"]);
+      this.router.navigate([], { queryParams: { 'page-no': this.bigCurrentPage }})
     }
     var fromLimit = this.bigCurrentPage.toString() +'0'
     var url_string = window.location.href;
     var url = new URL(url_string);
     var pageNo = url.searchParams.get("page-no");
     var data = {
-      from: this.pageNumber, //skip
+      from: this.pageNumber - 1, //skip
       to: parseInt(fromLimit) //limit
     }
 

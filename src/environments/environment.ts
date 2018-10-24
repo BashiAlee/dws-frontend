@@ -11,10 +11,6 @@ export const environment = {
   // uploadUrl: 'http://18.216.55.104:8079/dws/'
   apiURL: 'https://api.droneworkforcesolutions.com/dws/',
   uploadUrl: 'https://upload.droneworkforcesolutions.com/dws/'
-<<<<<<< HEAD
-=======
-
->>>>>>> 0b56edd81833dd4b124e318565bd9edd402b09f3
 
 
 };
