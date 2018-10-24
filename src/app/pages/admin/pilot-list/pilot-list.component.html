@@ -10,7 +10,7 @@
 
         <ul>
           <li (click)="openApprovedPilot()"><a [class.active-link]="isApprovedPilots">Approved Pilots</a></li>
-          <li (click)="openPendingPilot()"><a [class.active-link]="!isApprovedPilots">Pending Approval <span class="badge">5</span></a></li>
+          <li (click)="openPendingPilot()"><a [class.active-link]="!isApprovedPilots">Pending Approval <span class="badge">{{pendingList?pendingList.length:'0'}}</span></a></li>
         </ul>
 
       </div>
@@ -189,7 +189,7 @@
                 <div class="table-heading">City</div>
                 <div class="table-heading">Action</div>
               </div>
-              <div class="table-body">
+              <div class="table-body" *ngIf="pendingList && pendingList.length">
               <div class="table-rows table-body-rows" *ngFor="let list of pendingList">
                  <div>{{list.FirstName+' '+list.MiddleName+' '+list.LastName}}</div>
                  <div>{{list.Email}}</div>
@@ -200,6 +200,12 @@
                  <div class="action"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
               </div>
               </div>
+              <div class="table-body" *ngIf="pendingList && !pendingList.length">
+                <div class="table-rows table-body-rows">
+                  <p>Not Found</p>
+                
+                </div>
+                </div>
             </div>
           </div>
             <div class="page-footer">

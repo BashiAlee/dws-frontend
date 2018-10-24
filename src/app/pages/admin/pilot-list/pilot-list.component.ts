@@ -109,10 +109,10 @@ export class PilotListComponent implements OnInit{
   getAllRejectedPilots(num, val) {
     var data = { from: val, to: num };
     this.pilotService.getAllRejectedPilots(data).subscribe(data => {
-      if (data.status) {
+      if (data.status && data.result) {
         this.pendingList = data.result;
         this.bigTotalItems = parseInt(data.totalRecord);
-      } else if (!data.status) {
+      } else if (data.status && !data.result) {
         this.pendingList = [];
         this.bigTotalItems = 0;
       }
@@ -121,10 +121,10 @@ export class PilotListComponent implements OnInit{
   getAllApprovedPilots(num, val) {
     var data = { from: val, to: num };
     this.pilotService.getAllApprovedPilots(data).subscribe(data => {
-      if (data.status) {
+      if (data.status && data.result) {
         this.approvedList = data.result;
         this.bigTotalItems = parseInt(data.totalRecord);
-      } else if (!data.status) {
+      } else if (data.status && !data.result) {
         this.approvedList = [];
         this.bigTotalItems = 0;
       }

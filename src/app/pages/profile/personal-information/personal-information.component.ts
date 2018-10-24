@@ -111,7 +111,7 @@ export class PersonalInformationComponent implements OnInit {
       data => {
         if(data.status) {
             this.personalData = data.result;
-            if(!this.personalData.PhysicallCountry && !this.personalData.PhysicallState) {
+            if(!this.personalData.PhysicallCountry && !this.personalData.PhysicallState &&  !this.isAdmin) {
               const initialState = {
                 type: 'old-user-empty',
               }
