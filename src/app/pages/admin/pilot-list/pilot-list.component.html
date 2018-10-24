@@ -110,6 +110,7 @@
                </div>
              </div>
            </div>
+             <div class="page-footer">
              <div class="entries-selector">
                <p class="show-entries-p">Show entries per page</p>
                <div class="selector-input-container">
@@ -120,10 +121,14 @@
                  </select>
                </div>
              </div>
+               <div class="pagination-div">
+               <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+               </div>
+               </div>
            </div>
          </div>
-        <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
-        <!-- <div class="custom-table">
+
+         <!-- <div class="custom-table">
 
         <div class="table" *ngIf="pilotList && pilotList.length">
           <div class="table-header mBottom25 for-seven-columns ">

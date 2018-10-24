@@ -166,6 +166,13 @@ div.command-center {
    color: #73738a;
   }
 }
+.page-footer{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
 .input-city{
   padding: 0 18px;
   height: 56px;
@@ -239,6 +246,8 @@ div.command-center {
     }
   }
 }
+
+
 
 @media only screen and (max-width:600px) {
   .custom-tabs{
