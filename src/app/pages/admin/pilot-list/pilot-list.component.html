@@ -122,8 +122,8 @@
              </div>
            </div>
          </div>
-        <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (click)="getSpecificPilots()"></pagination>
-         <!-- <div class="custom-table">
+        <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+        <!-- <div class="custom-table">
 
         <div class="table" *ngIf="pilotList && pilotList.length">
           <div class="table-header mBottom25 for-seven-columns ">
