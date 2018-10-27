@@ -47,14 +47,14 @@
           </i>
           </span>
         </div>
-  
+
         <ul class="list-unstyled components">
 
             <li class="nav-item notAvailable">
                 <a class="nav-link">
-                  <span><i class="fa fa-tachometer"></i> 
+                  <span><i class="fa fa-tachometer"></i>
                     <span class="inner-item" *ngIf="isOpen">Dashboard</span>
-                    
+
                   </span>
                 </a>
               </li>
@@ -72,7 +72,7 @@
                     <span *ngIf="isOpen" class="badge-value">3</span>
                     <span *ngIf="!isOpen" class="small-badge">3</span>
                      </span>
-                     
+
                 </a>
               </li>
               <li class="nav-item">
@@ -82,9 +82,9 @@
                       </span>
                   </a>
                 </li>
-              <li class="nav-item notAvailable">
-                <a class="nav-link">
-                  <span><i class="fa fa-comment-o"></i> 
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['communication']"  [routerLinkActive]="['active-sidebarlink']">
+                  <span><i class="fa fa-comment-o"></i>
                     <span class="inner-item" *ngIf="isOpen">Communications</span></span>
                 </a>
               </li>
@@ -95,7 +95,7 @@
                     </span>
                 </a>
               </li>
-  
+
           <li class="nav-item">
               <a class="nav-link" [routerLink]="['command-center']" [routerLinkActive]="['active-sidebarlink']">
                 <span><i class="fa fa-user-o" aria-hidden="true"></i>
@@ -106,5 +106,5 @@
 
         </ul>
     </nav>
-  
+
   </div>

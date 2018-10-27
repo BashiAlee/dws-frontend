@@ -17,10 +17,11 @@ import { EmptyLayoutComponent } from './components/layout/empty-layout/empty-lay
 import { AdminAuthGuard } from './components/admin-auth/admin-auth.guard';
 import { SendEmailComponent } from './pages/send-email/send-email.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import {CommunicationComponent} from './pages/admin/communication/communication.component';
 
 const routes: Routes = [
-  { 
-    path: '', 
+  {
+    path: '',
     component: BlankLayoutComponent,
     children: [
       { path: '', redirectTo: 'loginpilot',pathMatch:'full' },
@@ -30,10 +31,10 @@ const routes: Routes = [
       { path: 'signuppilot', component: SignupComponent }
     ]
 },
-  { 
-    
-    path: 'user', 
-    
+  {
+
+    path: 'user',
+
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
@@ -43,44 +44,45 @@ const routes: Routes = [
       {path:'profile/:id' ,component: ProfileComponent, loadChildren: ()=>ProfileModule,canActivate: [AuthGuard]},
     ]
 },
-{ 
-  path: 'admin', 
-  
+{
+  path: 'admin',
+
   component: MainLayoutComponent,
   children: [
     { path: 'command-center', component: CommandCenterComponent ,canActivate: [AdminAuthGuard]},
+    {path: 'communication', component: CommunicationComponent, canActivate: [AdminAuthGuard]},
     { path: 'pilot-list', component: PilotListComponent ,canActivate: [AdminAuthGuard]},
     { path: 'profile', redirectTo:'profile/:id', pathMatch:'full',canActivate: [AdminAuthGuard] },
     {path:'profile/:id' ,component: ProfileComponent, loadChildren: ()=>ProfileModule,canActivate: [AdminAuthGuard]},
-   
+
   ]
 },
 
 {
-  path: 'panel', 
-  
+  path: 'panel',
+
   component: EmptyLayoutComponent,
   children: [
     { path: 'admin', component: AdminLoginComponent},
-   
+
   ]
 
 },
-{ 
-  path: 'email-verification', 
-  
+{
+  path: 'email-verification',
+
   component: VerificationComponent,
 
 },
-{ 
-  path: 'send-email', 
-  
+{
+  path: 'send-email',
+
   component: SendEmailComponent,
 
 },
-{ 
-  path: 'forget-password', 
-  
+{
+  path: 'forget-password',
+
   component: ForgetPasswordComponent,
 
 },

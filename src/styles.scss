@@ -65,8 +65,15 @@
   src:url("./assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf");
   font-weight: normal;
   font-style: normal;
+
 }
 
+@font-face {
+  font-family: 'CarroisGothic-Regular';
+  src:url("./assets/fonts/CarroisGothic-Regular/CarroisGothic-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
 html,body,app-root,.alignItems{
   // min-height: 100vh;
   // height:100%;
@@ -1101,7 +1108,7 @@ button:disabled {
 }
 
 .marginAuto {
-  margin:  0 auto;
+  margin: 0 auto !important;
 }
 
 

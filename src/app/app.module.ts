@@ -32,6 +32,7 @@ import { EmptyLayoutComponent } from './components/layout/empty-layout/empty-lay
 import { SendEmailComponent } from './pages/send-email/send-email.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { PaginationModule } from 'ngx-bootstrap';
+import { CommunicationComponent } from './pages/admin/communication/communication.component';
 // import { CroppieComponent } from './components/croppie/croppie.component';
 
 
@@ -58,7 +59,8 @@ import { PaginationModule } from 'ngx-bootstrap';
     AdminLoginComponent,
     EmptyLayoutComponent,
     SendEmailComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    CommunicationComponent
     // CroppieComponent
   ],
   imports: [
