@@ -95,11 +95,12 @@ header{
   border-right: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   display: grid;
-  height: 692px;
+  height: 802px;
  @include scroll;
   .aside-scroll-child{
     overflow: auto;
-    max-height: 692px;
+    max-height: 100%;
+    @include scroll;
   }
   .sidebar-image-container{
     display: grid;
@@ -179,16 +180,22 @@ header{
     .mattie-img-text{
       padding-left: 21px;
       padding-top: 15px;
+      .gray-msg-div{
+        display: grid;
+        justify-content: left;
+      }
       &>:first-child{
         color: $grayPara;
         margin-left: 17px;
       }
       &>:last-child{
-        background: #fafafa;
-        color: black;
-        margin-top: 15px;
-        padding: 15px 20px;
-        border-radius: 30px;
+        p{
+          background: #fafafa;
+          color: black;
+          margin-top: 15px;
+          padding: 15px 20px;
+          border-radius: 30px;
+        }
       }
     }
   }
@@ -200,17 +207,23 @@ header{
     .mattie-img-text{
       padding-right: 21px;
       padding-top: 15px;
+      .blue-msg-div{
+        display: grid;
+        justify-content: right;
+      }
       &>:first-child{
         color: $grayPara;
         margin-right: 17px;
         text-align: right;
       }
       &>:last-child{
-        background: $skyColor;
-        color: white;
-        margin-top: 15px;
-        padding: 15px 20px;
-        border-radius: 30px;
+        p{
+          background: $skyColor;
+          color: white;
+          margin-top: 15px;
+          padding: 15px 20px;
+          border-radius: 30px;
+        }
       }
     }
     .john-img{
