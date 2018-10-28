@@ -92,11 +92,15 @@ header{
   }
 }
 .aside-body-div{
-  display: grid;
-  overflow: auto;
-  max-height: 692px;
+  border-right: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
+  display: grid;
+  height: 692px;
  @include scroll;
+  .aside-scroll-child{
+    overflow: auto;
+    max-height: 692px;
+  }
   .sidebar-image-container{
     display: grid;
     padding: 16px 10px 15px 25px;
@@ -258,6 +262,15 @@ header{
 @media screen and (max-width:1170px) {
   .section-body{
     grid-template-columns: none;
+  }
+}
+@media screen and (max-height: 693px){
+  .aside-body-div{
+    .sidebar-image-container{
+      &:last-child{
+        border-bottom: 1px solid lightgray;
+      }
+    }
   }
 }
 @media only screen and (max-width: 360px) {
