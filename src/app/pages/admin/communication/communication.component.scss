@@ -67,6 +67,8 @@ header{
   grid-template-columns: 28% 72%;
   grid-template-rows: auto auto;
   background-color: #fff;
+  margin-bottom: 50px;
+  border-radius: 9px;
 }
 .aside-header-div{
   display: grid;
@@ -93,7 +95,6 @@ header{
 }
 .aside-body-div{
   border-right: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
   display: grid;
   height: 802px;
  @include scroll;
