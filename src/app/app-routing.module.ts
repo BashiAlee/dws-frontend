@@ -39,6 +39,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'user', redirectTo:'dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
+          {path: 'communication', component: CommunicationComponent, canActivate: [AuthGuard]},
       { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard] },
       { path: 'profile', redirectTo:'profile/:id', pathMatch:'full',canActivate: [AuthGuard] },
       {path:'profile/:id' ,component: ProfileComponent, loadChildren: ()=>ProfileModule,canActivate: [AuthGuard]},

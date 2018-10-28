@@ -12,75 +12,75 @@
               <input type="text" class="aside-header-input" placeholder="Search Pilot">
               <button type="submit" class="aside-input-search-btn"><i class="fa fa-search"></i></button>
             </div>
-            <div  class="aside-body-div">
+              <div class="aside-body-div" *ngFor="let currentList of currentUserMessages" (click)="getAllMessages(currentList)">
               <div class="sidebar-image-container">
                 <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <div class="sidebar-img-text">
-                  <p>Margaret Soto</p>
-                  <p>Survey shows two thirds of..</p>
+                  <p>{{ currentList.SenderFirstName +' '+currentList.SenderMiddleName+' '+currentList.SenderLastName  }}</p>
+                  <p>{{ currentList.Message }}</p>
                 </div>
               </div>
-              <div class="sidebar-image-container">
+              <!-- <div class="sidebar-image-container">
                 <img  src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <div class="sidebar-img-text">
                   <p>Mittie Watson</p>
                   <p>The Trust about hemorrohids</p>
                 </div>
-              </div>
-              <div class="sidebar-image-container">
+              </div> -->
+              <!-- <div class="sidebar-image-container">
                 <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <div class="sidebar-img-text">
                   <p>John Doe</p>
                   <p>Hey? What's Up?</p>
                 </div>
-              </div>
-              <div class="sidebar-image-container">
+              </div> -->
+              <!-- <div class="sidebar-image-container">
                 <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <div class="sidebar-img-text">
                   <p>Margaret Soto</p>
                   <p>Survey shows two thirds of..</p>
                 </div>
-              </div>
-              <div class="sidebar-image-container">
+              </div> -->
+              <!-- <div class="sidebar-image-container">
                 <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <div class="sidebar-img-text">
                   <p>John Doe</p>
                   <p>Hey? What's Up?</p>
                 </div>
-              </div>
-              <div class="sidebar-image-container">
+              </div> -->
+              <!-- <div class="sidebar-image-container">
                 <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <div class="sidebar-img-text">
                   <p>Margaret Soto</p>
                   <p>Survey shows two thirds of..</p>
                 </div>
-              </div>
-              <div class="sidebar-image-container">
+              </div> -->
+              <!-- <div class="sidebar-image-container">
                 <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <div class="sidebar-img-text">
                   <p>Margaret Soto</p>
                   <p>Survey shows two thirds of..</p>
                 </div>
-              </div>
-              <div class="sidebar-image-container">
+              </div> -->
+              <!-- <div class="sidebar-image-container">
                 <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <div class="sidebar-img-text">
                   <p>Margaret Soto</p>
                   <p>Survey shows two thirds of..</p>
                 </div>
-              </div>
-              <div class="sidebar-image-container">
+              </div> -->
+              <!-- <div class="sidebar-image-container">
                 <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <div class="sidebar-img-text">
                   <p>Margaret Soto</p>
                   <p>Survey shows two thirds of..</p>
                 </div>
+              </div> -->
               </div>
-            </div>
           </div>
           <div class="mattie">
             <div class="mattie-header">
-              <p class="mattie-heading">Mattie Watson</p>
+              <p class="mattie-heading">{{selectedSenderChatName}}</p>
               <div class="mattie-header-select-container">
                 <select class="mattie-header-select">
                   <option>10-Dec 2017</option>
@@ -90,9 +90,9 @@
                 <i class="fa fa-angle-down"></i>
               </div>
             </div>
-            <div class="mattie-body">
-              <div class="matti-scroll-container">
-                <div class="mattie-scroll-container-div">
+              <div class="mattie-body" >
+                <div class="matti-scroll-container" >
+                <!-- <div class="mattie-scroll-container-div">
                   <div class="matti-image-container">
                     <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                     <div class="mattie-img-text">
@@ -100,17 +100,19 @@
                       <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
                     </div>
                   </div>
-                </div>
-                <div class="mattie-scroll-container-div">
-                  <div class="matti-image-container">
-                    <img src="../../../../assets/images/avatar.png" class="sidebar-img">
+                </div> -->
+<!-- *ngIf="onlineUserId != messages.MessageFrom" -->
+            <div class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId">
+              <div [ngClass]="(onlineUserId != messages.MessageFrom )?'matti-image-container':'john-image-container'">
+<img src="../../../../assets/images/avatar.png" [ngClass]="(onlineUserId != messages.MessageFrom )?'sidebar-img':'sidebar-img john-img'">
+<!--left-->
                     <div class="mattie-img-text">
                       <p>11:00 am</p>
-                      <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
+                      <p>{{ messages.Message }}</p>
                     </div>
                   </div>
                 </div>
-                <div class="mattie-scroll-container-div">
+                <!-- <div class="mattie-scroll-container-div">
                   <div class="john-image-container">
                     <img src="../../../../assets/images/avatar.png" class="sidebar-img john-img">
                     <div class="mattie-img-text">
@@ -118,17 +120,17 @@
                       <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
                     </div>
                   </div>
-                </div>
-                <div class="mattie-scroll-container-div">
+                </div> -->
+                <!-- <div class="mattie-scroll-container-div" *ngIf="onlineUserId == messages.MessageFrom">
                   <div class="john-image-container">
                     <img src="../../../../assets/images/avatar.png" class="sidebar-img john-img">
                     <div class="mattie-img-text">
                       <p>11:00 am</p>
-                      <p>Vitamin B A Complex Mix</p>
+                      <p>{{ messages.Message }}</p>
                     </div>
                   </div>
-                </div>
-                <div class="mattie-scroll-container-div">
+                </div> -->
+                <!-- <div class="mattie-scroll-container-div">
                   <div class="matti-image-container">
                     <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                     <div class="mattie-img-text">
@@ -136,12 +138,12 @@
                       <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="matti-body-input-div">
-              <input type="text" class="matti-body-input" placeholder="Type your message here">
-              <button class="matti-body-input-btn"><i class="fa fa-paper-plane"></i></button>
+              <input type="text" class="matti-body-input" placeholder="Type your message here" [(ngModel)]="message">
+              <button class="matti-body-input-btn"(click)="sendMessage(message)"><i class="fa fa-paper-plane"></i></button>
             </div>
           </div>
         </div>

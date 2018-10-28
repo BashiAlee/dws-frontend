@@ -33,6 +33,7 @@ import { SendEmailComponent } from './pages/send-email/send-email.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { PaginationModule } from 'ngx-bootstrap';
 import { CommunicationComponent } from './pages/admin/communication/communication.component';
+import {MessagesService} from './services/messages/messages.service';
 // import { CroppieComponent } from './components/croppie/croppie.component';
 
 
@@ -75,7 +76,7 @@ import { CommunicationComponent } from './pages/admin/communication/communicatio
     PaginationModule.forRoot()
   ],
   entryComponents: [ModalsComponent],
-  providers: [AuthenticationService, AuthGuard],
+  providers: [AuthenticationService, AuthGuard, MessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
