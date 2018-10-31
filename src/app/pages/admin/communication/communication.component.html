@@ -120,7 +120,9 @@
                     <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                     <div class="mattie-img-text">
                       <p>11:00 am</p>
-                      <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
+                      <div class="gray-msg-div">
+                        <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
+                      </div>
                     </div>
                   </div>
                 </div> -->
@@ -135,6 +137,7 @@
                     <div class="mattie-img-text">
                       <p>{{ messages.MessageTime | date: 'hh:mma' }}</p>
                       <p>{{ messages.Message }}</p>
+
                     </div>
                   </div>
                 </div>
@@ -143,7 +146,9 @@
                     <img src="../../../../assets/images/avatar.png" class="sidebar-img john-img">
                     <div class="mattie-img-text">
                       <p>11:00 am</p>
+                      <div class="blue-msg-div">
                       <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
+                      </div>
                     </div>
                   </div>
                 </div> -->
@@ -151,8 +156,15 @@
                   <div class="john-image-container">
                     <img src="../../../../assets/images/avatar.png" class="sidebar-img john-img">
                     <div class="mattie-img-text">
+
                       <p>11:00 am</p>
                       <p>{{ messages.Message }}</p>
+
+                      <p>11:00 am </p>
+                      <div class="blue-msg-div">
+                        <p>Vitamin B A Complex Mix</p>
+                      </div>
+
                     </div>
                   </div>
                 </div> -->
@@ -161,16 +173,20 @@
                     <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                     <div class="mattie-img-text">
                       <p>11:00 am</p>
-                      <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
+                      <div class="gray-msg-div">
+                        <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
+                      </div>
                     </div>
                   </div>
                 </div> -->
               </div>
             </div>
+
           </div>
           <div class="matti-body-input-div">
             <input [(ngModel)]="message" type="text" [ngClass]="(activeClass)?'input-active':''" class="matti-body-input" placeholder="Type your message here">
             <button class="matti-body-input-btn" (click)="sendMessage(message)" [ngClass]="(!message)?'disabled-btn':''" [disabled]="!message"><i class="fa fa-paper-plane"></i></button>
+
           </div>
         </div>
       </section>

@@ -221,17 +221,17 @@ export class ExperiencePortfolioComponent implements OnInit {
   loaders: any = {};
   @ViewChild('myInput')
 myInputVariable: ElementRef;
-  constructor(private formBuilder: FormBuilder, private profileService: ProfileService, 
-    private route: ActivatedRoute, private sanitize: DomSanitizer, 
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService,
+    private route: ActivatedRoute, private sanitize: DomSanitizer,
     private modalService: BsModalService,
-    private authService: AuthenticationService, private router: Router) { 
+    private authService: AuthenticationService, private router: Router) {
       if(this.router.url.split('/')[1] =='admin') {
         this.isAdmin = true;
       }
       this.route.parent.url.subscribe((urlPath) => {
         this.id = parseInt(urlPath[1].path);
     })
-    $('html, body').stop().animate({scrollTop: 0}, 500);   
+    $('html, body').stop().animate({scrollTop: 0}, 500);
     }
 
   ngOnInit() {
@@ -319,7 +319,7 @@ myInputVariable: ElementRef;
             } else {
               value.Path =  this.GetVimeoIDbyUrl(value.Path);
               this.loaders.VideosLoader = false;
-            }  
+            }
              this.videosList.push(value)
           } else {
             this.loaders.VideosLoader = false;
@@ -361,7 +361,7 @@ myInputVariable: ElementRef;
           // this.porfolioData.TravelOutsideUs =  this.porfolioData.TravelOutsideUs == '1'
 
           this.experiencePorfolioInformation.patchValue(Object.assign({}, this.porfolioData));
-         
+
         }
       }
     );
@@ -385,7 +385,7 @@ myInputVariable: ElementRef;
       .subscribe(
         data => {
           if(data.status) {
-      
+
                 this.getPortfolioImagesVideosByID(this.id)
                 this.addVideo.patchValue({
                   Title: '',
@@ -394,7 +394,7 @@ myInputVariable: ElementRef;
                   Type: ''
                 });
                 this.loaders.addVideoLoader = false;
-         
+
           } else {
             this.loaders.addVideoLoader = false;
           }
@@ -419,7 +419,7 @@ myInputVariable: ElementRef;
             if (this.addPhotos.invalid) {
               this.loaders.addPhotoLoader = false;
               return;
-              
+
             }
             this.profileService.addProfilioImagesVideos(this.addPhotos.value)
             .subscribe(
@@ -501,11 +501,11 @@ myInputVariable: ElementRef;
         reader.onload = (event:any) => {
           console.log("DDD", event.target.result)
           this.images.HeadshotImage = event.target.result;
-         
+
         }
         reader.readAsDataURL(file.target.files[0]);
       }
-    
+
       this.imageFiles.headshotImage = file;
       this.profileService.uploadProfilePicture(this.imageFiles.headshotImage)
       .subscribe(
@@ -568,7 +568,7 @@ myInputVariable: ElementRef;
     UserId: this.id
     });
     var data = {
-      UserId: this.porfolioData.UserId,
+      UserId: this.id,
       PilotId: this.porfolioData.PilotId,
       WorkOffered: this.selectedWorkOffered
     }
@@ -645,7 +645,7 @@ myInputVariable: ElementRef;
       class: 'custom-modal modal-dialog-centered modal-lg'
     }
     this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-  
+
 }
   uploadCoverImage(file, type) {
     if(type=='headshot') {
@@ -655,12 +655,12 @@ myInputVariable: ElementRef;
       this.imageChangedEventHeadShot = file;
       if (file.target.files && file.target.files[0]) {
         var reader = new FileReader();
-  
+
         reader.onload = (event: any) => {
           this.croppieDirective.croppie.bind({ url: event.target.result});
           // this.headShotPicture = event.target.result
           // this.displayPicture = event.target.result;
-         
+
         }
         reader.readAsDataURL(file.target.files[0]);
       }
@@ -672,12 +672,12 @@ myInputVariable: ElementRef;
       this.imageChangedPersonalPicture = file;
       if (file.target.files && file.target.files[0]) {
         var reader = new FileReader();
-  
+
         reader.onload = (event: any) => {
           this.croppieDirective.croppie.bind({ url: event.target.result});
           // this.headShotPicture = event.target.result
           // this.displayPicture = event.target.result;
-         
+
         }
         reader.readAsDataURL(file.target.files[0]);
       }
@@ -698,7 +698,7 @@ myInputVariable: ElementRef;
       this.updateVideos = true;
       this.addVideo.patchValue(Object.assign({}, value));
     }
-    
+
   }
   updatePhotosByID() {
     this.loaders.addPhotoLoader = true;
@@ -759,10 +759,10 @@ myInputVariable: ElementRef;
               }
               this.messages.uploadingHeadShotImage = false;
             }
-  
+
           })
       })
-      
+
     }
     if(type=='other-personal'){
       this.messages.uploadingPersonalImage = true;
@@ -781,36 +781,36 @@ myInputVariable: ElementRef;
               }
               this.messages.uploadingPersonalImage = false;
             }
-  
+
           })
       })
     }
 
 
   }
-  
+
   public croppieOptions: Croppie.CroppieOptions = {
     boundary: { width: 250, height: 250 },
     viewport: { width: 200, height: 200 },
-   
+
     enableOrientation: true,
   };
   @ViewChild('croppie')
-  
-  
+
+
   public croppieDirective: CroppieDirective;
 
   handleUpdate(data, type) {
     var x = this.croppieDirective.croppie.result('canvas','original').then(function (src) {
       return src;
-      
+
   });
 
   this.deepdive(x, type);
-    
+
   }
 
-  deepdive(e, type){  
+  deepdive(e, type){
     e.then((value)=> {
       if(type=='headshot'){
         this.croppedImageData.headshotbase64 = value;

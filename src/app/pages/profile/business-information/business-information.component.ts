@@ -85,11 +85,11 @@ export class BusinessInformationComponent implements OnInit {
       'code': 'O'
     },
   ];
-  constructor(private formBuilder: FormBuilder, private router: Router,private profileSevice: ProfileService,private route: ActivatedRoute, private modalService: BsModalService, private authService: AuthenticationService) { 
+  constructor(private formBuilder: FormBuilder, private router: Router,private profileSevice: ProfileService,private route: ActivatedRoute, private modalService: BsModalService, private authService: AuthenticationService) {
     if(this.router.url.split('/')[1] =='admin') {
       this.isAdmin = true;
     }
-    $('html, body').stop().animate({scrollTop: 0}, 500);   
+    $('html, body').stop().animate({scrollTop: 0}, 500);
   }
 
   ngOnInit() {
@@ -97,34 +97,34 @@ export class BusinessInformationComponent implements OnInit {
     //   scrollTop: $(".container").offset().top
     // },
     // 'slow');
-   
+
     this.businessInformation = this.formBuilder.group({
       ID: [],
-      PilotId: [],
+      PilotId: [0],
       UserId: [this.id, Validators.required],
       BusinessName: [''],
       BusinessType: ['', Validators.required],
       PhysicallAddressLine1: ['', Validators.required],
       PhysicallAddressLine2: ['', Validators.required],
-      PhysicallCountry: [''],
+      PhysicallCountry: [0],
       PhysicallCity: [''],
-      PhysicallState: ['', Validators.required],
+      PhysicallState: [0, [Validators.required]],
       PhysicallZip: ['', Validators.required],
       SameAsPhysical: [0],
       MailingAddressLine1: ['', Validators.required],
       MailingAddressLine2: ['', Validators.required],
-      MailingCountry: ['', Validators.required],
+      MailingCountry: [0, Validators.required],
       MailingCity: [''],
-      MailingState: ['', [Validators.required]],
+      MailingState: [0, [Validators.required]],
       MailingZip: ['', Validators.required],
       BusinessPhoneNumberPrimary: [''],
       BusinessPhoneNumberSecondary: [''],
-      StateRegisteredIn: [''],
+      StateRegisteredIn: [0],
       BusinessStartDate: [''],
-      GeneralLiabilityInsurance: [0],
-      ProfessionalLiabilityInsurance: [0],
-      WorksmanCompInsurance: [0],
-      CommercialAutoInsurance: [0],
+      GeneralLiabilityInsurance: ['0'],
+      ProfessionalLiabilityInsurance: ['0'],
+      WorksmanCompInsurance: ['0'],
+      CommercialAutoInsurance: ['0'],
       BusinessLogo: [''],
       Notes: ['']
       // password: ['', [Validators.required, Validators.minLength(6)]]
@@ -146,7 +146,7 @@ export class BusinessInformationComponent implements OnInit {
             // this.getRegionByCode(this.businessData.m1Country);
             if(this.businessData.PhysicallCountry) {
               this.getStatesByCode('physical',this.businessData.PhysicallCountry,'onload')
-            } 
+            }
             if(this.businessData.MailingCountry) {
               this.getStatesByCode('mailing',this.businessData.MailingCountry,'onload')
             }
@@ -154,7 +154,7 @@ export class BusinessInformationComponent implements OnInit {
             this.displayPicture = this.businessData.BusinessLogo;
             this.businessInformation.patchValue(Object.assign({}, this.businessData));
 
-          
+
 
         } else {
           this.businessData = [];
@@ -166,12 +166,12 @@ export class BusinessInformationComponent implements OnInit {
   getStatesByCode(type,code, value) {
     if(value== 'change' && type == 'physical') {
       this.businessInformation.patchValue({
-        PhysicallState: ''
+        PhysicallState: 0
       })
     }
     if(value== 'change' && type == 'mailing') {
       this.businessInformation.patchValue({
-        MailingState: ''
+        MailingState: 0
       })
     }
     this.profileSevice.getStatesByCode(code)
@@ -180,10 +180,10 @@ export class BusinessInformationComponent implements OnInit {
         if(data.status) {
           if(type == 'physical') {
             this.physicalRegionList = data.result;
-           
+
           } else if (type =='mailing') {
             this.mailingRegionList = data.result;
-           
+
           }
           // this.regionList = data.Result;
         } else {
@@ -208,15 +208,15 @@ export class BusinessInformationComponent implements OnInit {
   }
 
   uploadImage(file) {
-      
+
     this.imageFile = file;
           if (file.target.files && file.target.files[0]) {
             var reader = new FileReader();
-        
+
             reader.onload = (event:any) => {
               this.businessImage = event.target.result;
             }
-        
+
             reader.readAsDataURL(file.target.files[0]);
           }
 
@@ -243,7 +243,7 @@ export class BusinessInformationComponent implements OnInit {
         class: 'custom-modal modal-dialog-centered modal-lg'
       }
       this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-    
+
   }
 
     save() {
@@ -269,8 +269,9 @@ export class BusinessInformationComponent implements OnInit {
       // this.businessInformation.value.ProfessionalLiabilityInsurance = this.businessInformation.value.ProfessionalLiabilityInsurance.toString()
       // this.businessInformation.value.WorksmanCompInsurance = this.businessInformation.value.WorksmanCompInsurance.toString()
       // this.businessInformation.value.CommercialAutoInsurance = this.businessInformation.value.CommercialAutoInsurance.toString()
-      // this.businessInformation.value.BusinessPhoneNumberPrimary = this.businessInformation.value.BusinessPhoneNumberPrimary.toString();
-      // this.businessInformation.value.BusinessPhoneNumberSecondary = this.businessInformation.value.BusinessPhoneNumberSecondary.toString();
+      this.businessInformation.value.BusinessPhoneNumberPrimary = this.businessInformation.value.BusinessPhoneNumberPrimary.toString();
+      this.businessInformation.value.BusinessPhoneNumberSecondary = this.businessInformation.value.BusinessPhoneNumberSecondary.toString();
+      // this.businessInformation.value.PilotId = 0;
       if(this.imageFile) {
         this.profileSevice.uploadProfilePicture(this.imageFile)
         .subscribe(data => {
@@ -298,8 +299,8 @@ export class BusinessInformationComponent implements OnInit {
                 this.bsModalRef.content.closeBtnName = 'Close';
               }
 
-              
-              
+
+
             })
           } else if(!data.status){
             const initialState = {
@@ -309,7 +310,7 @@ export class BusinessInformationComponent implements OnInit {
             this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
             this.bsModalRef.content.closeBtnName = 'Close';
           }
-    
+
         });
       } else {
         this.profileSevice.updateBusinessInformation(this.businessInformation.value)
@@ -330,12 +331,12 @@ export class BusinessInformationComponent implements OnInit {
               this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
               this.bsModalRef.content.closeBtnName = 'Close';
             }
-          
-          
+
+
         })
       }
-  
-  
+
+
     }
 
     uploadCoverImage(file) {
@@ -345,11 +346,11 @@ export class BusinessInformationComponent implements OnInit {
       this.imageChangedEvent = file;
       if (file.target.files && file.target.files[0]) {
         var reader = new FileReader();
-  
+
         reader.onload = (event: any) => {
           this.croppieDirective.croppie.bind({ url: event.target.result});
           // this.displayPicture = event.target.result;
-         
+
         }
         reader.readAsDataURL(file.target.files[0]);
       }
@@ -371,43 +372,43 @@ export class BusinessInformationComponent implements OnInit {
               }
               this.messages.uploadingImage = false;
             }
-  
+
           })
       })
-  
+
     }
-    
+
     public croppieOptions: Croppie.CroppieOptions = {
       boundary: { width: 250, height: 250 },
       viewport: { width: 200, height: 200 },
-     
+
       enableOrientation: true,
     };
     @ViewChild('croppie')
-    
-    
+
+
     public croppieDirective: CroppieDirective;
-  
+
     handleUpdate(data) {
       var x = this.croppieDirective.croppie.result('canvas','original').then(function (src) {
         return src;
-        
+
     });
-  
+
     this.deepdive(x);
-      
+
     }
 
-    deepdive(e){  
+    deepdive(e){
       e.then((value)=> {
         this.croppedImageData.base64 = value;
        this.croppedImage = value;
        this.displayPicture = value;
       });
-  
+
     }
-    
-    
+
+
     goBack() {
       this.router.navigate(['/user/profile/'+this.id+'/personal-information']);
     }
@@ -421,6 +422,6 @@ export class BusinessInformationComponent implements OnInit {
         this.displayPicture = "";
       })
     }
-  
+
 
 }

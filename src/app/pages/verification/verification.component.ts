@@ -24,14 +24,14 @@ export class VerificationComponent implements OnInit {
     var url = new URL(url_string);
     this.token = url.searchParams.get("token");
     this.verifyToken(this.token)
-    
+
   }
 
   verifyToken(token) {
     this.authService.verifyToken(token)
     .subscribe( data=> {
       if(data.status) {
-        this.router.navigate(['/logincustomer']);
+        this.router.navigate(['/loginpilot']);
       } else if (!data.status) {
         const initialState = {
           type: 'error'
