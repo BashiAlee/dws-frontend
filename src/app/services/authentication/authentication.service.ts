@@ -40,6 +40,10 @@ export class AuthenticationService {
     return JSON.parse(localStorage.getItem('user'));
   }
 
+  getCurrentAdmin(){
+    return JSON.parse(localStorage.getItem("admin"));
+  }
+
   logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('admin');

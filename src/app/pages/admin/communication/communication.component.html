@@ -4,19 +4,38 @@
       <section>
         <header>
           <p>Pilots</p>
-          <button class="header-chat-btn">Start a new chat</button>
+        <button class="header-chat-btn" (click)="stratChat(template)">Start a new chat</button>
         </header>
         <div class="section-body">
-          <div>
+          <div class="side-panel">
+            <ng-template #template>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">Search User To Message</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                    <div class="aside-header-div">
+                      <input [(ngModel)]="searchUser" type="text" class="aside-header-input" placeholder="Search User">
+                        <button type="submit" class="aside-input-search-btn" (click)="adminSearchUser(searchUser)" [disabled]="!searchUser"><i class="fa fa-search"></i></button>
+                    </div>
+
+                      <li *ngFor="let user of resultSearchedUser" (click)="selectUser(user)">
+                        <span class="badge">{{user.FirstName}} {{user.MiddleName}} {{user.LastName}}</span>
+                      </li>
+              </div>
+            </ng-template>
             <div class="aside-header-div">
               <input type="text" class="aside-header-input" placeholder="Search Pilot">
               <button type="submit" class="aside-input-search-btn"><i class="fa fa-search"></i></button>
             </div>
-              <div class="aside-body-div" *ngFor="let currentList of currentUserMessages" (click)="getAllMessages(currentList)">
-            <div class="aside-body-div">
-              <div class="aside-scroll-child">
+              <div class="aside-body-div">
+            <div>
+              <div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages" (click)="getAllMessages(currentList)">
               <div class="sidebar-image-container">
-                <img src="../../../../assets/images/avatar.png" class="sidebar-img">
+<img *ngIf="!currentList.ProfileImage" src="../../../../assets/images/avatar.png" class="sidebar-img">
+                <img *ngIf="currentList.ProfileImage" [src]="currentList.ProfileImage" class="sidebar-img">
                 <div class="sidebar-img-text">
                   <p>{{ currentList.SenderFirstName +' '+currentList.SenderMiddleName+' '+currentList.SenderLastName  }}</p>
                   <p>{{ currentList.Message }}</p>
@@ -87,15 +106,15 @@
               <p class="mattie-heading">{{selectedSenderChatName}}</p>
               <div class="mattie-header-select-container">
                 <select class="mattie-header-select">
-                  <option>10-Dec 2017</option>
-                  <option>20-Dec 2017</option>
-                  <option>30-Dec 2017</option>
+                  <option>{{ lastMessageDate | date: 'd-MMMM yyyy' }}</option>
+                  <!-- <option>20-Dec 2017</option> -->
+                  <!-- <option>30-Dec 2017</option> -->
                 </select>
                 <i class="fa fa-angle-down"></i>
               </div>
             </div>
-              <div class="mattie-body" >
-                <div class="matti-scroll-container" >
+<div class="mattie-body" id="messages-scroll">
+<div class="matti-scroll-container" >
                 <!-- <div class="mattie-scroll-container-div">
                   <div class="matti-image-container">
                     <img src="../../../../assets/images/avatar.png" class="sidebar-img">
@@ -106,12 +125,15 @@
                   </div>
                 </div> -->
 <!-- *ngIf="onlineUserId != messages.MessageFrom" -->
-            <div class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId">
+        <div class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId">
               <div [ngClass]="(onlineUserId != messages.MessageFrom )?'matti-image-container':'john-image-container'">
-<img src="../../../../assets/images/avatar.png" [ngClass]="(onlineUserId != messages.MessageFrom )?'sidebar-img':'sidebar-img john-img'">
+                <!-- [src]="(onlineUserId != messages.MessageFrom)?messages.UserToDetail.ProfileImage:messages.UserFromDetail.ProfileImage" -->
+              <img src="../../../../assets/images/avatar.png" [ngClass]="(onlineUserId != messages.MessageFrom )?'sidebar-img':'sidebar-img john-img'">
+<!-- <img *ngIf="!messages.UserFromDetail.ProfileImage || messages.UserToDetail.ProfileImage" src="../../../../assets/images/avatar.png"
+  [ngClass]="(onlineUserId != messages.MessageFrom )?'sidebar-img':'sidebar-img john-img'"> -->
 <!--left-->
                     <div class="mattie-img-text">
-                      <p>11:00 am</p>
+                      <p>{{ messages.MessageTime | date: 'hh:mma' }}</p>
                       <p>{{ messages.Message }}</p>
                     </div>
                   </div>
@@ -147,8 +169,8 @@
             </div>
           </div>
           <div class="matti-body-input-div">
-            <input type="text" class="matti-body-input" placeholder="Type your message here">
-            <button class="matti-body-input-btn"><i class="fa fa-paper-plane"></i></button>
+            <input [(ngModel)]="message" type="text" [ngClass]="(activeClass)?'input-active':''" class="matti-body-input" placeholder="Type your message here">
+            <button class="matti-body-input-btn" (click)="sendMessage(message)" [ngClass]="(!message)?'disabled-btn':''" [disabled]="!message"><i class="fa fa-paper-plane"></i></button>
           </div>
         </div>
       </section>

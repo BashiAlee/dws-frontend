@@ -24,10 +24,47 @@ export class MessagesService {
       );
   }
 
-
-  getAllMessagesByConversationId(data){
+  getMessagesListOfCurrentUserAdmin() {
     return this.http
-      .get(this.apiUrl + "pilot/allMessages/" + data)
+      .get(this.apiUrl + "admin/listMessage")
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        })
+      );
+  }
+
+
+  getAllMessagesByConversationId(data,userid){
+    return this.http
+      .get(this.apiUrl + "pilot/allMessages/" + data+ "/" +userid)
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        })
+      );
+  }
+
+  sendMessageToAdmin(data){
+    return this.http.post(this.apiUrl + 'pilot/messageAdmin', data)
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
+  }
+
+  sendMessageToUser(data){
+    return this.http
+      .post(this.apiUrl + "admin/messagePilot", data)
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        })
+      );
+  }
+
+  adminSearchUser(data){
+    return this.http
+      .get(this.apiUrl + "admin/searchUser/" + data)
       .pipe(
         map((response: any) => {
           return response.json();

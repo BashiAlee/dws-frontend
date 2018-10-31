@@ -1,3 +1,4 @@
+import { CommunicationComponent } from './../../pages/admin/communication/communication.component';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Router } from '@angular/router';
@@ -20,7 +21,7 @@ export class HeaderComponent implements OnInit {
       this.userInfo = this.authService.getCurrentUser();
       // this.check(this.userInfo.ProfileImage)
     }
-   
+
   }
 
   check(url) {
@@ -33,6 +34,6 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  
+
 
 }

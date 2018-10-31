@@ -68,12 +68,16 @@ header{
   grid-template-rows: auto auto;
   background-color: #fff;
 }
+.side-panel{
+  grid-column: 1/2;
+  grid-row: 1/3;
+  border-right: 1px solid lightgray;
+}
 .aside-header-div{
   display: grid;
   grid-template-columns: 80% auto;
   padding: 19px 10px 14px 10px;
   align-items: center;
-  border-right:1px solid $grayBorder;
   border-bottom:1px solid $grayBorder;
 }
 .aside-header-input{
@@ -92,14 +96,12 @@ header{
   }
 }
 .aside-body-div{
-  border-right: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
-  display: grid;
   height: 692px;
  @include scroll;
   .aside-scroll-child{
     overflow: auto;
     max-height: 692px;
+    cursor: pointer;
   }
   .sidebar-image-container{
     display: grid;
@@ -227,7 +229,7 @@ header{
   height: 110px;
   padding: 0 20px;
   grid-gap: 12px;
-  grid-column: 1/3;
+  grid-column: 2/3;
   .matti-body-input{
     padding:25px;
     font-size: 15px;
@@ -235,6 +237,9 @@ header{
     outline: none;
     border: none;
     background: $lightGray;
+  }
+  .input-active{
+    border: 2px solid $skyColor;
   }
   .matti-body-input-btn{
     background: $skyColor;
@@ -255,6 +260,16 @@ header{
       border: 1px solid $skyColor;
       .fa-paper-plane{
         color: $skyColor;
+      }
+    }
+  }
+  .disabled-btn{
+    background: $grayPara;
+    &:hover{
+      background: $grayPara;
+      border-color: white;
+      .fa-paper-plane{
+        color: white;
       }
     }
   }
