@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
   loading: any;
   constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private route: ActivatedRoute, private router: Router) {
 
-  
+
     if(this.router.url.split('/')[1]=='signuppilot') {
       this.type = 'pilot'
     }
@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
     }
    }
   ngOnInit() {
-    
+
     this.signupForm = this.formBuilder.group({
       Email: ['', [Validators.required, Validators.email]],
       FirstName: ['', Validators.required],
@@ -44,6 +44,7 @@ export class SignupComponent implements OnInit {
     this.loading = true;
     this.success = '';
     this.error = '';
+    this.signupForm.patchValue({ Role: this.type });
     delete this.signupForm.value.ConfirmPassword;
     this.authService.signup(this.signupForm.value)
     .subscribe(

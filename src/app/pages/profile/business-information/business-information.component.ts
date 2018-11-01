@@ -113,7 +113,7 @@ export class BusinessInformationComponent implements OnInit {
       SameAsPhysical: [0],
       MailingAddressLine1: ['', Validators.required],
       MailingAddressLine2: ['', Validators.required],
-      MailingCountry: [0, Validators.required],
+      MailingCountry: [0, [Validators.required]],
       MailingCity: [''],
       MailingState: [0, [Validators.required]],
       MailingZip: ['', Validators.required],
