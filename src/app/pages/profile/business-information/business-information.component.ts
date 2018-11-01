@@ -106,20 +106,20 @@ export class BusinessInformationComponent implements OnInit {
       BusinessType: ['', Validators.required],
       PhysicallAddressLine1: ['', Validators.required],
       PhysicallAddressLine2: ['', Validators.required],
-      PhysicallCountry: [0],
+      PhysicallCountry: [''],
       PhysicallCity: [''],
-      PhysicallState: [0, [Validators.required]],
+      PhysicallState: ['', [Validators.required]],
       PhysicallZip: ['', Validators.required],
       SameAsPhysical: [0],
       MailingAddressLine1: ['', Validators.required],
       MailingAddressLine2: ['', Validators.required],
-      MailingCountry: [0, [Validators.required]],
+      MailingCountry: ['', [Validators.required]],
       MailingCity: [''],
-      MailingState: [0, [Validators.required]],
+      MailingState: ['', [Validators.required]],
       MailingZip: ['', Validators.required],
       BusinessPhoneNumberPrimary: [''],
       BusinessPhoneNumberSecondary: [''],
-      StateRegisteredIn: [0],
+      StateRegisteredIn: [''],
       BusinessStartDate: [''],
       GeneralLiabilityInsurance: ['0'],
       ProfessionalLiabilityInsurance: ['0'],
@@ -150,7 +150,17 @@ export class BusinessInformationComponent implements OnInit {
             if(this.businessData.MailingCountry) {
               this.getStatesByCode('mailing',this.businessData.MailingCountry,'onload')
             }
+            if (this.businessData.PhysicallCountry < 0) {
+              this.businessData.PhysicallCountry = 231;
+              this.getStatesByCode('physical',this.businessData.PhysicallCountry,'onload')
+            }
+
+            if (this.businessData.MailingCountry < 0) {
+              this.businessData.MailingCountry = 231;
+              this.getStatesByCode('mailing',this.businessData.MailingCountry,'onload')
+            }
             // this.check(this.businessData.BusinessLogo)
+            this.businessImage = this.businessData.BusinessLogo;
             this.displayPicture = this.businessData.BusinessLogo;
             this.businessInformation.patchValue(Object.assign({}, this.businessData));
 
@@ -166,12 +176,12 @@ export class BusinessInformationComponent implements OnInit {
   getStatesByCode(type,code, value) {
     if(value== 'change' && type == 'physical') {
       this.businessInformation.patchValue({
-        PhysicallState: 0
+        PhysicallState: ''
       })
     }
     if(value== 'change' && type == 'mailing') {
       this.businessInformation.patchValue({
-        MailingState: 0
+        MailingState: ''
       })
     }
     this.profileSevice.getStatesByCode(code)
@@ -180,9 +190,27 @@ export class BusinessInformationComponent implements OnInit {
         if(data.status) {
           if(type == 'physical') {
             this.physicalRegionList = data.result;
+            if(value == 'onload' && this.businessData.PhysicallState < 0) {
+
+              this.businessInformation.patchValue({
+                PhysicallState: this.physicalRegionList[0].ID
+              })
+            }
+
+            if(this.businessData.StateRegisteredIn < 0 ) {
+              this.businessInformation.patchValue({
+                StateRegisteredIn: this.physicalRegionList[0].ID
+              })
+            }
 
           } else if (type =='mailing') {
             this.mailingRegionList = data.result;
+            if(value == 'onload' && this.businessData.MailingState < 0) {
+
+              this.businessInformation.patchValue({
+                MailingState: this.mailingRegionList[0].ID
+              })
+            }
 
           }
           // this.regionList = data.Result;

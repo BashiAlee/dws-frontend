@@ -21,7 +21,7 @@
 
         <div class="row justify-content-center">
           <div class="col-md-3 makeCenter">
-            <!-- <div class="displayPicture">
+            <div class="displayPicture">
               <img *ngIf="businessImage" [src]="businessImage" alt="business logo">
               <img *ngIf="!businessImage" src="../../../../assets/images/avatar.png" alt="business logo">
               <div class="image-upload">
@@ -31,8 +31,8 @@
 
                 <input id="file-input" type="file" (change)="uploadImage($event)" accept="image/*"/>
               </div>
-            </div> -->
-            <div class="displayPictureTop">
+            </div>
+            <!-- <div class="displayPictureTop">
                 <div class="displayPicture">
                   <img *ngIf="messages.coverImageChoosed" [src]="croppedImage" class="croppedImageDiv" />
                   <img *ngIf="displayPicture && !messages.coverImageChoosed" [src]="displayPicture" alt="Display picture" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(displayPicture)">
@@ -54,7 +54,7 @@
 
                 </div>
 
-              </div>
+              </div> -->
             <p class="aperu-medium mTop15">Business Logo</p>
           </div>
           <!-- <div class="col-md-3 makeCenter">
@@ -103,14 +103,14 @@
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
               <input type="text" class="form-control custom-input" id="addressone" aria-describedby="addressone"
-                placeholder="Address line 1" formControlName="PhysicallAddressLine1">
+                placeholder="Address Line 1" formControlName="PhysicallAddressLine1">
             </div>
           </div>
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addresstwo" class="custom-input-label">Address Line 2</label>
               <input type="text" class="form-control custom-input" id="addresstwo" aria-describedby="addresstwo"
-                placeholder="Address line 2" formControlName="PhysicallAddressLine2">
+                placeholder="Address Line 2" formControlName="PhysicallAddressLine2">
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
-              <ng-select formControlName="PhysicallCountry" [searchable]="false" (change)="getStatesByCode('physical',businessInformation.value.PhysicallCountry, 'change')">
+              <ng-select formControlName="PhysicallCountry" [searchable]="true" (change)="getStatesByCode('physical',businessInformation.value.PhysicallCountry, 'change')">
                 <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
               </ng-select>
             </div>
@@ -132,7 +132,7 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
-              <ng-select formControlName="PhysicallState" [searchable]="false">
+              <ng-select formControlName="PhysicallState" [searchable]="true">
                 <ng-option *ngFor="let states of physicalRegionList" [value]="states.ID">{{states.Name}}</ng-option>
               </ng-select>
             </div>
@@ -166,14 +166,14 @@
             <div class="form-group">
               <label for="addressone" class="custom-input-label">Address Line 1</label>
               <input type="text" class="form-control custom-input" id="addressone" aria-describedby="addressone"
-                placeholder="Address line 1" formControlName="MailingAddressLine1">
+                placeholder="Address Line 1" formControlName="MailingAddressLine1">
             </div>
           </div>
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="addresstwo" class="custom-input-label">Address Line 2</label>
               <input type="text" class="form-control custom-input" id="addresstwo" aria-describedby="addresstwo"
-                placeholder="Address line 2" formControlName="MailingAddressLine2">
+                placeholder="Address Line 2" formControlName="MailingAddressLine2">
             </div>
           </div>
         </div>
@@ -181,7 +181,7 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="country" class="custom-input-label">Country</label>
-              <ng-select formControlName="MailingCountry" [searchable]="false" (change)="getStatesByCode('mailing', businessInformation.value.MailingCountry,'change')">
+              <ng-select formControlName="MailingCountry" [searchable]="true" (change)="getStatesByCode('mailing', businessInformation.value.MailingCountry,'change')">
                 <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
               </ng-select>
             </div>
@@ -195,7 +195,7 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="state" class="custom-input-label">State</label>
-              <ng-select formControlName="MailingState" [searchable]="false">
+              <ng-select formControlName="MailingState" [searchable]="true">
                 <ng-option *ngFor="let mState of mailingRegionList" [value]="mState.ID" >{{mState.Name}}</ng-option>
               </ng-select>
             </div>
@@ -204,8 +204,8 @@
         <div class="row" *ngIf="!businessInformation.value.SameAsPhysical">
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group">
-              <label for="zip" class="custom-input-label">Zip</label>
-              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" placeholder="zip" formControlName="MailingZip">
+              <label for="zip" class="custom-input-label"> ZIP Code</label>
+              <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" placeholder="ZIP Code" formControlName="MailingZip">
             </div>
           </div>
         </div>
@@ -234,7 +234,7 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
               <label for="stateRegistered" class="custom-input-label">State Registered In</label>
-              <ng-select formControlName="StateRegisteredIn" [searchable]="false">
+              <ng-select formControlName="StateRegisteredIn" [searchable]="true">
                <ng-option *ngFor="let states of physicalRegionList" [value]="states.ID">{{states.Name}}</ng-option>
               </ng-select>
             </div>

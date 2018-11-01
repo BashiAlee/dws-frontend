@@ -225,6 +225,7 @@ myInputVariable: ElementRef;
     private route: ActivatedRoute, private sanitize: DomSanitizer,
     private modalService: BsModalService,
     private authService: AuthenticationService, private router: Router) {
+
       if(this.router.url.split('/')[1] =='admin') {
         this.isAdmin = true;
       }
@@ -235,6 +236,7 @@ myInputVariable: ElementRef;
     }
 
   ngOnInit() {
+
     // $('html,body').animate({
     //   scrollTop: $(".custom-tabs").offset().top
     // },

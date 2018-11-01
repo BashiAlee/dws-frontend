@@ -111,14 +111,14 @@ export class PersonalInformationComponent implements OnInit {
       data => {
         if(data.status) {
             this.personalData = data.result;
-            if(!this.personalData.PhysicallCountry && !this.personalData.PhysicallState &&  !this.isAdmin) {
-              const initialState = {
-                type: 'old-user-empty',
-              }
-              this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-              this.bsModalRef.content.closeBtnName = 'Close';
-              // return;
-            }
+            // if(!this.personalData.PhysicallCountry && !this.personalData.PhysicallState &&  !this.isAdmin) {
+            //   const initialState = {
+            //     type: 'old-user-empty',
+            //   }
+            //   this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+            //   this.bsModalRef.content.closeBtnName = 'Close';
+            //   // return;
+            // }
             // this.getRegionByCode(this.personalData.m1Country);
             if(this.personalData.PhysicallCountry) {
               this.getStatesByCode('physical',this.personalData.PhysicallCountry,'onload')
@@ -127,12 +127,12 @@ export class PersonalInformationComponent implements OnInit {
               this.getStatesByCode('mailing',this.personalData.MailingCountry,'onload')
             }
 
-            if (!this.personalData.PhysicallCountry) {
+            if (this.personalData.PhysicallCountry < 0) {
               this.personalData.PhysicallCountry = 231;
               this.getStatesByCode('physical',this.personalData.PhysicallCountry,'onload')
             }
 
-            if (!this.personalData.MailingCountry) {
+            if (this.personalData.MailingCountry < 0) {
               this.personalData.MailingCountry = 231;
               this.getStatesByCode('mailing',this.personalData.MailingCountry,'onload')
             }
@@ -175,17 +175,30 @@ export class PersonalInformationComponent implements OnInit {
         MailingState: ''
       })
     }
+
     this.profileSevice.getStatesByCode(code)
     .subscribe(
       data => {
         if(data.status) {
           if(type == 'physical') {
+      
             this.physicalRegionList = data.result;
+            if(value == 'onload' && this.personalData.PhysicallState < 0) {
+              this.personalInformation.patchValue({
+                PhysicallState: this.physicalRegionList[0].ID
+              })
+            }
            
           } else if (type =='mailing') {
             this.mailingRegionList = data.result;
-           
+            if(value == 'onload' && this.personalData.MailingState < 0) {
+              this.personalInformation.patchValue({
+                MailingState: this.mailingRegionList[0].ID
+              })
+            }
           }
+
+
           // this.regionList = data.Result;
         } else {
           // this.regionList = [];

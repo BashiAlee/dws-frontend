@@ -78,7 +78,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="firstName" class="custom-input-label">Suffix</label>
-                <ng-select formControlName="Suffix" [searchable]="false">
+                <ng-select formControlName="Suffix" [searchable]="true">
                   <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
@@ -133,7 +133,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="country" class="custom-input-label">Country</label>
-                <ng-select formControlName="PhysicallCountry" [searchable]="false" (change)="getStatesByCode('physical',personalInformation.value.PhysicallCountry, 'change')">
+                <ng-select formControlName="PhysicallCountry" [searchable]="true" (change)="getStatesByCode('physical',personalInformation.value.PhysicallCountry, 'change')">
                   <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.PhysicallCountry.invalid && (form.PhysicallCountry.dirty || form.PhysicallCountry.touched)"
@@ -156,7 +156,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="state" class="custom-input-label">State</label>
-                <ng-select formControlName="PhysicallState" [searchable]="false">
+                <ng-select formControlName="PhysicallState" [searchable]="true">
                   <ng-option *ngFor="let states of physicalRegionList" [value]="states.ID">{{states.Name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.PhysicallState.invalid && (form.PhysicallState.dirty || form.PhysicallState.touched)"
@@ -221,7 +221,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="country" class="custom-input-label">Country</label>
-                <ng-select formControlName="MailingCountry" [searchable]="false" (change)="getStatesByCode('mailing', personalInformation.value.MailingCountry,'change')">
+                <ng-select formControlName="MailingCountry" [searchable]="true" (change)="getStatesByCode('mailing', personalInformation.value.MailingCountry,'change')">
                   <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.MailingCountry.invalid && (form.MailingCountry.dirty || form.MailingCountry.touched)"
@@ -243,7 +243,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12" *ngIf="!personalInformation.value.SameAsPhysical">
               <div class="form-group">
                 <label for="state" class="custom-input-label">State</label>
-                <ng-select formControlName="MailingState" [searchable]="false">
+                <ng-select formControlName="MailingState" [searchable]="true">
                   <ng-option *ngFor="let mState of mailingRegionList" [value]="mState.ID">{{mState.Name}}</ng-option>
                 </ng-select>
                 <div *ngIf="form.MailingState.invalid && (form.MailingState.dirty || form.MailingState.touched)" class="invalid-feedback">
@@ -322,12 +322,12 @@
 
   <div class="container">
     <div class="call-to-action" [class.disableDiv]="isAdmin">
-      <div class="goBack">
+      <!-- <div class="goBack">
         <button disabled>Previous Step</button>
-      </div>
+      </div> -->
       <p>Save your Personal Information and Continue to next Step.</p>
       <div class="saveButton" *ngIf="!loading">
-        <button (click)="save()">Save</button>
+        <button (click)="save()">Save/Update</button>
       </div>
       <div class="saveButton disableDiv" *ngIf="loading">
         <button><i class="fa fa-circle-o-notch fa-spin"></i></button>

@@ -193,7 +193,7 @@
                         <div class="col-md-6 col-sm-12 col-xs-12">
                           <div class="custom-checkbox">
                             <label class="container">Agreed
-                              <input type="checkbox" formControlName="Agrement">
+                              <input type="checkbox" value="1" [(ngModel)]="agreement" [ngModelOptions]="{standalone: true}">
                               <p class="checkmark"></p>
                             </label>
                           </div>

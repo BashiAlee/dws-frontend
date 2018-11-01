@@ -26,6 +26,9 @@ export class SendEmailComponent implements OnInit {
     .subscribe(data => {
       if(data.status) {
         this.success = data.message;
+        this.email.patchValue({
+          Email: ''
+        })
       } else if(!data.status) {
         this.error = data.message;
       }

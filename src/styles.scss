@@ -408,7 +408,8 @@ textarea.custom-textarea:focus {
 // }
 
 div.ng-select-container {
-  height: 56px !important;
+  min-height: 56px !important;
+  max-height: 214px !important;
   border-radius: 3px;
   border: 2px solid $border-input-color !important;
 }

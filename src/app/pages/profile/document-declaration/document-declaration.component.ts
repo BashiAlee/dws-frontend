@@ -89,6 +89,7 @@ export class DocumentDeclarationComponent implements OnInit {
       code: '8'
     },
   ];
+  agreement: any = 0;
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private profileService: ProfileService, private modalService: BsModalService, private router: Router, private authService: AuthenticationService,private sanitize: DomSanitizer) {
     this.documentInformation = this.formBuilder.group({
       Veteran: [0],

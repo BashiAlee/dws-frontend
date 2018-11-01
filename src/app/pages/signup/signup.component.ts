@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HowItWorksComponent } from '../../components/how-it-works/how-it-works.component';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit{
   signupForm: FormGroup;
   success: any;
   error: any;
   type: any;
   loading: any;
+
   constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private route: ActivatedRoute, private router: Router) {
 
 
