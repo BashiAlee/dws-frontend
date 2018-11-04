@@ -156,6 +156,10 @@ header{
     display: grid;
     justify-content: center;
     align-content: center;
+    .mattie-header-select{
+      font-size:14px;
+      width: 100%;
+    }
   }
   .mattie-header-select{
     width: 100px;
