@@ -1,5 +1,5 @@
 <form [formGroup]="businessInformation" >
-<div class="container makeBgWhite"[class.disableDiv]="isAdmin" >
+<div class="container makeBgWhite mBottom20"[class.disableDiv]="isAdmin" >
   <div class="personal-information">
     <div class="business-info-details makeCenter">
       <!-- <div class="displayPicture">
@@ -323,17 +323,25 @@
 </div>
 
 <div class="container">
+    <alert type="success" *ngIf="success">
+        You data has been saved successfully
+      </alert>
+
+      <alert type="danger" *ngIf="error">
+        Error in saving your information
+      </alert>
   <div class="call-to-action" [class.disableDiv]="isAdmin">
-    <div class="goBack" (click)="goBack()">
+    <!-- <div class="goBack" (click)="goBack()">
       <button>Previous Step</button>
-    </div>
+    </div> -->
+    <p>Save your Business Information and Continue to next Step.</p>
     <div class="saveButton" *ngIf="!loading">
       <button (click)="save()">Save</button>
     </div>
     <div class="saveButton disableDiv" *ngIf="loading">
       <button ><i class="fa fa-circle-o-notch fa-spin"></i></button>
     </div>
-    <p>Save your Personal Information and Continue to next Step.</p>
+   
   </div>
 </div>
 </form>

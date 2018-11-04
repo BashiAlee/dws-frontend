@@ -32,6 +32,8 @@ export class EquipmentComponent implements OnInit {
   isAdmin: any;
   id: any;
   loading: any;
+  success: any;
+  error: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
@@ -218,6 +220,8 @@ export class EquipmentComponent implements OnInit {
   }
 
   updateEquipmentNotes(){
+    this.success = false;
+    this.error = false;
     this.loaders = true;
     var data = {
       UserId: this.id,
@@ -234,15 +238,19 @@ export class EquipmentComponent implements OnInit {
             id: this.id
           }
           this.loaders = false;
-          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-          this.bsModalRef.content.closeBtnName = 'Close';
+          this.success = true;
+          this.error = false;
+          // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          // this.bsModalRef.content.closeBtnName = 'Close';
         } else if(!data.status) {
           const initialState = {
             type: 'error'
           }
           this.loaders = false;
-          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-          this.bsModalRef.content.closeBtnName = 'Close';
+          this.success = false;
+          this.error = true;
+          // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          // this.bsModalRef.content.closeBtnName = 'Close';
         }
       }
     )

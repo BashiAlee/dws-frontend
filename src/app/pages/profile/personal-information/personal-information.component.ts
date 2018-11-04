@@ -43,6 +43,8 @@ export class PersonalInformationComponent implements OnInit {
     class: "custom-modal modal-dialog-centered modal-md successModal"
   };
   isAdmin: any;
+  success: any;
+  error: any;
   constructor(private formBuilder: FormBuilder, private router: Router,
     private route: ActivatedRoute, private profileSevice: ProfileService,
     private modalService: BsModalService, private authService: AuthenticationService) { 
@@ -208,6 +210,8 @@ export class PersonalInformationComponent implements OnInit {
   }
 
   save() {
+    this.success = false;
+    this.error = false;
     // console.log(this.personalInformation.value)
     this.loading = true;
    
@@ -230,14 +234,18 @@ export class PersonalInformationComponent implements OnInit {
           .subscribe(data => {
             if(data.status) {
               localStorage.setItem('user', JSON.stringify(data.result))
-              this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-              this.bsModalRef.content.closeBtnName = 'Close';
+              this.success = true;
+              this.error = false;
+              // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+              // this.bsModalRef.content.closeBtnName = 'Close';
             } else if(!data.status) {
               const initialState = {
                 type: 'error'
               }
-              this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-              this.bsModalRef.content.closeBtnName = 'Close';
+              this.error = true;
+              this.success = false;
+              // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+              // this.bsModalRef.content.closeBtnName = 'Close';
               this.loading = false;
             }
             
@@ -247,9 +255,11 @@ export class PersonalInformationComponent implements OnInit {
           const initialState = {
             type: 'error'
           }
+          this.success = false;
+          this.error = true;
           this.loading = false;
-          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-          this.bsModalRef.content.closeBtnName = 'Close';
+          // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          // this.bsModalRef.content.closeBtnName = 'Close';
         }
   
       });
@@ -262,17 +272,21 @@ export class PersonalInformationComponent implements OnInit {
             page: 'business-information',
             id: this.id
           }
+          this.success = true;
+          this.error = false;
           this.loading = false;
           localStorage.setItem('user', JSON.stringify(data.result))
-          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-          this.bsModalRef.content.closeBtnName = 'Close';
+          // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          // this.bsModalRef.content.closeBtnName = 'Close';
         } else if(!data.status){
           const initialState = {
             type: 'error'
           }
           this.loading = false;
-          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-          this.bsModalRef.content.closeBtnName = 'Close';
+          this.success = false;
+          this.error = true;
+          // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          // this.bsModalRef.content.closeBtnName = 'Close';
         }
 
         

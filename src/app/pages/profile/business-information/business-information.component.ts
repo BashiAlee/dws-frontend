@@ -35,6 +35,8 @@ export class BusinessInformationComponent implements OnInit {
   imageChangedEvent: any;
   croppedImage: any;
   isAdmin: any;
+  success: any;
+  error: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
@@ -275,6 +277,8 @@ export class BusinessInformationComponent implements OnInit {
   }
 
     save() {
+      this.success = false;
+      this.error = false;
       this.loading = true;
       // console.log(this.personalInformation.value)
       //   this.bsModalRef = this.modalService.show(ModalsComponent,this.config);
@@ -316,15 +320,19 @@ export class BusinessInformationComponent implements OnInit {
                   id: this.id
                 }
                 this.loading = false;
-                this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-                this.bsModalRef.content.closeBtnName = 'Close';
+                this.success = true;
+                this.error = false;
+                // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+                // this.bsModalRef.content.closeBtnName = 'Close';
               } else if(!data.status) {
                 const initialState = {
                   type: 'error'
                 }
                 this.loading = false;
-                this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-                this.bsModalRef.content.closeBtnName = 'Close';
+                this.success = false;
+                this.error = true;
+                // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+                // this.bsModalRef.content.closeBtnName = 'Close';
               }
 
 
@@ -335,8 +343,10 @@ export class BusinessInformationComponent implements OnInit {
               type: 'error'
             }
             this.loading = false;
-            this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-            this.bsModalRef.content.closeBtnName = 'Close';
+            this.success = false;
+            this.error = true;
+            // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+            // this.bsModalRef.content.closeBtnName = 'Close';
           }
 
         });
@@ -350,14 +360,18 @@ export class BusinessInformationComponent implements OnInit {
                 id: this.id
               }
               this.loading = false;
-              this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-              this.bsModalRef.content.closeBtnName = 'Close';
+              this.success = true;
+              this.error = false;
+              // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+              // this.bsModalRef.content.closeBtnName = 'Close';
             } else if(!data.status) {
               const initialState = {
                 type: 'error'
               }
-              this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-              this.bsModalRef.content.closeBtnName = 'Close';
+              this.success = false;
+              this.error = true;
+              // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+              // this.bsModalRef.content.closeBtnName = 'Close';
             }
 
 
