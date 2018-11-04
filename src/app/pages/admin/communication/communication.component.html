@@ -20,8 +20,7 @@
                       <input [(ngModel)]="searchUser" type="text" class="aside-header-input" placeholder="Search User">
                         <button type="submit" class="aside-input-search-btn" (click)="adminSearchUser(searchUser)" [disabled]="!searchUser"><i class="fa fa-search"></i></button>
                     </div>
-
-                      <li *ngFor="let user of resultSearchedUser" (click)="selectUser(user)">
+                        <li *ngFor="let user of resultSearchedUser" (click)="selectUser(user)">
                         <span class="badge">{{user.FirstName}} {{user.MiddleName}} {{user.LastName}}</span>
                       </li>
               </div>
@@ -32,7 +31,7 @@
             </div>
               <div class="aside-body-div">
             <div>
-              <div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages" (click)="getAllMessages(currentList)">
+<div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages" (click)="getAllMessages(currentList)">
               <div class="sidebar-image-container">
 <img *ngIf="!currentList.ProfileImage" src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <img *ngIf="currentList.ProfileImage" [src]="currentList.ProfileImage" class="sidebar-img">
@@ -136,8 +135,7 @@
 <!--left-->
                     <div class="mattie-img-text">
                       <p>{{ messages.MessageTime | date: 'hh:mma' }}</p>
-                      <p class="msg-p ">{{ messages.Message }}</p>
-
+                      <p [ngClass]="(onlineUserId != messages.MessageFrom)?'msg-p':'blue-msg-p'">{{ messages.Message }}</p>
                     </div>
                   </div>
                 </div>
