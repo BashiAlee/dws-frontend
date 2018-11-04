@@ -153,16 +153,9 @@ header{
     font-weight: bolder;
   }
   .mattie-header-select-container{
-    position: relative;
-    z-index: 1;
-    .fa-angle-down{
-      position: absolute;
-      top: 26%;
-      right: 17%;
-      color: black;
-      font-size: 14px;
-      z-index: -1;
-    }
+    display: grid;
+    justify-content: center;
+    align-content: center;
   }
   .mattie-header-select{
     width: 100px;
