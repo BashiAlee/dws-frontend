@@ -105,12 +105,11 @@
             <div class="mattie-header">
               <p class="mattie-heading">{{selectedSenderChatName}}</p>
               <div class="mattie-header-select-container">
-                <select class="mattie-header-select">
-                  <option>{{ lastMessageDate | date: 'd-MMMM yyyy' }}</option>
+                <div class="mattie-header-select">
+                  <p>{{ lastMessageDate | date: 'd-MMMM yyyy' }}</p>
                   <!-- <option>20-Dec 2017</option> -->
                   <!-- <option>30-Dec 2017</option> -->
-                </select>
-                <i class="fa fa-angle-down"></i>
+                </div>
               </div>
             </div>
 <div class="mattie-body" id="messages-scroll">
