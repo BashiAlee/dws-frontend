@@ -32,6 +32,7 @@ import { ProfileService } from '../../services/profile/profile.service';
 import { HttpModule } from '@angular/http';
 import { ModalModule } from 'ngx-bootstrap';
 import { CroppieModule } from '../../../angular-croppie-module/src/lib/croppie.module';
+import { AlertModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { CroppieModule } from '../../../angular-croppie-module/src/lib/croppie.m
     ReactiveFormsModule,
     HttpModule,
     ModalModule.forRoot(),
-    CroppieModule
+    CroppieModule,
+    AlertModule.forRoot()
   ],
   declarations: [
     DocumentDeclarationComponent, 

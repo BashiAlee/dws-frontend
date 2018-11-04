@@ -1,7 +1,7 @@
 <form [formGroup]="personalInformation">
   <!-- <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event)" /> -->
 
-  <div class="container makeBgWhite" [class.disableDiv]="isAdmin">
+  <div class="container makeBgWhite mBottom20" [class.disableDiv]="isAdmin">
     <div class="personal-information">
       <div class="profile-details makeCenter" formGroupName="Users">
         <div class="displayPictureTop">
@@ -321,6 +321,13 @@
   </div>
 
   <div class="container">
+      <alert type="success" *ngIf="success">
+          You data has been saved successfully
+        </alert>
+  
+        <alert type="danger" *ngIf="error">
+          Error in saving your information
+        </alert>
     <div class="call-to-action" [class.disableDiv]="isAdmin">
       <!-- <div class="goBack">
         <button disabled>Previous Step</button>

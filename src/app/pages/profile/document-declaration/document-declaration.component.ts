@@ -44,6 +44,8 @@ export class DocumentDeclarationComponent implements OnInit {
   images:any =  {};
   loading: any;
   loaders: any = {};
+  success: any;
+  error: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
@@ -219,6 +221,8 @@ export class DocumentDeclarationComponent implements OnInit {
   }
 
   updateDocuments() {
+        this.success = false;
+    this.error = false;
     this.loading = true;
     this.addWaiver();
     if (this.documentInformation.value.Agrement) {
@@ -249,15 +253,19 @@ export class DocumentDeclarationComponent implements OnInit {
               page: '',
               id: ''
             }
-            this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-            this.bsModalRef.content.closeBtnName = 'Close';
+            this.success = true;
+            this.error = false;
+            // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+            // this.bsModalRef.content.closeBtnName = 'Close';
           } else if(!data.status) {
             const initialState = {
               type: 'error'
             }
             this.loading = false;
-            this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-            this.bsModalRef.content.closeBtnName = 'Close';
+            this.success = false;
+            this.error = true;
+            // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+            // this.bsModalRef.content.closeBtnName = 'Close';
           }
         }
       )

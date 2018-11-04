@@ -218,6 +218,8 @@ export class ExperiencePortfolioComponent implements OnInit {
   imageChangedPersonalPicture: any;
   croppedImageHeadShot: any;
   croppedPersonalPicture: any;
+  success: any;
+  error: any;
   loaders: any = {};
   @ViewChild('myInput')
 myInputVariable: ElementRef;
@@ -563,6 +565,8 @@ myInputVariable: ElementRef;
   }
 
   save() {
+    this.success = false;
+    this.error = false;
     this.loading = true;
     this.experiencePorfolioInformation.value.ValidPassport = this.experiencePorfolioInformation.value.ValidPassport.toString();
     this.experiencePorfolioInformation.value.TravelOutsideUs = this.experiencePorfolioInformation.value.TravelOutsideUs.toString();
@@ -590,9 +594,13 @@ myInputVariable: ElementRef;
             page: 'document-declaration',
             id: this.id
           }
-          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-          this.bsModalRef.content.closeBtnName = 'Close';
+          this.success = true;
+          this.error = false;
+          // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          // this.bsModalRef.content.closeBtnName = 'Close';
         } else if(!data.status) {
+          this.success = false;
+          this.error = true;
           const initialState = {
             type: 'error'
           }
