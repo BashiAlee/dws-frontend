@@ -62,9 +62,9 @@ export class MessagesService {
       );
   }
 
-  adminSearchUser(data){
+  adminSearchUser(){
     return this.http
-      .get(this.apiUrl + "admin/searchUser/" + data)
+      .get(this.apiUrl + "admin/getAllUsers")
       .pipe(
         map((response: any) => {
           return response.json();

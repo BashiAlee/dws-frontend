@@ -17,7 +17,7 @@ export class AuthenticationService {
       this.staticUrl = environment.uploadUrl;
    }
    login(data) {
-    return this.http.post(this.apiUrl + 'pilot/login',data)
+    return this.http.post(this.apiUrl + 'login',data)
     .pipe(map((response: any) => {
      return response.json();
     }));
@@ -30,10 +30,13 @@ export class AuthenticationService {
   }
 
   signup(data) {
-    return this.http.post(this.apiUrl + 'pilotSignup',data)
-    .pipe(map((response: any) => {
-     return response.json();
-    }));
+    return this.http
+      .post(this.apiUrl + "signup", data)
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        })
+      );
   }
 
   getCurrentUser() {

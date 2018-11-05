@@ -22,7 +22,7 @@ export class LoginComponent{
   config = {
     class: "custom-modal modal-dialog-centered modal-md successModal"
   };
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: FormBuilder,
     private modalService: BsModalService,
     private auth: AuthenticationService, private router: Router) {
     // localStorage.removeItem('user')
@@ -31,14 +31,15 @@ export class LoginComponent{
   type: any;
   ngOnInit() {
     if(this.router.url.split('/')[1]=='loginpilot') {
-      this.type = 'PILOT'
+      this.type = 'pilot'
     }
     if(this.router.url.split('/')[1]=='logincustomer') {
-      this.type = 'CUSTOMER'
+      this.type = 'customer'
     }
     this.loginForm = this.formBuilder.group({
       Email: ['', [Validators.required, Validators.email]],
-      Password: ['',Validators.required]
+      Password: ['',Validators.required],
+      Role: []
     })
 
     if(localStorage.getItem('rememberMe')) {
@@ -46,7 +47,8 @@ export class LoginComponent{
       var data = JSON.parse(localStorage.getItem('rememberMe'));
       this.loginForm.patchValue({
         Email: data.Email,
-        Password: data.Password
+        Password: data.Password,
+        Role: this.type
       })
     }
   }
@@ -60,7 +62,7 @@ export class LoginComponent{
     this.auth.login(this.loginForm.value)
     .subscribe(
       data => {
-  
+
         if(data.status) {
           if(this.rememberMe) {
             localStorage.setItem('rememberMe', JSON.stringify(this.loginForm.value))
@@ -73,9 +75,12 @@ export class LoginComponent{
 
           localStorage.setItem('user',JSON.stringify(this.user))
 
-          this.router.navigate(['/user/profile/'+this.user.ID]);
-
-
+          if(this.type == "pilot"){
+            this.router.navigate(['/user/profile/' + this.user.ID]);
+          }else{
+            console.log("customer")
+            this.router.navigate(['/user/dashboard/']);
+          }
 
         } else if(!data.status) {
           this.loading = false;

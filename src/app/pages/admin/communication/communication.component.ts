@@ -135,10 +135,12 @@ export class CommunicationComponent implements OnInit {
               this.adminMessageToUserId = selectedConversationIdResult.result[0].MessageFrom;
               console.log("id ",this.adminMessageToUserId);
               console.log("chek ", this.selectedUser);
+              this.selectedUser = "";
             }else{
               this.adminMessageToUserId = selectedConversationIdResult.result[0].MessageTo;
               console.log("id to ", this.adminMessageToUserId);
               console.log("chek to ", this.selectedUser);
+              this.selectedUser = "";
             }
           }
         } else {
@@ -204,9 +206,8 @@ export class CommunicationComponent implements OnInit {
     }
   }
 
-  adminSearchUser(name) {
-    if (name != "") {
-      this.messageService.adminSearchUser(name).subscribe(data => {
+  adminSearchUser() {
+      this.messageService.adminSearchUser().subscribe(data => {
         if (data.status == true) {
           console.log(data.result);
           this.resultSearchedUser = data.result;
@@ -214,6 +215,5 @@ export class CommunicationComponent implements OnInit {
           console.log("Unable to find user ", data.message);
         }
       });
-    }
   }
 }

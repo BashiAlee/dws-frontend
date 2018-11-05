@@ -52,17 +52,17 @@
                             <a [routerLink]="['/send-email']">Forgot Password?</a>
 
                          </div>
-               
+
                        </div>
                        <div class="form-group wow fadeInDown">
                         <p *ngIf="error" class="errorMessage">{{error}}</p>
                         <p *ngIf="success" class="successMessage">{{success}}</p>
                     </div>
 
-                       <button type="submit" id="submitLoginForm" *ngIf="!loading"class="btn btn-sign-up mt20 wow fadeInDown" (click)="login()" [disabled]="type=='CUSTOMER'">SIGN IN</button>
+                       <button type="submit" id="submitLoginForm" *ngIf="!loading"class="btn btn-sign-up mt20 wow fadeInDown" (click)="login()">SIGN IN</button>
                        <a class="btn btn-sign-up mt20 wow fadeInDown loaderBtn"  *ngIf="loading"><i class="fa fa-circle-o-notch fa-spin"></i></a>
                     </form>
-                    <p class="makeCenter">Don't have an account? 
+                    <p class="makeCenter">Don't have an account?
                         <a *ngIf="type=='PILOT'"[routerLink]="['/signuppilot']">signup</a>
                         <a *ngIf="type=='CUSTOMER'"[routerLink]="['/signupcustomer']">signup</a>
                       </p>

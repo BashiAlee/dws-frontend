@@ -3,6 +3,7 @@
     <div class="col-md-12">
       <section>
         <header>
+
           <p>Pilots</p>
         <button class="header-chat-btn" (click)="stratChat(template)">Start a new chat</button>
         </header>
@@ -18,7 +19,7 @@
               <div class="modal-body">
                     <div class="aside-header-div">
                       <input [(ngModel)]="searchUser" type="text" class="aside-header-input" placeholder="Search User">
-                        <button type="submit" class="aside-input-search-btn" (click)="adminSearchUser(searchUser)" [disabled]="!searchUser"><i class="fa fa-search"></i></button>
+                        <button type="submit" class="aside-input-search-btn" (click)="adminSearchUser()" ><i class="fa fa-search"></i></button>
                     </div>
                         <li *ngFor="let user of resultSearchedUser" (click)="selectUser(user)">
                         <span class="badge">{{user.FirstName}} {{user.MiddleName}} {{user.LastName}}</span>
