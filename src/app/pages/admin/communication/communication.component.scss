@@ -102,27 +102,26 @@ header{
   }
 }
 .aside-body-div{
-
-
+  overflow: auto;
   display: grid;
   height: 802px;
+  .aside-body-main-child{
+    &>:last-child{
+      border: none;
+    }
+  }
  @include scroll;
   .aside-scroll-child{
     overflow: auto;
     max-height: 100%;
+    border-bottom:1px solid $grayBorder;
     @include scroll;
-
   }
   .sidebar-image-container{
     display: grid;
     padding: 16px 10px 15px 25px;
     grid-template-columns: auto auto;
-    border-bottom:1px solid $grayBorder;
-    //border-right:1px solid $grayBorder;
     justify-content: left;
-    &:last-child{
-      border: none;
-    }
     .sidebar-img-text{
       padding: 10px;
       &>:first-child{
@@ -305,10 +304,8 @@ header{
 }
 @media screen and (max-height: 693px){
   .aside-body-div{
-    .sidebar-image-container{
-      &:last-child{
-        border-bottom: 1px solid lightgray;
-      }
+    &>:last-child{
+      border: none;
     }
   }
 }
