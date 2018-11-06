@@ -73,6 +73,7 @@ header{
   background-color: #fff;
   margin-bottom: 50px;
   border-radius: 9px;
+
 }
 .side-panel{
   grid-column: 1/2;
@@ -341,3 +342,34 @@ header{
     }
   }
 }
+
+
+.modal-header {
+  padding: 15px;
+}
+
+.modal-input{
+      width: 100%;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid $skyColor;
+  border-top: 1px solid $skyColor;
+}
+
+
+
+  .modal-body{
+    .scrolling-list{
+      max-height: 550px;
+      overflow: auto;
+      &>:nth-child(even){
+        background: #eaeaea;
+      }
+      li{
+        padding: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+

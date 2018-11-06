@@ -17,13 +17,15 @@
                 </button>
               </div>
               <div class="modal-body">
-                    <div class="aside-header-div">
-                      <input [(ngModel)]="searchUser" type="text" class="aside-header-input" placeholder="Search User">
+                    <div>
+                      <div><input [(ngModel)]="searchUser" type="text" class="modal-input" placeholder="Search User"></div>
                         <!-- <button type="submit" class="aside-input-search-btn" (click)="adminSearchUser()" ><i class="fa fa-search"></i></button> -->
                     </div>
+                <div class="scrolling-list">
                         <li *ngFor="let user of resultSearchedUser | search: searchUser" (click)="selectUser(user)" >
                         <span class="badge">{{user.FirstName}} {{user.MiddleName}} {{user.LastName}}</span>
                       </li>
+                </div>
               </div>
             </ng-template>
             <div class="aside-header-div">
