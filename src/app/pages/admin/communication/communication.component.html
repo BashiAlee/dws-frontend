@@ -4,15 +4,16 @@
       <section>
         <header>
             <div class="custom-tabs">
-
               <ul>
                 <li><a [class.active-link]="">Pilots</a></li>
                 <li><a [class.active-link]="">Customers</a></li>
               </ul>
-
             </div>
-          <p>Pilots</p>
-        <button class="header-chat-btn" (click)="stratChat(template)">Start a new chat</button>
+          <div class="pilot-chat-btn-section">
+            <p>Pilots</p>
+            <button class="header-chat-btn" (click)="stratChat(template)">Start a new chat</button>
+          </div>
+
         </header>
         <div class="section-body">
           <div class="side-panel">
