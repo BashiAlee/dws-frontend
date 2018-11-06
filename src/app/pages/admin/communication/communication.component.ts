@@ -126,7 +126,7 @@ export class CommunicationComponent implements OnInit {
         if (selectedConversationIdResult.status == true) {
           this.allMessagesByConversationId =
             selectedConversationIdResult.result;
-          console.log(this.allMessagesByConversationId)
+          // console.log(this.allMessagesByConversationId)
           this.messageConversationId =
             selectedConversationIdResult.result[0].ConversationId;
           // this.lastMessageDate = selectedConversationIdResult.result[0].MessageTime;
@@ -135,13 +135,13 @@ export class CommunicationComponent implements OnInit {
           if(this.userType == "ADMIN"){
             if (selectedConversationIdResult.result[0].MessageFrom != this.onlineUserId){
               this.adminMessageToUserId = selectedConversationIdResult.result[0].MessageFrom;
-              console.log("id ",this.adminMessageToUserId);
-              console.log("chek ", this.selectedUser);
+              // console.log("id ",this.adminMessageToUserId);
+              // console.log("chek ", this.selectedUser);
               this.selectedUser = "";
             }else{
               this.adminMessageToUserId = selectedConversationIdResult.result[0].MessageTo;
-              console.log("id to ", this.adminMessageToUserId);
-              console.log("chek to ", this.selectedUser);
+              // console.log("id to ", this.adminMessageToUserId);
+              // console.log("chek to ", this.selectedUser);
               this.selectedUser = "";
             }
           }
@@ -185,7 +185,7 @@ export class CommunicationComponent implements OnInit {
           this.activeClass = false;
           var element = document.getElementById("messages-scroll");
           element.scrollTop = element.scrollHeight;
-          console.log("Scroll top ",element.scrollTop);
+          // console.log("Scroll top ",element.scrollTop);
         } else {
           console.log("Message Not Sent ", newData.message);
         }
@@ -195,11 +195,13 @@ export class CommunicationComponent implements OnInit {
   }
 
   selectUser(resultSearchedUser) {
+    console.log("Selected User ---> ", resultSearchedUser.FirstName)
+    this.selectedSenderChatName = resultSearchedUser.FirstName + " " + resultSearchedUser.MiddleName + " " + resultSearchedUser.LastName;
+    console.log("Selected User ---> ", this.selectedSenderChatName);
     this.selectedUser = resultSearchedUser;
     this.modalRef.hide();
     this.modalRef = null;
     this.activeClass = true;
-    this.selectedSenderChatName = "";
     this.allMessagesByConversationId = [];
     this.lastMessageDate = "";
   }
@@ -211,7 +213,7 @@ export class CommunicationComponent implements OnInit {
       this.modalRef = this.modalService.show(template);
       this.messageService.adminSearchUser().subscribe(data => {
         if (data.status == true) {
-          console.log(data.result);
+          // console.log(data.result);
           this.resultSearchedUser = data.result;
         } else {
           console.log("Unable to find user ", data.message);
@@ -223,7 +225,7 @@ export class CommunicationComponent implements OnInit {
   adminSearchUser() {
       this.messageService.adminSearchUser().subscribe(data => {
         if (data.status == true) {
-          console.log(data.result);
+          // console.log(data.result);
           this.resultSearchedUser = data.result;
         } else {
           console.log("Unable to find user ", data.message);

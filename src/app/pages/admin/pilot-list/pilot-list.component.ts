@@ -20,9 +20,11 @@ export class PilotListComponent implements OnInit{
   pendingList: any;
   approvedList: any;
   isApprovedPilots: any = true;
+  keyword: any;
+  selectedOption: any;
 
 
- 
+
 
   constructor(
     private pilotService: PilotService,
@@ -103,7 +105,7 @@ export class PilotListComponent implements OnInit{
       this.pageNumber = 10;
       this.getAllRejectedPilots(data.from, data.to)
     }
-   
+
   }
 
   getAllRejectedPilots(num, val) {
@@ -149,6 +151,11 @@ export class PilotListComponent implements OnInit{
   openPendingPilot() {
     this.isApprovedPilots = false;
     this.onPageLoad();
+  }
+
+  searchPilot(keyword){
+    console.log("keyword ---> ",keyword)
+    console.log("slecettd ---> ",this.search)
   }
 
   // getSpecificPilots() {
