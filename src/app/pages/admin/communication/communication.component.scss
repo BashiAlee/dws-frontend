@@ -3,7 +3,7 @@ $grayPara:#73738a;
 $grayBorder:lightgray;
 $skyColor:#29abe2;
 $lightGray:#f5f5f6;
-
+@import '../../../../variables';
 //mixins
 @mixin scroll{
   &::-webkit-scrollbar{
@@ -100,6 +100,81 @@ header{
   .fa-search{
     font-size: 20px;
     color: #73738a;
+  }
+}
+.custom-tabs {
+  margin-bottom: 28px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 0;
+
+  ul {
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    text-align: center;
+    height: 46px;
+    padding-right: 25px;
+
+    flex: 0 0 auto;
+    margin: 0 auto;
+    margin-bottom: 39px;
+    // margin-bottom: 23px;
+
+    li {
+      display: inline-block;
+
+      margin: 13px 17px 0px 0px;
+
+      a {
+        border: 1px solid $p-color;
+        // background-color: rgb(41, 171, 226);
+        color: $p-color;
+        // padding: 12px 20px 12px 20px;
+        padding: 12px 29px 12px 29px;
+
+        border-radius: 21px;
+        background: transparent;
+        font-size: 16px;
+        font-family: 'Apercu-Medium';
+
+        &:hover {
+          text-decoration: none;
+          background: $primary-color;
+          color: $white;
+          border: 1px solid $primary-color;
+        }
+
+        .badge {
+          background: $delete-icon-color;
+          color: $white;
+          border-radius: 50%;
+          padding: 7px 10px 7px 10px;
+          margin-left: 6px;
+        }
+      }
+    }
+  }
+
+  .active-link {
+    position: relative;
+    background: $primary-color !important;
+    border: 1px solid $primary-color !important;
+    color: $white !important;
+    box-shadow: 0px 8px 33px 0px rgba(41, 171, 226, 0.18);
+
+    &::after {
+      position: absolute;
+      width: 100%;
+      //   left: 38%;
+      // right: 0;
+      // bottom: -16px;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      content: url('../../../../assets/images/down_arrow.svg');
+
+    }
   }
 }
 .aside-body-div{
