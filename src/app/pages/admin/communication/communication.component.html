@@ -19,20 +19,20 @@
               <div class="modal-body">
                     <div class="aside-header-div">
                       <input [(ngModel)]="searchUser" type="text" class="aside-header-input" placeholder="Search User">
-                        <button type="submit" class="aside-input-search-btn" (click)="adminSearchUser()" ><i class="fa fa-search"></i></button>
+                        <!-- <button type="submit" class="aside-input-search-btn" (click)="adminSearchUser()" ><i class="fa fa-search"></i></button> -->
                     </div>
-                        <li *ngFor="let user of resultSearchedUser" (click)="selectUser(user)">
+                        <li *ngFor="let user of resultSearchedUser | search: searchUser" (click)="selectUser(user)" >
                         <span class="badge">{{user.FirstName}} {{user.MiddleName}} {{user.LastName}}</span>
                       </li>
               </div>
             </ng-template>
             <div class="aside-header-div">
-              <input type="text" class="aside-header-input" placeholder="Search Pilot">
+              <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Pilot">
               <button type="submit" class="aside-input-search-btn"><i class="fa fa-search"></i></button>
             </div>
               <div class="aside-body-div">
             <div class="aside-body-main-child">
-<div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages" (click)="getAllMessages(currentList)">
+<div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages | pilots: searchPilot" (click)="getAllMessages(currentList)">
               <div class="sidebar-image-container">
 <img *ngIf="!currentList.ProfileImage" src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <img *ngIf="currentList.ProfileImage" [src]="currentList.ProfileImage" class="sidebar-img">
@@ -126,7 +126,7 @@
                   </div>
                 </div> -->
 <!-- *ngIf="onlineUserId != messages.MessageFrom" -->
-        <div class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId">
+<div  class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId">
               <div [ngClass]="(onlineUserId != messages.MessageFrom )?'matti-image-container':'john-image-container'">
                 <!-- [src]="(onlineUserId != messages.MessageFrom)?messages.UserToDetail.ProfileImage:messages.UserFromDetail.ProfileImage" -->
               <img src="../../../../assets/images/avatar.png" [ngClass]="(onlineUserId != messages.MessageFrom )?'sidebar-img':'sidebar-img john-img'">

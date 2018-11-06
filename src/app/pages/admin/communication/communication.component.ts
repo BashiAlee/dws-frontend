@@ -24,6 +24,7 @@ export class CommunicationComponent implements OnInit {
   userType: any;
   modalRef: BsModalRef;
   searchUser: any;
+  searchPilot: any;
   resultSearchedUser: any = [];
   selectedUser: any;
   adminMessageToUserId: any;
@@ -125,6 +126,7 @@ export class CommunicationComponent implements OnInit {
         if (selectedConversationIdResult.status == true) {
           this.allMessagesByConversationId =
             selectedConversationIdResult.result;
+          console.log(this.allMessagesByConversationId)
           this.messageConversationId =
             selectedConversationIdResult.result[0].ConversationId;
           // this.lastMessageDate = selectedConversationIdResult.result[0].MessageTime;
@@ -181,10 +183,14 @@ export class CommunicationComponent implements OnInit {
           this.onPageLoadCommunication();
           this.message = "";
           this.activeClass = false;
+          var element = document.getElementById("messages-scroll");
+          element.scrollTop = element.scrollHeight;
+          console.log("Scroll top ",element.scrollTop);
         } else {
           console.log("Message Not Sent ", newData.message);
         }
       });
+
     }
   }
 
@@ -203,6 +209,14 @@ export class CommunicationComponent implements OnInit {
       this.activeClass = true;
     } else {
       this.modalRef = this.modalService.show(template);
+      this.messageService.adminSearchUser().subscribe(data => {
+        if (data.status == true) {
+          console.log(data.result);
+          this.resultSearchedUser = data.result;
+        } else {
+          console.log("Unable to find user ", data.message);
+        }
+      });
     }
   }
 
