@@ -180,7 +180,8 @@ header{
   }
 }
 .aside-body-div{
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: grid;
   height: 802px;
   .aside-body-main-child{
@@ -202,6 +203,11 @@ header{
     justify-content: left;
     .sidebar-img-text{
       padding: 10px;
+      p{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 207px;
+      }
       &>:first-child{
         font-weight: bolder;
         font-size: 17px;
@@ -279,6 +285,7 @@ header{
         margin-top: 15px;
         padding: 15px 20px;
         border-radius: 30px;
+        text-align: center;
       }
       &>:last-child{
         .msg-p{
@@ -314,6 +321,7 @@ header{
         margin-top: 15px;
         padding: 15px 20px;
         border-radius: 30px;
+        text-align: center;
       }
     }
     .john-img{
