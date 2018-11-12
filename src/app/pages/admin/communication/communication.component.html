@@ -145,7 +145,7 @@
 <!--left-->
                     <div class="mattie-img-text">
                       <p>{{ messages.MessageTime | date: 'hh:mma' }}</p>
-                      <p [ngClass]="(onlineUserId != messages.MessageFrom)?'msg-p':'blue-msg-p'">{{ messages.Message }}</p>
+                      <div [ngClass]="(onlineUserId != messages.MessageFrom)?'msg-p':'blue-msg-p'"><p>{{ messages.Message }}</p></div>
                     </div>
                   </div>
                 </div>
