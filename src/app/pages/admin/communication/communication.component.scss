@@ -184,11 +184,6 @@ header{
   overflow-x: hidden;
   display: grid;
   height: 802px;
-  .aside-body-main-child{
-    &>:last-child{
-      border: none;
-    }
-  }
  @include scroll;
   .aside-scroll-child{
     overflow: auto;
@@ -274,6 +269,7 @@ header{
       .gray-msg-div{
         display: grid;
         justify-content: left;
+
       }
       &>:first-child{
         color: $grayPara;
@@ -283,11 +279,12 @@ header{
         background: #fafafa;
         color: black;
         margin-top: 15px;
-        padding: 15px 20px;
+        padding: 15px 25px;
         border-radius: 30px;
         text-align: left;
         overflow-wrap: break-word;
         max-width: 639px;
+        width: max-content;
 
       }
       //&>:last-child{
@@ -312,6 +309,7 @@ header{
       .blue-msg-div{
         display: grid;
         justify-content: right;
+
       }
       &>:first-child{
         color: $grayPara;
@@ -322,11 +320,11 @@ header{
       background: $skyColor;
       color: white;
       margin-top: 15px;
-      padding: 15px 20px;
+      padding: 15px 25px;
       border-radius: 30px;
-      text-align: center;
       max-width: 639px;
       overflow-wrap: break-word;
+        width: max-content;
     }
 
     }
@@ -394,13 +392,7 @@ header{
     grid-template-columns: none;
   }
 }
-@media screen and (max-height: 693px){
-  .aside-body-div{
-    &>:last-child{
-      border: none;
-    }
-  }
-}
+
 @media only screen and (max-width: 360px) {
   section{
     padding: 0;
@@ -438,7 +430,7 @@ header{
 .modal-header {
   padding: 15px;
 }
-
+  //unKnown-parents
 .modal-input{
       width: 100%;
   padding: 10px 20px;
@@ -447,23 +439,23 @@ header{
   border-bottom: 1px solid $skyColor;
   border-top: 1px solid $skyColor;
 }
-
-
-
-  .modal-body{
-    .scrolling-list{
-      max-height: 550px;
-      overflow: auto;
-      &>:nth-child(even){
-        background: #f5f5f6;
-      }
-      li{
-        padding: 10px;
-        cursor: pointer;
-        &:hover{
-          background: #fbfbfd;
-        }
+.modal-body{
+  .scrolling-list{
+    max-height: 550px;
+    overflow: auto;
+    &>:nth-child(even){
+      background: #f5f5f6;
+    }
+    li{
+      padding: 10px;
+      cursor: pointer;
+      &:hover{
+        background: #fbfbfd;
       }
     }
   }
+}
+
+
+
 
