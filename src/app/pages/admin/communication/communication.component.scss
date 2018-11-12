@@ -285,17 +285,20 @@ header{
         margin-top: 15px;
         padding: 15px 20px;
         border-radius: 30px;
-        text-align: center;
+        text-align: left;
+        overflow-wrap: break-word;
+        max-width: 639px;
+
       }
-      &>:last-child{
-        .msg-p{
-          background: #fafafa;
-          color: black;
-          margin-top: 15px;
-          padding: 15px 20px;
-          border-radius: 30px;
-        }
-      }
+      //&>:last-child{
+      //  .msg-p{
+      //    background: #fafafa;
+      //    color: black;
+      //    margin-top: 15px;
+      //    padding: 15px 32px;
+      //    border-radius: 30px;
+      //  }
+      //}
     }
   }
   .john-image-container {
@@ -316,13 +319,16 @@ header{
         text-align: right;
       }
       .blue-msg-p{
-        background: $skyColor;
-        color: white;
-        margin-top: 15px;
-        padding: 15px 20px;
-        border-radius: 30px;
-        text-align: center;
-      }
+      background: $skyColor;
+      color: white;
+      margin-top: 15px;
+      padding: 15px 20px;
+      border-radius: 30px;
+      text-align: center;
+      max-width: 639px;
+      overflow-wrap: break-word;
+    }
+
     }
     .john-img{
       order: 2;
