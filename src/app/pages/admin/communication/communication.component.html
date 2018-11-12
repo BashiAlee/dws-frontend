@@ -5,12 +5,17 @@
         <header>
             <div class="custom-tabs">
               <ul>
-                <li><a [class.active-link]="">Pilots</a></li>
-                <li><a [class.active-link]="">Customers</a></li>
+                <li (click)="getMessagesByRole('pilot')" ><a [class.active-link]="isPilotTab">Pilots</a></li>
+                <li (click)="getMessagesByRole('customer')"><a [class.active-link]="!isPilotTab">Customers</a></li>
               </ul>
             </div>
           <div class="pilot-chat-btn-section">
-            <p>Pilots</p>
+            <div *ngIf="isPilotTab">
+              <p>Pilots</p>
+            </div>
+            <div *ngIf="!isPilotTab">
+              <p>Customers</p>
+            </div>
             <button class="header-chat-btn" (click)="stratChat(template)">Start a new chat</button>
           </div>
 

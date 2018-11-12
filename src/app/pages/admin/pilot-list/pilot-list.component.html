@@ -31,20 +31,35 @@
            <div class="div-pilot-select">
                <div class="form-group">
                    <label for="state" class="custom-input-label makeBlack">Search Pilot by</label>
-                   <ng-select [searchable]="false" (changeEvent)="selectedSearch">
-                         <ng-option *ngFor="let se of search">{{se.name}}</ng-option>
+                   <ng-select [(ngModel)]="selectedOption" [searchable]="false">
+                         <ng-option *ngFor="let se of search" [value]="se.value">{{se.name}}</ng-option>
                      </ng-select>
                  </div>
            </div>
            <div class="input-city-div">
-
+             <div *ngIf="selectedOption == 'zipcode' || selectedOption == 'city' || !selectedOption">
                <div class="form-group">
                    <input [(ngModel)]="keyword" type="text" class="form-control custom-inputm input-city" id="city" aria-describedby="keyword"
                      placeholder="Keyword">
                  </div>
+            </div>
+            <div *ngIf="selectedOption == 'state'">
+              <div class="form-group">
+                <ng-select [(ngModel)]="keyword" [searchable]="true">
+                  <ng-option *ngFor="let s of states" [value]="s.ID">{{s.Name}}</ng-option>
+                </ng-select>
+            </div>
+              </div>
+            <div *ngIf="selectedOption == 'country'" >
+              <div class="form-group">
+              <ng-select [(ngModel)]="keyword" [searchable]="true">
+                  <ng-option *ngFor="let c of countires" [value]="c.ID">{{c.Name}}</ng-option>
+                </ng-select>
+            </div>
+            </div>
            </div>
            <div class="filter-button-div">
-              <button class="custom-primary-button filter-btn" (click)="searchPilot(keyword)" [disabled]="!keyword">Filter</button>
+              <button class="custom-primary-button filter-btn" (click)="searchPilot()" [disabled]="!keyword">Filter</button>
            </div>
          </div>
 

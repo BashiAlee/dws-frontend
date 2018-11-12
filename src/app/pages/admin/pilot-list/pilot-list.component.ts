@@ -10,9 +10,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   templateUrl: "./pilot-list.component.html",
   styleUrls: ["./pilot-list.component.scss"]
 })
-export class PilotListComponent implements OnInit{
-
-  paginationData: any = {}
+export class PilotListComponent implements OnInit {
+  paginationData: any = {};
   pageNumber: any = 10;
   maxSize = 5;
   bigTotalItems: any;
@@ -22,36 +21,39 @@ export class PilotListComponent implements OnInit{
   isApprovedPilots: any = true;
   keyword: any;
   selectedOption: any;
-
-
-
+  states: any = [];
+  selectedState: any;
+  selectedCountry: any;
+  countires: any = [];
 
   constructor(
     private pilotService: PilotService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-  }
+  ) {}
   pilotList: any;
   search = [
     {
-      name: "City"
+      name: "City",
+      value: "city"
     },
     {
-      name: "State"
+      name: "State",
+      value: "state"
     },
     {
-      name: "Country"
+      name: "Country",
+      value: "country"
     },
     {
-      name: "Zipcode"
+      name: "Zipcode",
+      value: "zipcode"
     },
     {
-      name: "Jobs"
+      name: "Jobs",
+      value: "jobs"
     }
   ];
-
-
 
   ngOnInit() {
     // setTimeout(() => {
@@ -64,7 +66,7 @@ export class PilotListComponent implements OnInit{
     //  var url_string = window.location.href;
     //   var url = new URL(url_string);
     //   var pageNo = parseInt(url.searchParams.get("page-no"));
-      // this.bigCurrentPage = parseInt(pageNo);
+    // this.bigCurrentPage = parseInt(pageNo);
     // if(pageNo) {
     //     var fromLimit = pageNo.toString() +'0'
     //     var data = {
@@ -78,7 +80,7 @@ export class PilotListComponent implements OnInit{
     this.onPageLoad();
     // } else {
     //   console.log("Elseee")
-      // this.getAllPilots(this.pageNumber, 0);
+    // this.getAllPilots(this.pageNumber, 0);
     // }
 
     // this.getAllPilots(this.pageNumber, 0);
@@ -86,26 +88,26 @@ export class PilotListComponent implements OnInit{
     // setTimeout(() => {
     //   this.getSpecificPilotsInit()
     // }, 500);
+    this.getAllStates();
+    this.getAllCountries();
   }
 
   onPageLoad() {
-    console.log("SDDDDD", this.isApprovedPilots)
-    var fromLimit = this.bigCurrentPage.toString() +'0'
-
+    console.log("SDDDDD", this.isApprovedPilots);
+    var fromLimit = this.bigCurrentPage.toString() + "0";
     var data = {
-        from: this.pageNumber, //skip
-        to: parseInt(fromLimit) - 10 //limit
-    }
-    if(this.isApprovedPilots) {
+      from: this.pageNumber, //skip
+      to: parseInt(fromLimit) - 10 //limit
+    };
+    if (this.isApprovedPilots) {
       this.bigCurrentPage = 1;
       this.pageNumber = 10;
-      this.getAllApprovedPilots(data.from,data.to)
+      this.getAllApprovedPilots(data.from, data.to);
     } else {
       this.bigCurrentPage = 1;
       this.pageNumber = 10;
-      this.getAllRejectedPilots(data.from, data.to)
+      this.getAllRejectedPilots(data.from, data.to);
     }
-
   }
 
   getAllRejectedPilots(num, val) {
@@ -135,7 +137,25 @@ export class PilotListComponent implements OnInit{
 
   getAllStates() {
     this.pilotService.getAllStates().subscribe(data => {
-      console.log("dd", data);
+      if(data.status == true){
+        this.states = data.result;
+        // console.log("All States ---> ", this.states);
+      }else{
+        console.log("States Not Found !!")
+      }
+
+    });
+  }
+
+  getAllCountries() {
+    this.pilotService.getAllCountries().subscribe(data => {
+      if(data.status == true){
+        this.countires = data.result;
+        // console.log("All Countries ---> ", this.countires);
+      }else{
+        console.log("Countries Not Found !!")
+      }
+
     });
   }
 
@@ -153,9 +173,13 @@ export class PilotListComponent implements OnInit{
     this.onPageLoad();
   }
 
-  searchPilot(keyword){
-    console.log("keyword ---> ",keyword)
-    console.log("slecettd ---> ",this.search)
+  searchPilot() {
+    var fromLimit = this.bigCurrentPage.toString() + "0";
+    var keywordString = this.keyword.toString();
+    var searchData = { SearchType: this.selectedOption, SearchKeyword: keywordString, Offset: this.pageNumber, Limit: parseInt(fromLimit) - 10 };
+    this.pilotService.searchPilotList(searchData).subscribe(data =>{
+      console.log("Searched ---> ",data)
+    });
   }
 
   // getSpecificPilots() {
@@ -174,6 +198,4 @@ export class PilotListComponent implements OnInit{
   //   }, 100);
 
   // }
-
-
 }

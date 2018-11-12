@@ -24,9 +24,9 @@ export class MessagesService {
       );
   }
 
-  getMessagesListOfCurrentUserAdmin() {
+  getMessagesListOfCurrentUserAdmin(role) {
     return this.http
-      .get(this.apiUrl + "admin/listMessage")
+      .get(this.apiUrl + "admin/listMessage/"+role)
       .pipe(
         map((response: any) => {
           return response.json();

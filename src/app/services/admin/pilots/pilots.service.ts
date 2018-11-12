@@ -62,4 +62,11 @@ export class PilotService {
      return response.json();
     }));
   }
+
+  getAllCountries(){
+    return this.http.get(this.apiUrl +'getCountries')
+    .pipe(map((response: any)=>{
+      return response.json();
+    }))
+  }
 }
