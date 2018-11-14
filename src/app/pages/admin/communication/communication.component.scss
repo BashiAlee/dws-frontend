@@ -276,7 +276,7 @@ header{
   }
   .matti-scroll-container{
     overflow: auto;
-    height: 663px;
+    max-height: 663px;
     padding-bottom: 10px;
     @include scroll;
   }
