@@ -1,11 +1,13 @@
 <div class="container marginAuto">
   <div class="row">
     <div class="col-md-12">
-      <section>
+      <section id="communication-section">
         <header>
           <div *ngIf="currentRole == 'admin'">
+            <h1 class="communications-h1">Communications</h1>
+            <p class="communications-main-p">All of Your Communications/Messages rest here</p>
             <div class="custom-tabs">
-              <ul>
+              <ul class="header-ul">
                 <li (click)="getMessagesByRole('pilot')"><a [class.active-link]="isPilotTab">Pilots</a></li>
                 <li (click)="getMessagesByRole('customer')"><a [class.active-link]="!isPilotTab">Customers</a></li>
               </ul>
@@ -44,8 +46,8 @@
                     <img *ngIf="currentList.ProfileImage" [src]="currentList.ProfileImage" class="sidebar-img">
                     <div class="sidebar-img-text">
                       <p>{{ currentList.SenderFirstName +' '+currentList.SenderMiddleName+'
-                        '+currentList.SenderLastName }}</p>
-                      <p class="putDot">{{ currentList.Message }}</p>
+                        '+currentList.SenderLastName}}</p>
+                      <p class="ellipsis-p" >{{ currentList.Message }}</p>
                     </div>
                   </div>
                 </div>

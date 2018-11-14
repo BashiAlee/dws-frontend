@@ -16,6 +16,25 @@
     }
 
   }
+//this
+@media screen and (max-width:1470px) {
+  #communication-section{
+    margin: 0 10px;
+  }
+
+}
+//this
+@media screen and (max-width:1398px) {
+  #communication-section {
+    .section-body {
+
+      display: block;
+    }
+    div.side-panel {
+      border-right: none;
+    }
+  }
+}
 @media (max-width: 1330px) {
   .table-div{
     width: 1170px;
@@ -254,7 +273,43 @@
     padding: 30px!important;
   }
 }
-
+//@media (max-width: 576px) {
+//  .container {
+//    width: 100% !important;
+//  }
+//}
+@media only screen and (max-width: 360px) {
+  section{
+    padding: 0 !important;
+  }
+  .mattie {
+    .matti-image-container{
+      .mattie-img-text{
+        padding-left: 0 !important;
+      }
+    }
+    .john-image-container{
+      .mattie-img-text{
+        padding-right: 0 !important;
+      }
+    }
+  }
+  .mattie  {
+    .matti-body-input-div{
+      .matti-body-input{
+        padding: 17px !important;
+      }
+    }
+  }
+  header{
+    p{
+      font-size: 24px !important;
+    }
+    .header-chat-btn{
+      padding: 10px 15px !important;
+    }
+  }
+}
 @media screen and (max-width: 330px){
   div.entries-selector{
     .selector-input-container{
@@ -277,3 +332,92 @@
     padding: 20px!important;
   }
 }
+
+//@media screen and (max-width: 1050px){
+//  div.mattie{
+//    div.john-image-container, div.matti-image-container{
+//      div.mattie-img-text{
+//        div.blue-msg-p, div.msg-p{
+//          max-width: 390px ;
+//        }
+//      }
+//    }
+//  }
+//}
+//@media screen and (max-width: 545px){
+//   .mattie{
+//    .john-image-container,
+//    .matti-image-container{
+//      .mattie-img-text{
+//        .blue-msg-p, .msg-p{
+//          max-width: 273px ;
+//        }
+//      }
+//    }
+//  }
+//}
+//@media screen and (max-width: 422px){
+//  .mattie{
+//    .john-image-container, .matti-image-container{
+//      .mattie-img-text{
+//        .blue-msg-p, .msg-p{
+//          max-width: 200px ;
+//        }
+//      }
+//    }
+//  }
+//}
+//@media screen and (max-width: 362px){
+//  .mattie{
+//    .john-image-container, .matti-image-container{
+//      .mattie-img-text{
+//        .blue-msg-p, .msg-p{
+//          max-width: 170px ;
+//        }
+//      }
+//    }
+//  }
+//}
+
+
+//this
+
+
+
+//@media screen and (max-width:1170px) {
+//  .section-body{
+//    grid-template-columns: none;
+//  }
+//}
+//@media only screen and (max-width: 360px) {
+//  section{
+//    padding: 0;
+//  }
+//  .mattie {
+//    .matti-image-container{
+//      .mattie-img-text{
+//        padding-left: 0;
+//      }
+//    }
+//    .john-image-container{
+//      .mattie-img-text{
+//        padding-right: 0;
+//      }
+//    }
+//  }
+//  .mattie  {
+//    .matti-body-input-div{
+//      .matti-body-input{
+//        padding: 17px;
+//      }
+//    }
+//  }
+//  header{
+//    p{
+//      font-size: 24px;
+//    }
+//    .header-chat-btn{
+//      padding: 10px 15px;
+//    }
+//  }
+//}
