@@ -1,14 +1,18 @@
 <div class="container marginAuto">
   <div class="row">
     <div class="col-md-12">
-      <section>
+      <section id="communication-section">
         <header>
+          <div *ngIf="currentRole == 'admin'">
+            <h1 class="communications-h1">Communications</h1>
+            <p class="communications-main-p">All of Your Communications/Messages rest here</p>
             <div class="custom-tabs">
-              <ul>
-                <li (click)="getMessagesByRole('pilot')" ><a [class.active-link]="isPilotTab">Pilots</a></li>
+              <ul class="header-ul">
+                <li (click)="getMessagesByRole('pilot')"><a [class.active-link]="isPilotTab">Pilots</a></li>
                 <li (click)="getMessagesByRole('customer')"><a [class.active-link]="!isPilotTab">Customers</a></li>
               </ul>
             </div>
+          </div>
           <div class="pilot-chat-btn-section">
             <div *ngIf="isPilotTab">
               <p>Pilots</p>
@@ -16,109 +20,48 @@
             <div *ngIf="!isPilotTab">
               <p>Customers</p>
             </div>
-            <button class="header-chat-btn" (click)="stratChat(template)">Start a new chat</button>
+            <button class="header-chat-btn" (click)="startChat(template)">Start a new chat</button>
           </div>
 
         </header>
         <div class="section-body">
           <div class="side-panel">
-            <ng-template #template>
-              <div class="modal-header">
-                <h4 class="modal-title pull-left">Search User To Message</h4>
-                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                    <div>
-                      <div><input [(ngModel)]="searchUser" type="text" class="modal-input" placeholder="Search User"></div>
-                        <!-- <button type="submit" class="aside-input-search-btn" (click)="adminSearchUser()" ><i class="fa fa-search"></i></button> -->
-                    </div>
-                <div class="scrolling-list">
-                        <li *ngFor="let user of resultSearchedUser | search: searchUser" (click)="selectUser(user)" >
-                        <span class="badge">{{user.FirstName}} {{user.MiddleName}} {{user.LastName}}</span>
-                      </li>
-                </div>
-              </div>
-            </ng-template>
-<div class="aside-header-div">
+            <div class="aside-header-div" *ngIf="currentRole == 'admin'">
               <div *ngIf="isPilotTab">
-                  <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Pilot">
+                <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Pilot">
               </div>
-<div *ngIf="!isPilotTab">
-  <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Customer">
-</div>
+              <div *ngIf="!isPilotTab">
+                <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Customer">
+              </div>
               <button type="submit" class="aside-input-search-btn"><i class="fa fa-search"></i></button>
             </div>
-              <div class="aside-body-div">
-            <div class="aside-body-main-child">
-<div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages | pilots: searchPilot" (click)="getAllMessages(currentList)">
-              <div class="sidebar-image-container">
-<img *ngIf="!currentList.ProfileImage" src="../../../../assets/images/avatar.png" class="sidebar-img">
-                <img *ngIf="currentList.ProfileImage" [src]="currentList.ProfileImage" class="sidebar-img">
-                <div class="sidebar-img-text">
-                  <p>{{ currentList.SenderFirstName +' '+currentList.SenderMiddleName+' '+currentList.SenderLastName  }}</p>
-                  <p>{{ currentList.Message }}</p>
+            <div class="aside-body-div">
+              <div class="aside-body-main-child" *ngIf="currentUserMessages && currentUserMessages.length">
+                <div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages | pilots: searchPilot"
+                  (click)="getAllMessages(currentList)">
+
+
+                  <div class="sidebar-image-container" [ngClass]="(currentRole != 'admin')?'makeSmall':''">
+                    <img *ngIf="!currentList.ProfileImage" src="../../../../assets/images/avatar.png" class="sidebar-img">
+                    <img *ngIf="currentList.ProfileImage" [src]="currentList.ProfileImage" class="sidebar-img">
+                    <div class="sidebar-img-text">
+                      <p>{{ currentList.SenderFirstName +' '+currentList.SenderMiddleName+'
+                        '+currentList.SenderLastName}}</p>
+                      <p class="ellipsis-p" >{{ currentList.Message }}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <!--<div class="sidebar-image-container">
-                <img  src="../../../../assets/images/avatar.png" class="sidebar-img">
-                <div class="sidebar-img-text">
-                  <p>Mittie Watson</p>
-                  <p>The Trust about hemorrohids</p>
-                </div>
-              </div>--!>
-              <!-- <div class="sidebar-image-container">
-                <img src="../../../../assets/images/avatar.png" class="sidebar-img">
-                <div class="sidebar-img-text">
-                  <p>John Doe</p>
-                  <p>Hey? What's Up?</p>
-                </div>
-              </div> -->
-              <!-- <div class="sidebar-image-container">
-                <img src="../../../../assets/images/avatar.png" class="sidebar-img">
-                <div class="sidebar-img-text">
-                  <p>Margaret Soto</p>
-                  <p>Survey shows two thirds of..</p>
-                </div>
-              </div> -->
-              <!-- <div class="sidebar-image-container">
-                <img src="../../../../assets/images/avatar.png" class="sidebar-img">
-                <div class="sidebar-img-text">
-                  <p>John Doe</p>
-                  <p>Hey? What's Up?</p>
-                </div>
-              </div> -->
-              <!-- <div class="sidebar-image-container">
-                <img src="../../../../assets/images/avatar.png" class="sidebar-img">
-                <div class="sidebar-img-text">
-                  <p>Margaret Soto</p>
-                  <p>Survey shows two thirds of..</p>
-                </div>
-              </div> -->
-              <!-- <div class="sidebar-image-container">
-                <img src="../../../../assets/images/avatar.png" class="sidebar-img">
-                <div class="sidebar-img-text">
-                  <p>Margaret Soto</p>
-                  <p>Survey shows two thirds of..</p>
-                </div>
-              </div> -->
-              <!-- <div class="sidebar-image-container">
-                <img src="../../../../assets/images/avatar.png" class="sidebar-img">
-                <div class="sidebar-img-text">
-                  <p>Margaret Soto</p>
-                  <p>Survey shows two thirds of..</p>
-                </div>
-              </div> -->
-              <!-- <div class="sidebar-image-container">
-                <img src="../../../../assets/images/avatar.png" class="sidebar-img">
-                <div class="sidebar-img-text">
-                  <p>Margaret Soto</p>
-                  <p>Survey shows two thirds of..</p>
-                </div>
-              </div> -->
+              <div class="aside-body-main-child" *ngIf="currentUserMessages && !currentUserMessages.length">
+                <!-- <div class="aside-scroll-child"> -->
+                  <div class="sidebar-image-container">
+
+                    <div class="sidebar-img-text">
+                      <p>No Messages List Exist</p>
+                    </div>
+                  </div>
+                <!-- </div> -->
               </div>
-            </div>
             </div>
           </div>
           <div class="mattie">
@@ -132,8 +75,8 @@
                 </div>
               </div>
             </div>
-<div class="mattie-body" id="messages-scroll">
-<div class="matti-scroll-container" >
+            <div class="mattie-body" id="messages-scroll">
+              <div class="matti-scroll-container">
                 <!-- <div class="mattie-scroll-container-div">
                   <div class="matti-image-container">
                     <img src="../../../../assets/images/avatar.png" class="sidebar-img">
@@ -145,65 +88,35 @@
                     </div>
                   </div>
                 </div> -->
-<!-- *ngIf="onlineUserId != messages.MessageFrom" -->
-<div  class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId">
-              <div [ngClass]="(onlineUserId != messages.MessageFrom )?'matti-image-container':'john-image-container'">
-                <!-- [src]="(onlineUserId != messages.MessageFrom)?messages.UserToDetail.ProfileImage:messages.UserFromDetail.ProfileImage" -->
-              <img src="../../../../assets/images/avatar.png" [ngClass]="(onlineUserId != messages.MessageFrom )?'sidebar-img':'sidebar-img john-img'">
-<!-- <img *ngIf="!messages.UserFromDetail.ProfileImage || messages.UserToDetail.ProfileImage" src="../../../../assets/images/avatar.png"
+                <!-- *ngIf="onlineUserId != messages.MessageFrom" -->
+                <div class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId">
+                  <div [ngClass]="(onlineUserId != messages.MessageFrom )?'matti-image-container':'john-image-container'">
+                    <!-- [src]="(onlineUserId != messages.MessageFrom)?messages.UserToDetail.ProfileImage:messages.UserFromDetail.ProfileImage" -->
+                    <img *ngIf="onlineUserId != messages.MessageFrom && messages.UserFromDetail.ProfileImage" [src]="messages.UserFromDetail.ProfileImage" class="sidebar-img">
+                    <img *ngIf="onlineUserId != messages.MessageFrom && !messages.UserFromDetail.ProfileImage" src="../../../../assets/images/avatar.png" class="sidebar-img">
+                    <img *ngIf="onlineUserId == messages.MessageFrom && userInfo.ProfileImage"[src]="userInfo.ProfileImage" class="sidebar-img john-img">
+                    <img *ngIf="onlineUserId == messages.MessageFrom && !userInfo.ProfileImage" src="../../../../assets/images/avatar.png" class="sidebar-img john-img">
+                    <!-- <img *ngIf="!messages.UserFromDetail.ProfileImage || messages.UserToDetail.ProfileImage" src="../../../../assets/images/avatar.png"
   [ngClass]="(onlineUserId != messages.MessageFrom )?'sidebar-img':'sidebar-img john-img'"> -->
-<!--left-->
+                    <!--left-->
                     <div class="mattie-img-text">
                       <p>{{ messages.MessageTime | date: 'hh:mma' }}</p>
-                      <div [ngClass]="(onlineUserId != messages.MessageFrom)?'msg-p':'blue-msg-p'"><p>{{ messages.Message }}</p></div>
+                      <div [ngClass]="(onlineUserId != messages.MessageFrom)?'msg-p':'blue-msg-p'">
+                        <p>{{ messages.Message }}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <!-- <div class="mattie-scroll-container-div">
-                  <div class="john-image-container">
-                    <img src="../../../../assets/images/avatar.png" class="sidebar-img john-img">
-                    <div class="mattie-img-text">
-                      <p>11:00 am</p>
-                      <div class="blue-msg-div">
-                      <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-                <!-- <div class="mattie-scroll-container-div" *ngIf="onlineUserId == messages.MessageFrom">
-                  <div class="john-image-container">
-                    <img src="../../../../assets/images/avatar.png" class="sidebar-img john-img">
-                    <div class="mattie-img-text">
-
-                      <p>11:00 am</p>
-                      <p>{{ messages.Message }}</p>
-
-                      <p>11:00 am </p>
-                      <div class="blue-msg-div">
-                        <p>Vitamin B A Complex Mix</p>
-                      </div>
-
-                    </div>
-                  </div>
-                </div> -->
-                <!-- <div class="mattie-scroll-container-div">
-                  <div class="matti-image-container">
-                    <img src="../../../../assets/images/avatar.png" class="sidebar-img">
-                    <div class="mattie-img-text">
-                      <p>11:00 am</p>
-                      <div class="gray-msg-div">
-                        <p>Survey shows two thirds of migraine suffers Dissatisfied</p>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
               </div>
             </div>
 
           </div>
-          <div class="matti-body-input-div">
-            <div class="footer-input-div"><textarea rows="12" cols="10" [(ngModel)]="message"  [ngClass]="(activeClass)?'input-active':''" class="matti-body-input" placeholder="Type your message here"></textarea></div>
-            <button class="matti-body-input-btn" (click)="sendMessage(message)" [ngClass]="(!message)?'disabled-btn':''" [disabled]="!message"><i class="fa fa-paper-plane"></i></button>
+          <div class="matti-body-input-div" id="sendMessageArea">
+            <input [(ngModel)]="message" type="text" [ngClass]="(activeClass)?'input-active':''" class="matti-body-input"
+              placeholder="Type your message here">
+            <button class="matti-body-input-btn" (click)="sendMessage(message)" [ngClass]="(!message)?'disabled-btn':''"
+              [disabled]="!message"><i class="fa fa-paper-plane"></i></button>
+
           </div>
         </div>
       </section>
@@ -213,5 +126,22 @@
 </div>
 
 
-
-
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Search User To Message</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div><input [(ngModel)]="searchUser" type="text" class="modal-input" placeholder="Search User"></div>
+      <!-- <button type="submit" class="aside-input-search-btn" (click)="adminSearchUser()" ><i class="fa fa-search"></i></button> -->
+    </div>
+    <div class="scrolling-list">
+      <li *ngFor="let user of resultSearchedUser | search: searchUser" (click)="selectUser(user)">
+        <span class="badge">{{user.FirstName}} {{user.MiddleName}} {{user.LastName}}</span>
+      </li>
+    </div>
+  </div>
+</ng-template>

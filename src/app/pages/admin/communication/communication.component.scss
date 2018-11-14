@@ -43,9 +43,12 @@ section
     width: 45px;
     margin:6px;
   }
+
+
 }
 header{
   padding:24px 8px;
+  text-align: center;
   .header-chat-btn{
     padding: 17px 40px;
     border-radius: 30px;
@@ -57,10 +60,27 @@ header{
       background: #29ABFF;
     }
   }
+  .communications-h1{
+    font-size: 29px;
+    color: $grayPara;
+    padding-top: 40px;
+  }
+  .communications-main-p{
+    font-size: 17px;
+    padding-bottom: 34px;
+    padding-top: 10px;
+  }
   p{
-    font-size: 26px;
+    font-size: 25px;
     color: $grayPara;
   }
+  .custom-tabs{
+    .header-ul{
+      padding-left: 25px;
+      padding-right: 0;
+    }
+  }
+
   .pilot-chat-btn-section{
     display: grid;
     grid-template-columns: auto auto;
@@ -94,6 +114,7 @@ header{
   outline: none;
   border: none;
   padding:10px;
+  width: 100%;
 }
 .aside-input-search-btn{
   outline: none;
@@ -183,7 +204,7 @@ header{
   overflow-y: auto;
   overflow-x: hidden;
   display: grid;
-  height: 802px;
+  max-height: 802px;
  @include scroll;
   .aside-scroll-child{
     overflow: auto;
@@ -193,15 +214,16 @@ header{
   }
   .sidebar-image-container{
     display: grid;
-    padding: 16px 10px 15px 25px;
+    padding: 16px 6px 15px 17px;
     grid-template-columns: auto auto;
     justify-content: left;
     .sidebar-img-text{
-      padding: 10px;
+      padding: 10px 0 10px 10px;
       p{
         text-overflow: ellipsis;
         overflow: hidden;
         width: 207px;
+        white-space: nowrap;
       }
       &>:first-child{
         font-weight: bolder;
@@ -282,9 +304,6 @@ header{
         padding: 15px 25px;
         border-radius: 30px;
         text-align: left;
-        overflow-wrap: break-word;
-        max-width: 639px;
-        width: max-content;
 
       }
       //&>:last-child{
@@ -323,8 +342,6 @@ header{
       padding: 15px 25px;
       border-radius: 30px;
       max-width: 639px;
-      overflow-wrap: break-word;
-        width: max-content;
     }
 
     }
@@ -353,12 +370,12 @@ header{
 
   }
   .matti-body-input{
-    padding: 7px;
-    width: 100%;
-    height: 40px;
-    border: none;
-    background: transparent;
+    padding: 25px;
+    font-size: 15px;
+    border-radius: 40px;
     outline: none;
+    border: none;
+    background: #f5f5f6;
   }
   .input-active{
     border: 2px solid $skyColor;
@@ -374,7 +391,7 @@ header{
     outline: none;
     .fa-paper-plane{
       color: white;
-      font-size: 20px;
+      font-size: 21px;
     }
     &:hover{
       background: white;
@@ -385,6 +402,7 @@ header{
       }
     }
   }
+
   .disabled-btn{
     background: $grayPara;
     &:hover{
@@ -396,44 +414,54 @@ header{
     }
   }
 }
-@media screen and (max-width:1170px) {
-  .section-body{
-    grid-template-columns: none;
-  }
-}
-
-@media only screen and (max-width: 360px) {
-  section{
-    padding: 0;
-  }
-  .mattie {
-    .matti-image-container{
-      .mattie-img-text{
-        padding-left: 0;
-      }
-    }
-    .john-image-container{
-      .mattie-img-text{
-        padding-right: 0;
-      }
-    }
-  }
-  .mattie  {
-    .matti-body-input-div{
-      .matti-body-input{
-        padding: 17px;
-      }
-    }
-  }
-  header{
-    p{
-      font-size: 24px;
-    }
-    .header-chat-btn{
-      padding: 10px 15px;
-    }
-  }
-}
+//msg
+//@media screen and (max-width:1470px) {
+//  #communication-section{
+//    margin: 0 10px;
+//  }
+//
+//}
+//@media screen and (max-width:1398px) {
+//  .section-body{
+//    display: block;
+//  }
+//  .side-panel{
+//    border-right: none;
+//  }
+//}
+//
+//@media only screen and (max-width: 360px) {
+//  section{
+//    padding: 0;
+//  }
+//  .mattie {
+//    .matti-image-container{
+//      .mattie-img-text{
+//        padding-left: 0;
+//      }
+//    }
+//    .john-image-container{
+//      .mattie-img-text{
+//        padding-right: 0;
+//      }
+//    }
+//  }
+//  .mattie  {
+//    .matti-body-input-div{
+//      .matti-body-input{
+//        padding: 17px;
+//      }
+//    }
+//  }
+//  header{
+//    p{
+//      font-size: 24px;
+//    }
+//    .header-chat-btn{
+//      padding: 10px 15px;
+//    }
+//  }
+//}
 
 
 .modal-header {
@@ -465,6 +493,10 @@ header{
   }
 }
 
+
+div.makeSmall {
+  padding: 8px 10px 0px 25px !important;
+}
 
 
 

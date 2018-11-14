@@ -5,6 +5,7 @@ import { MessagesService } from "../../../services/messages/messages.service";
 import { AuthenticationService } from "../../../services/authentication/authentication.service";
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 import * as _ from "lodash";
+declare var $: any;
 
 @Component({
   selector: "app-communication",
@@ -32,7 +33,7 @@ export class CommunicationComponent implements OnInit {
   pilotMessages: any;
   isPilotTab: any = true;
   tabRole: any = "pilot";
-
+  currentRole: any;
   constructor(
     private messageService: MessagesService,
     private authService: AuthenticationService,
@@ -41,20 +42,26 @@ export class CommunicationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.userInfo = this.authService.getCurrentUser();
     if (this.router.url.split("/")[1] == "user") {
       this.userType = "PILOT";
+      this.selectedSenderChatName = "Admin";
+      this.lastMessageDate = Date.now();
     } else {
       this.userType = "ADMIN";
     }
+
     this.onPageLoadCommunication();
 
     //get online user data
     if (this.userType == "PILOT") {
       var dataOnlineUser = this.authService.getCurrentUser();
       this.onlineUserId = dataOnlineUser.ID;
+      this.currentRole = dataOnlineUser.Role;
     } else {
       var dataOnlineUser = this.authService.getCurrentAdmin();
       this.onlineUserId = dataOnlineUser.ID;
+      this.currentRole = dataOnlineUser.Role;
     }
 
     //scrolling messages to bottom
@@ -66,7 +73,6 @@ export class CommunicationComponent implements OnInit {
   }
   onPageLoadCommunication() {
     if (this.userType == "PILOT") {
-      this.userInfo = this.authService.getCurrentUser();
       var data = this.userInfo;
       this.messageService.getMessagesListOfCurrentUser(data).subscribe(data => {
         // console.log("Messages List ----> ", data.result);
@@ -196,6 +202,10 @@ export class CommunicationComponent implements OnInit {
   }
 
   sendMessage(message = "") {
+    // if (event.keyCode == 13) {
+
+    // }
+    console.log(event)
     if (this.userType == "PILOT") {
       var data = {
         MessageFrom: this.onlineUserId,
@@ -254,8 +264,13 @@ export class CommunicationComponent implements OnInit {
     this.lastMessageDate = "";
   }
 
-  stratChat(template: TemplateRef<any>) {
+  startChat(template: TemplateRef<any>) {
+
     if (this.userType == "PILOT") {
+    
+      $('div.mainContent').animate({
+        scrollTop: $("div.matti-body-input-div").offset().top
+      }, 1000)
       this.activeClass = true;
     } else {
       this.modalRef = this.modalService.show(template);

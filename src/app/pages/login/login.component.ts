@@ -56,6 +56,9 @@ export class LoginComponent{
   get form() {return this.loginForm.controls}
 
   login() {
+    this.loginForm.patchValue({
+      Role: this.type
+    });
     this.loading = true;
     this.success = '';
     this.error = '';

@@ -31,7 +31,12 @@ export class VerificationComponent implements OnInit {
     this.authService.verifyToken(token)
     .subscribe( data=> {
       if(data.status) {
-        this.router.navigate(['/loginpilot']);
+        if (data.type == 'pilot'){
+          this.router.navigate(["/loginpilot"]);
+        }else{
+          this.router.navigate(["/logincustomer"]);
+        }
+
       } else if (!data.status) {
         const initialState = {
           type: 'error'
