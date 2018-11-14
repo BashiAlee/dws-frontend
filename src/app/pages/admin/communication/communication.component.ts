@@ -5,6 +5,7 @@ import { MessagesService } from "../../../services/messages/messages.service";
 import { AuthenticationService } from "../../../services/authentication/authentication.service";
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 import * as _ from "lodash";
+declare var $: any;
 
 @Component({
   selector: "app-communication",
@@ -41,8 +42,11 @@ export class CommunicationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.userInfo = this.authService.getCurrentUser();
     if (this.router.url.split("/")[1] == "user") {
       this.userType = "PILOT";
+      this.selectedSenderChatName = "Admin";
+      this.lastMessageDate = Date.now();
     } else {
       this.userType = "ADMIN";
     }
@@ -69,7 +73,6 @@ export class CommunicationComponent implements OnInit {
   }
   onPageLoadCommunication() {
     if (this.userType == "PILOT") {
-      this.userInfo = this.authService.getCurrentUser();
       var data = this.userInfo;
       this.messageService.getMessagesListOfCurrentUser(data).subscribe(data => {
         // console.log("Messages List ----> ", data.result);
@@ -261,8 +264,13 @@ export class CommunicationComponent implements OnInit {
     this.lastMessageDate = "";
   }
 
-  stratChat(template: TemplateRef<any>) {
+  startChat(template: TemplateRef<any>) {
+
     if (this.userType == "PILOT") {
+    
+      $('div.mainContent').animate({
+        scrollTop: $("div.matti-body-input-div").offset().top
+      }, 1000)
       this.activeClass = true;
     } else {
       this.modalRef = this.modalService.show(template);
