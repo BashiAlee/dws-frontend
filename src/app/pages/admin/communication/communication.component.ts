@@ -32,7 +32,7 @@ export class CommunicationComponent implements OnInit {
   pilotMessages: any;
   isPilotTab: any = true;
   tabRole: any = "pilot";
-
+  currentRole: any;
   constructor(
     private messageService: MessagesService,
     private authService: AuthenticationService,
@@ -46,15 +46,18 @@ export class CommunicationComponent implements OnInit {
     } else {
       this.userType = "ADMIN";
     }
+
     this.onPageLoadCommunication();
 
     //get online user data
     if (this.userType == "PILOT") {
       var dataOnlineUser = this.authService.getCurrentUser();
       this.onlineUserId = dataOnlineUser.ID;
+      this.currentRole = dataOnlineUser.Role;
     } else {
       var dataOnlineUser = this.authService.getCurrentAdmin();
       this.onlineUserId = dataOnlineUser.ID;
+      this.currentRole = dataOnlineUser.Role;
     }
 
     //scrolling messages to bottom
@@ -196,6 +199,10 @@ export class CommunicationComponent implements OnInit {
   }
 
   sendMessage(message = "") {
+    // if (event.keyCode == 13) {
+
+    // }
+    console.log(event)
     if (this.userType == "PILOT") {
       var data = {
         MessageFrom: this.onlineUserId,

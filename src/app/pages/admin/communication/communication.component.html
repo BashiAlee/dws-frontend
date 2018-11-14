@@ -3,12 +3,14 @@
     <div class="col-md-12">
       <section>
         <header>
+          <div *ngIf="currentRole == 'admin'">
             <div class="custom-tabs">
               <ul>
                 <li (click)="getMessagesByRole('pilot')" ><a [class.active-link]="isPilotTab">Pilots</a></li>
                 <li (click)="getMessagesByRole('customer')"><a [class.active-link]="!isPilotTab">Customers</a></li>
               </ul>
             </div>
+</div>
           <div class="pilot-chat-btn-section">
             <div *ngIf="isPilotTab">
               <p>Pilots</p>
@@ -67,8 +69,8 @@
                   <p>Mittie Watson</p>
                   <p>The Trust about hemorrohids</p>
                 </div>
-              </div>--!>
-              <!-- <div class="sidebar-image-container">
+              </div>
+              <div class="sidebar-image-container">
                 <img src="../../../../assets/images/avatar.png" class="sidebar-img">
                 <div class="sidebar-img-text">
                   <p>John Doe</p>
@@ -202,7 +204,8 @@
 
           </div>
           <div class="matti-body-input-div">
-            <input [(ngModel)]="message" type="text" [ngClass]="(activeClass)?'input-active':''" class="matti-body-input" placeholder="Type your message here">
+<input [(ngModel)]="message" type="text" [ngClass]="(activeClass)?'input-active':''"
+  class="matti-body-input" placeholder="Type your message here">
             <button class="matti-body-input-btn" (click)="sendMessage(message)" [ngClass]="(!message)?'disabled-btn':''" [disabled]="!message"><i class="fa fa-paper-plane"></i></button>
 
           </div>

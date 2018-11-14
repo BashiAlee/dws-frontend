@@ -8,12 +8,14 @@ declare var $: any;
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {  
+export class SidebarComponent implements OnInit {
  id: any;
+ role: any;
   @Input() isOpen: boolean;
   @Output() toggleEvent: EventEmitter<boolean> =   new EventEmitter();
-  constructor(private authService :AuthenticationService) { 
+  constructor(private authService :AuthenticationService) {
     this.id = this.authService.getCurrentUser().ID;
+    this.role = this.authService.getCurrentUser().Role;
     var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     if(width < 768) {
       this.isOpen = false;

@@ -57,7 +57,7 @@
             </span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [ngClass]="(role =='customer')?'nav-item notAvailable':'nav-item'">
           <a class="nav-link" [routerLink]="['profile',id]" [routerLinkActive]="['active-sidebarlink']">
             <span><i class="fa fa-user-o" aria-hidden="true"></i>
               <span class="inner-item" *ngIf="isOpen">Profile</span>
