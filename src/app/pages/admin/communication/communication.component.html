@@ -202,9 +202,8 @@
 
           </div>
           <div class="matti-body-input-div">
-            <input [(ngModel)]="message" type="text" [ngClass]="(activeClass)?'input-active':''" class="matti-body-input" placeholder="Type your message here">
+            <div class="footer-input-div"><textarea rows="12" cols="10" [(ngModel)]="message"  [ngClass]="(activeClass)?'input-active':''" class="matti-body-input" placeholder="Type your message here"></textarea></div>
             <button class="matti-body-input-btn" (click)="sendMessage(message)" [ngClass]="(!message)?'disabled-btn':''" [disabled]="!message"><i class="fa fa-paper-plane"></i></button>
-
           </div>
         </div>
       </section>
