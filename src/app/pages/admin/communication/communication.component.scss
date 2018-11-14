@@ -461,5 +461,12 @@ div.makeSmall {
   padding: 8px 10px 0px 25px !important;
 }
 
+p.putDot{
+  width : 100px;
+  overflow:hidden;
+  display:inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 

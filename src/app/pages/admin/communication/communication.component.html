@@ -37,7 +37,7 @@
               <div class="aside-body-main-child" *ngIf="currentUserMessages && currentUserMessages.length">
                 <div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages | pilots: searchPilot"
                   (click)="getAllMessages(currentList)">
-       
+
 
                   <div class="sidebar-image-container" [ngClass]="(currentRole != 'admin')?'makeSmall':''">
                     <img *ngIf="!currentList.ProfileImage" src="../../../../assets/images/avatar.png" class="sidebar-img">
@@ -45,7 +45,7 @@
                     <div class="sidebar-img-text">
                       <p>{{ currentList.SenderFirstName +' '+currentList.SenderMiddleName+'
                         '+currentList.SenderLastName }}</p>
-                      <p>{{ currentList.Message }}</p>
+                      <p class="putDot">{{ currentList.Message }}</p>
                     </div>
                   </div>
                 </div>
@@ -53,7 +53,7 @@
               <div class="aside-body-main-child" *ngIf="currentUserMessages && !currentUserMessages.length">
                 <!-- <div class="aside-scroll-child"> -->
                   <div class="sidebar-image-container">
-             
+
                     <div class="sidebar-img-text">
                       <p>No Messages List Exist</p>
                     </div>

@@ -267,7 +267,7 @@ export class CommunicationComponent implements OnInit {
   startChat(template: TemplateRef<any>) {
 
     if (this.userType == "PILOT") {
-    
+
       $('div.mainContent').animate({
         scrollTop: $("div.matti-body-input-div").offset().top
       }, 1000)
