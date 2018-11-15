@@ -1,8 +1,19 @@
-import { MessagesService } from './../../services/messages/messages.service';
-import { CommunicationComponent } from './../../pages/admin/communication/communication.component';
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { Router } from '@angular/router';
+import {
+  MessagesService
+} from './../../services/messages/messages.service';
+import {
+  CommunicationComponent
+} from './../../pages/admin/communication/communication.component';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  AuthenticationService
+} from '../../services/authentication/authentication.service';
+import {
+  Router
+} from '@angular/router';
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
@@ -28,10 +39,9 @@ export class HeaderComponent implements OnInit {
 
     if (this.router.url.split("/")[1] == "admin") {
       this.userInfo = JSON.parse(localStorage.getItem("admin"));
-      // this.getAdminMessages();
-      let adminMessages = this.getAdminMessages();
-      adminMessages.then();
-      this.concatAdminMessages();
+      this.getAdminMessages().then((data=>{
+        
+      })).catch(e =>{console.log("errrr",e)});
     } else {
       this.userInfo = this.authService.getCurrentUser();
       this.getCurrentUsersMessages()
@@ -50,12 +60,16 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  test(){
+    console.log("tjis sadasdasdasdasdasd")
+  }
+
   getCurrentUsersMessages() {
     this.userInfo = this.authService.getCurrentUser();
     var data = this.userInfo;
     this.messageService.getMessagesListOfCurrentUser(data).subscribe(data => {
       console.log("Current User All Messages ----> ", data.result);
-      if (data.status == true) {
+      if (data.status) {
         this.currentUserMessages = data.result;
         this.messageConversationId = data.result[0].ConversationId;
         // console.log("Current User Message ---> ",this)
@@ -63,42 +77,49 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  getAdminMessages(){
-    return new Promise(function (resolve, reject) {
-      this.messageService
-        .getMessagesListOfCurrentUserAdmin("pilot")
+  async getAdminMessages() {
+    var bool1: any;
+    var bool2: any;
+      let promise = new Promise((resolve, reject) => {
+        this.messageService.getMessagesListOfCurrentUserAdmin("pilot")
         .subscribe(dataPilot => {
-          if (dataPilot.status) {
-            this.adminPilotMessages = dataPilot.result;
-          } else {
-            console.log("Unable to get admin and pilot messages")
-          }
+            if (dataPilot.status) {
+              this.adminPilotMessages = dataPilot.result
+              this.messageService.getMessagesListOfCurrentUserAdmin("customer")
+              .subscribe(dataCustomer => {
+                  if (dataCustomer.status) {
+                    this.adminCustomerMessages = dataCustomer.result
+                    resolve(this.adminAllMessages = this.adminPilotMessages.concat(this.adminCustomerMessages))
+                  }
+              });
+            } else {
+              this.messageService.getMessagesListOfCurrentUserAdmin("customer")
+              .subscribe(dataCustomer => {
+                  if (dataCustomer.status) {
+                    this.adminCustomerMessages = dataCustomer.result
+                    resolve(this.adminAllMessages = this.adminPilotMessages.concat(this.adminCustomerMessages))
+                  }
+              });
+            }
         });
 
-      this.messageService
-        .getMessagesListOfCurrentUserAdmin("customer")
-        .subscribe(dataCustomer => {
-          if (dataCustomer.status) {
-            this.adminCustomerMessages = dataCustomer.result;
-          } else {
-            console.log("Unable to get admin and customer messages");
-          }
-        });
 
-        if( this.adminPilotMessage && this.adminCustomerMessages ){
-            resolve("Resolved");
-        }else{
-          reject("Rejectde");
-        }
+
+
+
+          // resolve(this.adminPilotMessages.concat(this.adminPilotMessages))
+
+
+        // if(this.adminCustomerMessages.length && this.adminPilotMessages.length){
+        //   resolve(this.adminPilotMessages.concat(this.adminPilotMessages));
+        // }else{
+        //   reject("Not Resolved")
+        // }
     });
 
+    let result = await promise; // wait till the promise resolves (*)
 
-    // console.log("DDDd", this.adminPilotMessages, this.adminCustomerMessages);
-    //   this.adminAllMessages = this.adminPilotMessages.concat(this.adminCustomerMessages);
-    //   console.log("sadasdasda ",this.adminAllMessages);
-  }
-
-  concatAdminMessages(){
-    console.log("my word");
+    console.log("billu",result); // "done!"
+      // console.log("sadasdasda ",this.adminPilotMessages);
   }
 }
