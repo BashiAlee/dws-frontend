@@ -3,9 +3,9 @@
     <div class="col-md-12">
       <section id="communication-section">
         <header>
+          <h1 class="communications-h1">Communications</h1>
+          <p class="communications-main-p">All of Your Communications/Messages rest here</p>
           <div *ngIf="currentRole == 'admin'">
-            <h1 class="communications-h1">Communications</h1>
-            <p class="communications-main-p">All of Your Communications/Messages rest here</p>
             <div class="custom-tabs">
               <ul class="header-ul">
                 <li (click)="getMessagesByRole('pilot')"><a [class.active-link]="isPilotTab">Pilots</a></li>
@@ -109,7 +109,6 @@
                 </div>
               </div>
             </div>
-
           </div>
           <div class="matti-body-input-div" id="sendMessageArea">
             <input [(ngModel)]="message" type="text" [ngClass]="(activeClass)?'input-active':''" class="matti-body-input"

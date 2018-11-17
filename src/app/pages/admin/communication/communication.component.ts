@@ -121,9 +121,19 @@ export class CommunicationComponent implements OnInit {
 
   getMessagesByRole(role){
     if(role=='pilot'){
+      this.currentUserMessages = [];
+      this.lastMessageDate = '';
+      this.messageConversationId = '';
+      this.allMessagesByConversationId = [];
+      this.selectedSenderChatName = "";
       this.isPilotTab = true;
       this.tabRole = role;
     }else{
+      this.lastMessageDate = '';
+      this.allMessagesByConversationId = [];
+      this.selectedSenderChatName = '';
+      this.currentUserMessages = [];
+      this.messageConversationId= '';
       this.isPilotTab = false;
       this.tabRole = role;
     }
