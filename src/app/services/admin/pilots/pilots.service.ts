@@ -69,4 +69,11 @@ export class PilotService {
       return response.json();
     }))
   }
+
+  exportPilots(data) {
+    return this.http.get(this.apiUrl +'admin/exportPilots/'+data)
+    .pipe(map((response: any)=>{
+      return response.json();
+    }))
+  }
 }

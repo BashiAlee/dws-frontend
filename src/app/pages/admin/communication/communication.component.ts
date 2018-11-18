@@ -62,6 +62,7 @@ export class CommunicationComponent implements OnInit {
       var dataOnlineUser = this.authService.getCurrentAdmin();
       this.onlineUserId = dataOnlineUser.ID;
       this.currentRole = dataOnlineUser.Role;
+      console.log("Online User ID ---> ",this.onlineUserId)
     }
 
     //scrolling messages to bottom
@@ -215,6 +216,7 @@ export class CommunicationComponent implements OnInit {
     // if (event.keyCode == 13) {
 
     // }
+
     console.log(event)
     if (this.userType == "PILOT") {
       var data = {
@@ -226,6 +228,13 @@ export class CommunicationComponent implements OnInit {
           this.onPageLoadCommunication();
           this.message = "";
           this.activeClass = false;
+          var elements = document.querySelectorAll('.mattie-scroll-container-div');
+          var len = elements.length;
+          console.log('scroll');
+          console.log(elements);
+          const el = elements[this.allMessagesByConversationId.length-1] as HTMLElement;
+        
+          el.scrollIntoView({behavior:"smooth"});
         } else {
           console.log("Message Not Sent ", newData.message);
         }
@@ -247,9 +256,14 @@ export class CommunicationComponent implements OnInit {
           this.onPageLoadCommunication();
           this.message = "";
           this.activeClass = false;
-          var element = document.getElementById("messages-scroll");
-          element.scrollTop = element.scrollHeight;
-          // console.log("Scroll top ",element.scrollTop);
+          var elements = document.querySelectorAll('.mattie-scroll-container-div');
+          var len = elements.length;
+          console.log('scroll');
+          console.log(elements);
+          const el = elements[this.allMessagesByConversationId.length-1] as HTMLElement;
+        
+          el.scrollIntoView({behavior:"smooth"});
+  
         } else {
           console.log("Message Not Sent ", newData.message);
         }

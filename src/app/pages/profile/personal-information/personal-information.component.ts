@@ -233,7 +233,9 @@ export class PersonalInformationComponent implements OnInit {
           this.profileSevice.updatePersonalInformation(this.personalInformation.value)
           .subscribe(data => {
             if(data.status) {
+             
               localStorage.setItem('user', JSON.stringify(data.result))
+
               this.success = true;
               this.error = false;
               // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
@@ -275,6 +277,7 @@ export class PersonalInformationComponent implements OnInit {
           this.success = true;
           this.error = false;
           this.loading = false;
+          console.log("sdasdasdasdas---> ",data.result)
           localStorage.setItem('user', JSON.stringify(data.result))
           // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           // this.bsModalRef.content.closeBtnName = 'Close';
