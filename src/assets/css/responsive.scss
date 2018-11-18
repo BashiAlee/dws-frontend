@@ -17,14 +17,17 @@
 
   }
 //this
-@media screen and (max-width:1470px) {
+@media screen and (max-width:1350px) {
   #communication-section{
     margin: 0 10px;
+  }
+  .mainContent{
+    padding: 0 10px !important;
   }
 
 }
 //this
-@media screen and (max-width:1398px) {
+@media screen and (max-width:1300px) {
   #communication-section {
     .section-body {
 
@@ -273,11 +276,7 @@
     padding: 30px!important;
   }
 }
-//@media (max-width: 576px) {
-//  .container {
-//    width: 100% !important;
-//  }
-//}
+
 @media only screen and (max-width: 360px) {
   section{
     padding: 0 !important;
@@ -302,7 +301,7 @@
     }
   }
   header{
-    p{
+    .communications-h1{
       font-size: 24px !important;
     }
     .header-chat-btn{
@@ -332,6 +331,7 @@
     padding: 20px!important;
   }
 }
+
 
 //@media screen and (max-width: 1050px){
 //  div.mattie{
@@ -421,3 +421,8 @@
 //    }
 //  }
 //}
+@media (min-width: 576px) {
+  .container {
+    max-width: 100% !important;
+  }
+}

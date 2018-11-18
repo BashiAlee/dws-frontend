@@ -39,7 +39,7 @@ div.command-center {
 }
 .inputs-container1{
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: 31% 31% 16% 16%;
   align-items: end;
   grid-gap: 2%;
   margin: 0;
@@ -173,6 +173,14 @@ div.command-center {
   justify-content: space-between;
   align-content: center;
   align-items: center;
+  .pagination-div{
+    dl, ol, ul{
+        margin-top: auto;
+        background: red;
+      }
+
+  }
+
 }
 .input-city{
   padding: 0 18px;
@@ -184,6 +192,17 @@ div.command-center {
  margin-left: 0;
   height: 56px;
 }
+.download-link-div{
+  padding-bottom: 14px;
+  .download-link{
+    color:  #3FBAD0;
+    text-decoration: underline;
+    .fa-download{
+      color: #3FBAD0;
+    }
+  }
+}
+
 .custom-tabs {
   margin-bottom: 28px;
   display: flex;
@@ -204,7 +223,7 @@ div.command-center {
 
     li {
       display: inline-block;
-  
+
       margin: 13px 17px 0px 0px;
 
       a {

@@ -31,8 +31,10 @@ body{
 .onclick{
   background: lightGray;
 }
-section
+#communication-section
 {
+  max-width: 1030px;
+  margin: 0 auto;
   font-family: 'CarroisGothic-Regular';
   //max-width: 1330px;
   //margin: 30px auto;

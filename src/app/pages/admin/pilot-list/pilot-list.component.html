@@ -59,9 +59,13 @@
             </div>
            </div>
            <div class="filter-button-div">
-              <button class="custom-primary-button filter-btn" (click)="searchPilot()" [disabled]="!keyword">Filter</button>
+             <button class="custom-primary-button filter-btn" (click)="searchPilot()" [disabled]="!keyword">Filter</button>
            </div>
-           <div (click)="downloadCSV('approved')"><a >Export Pilots</a></div>
+
+           <div class="download-link-div">
+             <a (click)="downloadCSV('approved')" class="download-link" >Download Pilot data <i class="fa fa-download"></i> </a>
+           </div>
+
          </div>
 
          <div class="row">
@@ -137,6 +141,9 @@
                <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
                </div>
                </div>
+
+
+
            </div>
          </div>
 
