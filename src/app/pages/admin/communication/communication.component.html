@@ -9,7 +9,7 @@
             <div class="custom-tabs">
               <ul class="header-ul">
                 <li (click)="getMessagesByRole('pilot')"><a [class.active-link]="isPilotTab">Pilots</a></li>
-                <li (click)="getMessagesByRole('customer')"><a [class.active-link]="!isPilotTab">Customers</a></li>
+                <li (click)="getMessagesByRole('customer')"><a [class.active-link]="!isPilotTab">Clients</a></li>
               </ul>
             </div>
           </div>
@@ -18,7 +18,7 @@
               <p>Pilots</p>
             </div>
             <div *ngIf="!isPilotTab">
-              <p>Customers</p>
+              <p>Clients</p>
             </div>
             <button class="header-chat-btn" (click)="startChat(template)">Start a new chat</button>
           </div>
@@ -31,7 +31,7 @@
                 <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Pilot">
               </div>
               <div *ngIf="!isPilotTab">
-                <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Customer">
+                <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Clients">
               </div>
               <button type="submit" class="aside-input-search-btn"><i class="fa fa-search"></i></button>
             </div>
@@ -69,7 +69,7 @@
               <p class="mattie-heading">{{selectedSenderChatName}}</p>
               <div class="mattie-header-select-container">
                 <div class="mattie-header-select">
-                  <p>{{ lastMessageDate | date: 'd-MMMM yyyy' }}</p>
+                  <p>{{ lastMessageDate | date: 'd-MMM yyyy' }}</p>
                   <!-- <option>20-Dec 2017</option> -->
                   <!-- <option>30-Dec 2017</option> -->
                 </div>
@@ -89,7 +89,7 @@
                   </div>
                 </div> -->
                 <!-- *ngIf="onlineUserId != messages.MessageFrom" -->
-                <div class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId">
+                <div class="mattie-scroll-container-div" [class.billa]="last"*ngFor="let messages of allMessagesByConversationId; let last = last;">
                   <div [ngClass]="(onlineUserId != messages.MessageFrom )?'matti-image-container':'john-image-container'">
                     <!-- [src]="(onlineUserId != messages.MessageFrom)?messages.UserToDetail.ProfileImage:messages.UserFromDetail.ProfileImage" -->
                     <img *ngIf="onlineUserId != messages.MessageFrom && messages.UserFromDetail.ProfileImage" [src]="messages.UserFromDetail.ProfileImage" class="sidebar-img">
@@ -110,13 +110,17 @@
               </div>
             </div>
           </div>
+          <form>
           <div class="matti-body-input-div" id="sendMessageArea">
-            <input [(ngModel)]="message" type="text" [ngClass]="(activeClass)?'input-active':''" class="matti-body-input"
+            
+              <input [(ngModel)]="message" [ngModelOptions]="{standalone: true}" type="text" [ngClass]="(activeClass)?'input-active':''" class="matti-body-input"
               placeholder="Type your message here">
-            <button class="matti-body-input-btn" (click)="sendMessage(message)" [ngClass]="(!message)?'disabled-btn':''"
+            <button class="matti-body-input-btn" type="submit" (click)="sendMessage(message)" [ngClass]="(!message)?'disabled-btn':''"
               [disabled]="!message"><i class="fa fa-paper-plane"></i></button>
+       
 
           </div>
+        </form>
         </div>
       </section>
 

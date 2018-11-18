@@ -61,6 +61,7 @@
            <div class="filter-button-div">
               <button class="custom-primary-button filter-btn" (click)="searchPilot()" [disabled]="!keyword">Filter</button>
            </div>
+           <div (click)="downloadCSV('approved')"><a >Export Pilots</a></div>
          </div>
 
          <div class="row">

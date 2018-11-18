@@ -25,7 +25,7 @@ export class PilotListComponent implements OnInit {
   selectedState: any;
   selectedCountry: any;
   countires: any = [];
-
+  allPilots: any = [];
   constructor(
     private pilotService: PilotService,
     private router: Router,
@@ -198,4 +198,89 @@ export class PilotListComponent implements OnInit {
   //   }, 100);
 
   // }
+
+  convertToCSV(objArray) {
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    var str = '';
+
+    for (var i = 0; i < array.length; i++) {
+        var line = '';
+        for (var index in array[i]) {
+            if (line != '') line += ','
+
+            line += array[i][index];
+        }
+
+        str += line + '\r\n';
+    }
+
+    return str;
+}
+
+exportCSVFile(headers, items, fileTitle) {
+    if (headers) {
+        items.unshift(headers);
+    }
+
+    // Convert Object to JSON
+    var jsonObject = JSON.stringify(items);
+
+    var csv = this.convertToCSV(jsonObject);
+
+    var exportedFilenmae = fileTitle+'.csv';
+
+    var blob = new Blob([csv], {
+        type: 'text/csv;charset=utf-8;'
+    });
+    if (navigator.msSaveBlob) { // IE 10+
+        navigator.msSaveBlob(blob, exportedFilenmae);
+    } else {
+        var link = document.createElement("a");
+        if (link.download !== undefined) { // feature detection
+            // Browsers that support HTML5 download attribute
+            var url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", exportedFilenmae);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+}
+
+downloadCSV(value) {
+    this.pilotService.exportPilots(value)
+    .subscribe( data=> {
+      if(data.status) {
+        this.allPilots = data.result
+        var headers = {
+          firstName: 'First Name'.replace(/,/g, ''), // remove commas to avoid errors
+          lastName: "Last Name",
+          email: 'Email',
+          phoneNumber: 'Phone Number'
+      };
+  
+  
+      var itemsFormatted = [];
+  
+      // format the data
+      this.allPilots.forEach((item) => {
+          itemsFormatted.push({
+              firstName: item.FirstName,
+              lastName: item.LastName,
+              email: item.Email,
+              phoneNumber: item.Phone
+          });
+      });
+      }
+      this.exportCSVFile(headers, itemsFormatted, 'pilots'); // call the exportCSVFile() function to process the JSON and trigger the download
+    })
+
+
+
+   
+}
+
+
 }
