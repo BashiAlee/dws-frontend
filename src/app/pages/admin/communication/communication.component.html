@@ -112,12 +112,11 @@
           </div>
           <form>
           <div class="matti-body-input-div" id="sendMessageArea">
-            
               <input [(ngModel)]="message" [ngModelOptions]="{standalone: true}" type="text" [ngClass]="(activeClass)?'input-active':''" class="matti-body-input"
               placeholder="Type your message here">
             <button class="matti-body-input-btn" type="submit" (click)="sendMessage(message)" [ngClass]="(!message)?'disabled-btn':''"
               [disabled]="!message"><i class="fa fa-paper-plane"></i></button>
-       
+
 
           </div>
         </form>

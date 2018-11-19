@@ -22,6 +22,7 @@
               </a>
               <div class="dropdown-menu notification-dropdown dropdown-menu-right wow fadeInDown">
                   <ul class="drop-content">
+                    <div *ngIf="userInfo.Role == 'admin'">
                       <li class="align-text" *ngFor="let message of adminAllMessages">
                           <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
                           <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png" alt=""></div>
@@ -29,7 +30,15 @@
                           <p>has message for you.</p>
                           </div>
                        </li>
-
+                    </div>
+                    <li class="align-text" *ngFor="let message of currentUserMessages">
+                      <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
+                      <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png" alt=""></div>
+                      <div class="detail">
+                        <h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
+                        <p>has message for you.</p>
+                      </div>
+                    </li>
                   </ul>
                   <div class="notify-drop-footer text-center">
                       <a href=""> See All Messages > </a>
