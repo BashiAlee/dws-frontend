@@ -232,9 +232,10 @@ export class CommunicationComponent implements OnInit {
           var len = elements.length;
           console.log('scroll');
           console.log(elements);
+          console.log("asdasdas  ----> ", this.allMessagesByConversationId.length);
           const el = elements[this.allMessagesByConversationId.length-1] as HTMLElement;
-        
-          el.scrollIntoView({behavior:"smooth"});
+
+          el.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest"});
         } else {
           console.log("Message Not Sent ", newData.message);
         }
@@ -259,11 +260,10 @@ export class CommunicationComponent implements OnInit {
           var elements = document.querySelectorAll('.mattie-scroll-container-div');
           var len = elements.length;
           console.log('scroll');
-          console.log(elements);
+          console.log(elements.length);
+          console.log("asdasdas  ----> ",this.allMessagesByConversationId.length);
           const el = elements[this.allMessagesByConversationId.length-1] as HTMLElement;
-        
-          el.scrollIntoView({behavior:"smooth"});
-  
+          el.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest"});
         } else {
           console.log("Message Not Sent ", newData.message);
         }

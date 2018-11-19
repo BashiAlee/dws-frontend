@@ -40,12 +40,11 @@ export class HeaderComponent implements OnInit {
     if (this.router.url.split("/")[1] == "admin") {
       this.userInfo = JSON.parse(localStorage.getItem("admin"));
       this.getAdminMessages().then((data=>{
-        
+
       })).catch(e =>{console.log("errrr",e)});
     } else {
       this.userInfo = this.authService.getCurrentUser();
       this.getCurrentUsersMessages()
-      // this.check(this.userInfo.ProfileImage)
     }
   }
 
@@ -72,7 +71,6 @@ export class HeaderComponent implements OnInit {
       if (data.status) {
         this.currentUserMessages = data.result;
         this.messageConversationId = data.result[0].ConversationId;
-        // console.log("Current User Message ---> ",this)
       }
     });
   }
