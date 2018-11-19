@@ -38,11 +38,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     if (this.router.url.split("/")[1] == "admin") {
+      this.isAdmin = true;
       this.userInfo = JSON.parse(localStorage.getItem("admin"));
       this.getAdminMessages().then((data=>{
-
+        
       })).catch(e =>{console.log("errrr",e)});
     } else {
+      this.isAdmin = false;
       this.userInfo = this.authService.getCurrentUser();
       this.getCurrentUsersMessages()
     }
@@ -76,8 +78,6 @@ export class HeaderComponent implements OnInit {
   }
 
   async getAdminMessages() {
-    var bool1: any;
-    var bool2: any;
       let promise = new Promise((resolve, reject) => {
         this.messageService.getMessagesListOfCurrentUserAdmin("pilot")
         .subscribe(dataPilot => {
@@ -100,24 +100,7 @@ export class HeaderComponent implements OnInit {
               });
             }
         });
-
-
-
-
-
-          // resolve(this.adminPilotMessages.concat(this.adminPilotMessages))
-
-
-        // if(this.adminCustomerMessages.length && this.adminPilotMessages.length){
-        //   resolve(this.adminPilotMessages.concat(this.adminPilotMessages));
-        // }else{
-        //   reject("Not Resolved")
-        // }
     });
-
-    let result = await promise; // wait till the promise resolves (*)
-
-    console.log("billu",result); // "done!"
-      // console.log("sadasdasda ",this.adminPilotMessages);
+    let result = await promise;
   }
 }

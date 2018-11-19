@@ -7,10 +7,10 @@
     </div>
 
     <div class="buttons makeCenter" *ngIf="isAdmin">
-        <a class="btn-approve profile-buttons" *ngIf="!loaders.approveProfile" (click)="approveProfile()">Approve this profile</a>
+        <a class="btn-approve profile-buttons" *ngIf="!loaders.approveProfile" (click)="approveProfile()">Approve This Profile</a>
         <a class="btn-approve" *ngIf="loaders.approveProfile" ><i class="fa fa-circle-o-notch fa-spin"></i></a>
-        <a class="btn-message profile-buttons">Send Message</a>
-        <a class="btn-reject  profile-buttons" *ngIf="!loaders.rejectProfile"(click)="rejectProfile()">Block this profile</a>
+        <a class="btn-message profile-buttons">Send a Message</a>
+        <a class="btn-reject  profile-buttons" *ngIf="!loaders.rejectProfile"(click)="rejectProfile()">Reject This Profile</a>
         <a  class="btn-reject" *ngIf="loaders.rejectProfile" ><i class="fa fa-circle-o-notch fa-spin"></i></a>
 
     </div>

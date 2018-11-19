@@ -138,21 +138,26 @@
   display: none;  // Safari and Chrome
 }
 .buttons {
+ 
   .btn-message {
-    background: $success;
+    background: $primary-color;
+    // background: #49cb46;
     color: $white;
   }
 
   .btn-approve{
-    background:$delete-icon-color;
+    // background:$delete-icon-color;
+    background: #49cb46;
     color: $white;
    }
   a {
+    margin: 20px;
     padding: 17px 40px;
     border-radius: 30px;
   }
   .btn-reject {
-    background: #f00;
+    background:$delete-icon-color;
+    // background: #f00;
     color: $white;
   }
 }

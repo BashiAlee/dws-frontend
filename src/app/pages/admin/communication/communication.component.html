@@ -28,10 +28,10 @@
           <div class="side-panel">
             <div class="aside-header-div" *ngIf="currentRole == 'admin'">
               <div *ngIf="isPilotTab">
-                <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Pilot">
+                <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Chat">
               </div>
               <div *ngIf="!isPilotTab">
-                <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Clients">
+                <input [(ngModel)]="searchPilot" type="text" class="aside-header-input" placeholder="Search Chat">
               </div>
               <button type="submit" class="aside-input-search-btn"><i class="fa fa-search"></i></button>
             </div>

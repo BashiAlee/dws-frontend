@@ -49,10 +49,10 @@ export class PilotListComponent implements OnInit {
       name: "Zipcode",
       value: "zipcode"
     },
-    {
-      name: "Jobs",
-      value: "jobs"
-    }
+    // {
+    //   name: "Jobs Title",
+    //   value: "jobs"
+    // }
   ];
 
   ngOnInit() {
@@ -93,7 +93,7 @@ export class PilotListComponent implements OnInit {
   }
 
   onPageLoad() {
-    console.log("SDDDDD", this.isApprovedPilots);
+
     var fromLimit = this.bigCurrentPage.toString() + "0";
     var data = {
       from: this.pageNumber, //skip //offsert
@@ -180,7 +180,12 @@ export class PilotListComponent implements OnInit {
     var keywordString = this.keyword.toString();
     var searchData = { SearchType: this.selectedOption, SearchKeyword: keywordString, Offset: parseInt(fromLimit) - 10, Limit: this.pageNumber };
     this.pilotService.searchPilotList(searchData).subscribe(data =>{
-      console.log("Searched ---> ",data)
+      if(data.status) {
+        this.approvedList = data.result;
+        this.bigTotalItems = parseInt(data.totalRecord);
+      } else {
+        this.approvedList = [];
+      }
     });
   }
 

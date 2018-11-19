@@ -93,7 +93,7 @@
                          <p *ngIf="error" class="errorMessage">{{error}}</p>
                          <p *ngIf="success" class="successMessage">{{success}}</p>
                      </div>
-                       <button type="submit" id="submitLoginForm" *ngIf="!loading" class="btn btn-sign-up mt20 wow fadeInDown" (click)="signUp()">CONFIRM YOUR EMAIL & CONTINUE</button>
+                       <button type="submit" id="submitLoginForm" *ngIf="!loading" class="btn btn-sign-up mt20 wow fadeInDown" [disabled]="signupForm.invalid" (click)="signUp()">CONFIRM YOUR EMAIL & CONTINUE</button>
                        <a class="btn btn-sign-up mt20 wow fadeInDown loaderBtn"  *ngIf="loading"><i class="fa fa-circle-o-notch fa-spin"></i></a>
                     </form>
                     <p class="makeCenter">Already have an account?
