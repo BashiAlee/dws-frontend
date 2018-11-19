@@ -217,7 +217,7 @@ export class CommunicationComponent implements OnInit {
 
     // }
 
- 
+
     if (this.userType == "PILOT") {
       var data = {
         MessageFrom: this.onlineUserId,
@@ -298,7 +298,7 @@ export class CommunicationComponent implements OnInit {
       this.activeClass = true;
     } else {
       this.modalRef = this.modalService.show(template);
-      this.messageService.adminSearchUser().subscribe(data => {
+      this.messageService.adminSearchUser(this.tabRole).subscribe(data => {
         if (data.status == true) {
           // console.log(data.result);
           this.resultSearchedUser = data.result;
