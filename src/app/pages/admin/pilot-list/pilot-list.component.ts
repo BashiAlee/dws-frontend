@@ -96,7 +96,7 @@ export class PilotListComponent implements OnInit {
     console.log("SDDDDD", this.isApprovedPilots);
     var fromLimit = this.bigCurrentPage.toString() + "0";
     var data = {
-      from: this.pageNumber, //skip
+      from: this.pageNumber, //skip //offsert
       to: parseInt(fromLimit) - 10 //limit
     };
     if (this.isApprovedPilots) {
@@ -136,6 +136,7 @@ export class PilotListComponent implements OnInit {
   }
 
   getAllStates() {
+    this.keyword = '';
     this.pilotService.getAllStates().subscribe(data => {
       if(data.status == true){
         this.states = data.result;
@@ -151,6 +152,7 @@ export class PilotListComponent implements OnInit {
     this.pilotService.getAllCountries().subscribe(data => {
       if(data.status == true){
         this.countires = data.result;
+        this.keyword=231;
         // console.log("All Countries ---> ", this.countires);
       }else{
         console.log("Countries Not Found !!")
@@ -176,7 +178,7 @@ export class PilotListComponent implements OnInit {
   searchPilot() {
     var fromLimit = this.bigCurrentPage.toString() + "0";
     var keywordString = this.keyword.toString();
-    var searchData = { SearchType: this.selectedOption, SearchKeyword: keywordString, Offset: this.pageNumber, Limit: parseInt(fromLimit) - 10 };
+    var searchData = { SearchType: this.selectedOption, SearchKeyword: keywordString, Offset: parseInt(fromLimit) - 10, Limit: this.pageNumber };
     this.pilotService.searchPilotList(searchData).subscribe(data =>{
       console.log("Searched ---> ",data)
     });

@@ -212,12 +212,12 @@ export class CommunicationComponent implements OnInit {
       });
   }
 
-  sendMessage(message = "") {
+  sendMessage(message) {
     // if (event.keyCode == 13) {
 
     // }
 
-    console.log(event)
+ 
     if (this.userType == "PILOT") {
       var data = {
         MessageFrom: this.onlineUserId,
