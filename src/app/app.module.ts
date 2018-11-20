@@ -34,8 +34,8 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
 import { PaginationModule } from 'ngx-bootstrap';
 import { CommunicationComponent } from './pages/admin/communication/communication.component';
 import {MessagesService} from './services/messages/messages.service';
-import { SearchPipe } from './components/pipes/search.pipe';
-import { PilotsPipe } from './components/pipes/search/pilots.pipe';
+import { SearchPipe } from './components/pipes/search-names/search.pipe';
+import { PilotsPipe } from './components/pipes/search-pilots/pilots.pipe';
 // import { CroppieComponent } from './components/croppie/croppie.component';
 
 

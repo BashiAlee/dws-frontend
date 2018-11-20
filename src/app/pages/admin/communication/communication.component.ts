@@ -87,6 +87,8 @@ export class CommunicationComponent implements OnInit {
             data.result[0].SenderLastName;
           // this.lastMessageDate = data.result[0].MessageTime;
           // console.log("date ",this.lastMessageDate)
+
+
           this.getAllMessages(data.result[0]);
           this.messageConversationId = data.result[0].ConversationId;
         } else {
@@ -109,6 +111,7 @@ export class CommunicationComponent implements OnInit {
               data.result[0].SenderMiddleName +
               " " +
               data.result[0].SenderLastName;
+      
             // this.lastMessageDate = data.result[0].MessageTime;
             this.getAllMessages(data.result[0]);
             // console.log("date ", data.result[0].MessageTime)
@@ -184,6 +187,7 @@ export class CommunicationComponent implements OnInit {
             selectedConversationIdResult.result[0].ConversationId;
           // this.lastMessageDate = selectedConversationIdResult.result[0].MessageTime;
           var lastMessage = _.last(this.allMessagesByConversationId);
+
           this.lastMessageDate = lastMessage.MessageTime;
           if (this.userType == "ADMIN") {
             if (
@@ -297,6 +301,7 @@ export class CommunicationComponent implements OnInit {
       }, 1000)
       this.activeClass = true;
     } else {
+      // console.log("current role ----> ",this.tabRole)
       this.modalRef = this.modalService.show(template);
       this.messageService.adminSearchUser(this.tabRole).subscribe(data => {
         if (data.status == true) {
@@ -310,7 +315,7 @@ export class CommunicationComponent implements OnInit {
   }
 
   adminSearchUser() {
-    this.messageService.adminSearchUser().subscribe(data => {
+    this.messageService.adminSearchUser(this.tabRole).subscribe(data => {
       if (data.status == true) {
         // console.log(data.result);
         this.resultSearchedUser = data.result;
@@ -325,4 +330,23 @@ export class CommunicationComponent implements OnInit {
   }
 
   openPilotMessages() {}
+
+
+  check(url) {
+    return fetch(url)
+    .then((data) => {
+    return url;
+    }).catch(err => {
+     return '../../../../assets/images/avatar.png'
+    })
+    // this.authService.checkImageExists(url)
+    // .subscribe(data => {
+    //   console.log("DDD", data)
+    //   return url;
+    // }, err => {
+    //   console.log("ERRRR")
+    //  return '../../../../assets/images/avatar.png';
+    // })
+  }
+  
 }

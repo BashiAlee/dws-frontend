@@ -80,10 +80,10 @@ export class AuthenticationService {
     }));
   }
 
-  checkImageExists(url): Observable<any> {
+  checkImageExists(url) {
     return this.http.get(url)
-    .pipe(map(response => {
-     return response;
-    }))
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
   }
 }

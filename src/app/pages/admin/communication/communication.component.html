@@ -36,11 +36,11 @@
               <button type="submit" class="aside-input-search-btn"><i class="fa fa-search"></i></button>
             </div>
             <div class="aside-body-div">
+
               <div class="aside-body-main-child" *ngIf="currentUserMessages && currentUserMessages.length">
+               
                 <div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages | pilots: searchPilot"
                   (click)="getAllMessages(currentList)">
-
-
                   <div class="sidebar-image-container" [ngClass]="(currentRole != 'admin')?'makeSmall':''">
                     <img *ngIf="!currentList.ProfileImage" src="../../../../assets/images/avatar.png" class="sidebar-img">
                     <img *ngIf="currentList.ProfileImage" [src]="currentList.ProfileImage" class="sidebar-img">
@@ -51,6 +51,13 @@
                     </div>
                   </div>
                 </div>
+                <div *ngIf="(currentUserMessages | pilots: searchPilot).length === 0">
+                    <div class="sidebar-img-text makeCenter mTop15">
+                        <p> No conversation found</p>
+                      </div>
+                   
+                </div>
+                
               </div>
               <div class="aside-body-main-child" *ngIf="currentUserMessages && !currentUserMessages.length">
                 <!-- <div class="aside-scroll-child"> -->
@@ -75,7 +82,14 @@
                 </div>
               </div>
             </div>
-            <div class="mattie-body" id="messages-scroll">
+            <div class="matti-body makeCenter" id="messages-scroll"  *ngIf="!allMessagesByConversationId.length">
+              <div class="messageEmptyBody">
+                  <i class="fa fa-comments" aria-hidden="true"></i>
+                  <p>No Chat Found! click start new chat </p>
+              </div>
+
+            </div>
+            <div class="mattie-body" id="messages-scroll" *ngIf="allMessagesByConversationId && allMessagesByConversationId.length">
               <div class="matti-scroll-container">
                 <!-- <div class="mattie-scroll-container-div">
                   <div class="matti-image-container">
@@ -89,7 +103,7 @@
                   </div>
                 </div> -->
                 <!-- *ngIf="onlineUserId != messages.MessageFrom" -->
-                <div class="mattie-scroll-container-div" [class.billa]="last"*ngFor="let messages of allMessagesByConversationId; let last = last;">
+                <div class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId; let last = last;">
                   <div [ngClass]="(onlineUserId != messages.MessageFrom )?'matti-image-container':'john-image-container'">
                     <!-- [src]="(onlineUserId != messages.MessageFrom)?messages.UserToDetail.ProfileImage:messages.UserFromDetail.ProfileImage" -->
                     <img *ngIf="onlineUserId != messages.MessageFrom && messages.UserFromDetail.ProfileImage" [src]="messages.UserFromDetail.ProfileImage" class="sidebar-img">
@@ -143,7 +157,15 @@
     <div class="scrolling-list">
       <li *ngFor="let user of resultSearchedUser | search: searchUser" (click)="selectUser(user)">
         <span class="badge">{{user.FirstName}} {{user.MiddleName}} {{user.LastName}}</span>
+
       </li>
+
+      <div *ngIf="(resultSearchedUser | search: searchUser).length === 0">
+          <div class="sidebar-img-text makeCenter mTop15 mBottom25">
+              <p> No record found</p>
+            </div>
+         
+          </div>
     </div>
   </div>
 </ng-template>
