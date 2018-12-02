@@ -62,12 +62,12 @@ export class CommunicationComponent implements OnInit {
       var dataOnlineUser = this.authService.getCurrentAdmin();
       this.onlineUserId = dataOnlineUser.ID;
       this.currentRole = dataOnlineUser.Role;
-      console.log("Online User ID ---> ",this.onlineUserId)
+     
     }
 
     //scrolling messages to bottom
-    var objDiv = document.getElementById("messages-scroll");
-    objDiv.scrollTop = objDiv.scrollHeight;
+    // var objDiv = document.getElementById("messages-scroll");
+    // objDiv.scrollTop = objDiv.scrollHeight;
 
     //assigning active calss on feildfocus
     this.activeClass = false;

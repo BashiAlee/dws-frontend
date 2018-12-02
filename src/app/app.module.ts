@@ -36,6 +36,7 @@ import { CommunicationComponent } from './pages/admin/communication/communicatio
 import {MessagesService} from './services/messages/messages.service';
 import { SearchPipe } from './components/pipes/search-names/search.pipe';
 import { PilotsPipe } from './components/pipes/search-pilots/pilots.pipe';
+import { PostAJobComponent } from './pages/post-a-job/post-a-job.component';
 // import { CroppieComponent } from './components/croppie/croppie.component';
 
 
@@ -66,6 +67,7 @@ import { PilotsPipe } from './components/pipes/search-pilots/pilots.pipe';
     CommunicationComponent,
     SearchPipe,
     PilotsPipe,
+    PostAJobComponent,
     // CroppieComponent
   ],
   imports: [

@@ -26,19 +26,28 @@
                       <li class="align-text" *ngFor="let message of adminAllMessages">
                           <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
                           <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png" alt=""></div>
-                          <div class="detail"><h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
+                          <div class="detail"  [routerLink]="['communication']"><h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
                           <p>has message for you.</p>
                           </div>
+                       </li>
+                       <li class="align-text" *ngIf="adminAllMessages && !adminAllMessages.length">
+                          <p>No Messages</p>
+                       
                        </li>
                     </div>
                     <li class="align-text" *ngFor="let message of currentUserMessages">
                       <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
                       <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png" alt=""></div>
-                      <div class="detail">
+                      <div class="detail"  [routerLink]="['communication']">
                         <h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
                         <p>has message for you.</p>
                       </div>
                     </li>
+                    <li class="align-text" *ngIf="currentUserMessages && !currentUserMessages.length">
+                        <div class="detail">
+                          <p>No Messages</p>
+                        </div>
+                     </li>
                   </ul>
                   <div class="notify-drop-footer text-center"  [routerLink]="['communication']">
                       <a> See All Messages > </a>
