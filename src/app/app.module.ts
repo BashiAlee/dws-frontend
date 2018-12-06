@@ -38,8 +38,7 @@ import { SearchPipe } from './components/pipes/search-names/search.pipe';
 import { PilotsPipe } from './components/pipes/search-pilots/pilots.pipe';
 import { PostAJobComponent } from './pages/post-a-job/post-a-job.component';
 // import { CroppieComponent } from './components/croppie/croppie.component';
-
-
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -79,6 +78,7 @@ import { PostAJobComponent } from './pages/post-a-job/post-a-job.component';
     DataTablesModule,
     ReactiveFormsModule,
     FormsModule,
+    BsDatepickerModule.forRoot(),
     PaginationModule.forRoot()
   ],
   entryComponents: [ModalsComponent],

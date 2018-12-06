@@ -257,7 +257,7 @@ input.custom-input:focus {
 
 textarea.custom-textarea {
   resize: none;
-  height: 150px !important;
+  height: 162px !important;
 }
 
 textarea.custom-textarea:focus {
@@ -390,6 +390,9 @@ textarea.custom-textarea:focus {
   font-family: 'Karla-Bold';
 }
 
+.pb0{
+  padding-bottom: 0px !important;
+}
 .mTop15 {
   margin-top: 15px !important;
 }
@@ -528,6 +531,9 @@ div.custom-table {
 
 .mtop30 {
   margin-top: 30px !important;
+}
+.mt18 {
+  margin-top: 18px !important;
 }
 
 .custom-ngselect {

@@ -1,3 +1,547 @@
-<p>
-  post-a-job works!
-</p>
+<div class="topContent makeCenter" >
+  <h1 class="pb0">Post a Job</h1>
+  <p class="p1">You can post a live job or you can ask for a quote. DWS will then react to your request accordingly.</p>
+  <a class="custom-link" href="#">Learn More</a>
+</div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="custom-checkbox">
+      <label class="container">
+        <span class="checkbox-txt">Request a Quote</span>
+        <input type="checkbox" checked="checked" formControlName="SameAsPhysical" (click)="cloneValues(personalInformation.value.SameAsPhysical)">
+        <p class="checkmark mark"></p>
+        <p><label class="custom-input-label">Leave it un-checked if you're posting a job which you don't require a quote for.</label></p>
+      </label>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="personalInformation">
+  <!-- <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event)" /> -->
+
+  <div class="container makeBgWhite mBottom20" [class.disableDiv]="isAdmin">
+    <div class="personal-information">
+      <div class="user-personal-info">
+        <div class="container">
+          <div class="row" formGroupName="Users">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="firstName" class="custom-input-label">Title of the Job*</label>
+                <input type="text" class="form-control custom-input" id="firstName" aria-describedby="firstName"
+                  formControlName="" placeholder="e.g Cover our corporate event">
+                <div *ngIf="form.Users.controls.FirstName.invalid && (form.Users.controls.FirstName.dirty || form.Users.controls.FirstName.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.Users.controls.FirstName.errors.required">First Name is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="firstName" class="custom-input-label">Select Industry</label>
+                <ng-select formControlName="Suffix" [searchable]="true">
+                  <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
+                </ng-select>
+                <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
+                  <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+              <label for="firstName" class="custom-input-label">Additional request/Comments</label>
+                <textarea class="form-control custom-textarea" id="notes" placeholder="Comments" formControlName="Notes"></textarea>
+                <div *ngIf="form.Notes.invalid && (form.Notes.dirty || form.Notes.touched)" class="invalid-feedback">
+                  <div *ngIf="form.Notes.errors.required">Notes is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="lastName" class="custom-input-label">Budget</label>
+                <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
+                  formControlName="LastName" placeholder="Enter your budget">
+                <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="view-wraper">
+                  <a class="view-btn" href="#"><img src="../../../assets/icons/box.png" alt="error">View Packages</a>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                <label for="lastName" class="custom-input-label">Expected Deliverables</label>
+                <ng-select formControlName="Suffix" [searchable]="true">
+                  <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
+                </ng-select>
+                <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
+                  <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label for="lastName" class="custom-input-label">Type your own Deliverables (Separated by Commas)</label>
+                  <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
+                    formControlName="LastName">
+                  <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <label for="date" class="custom-input-label">Equipment Preferences</label>
+                <div class="row">
+                  <div class="col-md-2 col-sm-6 col-xs-6">
+                    <input type="radio" value="yes" name="preference" formControlName="SameAsPhysical"><span class="radio-txt">Yes</span> 
+                  </div>        
+                  <div class="col-md-2 col-sm-6 col-xs-6">
+                    <input type="radio" value="no" name="preference" formControlName="SameAsPhysical"><span class="radio-txt">No</span> 
+                  </div>           
+                </div>              
+              </div>
+
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group mTop15">
+                    <textarea class="form-control custom-textarea" id="notes" placeholder="Type your equipment preferences" formControlName="Notes"></textarea>
+                    <div *ngIf="form.Notes.invalid && (form.Notes.dirty || form.Notes.touched)" class="invalid-feedback">
+                      <div *ngIf="form.Notes.errors.required">Notes is required</div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <h1 class="form-heading">Date & Time</h1>
+                <p>Does job require a Particular date to get the job doneor it can be done within a range of date?</p>
+                <div class="row">
+                  <div class="col-md-3 col-sm-12 col-xs-12">
+                    <input type="radio" value="yes" name="preference" formControlName="SameAsPhysical">Particular Date
+                  </div>        
+                  <div class="col-md-3 col-sm-12 col-xs-12">
+                    <input type="radio" value="no" name="preference" formControlName="SameAsPhysical">Date Range
+                  </div>           
+                </div>              
+              </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-12 col-md-4 form-group">
+                      <input
+                        placeholder="Datepicker"
+                        class="form-control"
+                        #dp="bsDatepicker"
+                        bsDatepicker>
+                    </div>
+                    <div class="col-xs-12 col-12 col-md-3 form-group">
+                      <button class="btn btn-success" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">Date Picker</button>
+                    </div>
+                  </div>
+         
+
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <h1 class="form-heading">Venue</h1>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="lastName" class="custom-input-label">Address line 1</label>
+                  <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
+                    formControlName="LastName">
+                  <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
+                  </div>
+                </div>
+              </div>
+
+              
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="lastName" class="custom-input-label">Address line 2</label>
+                  <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
+                    formControlName="LastName">
+                  <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                  <label for="lastName" class="custom-input-label">Country</label>
+                  <ng-select formControlName="Suffix" [searchable]="true">
+                    <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
+                  </ng-select>
+                  <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
+                    <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label for="lastName" class="custom-input-label">City</label>
+                  <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
+                    formControlName="LastName">
+                  <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                  <label for="lastName" class="custom-input-label">State</label>
+                  <ng-select formControlName="Suffix" [searchable]="true">
+                    <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
+                  </ng-select>
+                  <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
+                    <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="lastName" class="custom-input-label">Zip</label>
+                    <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
+                      formControlName="LastName">
+                    <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <h1 class="form-heading">Contact Details</h1>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                    <label for="lastName" class="custom-input-label">Primary Email</label>
+                    <ng-select formControlName="Suffix" [searchable]="true">
+                      <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
+                    </ng-select>
+                    <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
+                      <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                </div>     
+                
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                    <label for="lastName" class="custom-input-label">Primary Phone</label>
+                    <ng-select formControlName="Suffix" [searchable]="true">
+                      <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
+                    </ng-select>
+                    <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
+                      <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                    <label for="lastName" class="custom-input-label">Secondary Phone</label>
+                    <ng-select formControlName="Suffix" [searchable]="true">
+                      <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
+                    </ng-select>
+                    <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
+                      <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="view-wraper">
+                    <a class="view-btn" href="#"><img src="../../../assets/icons/plus.png" alt="error">Add a particular Contact Name/Number</a>
+                </div>
+          </div>
+        
+
+          <!-- <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="firstName" class="custom-input-label">Suffix</label>
+                <ng-select formControlName="Suffix" [searchable]="true">
+                  <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
+                </ng-select>
+                <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
+                  <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group" formGroupName="Users">
+                <label for="date" class="custom-input-label">Date of Birth</label>
+                <input type="date" class="form-control custom-input" id="date" aria-describedby="data" formControlName="Dob">
+                <div *ngIf="form.Users.controls.Dob.invalid && (form.Users.controls.Dob.dirty || form.Users.controls.Dob.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.Users.controls.Dob.errors.required">Date of birth is required</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="physical-address">
+        <div class="container">
+          <h1 class="form-heading">Physical Address</h1>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="addressone" class="custom-input-label">Address Line 1</label>
+                <input type="text" class="form-control custom-input" id="addressone" aria-describedby="addressone"
+                  formControlName="PhysicallAddressLine1" placeholder="Address Line 1">
+                <div *ngIf="form.PhysicallAddressLine1.invalid && (form.PhysicallAddressLine1.dirty || form.PhysicallAddressLine1.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.PhysicallAddressLine1.errors.required">Street Address is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="addresstwo" class="custom-input-label">Address Line 2</label>
+                <input type="text" class="form-control custom-input" id="addresstwo" aria-describedby="addresstwo"
+                  placeholder="Address Line 2" formControlName="PhysicallAddressLine2">
+                <div *ngIf="form.PhysicallAddressLine2.invalid && (form.PhysicallAddressLine2.dirty || form.PhysicallAddressLine2.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.PhysicallAddressLine2.errors.required">Street Address is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="country" class="custom-input-label">Country</label>
+                <ng-select formControlName="PhysicallCountry" [searchable]="true" (change)="getStatesByCode('physical',personalInformation.value.PhysicallCountry, 'change')">
+                  <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
+                </ng-select>
+                <div *ngIf="form.PhysicallCountry.invalid && (form.PhysicallCountry.dirty || form.PhysicallCountry.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.PhysicallCountry.errors.required">Country is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="city" class="custom-input-label">City</label>
+                <input type="text" class="form-control custom-input" id="city" aria-describedby="city" formControlName="PhysicallCity"
+                  placeholder="City">
+                <div *ngIf="form.PhysicallCity.invalid && (form.PhysicallCity.dirty || form.PhysicallCity.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.PhysicallCity.errors.required">City is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="state" class="custom-input-label">State</label>
+                <ng-select formControlName="PhysicallState" [searchable]="true">
+                  <ng-option *ngFor="let states of physicalRegionList" [value]="states.ID">{{states.Name}}</ng-option>
+                </ng-select>
+                <div *ngIf="form.PhysicallState.invalid && (form.PhysicallState.dirty || form.PhysicallState.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.PhysicallState.errors.required">State is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="zip" class="custom-input-label">Zip Code</label>
+                <input type="text" class="form-control custom-input" id="zip" aria-describedby="zip" formControlName="PhysicallZip"
+                  placeholder="Zip Code">
+                <div *ngIf="form.PhysicallZip.invalid && (form.PhysicallZip.dirty || form.PhysicallZip.touched)" class="invalid-feedback">
+                  <div *ngIf="form.PhysicallZip.errors.required">Zip Code is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mailing-address">
+        <div class="container">
+          <h1 class="form-heading">Mailing Address</h1>
+          <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="custom-checkbox">
+                  <label class="container">Same as Physical Address
+                    <input type="checkbox" checked="checked" formControlName="SameAsPhysical" (click)="cloneValues(personalInformation.value.SameAsPhysical)">
+                    <p class="checkmark"></p>
+                  </label>
+                </div>
+              </div>
+          </div>
+          <div class="row" *ngIf="!personalInformation.value.SameAsPhysical">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="addressone" class="custom-input-label">Address Line 1</label>
+                <input type="text" class="form-control custom-input" id="addressone" formControlName="MailingAddressLine1"
+                  aria-describedby="addressone" placeholder="Address Line 1">
+                <div *ngIf="form.MailingAddressLine1.invalid && (form.MailingAddressLine1.dirty || form.MailingAddressLine1.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.MailingAddressLine1.errors.required">Street Address is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="addresstwo" class="custom-input-label">Address Line 2</label>
+                <input type="text" class="form-control custom-input" id="addresstwo" formControlName="MailingAddressLine2"
+                  aria-describedby="addresstwo" placeholder="Address Line 2">
+                <div *ngIf="form.MailingAddressLine2.invalid && (form.MailingAddressLine2.dirty || form.MailingAddressLine2.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.MailingAddressLine2.errors.required">Street Address is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="!personalInformation.value.SameAsPhysical">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="country" class="custom-input-label">Country</label>
+                <ng-select formControlName="MailingCountry" [searchable]="true" (change)="getStatesByCode('mailing', personalInformation.value.MailingCountry,'change')">
+                  <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
+                </ng-select>
+                <div *ngIf="form.MailingCountry.invalid && (form.MailingCountry.dirty || form.MailingCountry.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.MailingCountry.errors.required">Country is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12" *ngIf="!personalInformation.value.SameAsPhysical">
+              <div class="form-group">
+                <label for="city" class="custom-input-label">City</label>
+                <input type="text" class="form-control custom-input" id="city" formControlName="MailingCity"
+                  aria-describedby="city" placeholder="City">
+                <div *ngIf="form.MailingCity.invalid && (form.MailingCity.dirty || form.MailingCity.touched)" class="invalid-feedback">
+                  <div *ngIf="form.MailingCity.errors.required">City is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12" *ngIf="!personalInformation.value.SameAsPhysical">
+              <div class="form-group">
+                <label for="state" class="custom-input-label">State</label>
+                <ng-select formControlName="MailingState" [searchable]="true">
+                  <ng-option *ngFor="let mState of mailingRegionList" [value]="mState.ID">{{mState.Name}}</ng-option>
+                </ng-select>
+                <div *ngIf="form.MailingState.invalid && (form.MailingState.dirty || form.MailingState.touched)" class="invalid-feedback">
+                  <div *ngIf="form.MailingState.errors.required">State is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="!personalInformation.value.SameAsPhysical">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="zip" class="custom-input-label">Zip Code</label>
+                <input type="text" class="form-control custom-input" id="zip" formControlName="MailingZip"
+                  aria-describedby="zip" placeholder="Zip Code">
+                <div *ngIf="form.MailingZip.invalid && (form.MailingZip.dirty || form.MailingZip.touched)" class="invalid-feedback">
+                  <div *ngIf="form.MailingZip.errors.required">Zip Code is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="other-info">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="PrimaryEmail" class="custom-input-label">Primary Email</label>
+                <input type="email" class="form-control custom-input" id="zip" aria-describedby="PrimaryEmail"
+                  formControlName="PrimaryEmail" placeholder="Primary Email">
+                <div *ngIf="form.PrimaryEmail.invalid && (form.PrimaryEmail.dirty || form.PrimaryEmail.touched)" class="invalid-feedback">
+                  <div *ngIf="form.PrimaryEmail.errors.required">Email is required</div>
+                  <div *ngIf="form.PrimaryEmail.errors.email">Email must be a valid email address</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="PrimaryPhone" class="custom-input-label">Primary Phone</label>
+                <input type="number" class="form-control custom-input" id="PrimaryPhone" formControlName="PrimaryPhone"
+                  aria-describedby="PrimaryPhone" placeholder="Primary Phone">
+                <div *ngIf="form.PrimaryPhone.invalid && (form.PrimaryPhone.dirty || form.PrimaryPhone.touched)" class="invalid-feedback">
+                  <div *ngIf="form.PrimaryPhone.errors.required">Phone is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="general-info" class="form-heading">General Information / BIO</label>
+                <textarea class="form-control custom-textarea" id="general-info" formControlName="GeneralInformation"></textarea>
+                <div *ngIf="form.GeneralInformation.invalid && (form.GeneralInformation.dirty || form.GeneralInformation.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.GeneralInformation.errors.required">Biography is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="notes" class="form-heading">Notes</label>
+                <textarea class="form-control custom-textarea" id="notes" formControlName="Notes"></textarea>
+                <div *ngIf="form.Notes.invalid && (form.Notes.dirty || form.Notes.touched)" class="invalid-feedback">
+                  <div *ngIf="form.Notes.errors.required">Notes is required</div>
+                </div>
+              </div>
+            </div>
+          </div>-->
+        </div>
+      </div> 
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row makeCenter">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <a class="post-btn" href="#">Post this as Live Job</a>
+        </div>
+      </div>
+  </div>
+  <div class="bottom-txt">
+      <p>Someone from DWS Will get in touch with you
+        shortly. Login to DWS Job Portal and manage your
+        job better.</p>
+  </div>
+ 
+ 
+  <!-- <div class="container">
+    <alert type="success" *ngIf="success">
+      You data has been saved successfully
+    </alert>
+
+    <alert type="danger" *ngIf="error">
+      Error in saving your information
+    </alert>
+    <div class="call-to-action" [class.disableDiv]="isAdmin"> -->
+      <!-- <div class="goBack">
+        <button disabled>Previous Step</button>
+      </div> -->
+      <!-- <p>Save your Personal Information and Continue to next Step.</p>
+      <div class="saveButton" *ngIf="!loading">
+        <button (click)="save()">Save/Update</button>
+      </div>
+      <div class="saveButton disableDiv" *ngIf="loading">
+        <button><i class="fa fa-circle-o-notch fa-spin"></i></button>
+      </div>
+
+    </div>
+  </div> -->
+</form>
+
