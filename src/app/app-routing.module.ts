@@ -60,6 +60,7 @@ import {
 import {
   PostAJobComponent
 } from './pages/post-a-job/post-a-job.component';
+import { JobsComponent } from './pages/admin/jobs/jobs.component';
 
 const routes: Routes = [{
     path: '',
@@ -157,6 +158,11 @@ const routes: Routes = [{
         path: 'profile/:id',
         component: ProfileComponent,
         loadChildren: () => ProfileModule,
+        canActivate: [AdminAuthGuard]
+      },
+      {
+        path: 'jobs-list',
+        component: JobsComponent,
         canActivate: [AdminAuthGuard]
       },
 

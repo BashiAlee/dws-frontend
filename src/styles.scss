@@ -389,9 +389,14 @@ textarea.custom-textarea:focus {
 .karla-bold {
   font-family: 'Karla-Bold';
 }
-
+.pt20{
+  padding-top: 20px;
+}
 .pb0{
   padding-bottom: 0px !important;
+}
+.ml10{
+  margin-left: 10px !important;
 }
 .mTop15 {
   margin-top: 15px !important;
@@ -535,7 +540,25 @@ div.custom-table {
 .mt18 {
   margin-top: 18px !important;
 }
-
+.ml25{
+  margin-left: -25px !important;
+}
+.custom-checkbox .container input:checked ~ .checkmark, .custom-radio .container input:checked ~ .checkmark {
+  background-color: #ff7676;
+}
+.ng-select.ng-select-single .ng-select-container .ng-value-container, .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+  color:#29abe2  !important;
+}
+.ng-select .ng-clear-wrapper {
+  color:#29abe2  !important;
+}
+// .ng-select .ng-select-container {
+//   color:#29abe2  !important;
+// }
+// .ng-select .ng-arrow-wrapper .ng-arrow {
+//   color:#29abe2  !important;
+//   border-color: transparent transparent #29abe2 !important;
+// }
 .custom-ngselect {
   div.ng-value {
     background-color: $multi-select-label-color !important;

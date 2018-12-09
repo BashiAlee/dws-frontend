@@ -1,0 +1,311 @@
+@import '../../../../variables';
+
+div.command-center {
+    .custom-datatable{
+        tr {
+            background: transparent;
+
+            th {
+                color: $primary-color;
+                font-family: 'Apercu-Medium';
+                font-size: 14px;
+            }
+            th,td{
+                 border:0;
+            }
+
+            td {
+                color: $table-row-color;
+                font-family: 'Apercu-Regular';
+                font-size: 14px;
+
+                .details-btn {
+                    background: $delete-icon-color;
+                    color: $white;
+                    box-shadow: 0px 13px 23px 0px rgba(252, 87, 87, 0.2);
+                    border-radius: 15px;
+                    width: 72px;
+                    height: 31px;
+                    padding: 6px 10px 6px 10px;
+                }
+            }
+
+            &:hover {
+                background: transparent;
+            }
+        }
+    }
+
+}
+.inputs-container1{
+  display: grid;
+  grid-template-columns: 31% 31% 16% 16%;
+  align-items: end;
+  grid-gap: 2%;
+  margin: 0;
+}
+.main-div{
+  overflow-x:auto;
+  white-space: nowrap;
+  border: 2px solid $modal-border;
+}
+
+.table-div{
+  display: grid;
+  grid-template-rows: repeat(2,auto);
+  background: white;
+  padding:5px 21px;
+  grid-gap: 10px;
+  // height: 600px;
+
+
+
+  .table-body{
+    min-height: 200px;
+    max-height: 600px;
+    overflow: auto;
+    &::-webkit-scrollbar{
+      width: 7px;
+      background: $table-scroll;
+    }
+    &::-webkit-scrollbar-thumb{
+      width: 100%;
+      background: $table-heading;
+    }
+  }
+  .table-heading-row{
+    padding-right:37px;
+    &>:last-child{
+      text-align: center;
+    }
+  }
+  .table-body-rows{
+    cursor: pointer;
+    color: $p-color;
+    &:hover{
+      background: $table-row-hover;
+    }
+  }
+  .table-rows{
+    display: grid;
+    grid-template-columns: 13% 11% 9% 10% 9% 8% 11% ;
+    justify-content: space-between;
+    align-items: center;
+    padding:2px 10px;
+    border-radius: 5px;
+    margin-right: 20px;
+    div{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .action {
+      height: 65px;
+      line-height: 65px;
+    }
+  }
+  .table-heading{
+    color: $table-heading;
+    padding: 10px;
+  }
+}
+.detail-btn{
+  padding: 9px 18px;
+  background: $details-btn;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  color: white;
+}
+.entries-selector{
+  display: grid;
+  height: 100px;
+  grid-template-columns: auto auto;
+  justify-content: left;
+  align-content: center;
+  grid-gap: 17px;
+}
+.show-entries-p{
+  margin: 0;
+  padding: 10px 0;
+}
+.selector-input-container{
+  background: white;
+  border-radius: 25px;
+  padding: 7px 24px;
+  position: relative;
+  z-index: 1;
+  &::before{
+    content: '\25b2';
+    position: absolute;
+    top: 18%;
+    left: 64%;
+    color: #3FBAD0;
+    font-size: 12px;
+    z-index: -1;
+  }
+  &::after{
+    content: '\25BC';
+    position: absolute;
+    top: 44%;
+    left: 64%;
+    color: #3FBAD0;
+    font-size: 12px;
+    z-index: -1;
+  }
+}
+.selector-input{
+  width: 55px;
+  height: 31px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background:transparent;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  option {
+   color: #73738a;
+  }
+}
+.page-footer{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  .pagination-div{
+    dl, ol, ul{
+        margin-top: auto;
+        background: red;
+      }
+
+  }
+
+}
+.input-city{
+  padding: 0 18px;
+  height: 56px;
+}
+.filter-btn{
+  position: inherit;
+  margin-bottom: 16px;
+ margin-left: 0;
+  height: 56px;
+}
+.download-link-div{
+  padding-bottom: 14px;
+  .download-link{
+    color:  #3FBAD0;
+    text-decoration: underline;
+    .fa-download{
+      color: #3FBAD0;
+    }
+  }
+}
+
+.custom-tabs {
+  margin-bottom: 28px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 0;
+  ul {
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    text-align: center;
+    height: 46px;
+    padding-right: 25px;
+
+    flex: 0 0 auto;
+    margin: 0 auto;
+    margin-bottom: 39px;
+    // margin-bottom: 23px;
+
+    li {
+      display: inline-block;
+
+      margin: 13px 17px 0px 0px;
+
+      a {
+        border: 1px solid $p-color;
+        // background-color: rgb(41, 171, 226);
+        color: $p-color;
+        // padding: 12px 20px 12px 20px;
+        padding: 12px 29px 12px 29px;
+
+        border-radius: 21px;
+        background: transparent;
+        font-size: 16px;
+        font-family: 'Apercu-Medium';
+
+        &:hover {
+          text-decoration: none;
+          background: $primary-color;
+          color: $white;
+          border: 1px solid $primary-color;
+        }
+        .badge {
+          background: $delete-icon-color;
+          color: $white;
+          border-radius: 50%;
+          padding: 7px 10px 7px 10px;
+          margin-left: 6px;
+        }
+      }
+    }
+  }
+  .active-link {
+    position: relative;
+  background: $primary-color !important;
+  border: 1px solid $primary-color !important;
+  color: $white !important;
+  box-shadow: 0px 8px 33px 0px rgba(41, 171, 226, 0.18);
+  &::after {
+      position: absolute;
+      width: 100%;
+    //   left: 38%;
+    // right: 0;
+    // bottom: -16px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    content: url('../../../../assets/images/down_arrow.svg');
+
+  }
+}
+}
+
+
+
+@media only screen and (max-width:600px) {
+  .custom-tabs{
+    display: block;
+    padding: 0;
+    ul{
+      height: auto;
+      padding: 0;
+      li{
+        margin: 13px 25px 20px 13px;
+        a{
+          padding: 12px 25px 12px 25px;
+        }
+      }
+    }
+  }
+}
+
+.transparent-btn{
+  border-radius: 500px;
+  text-decoration: none;
+  color: #fff;
+  background: transparent;
+  font-family: 'Apercu-Medium';
+  border: 1px solid red;
+  .assign-btn{
+    padding: 30px 29px;
+    background: transparent;
+    font-size: 16px;
+    font-family: 'Apercu-Medium';
+    color: red;
+  }
+}

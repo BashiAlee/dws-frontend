@@ -1,0 +1,252 @@
+
+
+    <div class="container">
+      <div class="topContent">
+               <h1>Pilots</h1>
+               <p>See where all of the DWS registered drones are..</p>
+       </div>
+
+      <div class="custom-tabs">
+
+        <ul>
+          <li (click)="openActiveJobs()"><a [class.active-link]="isActiveJobs">Active Jobs {{isActiveJobs}}</a></li>
+          <li (click)="openQuotedJobs()"><a [class.active-link]="!isActiveJobs">Quoted Jobs <span class="badge">{{pendingList?pendingList.length:'0'}}</span></a></li>
+        </ul>
+      </div>
+
+      <div class="custom-tabs" >
+        <!--<button  class="BackBtn" (click)="moveBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>-->
+        <!-- <ul>
+          <li ><a  class="active-link " [routerLink]="['personal-information']" [routerLinkActive]="['active-link']" >Personal Information</a></li>
+          <li ><a [routerLink]="['business-information']"  [routerLinkActive]="['active-link']">Business Information</a></li>
+        </ul> -->
+        <!--<button class="ForwardBtn"  (click)="moveForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>-->
+      </div>
+
+
+
+       <div class="command-center" *ngIf="isActiveJobs">
+         <!-- <div class="row inputs-container1">
+           <div class="div-pilot-select">
+               <div class="form-group">
+                   <label for="state" class="custom-input-label makeBlack">Search Pilot by</label>
+                   <ng-select [(ngModel)]="selectedOption" [searchable]="false">
+                         <ng-option *ngFor="let se of search" [value]="se.value">{{se.name}}</ng-option>
+                     </ng-select>
+                 </div>
+           </div>
+           <div class="input-city-div">
+             <div *ngIf="selectedOption == 'zipcode' || selectedOption == 'city' || !selectedOption">
+               <div class="form-group">
+                   <input [(ngModel)]="keyword" type="text" class="form-control custom-inputm input-city" id="city" aria-describedby="keyword"
+                     placeholder="Keyword">
+                 </div>
+            </div>
+            <div *ngIf="selectedOption == 'state'">
+              <div class="form-group">
+                <ng-select [(ngModel)]="keyword" [searchable]="true">
+                  <ng-option *ngFor="let s of states" [value]="s.ID">{{s.Name}}</ng-option>
+                </ng-select>
+            </div>
+              </div>
+            <div *ngIf="selectedOption == 'country'" >
+              <div class="form-group">
+              <ng-select [(ngModel)]="keyword" [searchable]="true">
+                  <ng-option *ngFor="let c of countires" [value]="c.ID">{{c.Name}}</ng-option>
+                </ng-select>
+            </div>
+            </div>
+           </div>
+           <div class="filter-button-div">
+             <button class="custom-primary-button filter-btn" (click)="searchPilot()" [disabled]="!keyword">Filter</button>
+           </div>
+
+           <div class="download-link-div">
+             <a (click)="downloadCSV('approved')" class="download-link" >Export Pilot data <i class="fa fa-download"></i> </a>
+           </div>
+
+         </div> -->
+
+         <div class="row">
+           <div class="col-md-12">
+<!--
+            <table datatable [dtOptions]="dtOptions" class="row-border hover custom-datatable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Country</th>
+                  <th>State</th>
+                  <th>City</th>
+                  <th>Status</th>
+                  <th>Action</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let list of pilotList">
+                  <td>{{list.Users.FirstName+' '+list.Users.LastName}}</td>
+                  <td>{{list.Users.Email}}</td>
+                  <td>{{list.PrimaryPhone}}</td>
+                  <td>{{list.Country.Name}}</td>
+                  <td>{{list.State.Name}}</td>
+                  <td>{{list.PhysicallCity}}</td>
+                  <td>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</td>
+                  <td><a [routerLink]="['/admin/profile',list.UserId]" class="details-btn">Details</a></td>
+                </tr>
+              </tbody>
+            </table> -->
+             <div class="main-div">
+             <div class="table-div">
+               <div class="table-rows table-heading-row">
+
+                 <div class="table-heading">Job Title</div>
+                 <div class="table-heading">Status</div>
+                 <div class="table-heading">Phone</div>
+                 <div class="table-heading">Country</div>
+                 <div class="table-heading">State</div>
+                 <div class="table-heading">City</div>
+                 <div class="table-heading">Action</div>
+               </div>
+               <div class="table-body">
+               <div class="table-rows table-body-rows">
+                <div>sdcs</div>
+                <div class="transparent-btn"><a class="assign-btn">Assign</a></div>
+                <!-- <div class="transparent-btn"><a class="detail-btn">Archive</a></div>
+                <div class="transparent-btn"><a class="detail-btn">Pending</a></div>
+                <div class="transparent-btn"><a class="detail-btn">Completed</a></div> -->
+                <div>scdsc</div>
+                <div>dscdsc</div>
+                <div>sdcs</div>
+                <div>scdsc</div>
+                <div class="action"><a class="detail-btn">Details</a></div>
+               </div>
+               </div>
+             </div>
+           </div>
+             <div class="page-footer">
+             <div class="entries-selector">
+               <p class="show-entries-p">Show entries per page</p>
+               <div class="selector-input-container">
+                 <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getAllApprovedPilots(pageNumber,0)">
+                   <option value="10">10</option>
+                   <option value="20">20</option>
+                   <option value="30">30</option>
+                 </select>
+               </div>
+             </div>
+               <div class="pagination-div">
+               <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+               </div>
+               </div>
+
+
+
+           </div>
+         </div>
+
+         <!-- <div class="custom-table">
+
+        <div class="table" *ngIf="pilotList && pilotList.length">
+          <div class="table-header mBottom25 for-seven-columns ">
+            <span>Name</span>
+            <span>Email</span>
+            <span>Phone</span>
+            <span>Country</span>
+            <span>State</span>
+            <span>City</span>
+            <span>Action</span>
+
+          </div>
+          <div class="table-body">
+            <div class="table-row mBottom25 for-seven-columns " *ngFor="let list of pilotList">
+              <span>{{list.Users.FirstName+' '+list.Users.LastName}}</span>
+                  <span>{{list.Users.Email}}</span>
+                  <span>{{list.PrimaryPhone}}</span>
+                  <span>{{list.PhysicallCountry}}</span>
+                  <span>{{list.PhysicallState}}</span>
+                  <span>{{list.PhysicallCity}}</span>
+                  <span><a class="details-btn">Details</a></span>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+       </div>
+
+       <div class="command-center" *ngIf="!isActiveJobs">
+        <div class="row inputs-container1">
+          <div class="div-pilot-select">
+              <div class="form-group">
+                  <label for="state" class="custom-input-label makeBlack">Search Pilot by</label>
+                  <ng-select [searchable]="false">
+                        <ng-option *ngFor="let se of search" >{{se.name}}</ng-option>
+                    </ng-select>
+                </div>
+          </div>
+          <div class="input-city-div">
+
+              <div class="form-group">
+                  <input type="text" class="form-control custom-inputm input-city" id="city" aria-describedby="city"
+                    placeholder="City Name">
+                </div>
+          </div>
+          <div class="filter-button-div">
+            <button class="custom-primary-button filter-btn">Filter</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="main-div">
+            <div class="table-div">
+              <div class="table-rows table-heading-row">
+
+                <div class="table-heading">Name</div>
+                <div class="table-heading">Email</div>
+                <div class="table-heading">Phone</div>
+                <div class="table-heading">Country</div>
+                <div class="table-heading">State</div>
+                <div class="table-heading">City</div>
+                <div class="table-heading">Action</div>
+              </div>
+              <div class="table-body" *ngIf="pendingList && pendingList.length">
+              <div class="table-rows table-body-rows" *ngFor="let list of pendingList">
+                 <div>{{list.FirstName+' '+list.MiddleName+' '+list.LastName}}</div>
+                 <div>{{list.Email}}</div>
+                 <div>{{list.Phone ? list.Phone: '-'}}</div>
+                 <div>{{list.PhysicallCountry ? list.PhysicallCountry: '-'}}</div>
+                 <div>{{list.PhysicallState ? list.PhysicallState: '-'}}</div>
+                 <div>{{list.PhysicallCity ? list.PhysicallCity: "-"}}</div>
+                 <div class="action"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
+              </div>
+              </div>
+              <div class="table-body" *ngIf="pendingList && !pendingList.length">
+                <div class="table-rows table-body-rows">
+                  <p>Not Found</p>
+
+                </div>
+                </div>
+            </div>
+          </div>
+            <div class="page-footer">
+            <div class="entries-selector">
+              <p class="show-entries-p">Show entries per page</p>
+              <div class="selector-input-container">
+                <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getAllRejectedPilots(pageNumber,0)">
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                </select>
+              </div>
+            </div>
+              <div class="pagination-div">
+              <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+              </div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+       </div>

@@ -38,7 +38,9 @@ import { SearchPipe } from './components/pipes/search-names/search.pipe';
 import { PilotsPipe } from './components/pipes/search-pilots/pilots.pipe';
 import { PostAJobComponent } from './pages/post-a-job/post-a-job.component';
 // import { CroppieComponent } from './components/croppie/croppie.component';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule,TimepickerModule } from 'ngx-bootstrap';
+import { JobService } from './services/job/job.service';
+import { JobsComponent } from './pages/admin/jobs/jobs.component';
 
 
 @NgModule({
@@ -67,6 +69,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
     SearchPipe,
     PilotsPipe,
     PostAJobComponent,
+    JobsComponent,
     // CroppieComponent
   ],
   imports: [
@@ -79,10 +82,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
     ReactiveFormsModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     PaginationModule.forRoot()
   ],
   entryComponents: [ModalsComponent],
-  providers: [AuthenticationService, AuthGuard, MessagesService],
+  providers: [AuthenticationService, AuthGuard, MessagesService,JobService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
