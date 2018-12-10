@@ -110,6 +110,9 @@
 
 
   @media only screen and (max-width:768px){
+    .custom-btn{
+      width: 250px !important;
+    }
     .view-wraper{
       .view-btn{
        font-size: 10px;

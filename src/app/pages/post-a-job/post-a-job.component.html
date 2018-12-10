@@ -35,7 +35,7 @@
               </div>
               <div class="form-group">
                 <label for="Industry" class="custom-input-label">Select Industry</label>
-                <ng-select formControlName="Industry" [searchable]="false">
+                <ng-select class="custom-select1" formControlName="Industry" [searchable]="false">
                   <ng-option *ngFor="let industry of industriesList" [value]="industry.name">{{industry.name}}</ng-option>
                 </ng-select><span class="select-iner">Select</span>
                 <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
@@ -74,7 +74,7 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                 <label for="lastName" class="custom-input-label">Expected Deliverables</label>
-                <ng-select formControlName="ExpectedDeliverables" [searchable]="true">
+                <ng-select class="custom-select1" formControlName="ExpectedDeliverables" [searchable]="true">
                   <ng-option *ngFor="let suff of suffix" [value]="suff.name">{{suff.name}}</ng-option>
                 </ng-select><span class="select-iner">Select From pre-established deliverables</span>
                 <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
@@ -84,7 +84,7 @@
             </div>
 
             <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="form-group">
+                <div class="form-group" ng-submit="addText(OwnDeliverables)">
                   <label for="lastName" class="custom-input-label">Type your own Deliverables (Separated by Commas)</label>
                   <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
                     formControlName="OwnDeliverables">
@@ -98,7 +98,7 @@
                     <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
                   </div>
               </div>
-              
+             
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <label for="date" class="custom-input-label">Equipment Preferences</label>
                 <div class="row">
@@ -140,8 +140,8 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12">
                         <label for="lastName" class="custom-input-label mBottom25">Date*</label>
-                        <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp="bsDatepicker" bsDatepicker>
-                        <span class="date-icon"><i class="fas fa-calendar-alt"></i></span>
+                        <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
+                        <span (click)="setOptions()" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
                       </div>
                       <div class="col-md-3 col-sm-6 col-xs-12 blue-txt">
                         <label for="lastName" class="custom-input-label">From</label>
@@ -158,13 +158,13 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12">
                         <label for="lastName" class="custom-input-label mBottom25">From Date*</label>
-                        <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp="bsDatepicker" bsDatepicker>
-                        <span class="date-icon"><i class="fas fa-calendar-alt"></i></span>
+                        <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
+                        <span (click)="setOptions()" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
                       </div>
                       <div class="col-md-4 col-sm-12 col-xs-12">
                         <label for="lastName" class="custom-input-label mBottom25">To Date*</label>
-                        <input placeholder="8/10/2018" formControlName="ToDate" class="form-control custom-input mTop30" #dp="bsDatepicker" bsDatepicker>
-                        <span class="date-icon"><i class="fas fa-calendar-alt"></i></span>
+                        <input placeholder="8/10/2018" formControlName="ToDate" class="form-control custom-input mTop30" #dp="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
+                        <span (click)="setOptions()" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
                       </div>
                 </div>
               </div>
@@ -200,7 +200,7 @@
               <div class="col-md-4 col-sm-12 col-xs-12">
                   <div class="form-group">
                   <label for="lastName" class="custom-input-label">Country</label>
-                  <ng-select class="blue-txt" formControlName="Country" [searchable]="true" (change)="getStatesByCode('physical',jobInformation.value.Country, 'change')">
+                  <ng-select  class="custom-select1" formControlName="Country" [searchable]="true" (change)="getStatesByCode('physical',jobInformation.value.Country, 'change')">
                     <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
                   </ng-select>
                   <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
@@ -222,7 +222,7 @@
               <div class="col-md-4 col-sm-12 col-xs-12">
                   <div class="form-group">
                   <label for="State" class="custom-input-label">State</label>
-                  <ng-select formControlName="State" [searchable]="true">
+                  <ng-select class="custom-select1" formControlName="State" [searchable]="true">
                     <ng-option *ngFor="let state of regionList" [value]="state.ID">{{state.Name}}</ng-option>
                   </ng-select>
                   <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">

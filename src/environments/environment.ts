@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiURL: "http://172.25.33.57:8082/dws/",
-  uploadUrl: "http://172.25.33.57:8081/dws/"
+  apiURL: "http://172.25.33.43:8082/dws/",
+  uploadUrl: "http://172.25.33.43:8081/dws/"
 
   // apiURL: 'http://18.188.240.44:8080/dws/',
   // uploadUrl: 'http://18.216.55.104:8079/dws/'

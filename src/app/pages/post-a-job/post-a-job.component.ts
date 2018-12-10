@@ -1,18 +1,20 @@
 import {
   Component,
+  ViewChild,
   OnInit
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../services/profile/profile.service';
 import { JobService } from '../../services/job/job.service';
 import { AuthenticationService } from "../../services/authentication/authentication.service";
-
+import { BsDaterangepickerDirective, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 @Component({
   selector: 'app-post-a-job',
   templateUrl: './post-a-job.component.html',
   styleUrls: ['./post-a-job.component.scss']
 })
 export class PostAJobComponent implements OnInit {
+  @ViewChild('dp') datepicker: BsDaterangepickerDirective;
   userInfo: any;
   jobInformation: FormGroup;
   industriesList: any=[];
@@ -25,8 +27,10 @@ export class PostAJobComponent implements OnInit {
   error: any;
   IsEquipmentPref:any    
   IsParticularDate:any;
-  default: any = 'UK';
-
+  diliverables:any=[]; 
+  bsConfig:any;
+  selectLabel:any;
+  OwnDeliverables1: any  =[];
   constructor(
     private formBuilder: FormBuilder,
     private profileSevice: ProfileService,
@@ -37,8 +41,13 @@ export class PostAJobComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.OwnDeliverables1 = [{
+      name: ''
+    }]
     this.getCountriesList();
     this.getStatesByCode("",231,"")
+    this.bsConfig = Object.assign({}, { containerClass: 'custom-datepicker' });
+    this.selectLabel='abc'
     this.userInfo = this.authService.getCurrentUser();
     this.industriesList  = [
       {
@@ -69,7 +78,7 @@ export class PostAJobComponent implements OnInit {
     
     this.jobInformation = this.formBuilder.group({
       UserId :[this.userInfo.ID],    
-      IsQuote:[false],  
+      IsQuote:[false], 
       JobTitle :[''],           
       Comments:[''],             
       Industry :[''],            
@@ -96,6 +105,21 @@ export class PostAJobComponent implements OnInit {
      
   });
   }
+
+  setOptions() {
+    this.datepicker.toggle();
+  }
+
+  // pushData(){
+  //   this.diliverables.push(this.jobInformation.value.Budget)
+  //   console.log(this.diliverables);
+    
+  // }
+  addText (text) {
+    this.diliverables.push(text);
+    console.log("dskfbdsj",this.diliverables)
+  }
+  
   save() {
     this.success = false;
     this.error = false;
