@@ -35,9 +35,9 @@
               </div>
               <div class="form-group">
                 <label for="Industry" class="custom-input-label">Select Industry</label>
-                <ng-select class="custom-select1" formControlName="Industry" [searchable]="false">
+                <ng-select class="custom-select1" formControlName="Industry" placeholder="Select" [searchable]="false">
                   <ng-option *ngFor="let industry of industriesList" [value]="industry.name">{{industry.name}}</ng-option>
-                </ng-select><span class="select-iner">Select</span>
+                </ng-select>
                 <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
                   <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
                 </div> -->
@@ -125,7 +125,7 @@
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <h1 class="form-heading">Date & Time</h1>
-                <p>Does job require a Particular date to get the job doneor it can be done within a range of date?</p>
+                <p>Does job require a Particular date to get the job done or it can be done within a range of date?</p>
                 <div class="row">
                   <div class="inputGroup">
                     <input id="radio3" name="radio1" type="radio" [value]="'particular'" [(ngModel)]="IsParticularDate" [ngModelOptions]="{standalone: true}"/>
@@ -286,8 +286,8 @@
                 <div class="row" *ngFor="let particularData of jobInformation.get('ParticularData').controls; let i=index" [formGroupName]="i">
                   <div class="col-md-5 col-sm-5 col-xs-12">
                     <div class="form-group">
-                    <label for="particularName" class="custom-input-label">Particular Name</label>
-                    <input type="text" formControlName="Name" placeholder="Enter Name" class="form-control custom-input" id="particularName" aria-describedby="particularName">
+                    <label for="ParticularName" class="custom-input-label">Particular Name</label>
+                    <input type="text" formControlName="ParticularName" placeholder="Enter Name" class="form-control custom-input" id="particularName" aria-describedby="particularName">
                     <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
                       <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
                     </div> -->
@@ -295,8 +295,8 @@
                 </div>
                 <div class="col-md-5 col-sm-5 col-xs-12">
                     <div class="form-group">
-                    <label for="particularNumber" class="custom-input-label">Particular Number</label>
-                    <input type="number" formControlName="Number" placeholder="Enter Phone" class="form-control custom-input" id="particularNumber" aria-describedby="particularNumber">
+                    <label for="ParticularNumber" class="custom-input-label">Particular Number</label>
+                    <input type="number" formControlName="ParticularNumber" placeholder="Enter Number" class="form-control custom-input" id="particularNumber" aria-describedby="particularNumber">
                     <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
                       <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
                     </div> -->

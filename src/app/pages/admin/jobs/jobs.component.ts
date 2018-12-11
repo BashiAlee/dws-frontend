@@ -8,6 +8,8 @@ import { JobService } from '../../../services/job/job.service';
 })
 export class JobsComponent implements OnInit {
   isActiveJobs: any = true;
+  activeJobList:any=[];
+  quotedJobList:any=[];
   paginationData: any = {};
   pageNumber: any = 10;
   maxSize = 5;
@@ -21,7 +23,7 @@ export class JobsComponent implements OnInit {
 
   ngOnInit() {
     this.onPageLoad();
-    this.getAlljobs()
+    this.getAllJobs()
   }
   openActiveJobs() {
     this.isActiveJobs = true;
@@ -47,15 +49,21 @@ export class JobsComponent implements OnInit {
       // this.getAllRejectedPilots(data.from, data.to);
     }
   }
-  getAlljobs() {
+  getAllJobs() {
     this.jobSevice.getAllJobs()
     .subscribe(
       data => {
-          console.log("dskfbdsj",data)
-          if(data.status) {
-          console.log("dskfbdsj",data)
-        } else {
-          
+        if (data.status && data.result) {
+          data.result.forEach(value => {
+            if (!value.IsQuote){
+              this.activeJobList.push(value)
+            }else{
+              this.quotedJobList.push(value)
+            }
+          });
+        } else  {
+          this.activeJobList = [];
+          this.quotedJobList = [];
         }
       }
     );

@@ -8,6 +8,9 @@ import { ProfileService } from '../../services/profile/profile.service';
 import { JobService } from '../../services/job/job.service';
 import { AuthenticationService } from "../../services/authentication/authentication.service";
 import { BsDaterangepickerDirective, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ModalsComponent } from '../../components/modals/modals.component';
 
 import * as _ from 'lodash';
 @Component({
@@ -20,6 +23,7 @@ export class PostAJobComponent implements OnInit {
   @ViewChild('dp2') datepicker2: BsDaterangepickerDirective;
   @ViewChild('dp3') datepicker3: BsDaterangepickerDirective;
   userInfo: any;
+  bsModalRef: BsModalRef;
   jobInformation: FormGroup;
   industriesList: any=[];
   countriesList: any;
@@ -36,12 +40,16 @@ export class PostAJobComponent implements OnInit {
   selectLabel:any;
   OwnDeliverables1: any  =[];
   tagsArray: any = [];
+  config = {
+    class: "custom-modal modal-dialog-centered modal-md successModal"
+  };
   expectedDeliverables: any = []
   constructor(
     private formBuilder: FormBuilder,
     private profileSevice: ProfileService,
     private authService: AuthenticationService,
-    private jobSevice:JobService
+    private jobSevice:JobService,
+    private modalService: BsModalService,
 
   ) {
   }
@@ -101,7 +109,7 @@ export class PostAJobComponent implements OnInit {
       IsQuote:[false], 
       JobTitle :[''],           
       Comments:[''],             
-      Industry :[''],            
+      Industry :[null],            
       Budget:[],              
       EquipmentPreferences:[''], 
       ExpectedDeliverables:[null], 
@@ -140,9 +148,9 @@ export class PostAJobComponent implements OnInit {
     
   }
   save() {
-    this.success = false;
-    this.error = false;
-    this.loading = true;
+    // this.success = false;
+    // this.error = false;
+    // this.loading = true;
     this.jobInformation.value.Budget= parseFloat(this.jobInformation.value.Budget);
     this.jobInformation.value.Zip= this.jobInformation.value.Zip.toString();
     this.jobInformation.value.PrimaryPhone=this.jobInformation.value.PrimaryPhone.toString();
@@ -151,9 +159,20 @@ export class PostAJobComponent implements OnInit {
     .subscribe(
       data => {
         if(data.status) {
-          console.log("dskfbdsj",data)
+          const initialState = {
+            type: 'success'
+          }
+          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          this.bsModalRef.content.closeBtnName = 'Close';
         } else {
-          
+          // this.loading = false;
+          // this.success = false;
+          // this.error = true;
+          const initialState = {
+            type: 'error'
+          }
+          this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
+          this.bsModalRef.content.closeBtnName = 'Close';
         }
       }
     );
@@ -177,9 +196,6 @@ export class PostAJobComponent implements OnInit {
       data => {
         if(data.status) {
           this.regionList = data.result;
-          var temp = this.regionList[0]
-          this.regionList[0] = this.regionList[9]
-          this.regionList[9] = temp
           this.jobInformation.patchValue({
             State: this.regionList[0].ID
           })
@@ -213,8 +229,8 @@ export class PostAJobComponent implements OnInit {
   addParticularData() {
     const control = < FormArray > this.jobInformation.controls['ParticularData'];
     const addrCtrl = this.formBuilder.group({
-      Name: [''],
-      Number: ['']
+      ParticularName: [''],
+      ParticularNumber: []
     });
     control.push(addrCtrl);
   }
