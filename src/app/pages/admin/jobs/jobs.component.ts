@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JobService } from '../../../services/job/job.service';
 
 @Component({
   selector: 'app-jobs',
@@ -12,19 +13,20 @@ export class JobsComponent implements OnInit {
   maxSize = 5;
   bigTotalItems: any;
   bigCurrentPage = 1;
-  constructor() { }
+  constructor(
+    private jobSevice:JobService
+
+
+  ) { }
 
   ngOnInit() {
     this.onPageLoad();
-    
+    this.getAlljobs()
   }
   openActiveJobs() {
     this.isActiveJobs = true;
     this.onPageLoad();
-    console.log("akjcbskjcbk");
-    
   }
-
   openQuotedJobs() {
     this.isActiveJobs = false;
     this.onPageLoad();
@@ -45,4 +47,19 @@ export class JobsComponent implements OnInit {
       // this.getAllRejectedPilots(data.from, data.to);
     }
   }
+  getAlljobs() {
+    this.jobSevice.getAllJobs()
+    .subscribe(
+      data => {
+          console.log("dskfbdsj",data)
+          if(data.status) {
+          console.log("dskfbdsj",data)
+        } else {
+          
+        }
+      }
+    );
+  }
 }
+
+
