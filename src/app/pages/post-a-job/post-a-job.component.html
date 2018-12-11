@@ -84,7 +84,7 @@
             </div>
 
             <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="form-group" ng-submit="addText(OwnDeliverables)">
+                <div class="form-group">
                   <label for="lastName" class="custom-input-label">Type your own Deliverables (Separated by Commas)</label>
                   <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
                     formControlName="OwnDeliverables">
@@ -154,17 +154,17 @@
                 </div>
               </div>
               
-              <div [formGroup]="DateRanges" class="col-md-12 col-sm-12 col-xs-12" *ngIf="IsParticularDate=='range'">
+              <div formGroupName="DateRanges" class="col-md-12 col-sm-12 col-xs-12" *ngIf="IsParticularDate=='range'">
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12">
-                        <label for="lastName" class="custom-input-label mBottom25">From Date*</label>
+                        <label for="fromDate" class="custom-input-label mBottom25">From Date*</label>
                         <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
                         <span (click)="setOptions()" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
                       </div>
                       <div class="col-md-4 col-sm-12 col-xs-12">
-                        <label for="lastName" class="custom-input-label mBottom25">To Date*</label>
+                        <label for="toDate" class="custom-input-label mBottom25">To Date*</label>
                         <input placeholder="8/10/2018" formControlName="ToDate" class="form-control custom-input mTop30" #dp="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
-                        <span (click)="setOptions()" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
+                        <span (click)="setOptions1()" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
                       </div>
                 </div>
               </div>
@@ -175,7 +175,7 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label for="lastName" class="custom-input-label">Address line 1</label>
-                  <input type="text" class="form-control custom-input" placeholder="House # 432,19/1 Islamabad" id="lastName" aria-describedby="lastName"
+                  <input type="text" class="form-control custom-input" placeholder="Enter Address line 1" id="lastName" aria-describedby="lastName"
                     formControlName="AddressLine1">
                   <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
                     class="invalid-feedback">
@@ -188,7 +188,7 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label for="lastName" class="custom-input-label">Address line 2</label>
-                  <input type="text" class="form-control custom-input" placeholder="House # 432,19/1 Islamabad" id="lastName" aria-describedby="lastName"
+                  <input type="text" class="form-control custom-input" placeholder="Enter Address line 2" id="lastName" aria-describedby="lastName"
                     formControlName="AddressLine2">
                   <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
                     class="invalid-feedback">
@@ -248,7 +248,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
                     <label for="lastName" class="custom-input-label">Primary Email</label>
-                    <input type="email" formControlName="PrimaryEmail" placeholder="mohd.kasimnazeer@gmail.com" class="form-control custom-input" id="lastName" aria-describedby="lastName">
+                    <input type="email" formControlName="PrimaryEmail" placeholder="Enter Primary Email" class="form-control custom-input" id="lastName" aria-describedby="lastName">
                     
                     <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
                       <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
@@ -261,7 +261,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
                     <label for="lastName" class="custom-input-label">Primary Phone</label>
-                    <input type="number" formControlName="PrimaryPhone" placeholder="0333 8400569" class="form-control custom-input" id="lastName" aria-describedby="lastName">
+                    <input type="number" formControlName="PrimaryPhone" placeholder="Enter Primary Phone" class="form-control custom-input" id="lastName" aria-describedby="lastName">
                     <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
                       <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
                     </div> -->
@@ -270,15 +270,32 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
                     <label for="lastName" class="custom-input-label">Secondary Phone</label>
-                    <input type="number" formControlName="SecondaryPhone" placeholder="0333 8400569" class="form-control custom-input" id="lastName" aria-describedby="lastName">
+                    <input type="number" formControlName="SecondaryPhone" placeholder="Enter Secondary Phone" class="form-control custom-input" id="lastName" aria-describedby="lastName">
                     <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
                       <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
                     </div> -->
                   </div>
                 </div>
+
                 <div class="view-wraper">
                     <a class="view-btn" href="#"><img src="../../../assets/icons/plus.png" alt="error">Add a particular Contact Name/Number</a>
                 </div>
+                <!-- <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                        <label for="name" class="custom-input-label">Name</label>
+                        <input type="text" formControlName="ParticularName" placeholder="Enter Name" class="form-control custom-input" id="lastName" aria-describedby="lastName">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group">
+                        <label for="number" class="custom-input-label">Number</label>
+                        <input type="number" formControlName="ParticularNumber" placeholder="Enter Number" class="form-control custom-input" id="lastName" aria-describedby="lastName">
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
           </div>
         </div>
       </div> 

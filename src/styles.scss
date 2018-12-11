@@ -1184,3 +1184,33 @@ div.custom-datepicker{
 .ng-select .ng-arrow-wrapper:hover .ng-arrow {
   border-top-color:  #29abe2 !important;
 }
+.custom-btn{
+  padding: 6px 15px;
+  background: #fff;
+  border-radius: 20px;
+
+}
+.red-trans{
+  border: 1px solid #ff7676;
+  color: #ff7676 !important;
+}
+.gray-trans{
+  border: 1px solid #c4c0c0;
+  color: #c4c0c0 !important;
+}
+.green-trans{
+  border: 1px solid #4dc970;
+  color: #4dc970 !important;
+}
+.yellow-trans{
+  border: 1px solid #f3f714;
+  color: #f3f714 !important;
+}
+.manage-btn{
+  background-color: #29abe2;
+  padding: 9px 18px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  color: white !important;
+}

@@ -109,23 +109,14 @@ export class PostAJobComponent implements OnInit {
   setOptions() {
     this.datepicker.toggle();
   }
-
-  // pushData(){
-  //   this.diliverables.push(this.jobInformation.value.Budget)
-  //   console.log(this.diliverables);
-    
-  // }
-  addText (text) {
-    this.diliverables.push(text);
-    console.log("dskfbdsj",this.diliverables)
-  }
-  
   save() {
     this.success = false;
     this.error = false;
     this.loading = true;
-    this.jobInformation.value.Budget= parseInt(this.jobInformation.value.Budget);
-    console.log("dskfbdsj",this.jobInformation.value)
+    this.jobInformation.value.Budget= parseFloat(this.jobInformation.value.Budget);
+    this.jobInformation.value.Zip= this.jobInformation.value.Zip.toString();
+    this.jobInformation.value.PrimaryPhone=this.jobInformation.value.PrimaryPhone.toString();
+    this.jobInformation.value.SecondaryPhone=this.jobInformation.value.SecondaryPhone.toString();
     this.jobSevice.saveJobInformation(this.jobInformation.value)
     .subscribe(
       data => {

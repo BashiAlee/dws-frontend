@@ -21,4 +21,10 @@ export class JobService {
      return response.json();
     }));
   }
+  getAllJobs() {
+    return this.http.post(this.apiUrl + 'job/jobList',"")
+    .pipe(map((response: any) => {
+     return response.json();
+    }));
+  }
 }

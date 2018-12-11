@@ -9,8 +9,8 @@
       <div class="custom-tabs">
 
         <ul>
-          <li (click)="openActiveJobs()"><a [class.active-link]="isActiveJobs">Active Jobs {{isActiveJobs}}</a></li>
-          <li (click)="openQuotedJobs()"><a [class.active-link]="!isActiveJobs">Quoted Jobs <span class="badge">{{pendingList?pendingList.length:'0'}}</span></a></li>
+          <li (click)="openActiveJobs()"><a [class.active-link]="isActiveJobs">Active Jobs</a></li>
+          <li (click)="openQuotedJobs()"><a [class.active-link]="!isActiveJobs">Quoted Jobs <span class="badge"></span></a></li>
         </ul>
       </div>
 
@@ -100,9 +100,8 @@
              <div class="main-div">
              <div class="table-div">
                <div class="table-rows table-heading-row">
-
                  <div class="table-heading">Job Title</div>
-                 <div class="table-heading">Status</div>
+                 <div class="table-heading makeCenter">Status</div>
                  <div class="table-heading">Phone</div>
                  <div class="table-heading">Country</div>
                  <div class="table-heading">State</div>
@@ -111,16 +110,16 @@
                </div>
                <div class="table-body">
                <div class="table-rows table-body-rows">
-                <div>sdcs</div>
-                <div class="transparent-btn"><a class="assign-btn">Assign</a></div>
-                <!-- <div class="transparent-btn"><a class="detail-btn">Archive</a></div>
-                <div class="transparent-btn"><a class="detail-btn">Pending</a></div>
-                <div class="transparent-btn"><a class="detail-btn">Completed</a></div> -->
+                <div>corprate events for new teachers also available</div>
+                <!-- <div class="action makeCenter"><a class="custom-btn red-trans">Assigned</a></div> -->
+                <!-- <div class="action makeCenter"><a class="custom-btn gray-trans">Archived</a></div> -->
+                <!-- <div class="action makeCenter"><a class="custom-btn green-trans">Completed</a></div> -->
+                <div class="action makeCenter"><a class="custom-btn yellow-trans">Pending</a></div>
                 <div>scdsc</div>
                 <div>dscdsc</div>
                 <div>sdcs</div>
                 <div>scdsc</div>
-                <div class="action"><a class="detail-btn">Details</a></div>
+                <div class="action makeCenter"><a class="manage-btn">Manage</a></div>
                </div>
                </div>
              </div>
