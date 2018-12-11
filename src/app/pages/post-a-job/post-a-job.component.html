@@ -279,8 +279,34 @@
                 </div>
 
                 <div class="view-wraper">
-                    <a class="view-btn" href="#"><img src="../../../assets/icons/plus.png" alt="error">Add a particular Contact Name/Number</a>
+                    <a class="view-btn"(click)="addParticularData()"><img src="../../../assets/icons/plus.png" alt="error">Add a particular Contact Name/Number</a>
                 </div>
+                <div class="container" formArrayName="ParticularData">
+                <div class="row" *ngFor="let particularData of jobInformation.get('ParticularData').controls; let i=index" [formGroupName]="i">
+                  <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="form-group">
+                    <label for="particularName" class="custom-input-label">Particular Name</label>
+                    <input type="text" formControlName="Name" placeholder="Enter Name" class="form-control custom-input" id="particularName" aria-describedby="particularName">
+                    <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
+                      <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="form-group">
+                    <label for="particularNumber" class="custom-input-label">Particular Number</label>
+                    <input type="number" formControlName="Number" placeholder="Enter Phone" class="form-control custom-input" id="particularNumber" aria-describedby="particularNumber">
+                    <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
+                      <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12 removeIcon">
+                  <a (click)="removeParticularData(i)"><i class="fas fa-trash"></i></a>
+                </div>
+                
+                </div>
+              </div>
                 <!-- <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">

@@ -3,7 +3,7 @@ import {
   ViewChild,
   OnInit
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { ProfileService } from '../../services/profile/profile.service';
 import { JobService } from '../../services/job/job.service';
 import { AuthenticationService } from "../../services/authentication/authentication.service";
@@ -106,7 +106,8 @@ export class PostAJobComponent implements OnInit {
       Zip:[''],                  
       PrimaryEmail :[''],        
       PrimaryPhone  :[''],       
-      SecondaryPhone:[''],       
+      SecondaryPhone:[''],
+      ParticularData: this.formBuilder.array([]),       
      
   });
   }
@@ -193,5 +194,19 @@ export class PostAJobComponent implements OnInit {
     var x = _.reject(this.tagsArray, _.isEmpty);
    this.tagsArray = x;
    
+  }
+  addParticularData() {
+    const control = < FormArray > this.jobInformation.controls['ParticularData'];
+    const addrCtrl = this.formBuilder.group({
+      Name: [''],
+      Number: ['']
+    });
+    control.push(addrCtrl);
+  }
+
+  removeParticularData(index){
+    let control = <FormArray>this.jobInformation.controls.ParticularData;
+    control.removeAt(index)
+    //.removeAt(this.images.value.findIndex(image => image.id === 502))
   }
 }

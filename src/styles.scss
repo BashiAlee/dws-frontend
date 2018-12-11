@@ -1214,3 +1214,12 @@ div.custom-datepicker{
   outline: none;
   color: white !important;
 }
+
+.removeIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  i {
+    color: $delete-icon-color;
+  }
+}
