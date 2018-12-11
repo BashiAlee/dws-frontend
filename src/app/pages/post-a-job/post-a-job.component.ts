@@ -36,6 +36,7 @@ export class PostAJobComponent implements OnInit {
   selectLabel:any;
   OwnDeliverables1: any  =[];
   tagsArray: any = [];
+  expectedDeliverables: any = []
   constructor(
     private formBuilder: FormBuilder,
     private profileSevice: ProfileService,
@@ -49,6 +50,20 @@ export class PostAJobComponent implements OnInit {
     this.OwnDeliverables1 = [{
       name: ''
     }]
+    this.expectedDeliverables = [
+      {
+        name: 'Raw Footage'
+      },
+      {
+        name: 'JPEGS'
+      },
+      {
+        name: 'RAW Images'
+      },
+      {
+        name: 'Edited Images'
+      }
+    ]
     this.getCountriesList();
     this.getStatesByCode("",231,"")
     this.bsConfig = Object.assign({}, { containerClass: 'custom-datepicker' });
@@ -89,7 +104,7 @@ export class PostAJobComponent implements OnInit {
       Industry :[''],            
       Budget:[],              
       EquipmentPreferences:[''], 
-      ExpectedDeliverables:[''], 
+      ExpectedDeliverables:[null], 
       OwnDeliverables :[''],     
       DateRanges: this.formBuilder.group({
         DateRangeID: [''],
