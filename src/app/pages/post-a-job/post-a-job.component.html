@@ -87,15 +87,16 @@
                 <div class="form-group" ng-submit="addText(OwnDeliverables)">
                   <label for="lastName" class="custom-input-label">Type your own Deliverables (Separated by Commas)</label>
                   <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
-                    formControlName="OwnDeliverables">
+                    formControlName="OwnDeliverables"  (input)="addToTagList(jobInformation.value.OwnDeliverables)">
                   <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
                     class="invalid-feedback">
                     <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
                   </div> -->
                 </div>
-                <div class="chip">
-                    John Doe
-                    <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+      
+                <div class="chip" *ngFor="let tags of tagsArray">
+                    {{tags}}
+                    <!-- <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span> -->
                   </div>
               </div>
              
@@ -140,8 +141,8 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12">
                         <label for="lastName" class="custom-input-label mBottom25">Date*</label>
-                        <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
-                        <span (click)="setOptions()" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
+                        <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp1="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
+                        <span (click)="setOptions('1')" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
                       </div>
                       <div class="col-md-3 col-sm-6 col-xs-12 blue-txt">
                         <label for="lastName" class="custom-input-label">From</label>
@@ -158,13 +159,13 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12">
                         <label for="lastName" class="custom-input-label mBottom25">From Date*</label>
-                        <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
-                        <span (click)="setOptions()" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
+                        <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp2="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
+                        <span (click)="setOptions('2')" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
                       </div>
                       <div class="col-md-4 col-sm-12 col-xs-12">
                         <label for="lastName" class="custom-input-label mBottom25">To Date*</label>
-                        <input placeholder="8/10/2018" formControlName="ToDate" class="form-control custom-input mTop30" #dp="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
-                        <span (click)="setOptions()" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
+                        <input placeholder="8/10/2018" formControlName="ToDate" class="form-control custom-input mTop30" #dp3="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
+                        <span (click)="setOptions('3')" class="date-icon"><i class="fas fa-calendar-alt"></i></span>
                       </div>
                 </div>
               </div>

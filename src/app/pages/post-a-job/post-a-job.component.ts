@@ -8,13 +8,17 @@ import { ProfileService } from '../../services/profile/profile.service';
 import { JobService } from '../../services/job/job.service';
 import { AuthenticationService } from "../../services/authentication/authentication.service";
 import { BsDaterangepickerDirective, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+
+import * as _ from 'lodash';
 @Component({
   selector: 'app-post-a-job',
   templateUrl: './post-a-job.component.html',
   styleUrls: ['./post-a-job.component.scss']
 })
 export class PostAJobComponent implements OnInit {
-  @ViewChild('dp') datepicker: BsDaterangepickerDirective;
+  @ViewChild('dp1') datepicker: BsDaterangepickerDirective;
+  @ViewChild('dp2') datepicker2: BsDaterangepickerDirective;
+  @ViewChild('dp3') datepicker3: BsDaterangepickerDirective;
   userInfo: any;
   jobInformation: FormGroup;
   industriesList: any=[];
@@ -31,6 +35,7 @@ export class PostAJobComponent implements OnInit {
   bsConfig:any;
   selectLabel:any;
   OwnDeliverables1: any  =[];
+  tagsArray: any = [];
   constructor(
     private formBuilder: FormBuilder,
     private profileSevice: ProfileService,
@@ -106,8 +111,17 @@ export class PostAJobComponent implements OnInit {
   });
   }
 
-  setOptions() {
-    this.datepicker.toggle();
+  setOptions(value) {
+    if(value=='1'){
+      this.datepicker.toggle();
+    }
+    if(value=='2'){
+      this.datepicker2.toggle();
+    }
+    if(value=='3'){
+      this.datepicker3.toggle();
+    }
+    
   }
 
   // pushData(){
@@ -168,5 +182,25 @@ export class PostAJobComponent implements OnInit {
         }
       }
     );
+  }
+
+  addToTagList(value) {
+   
+    if(value) {
+      var x = value.split(',');
+      x.forEach((value,index) => {
+        if(value) {
+          this.tagsArray[index] = value
+        } else {
+          this.tagsArray.splice(index,1);
+        }
+       
+      });
+    } else {
+      this.tagsArray = [];
+    }
+    var x = _.reject(this.tagsArray, _.isEmpty);
+   this.tagsArray = x;
+   
   }
 }
