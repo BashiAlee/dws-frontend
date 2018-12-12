@@ -47,11 +47,11 @@ export class PersonalInformationComponent implements OnInit {
   error: any;
   constructor(private formBuilder: FormBuilder, private router: Router,
     private route: ActivatedRoute, private profileSevice: ProfileService,
-    private modalService: BsModalService, private authService: AuthenticationService) { 
+    private modalService: BsModalService, private authService: AuthenticationService) {
       if(this.router.url.split('/')[1] =='admin') {
         this.isAdmin = true;
       }
-      $('html, body').stop().animate({scrollTop: 0}, 500);  
+      $('html, body').stop().animate({scrollTop: 0}, 500);
       // this.personalData.CreatedAt = this.auth.getCurrentUser().CreatedAt;
     }
 
@@ -124,7 +124,7 @@ export class PersonalInformationComponent implements OnInit {
             // this.getRegionByCode(this.personalData.m1Country);
             if(this.personalData.PhysicallCountry) {
               this.getStatesByCode('physical',this.personalData.PhysicallCountry,'onload')
-            } 
+            }
             if(this.personalData.MailingCountry) {
               this.getStatesByCode('mailing',this.personalData.MailingCountry,'onload')
             }
@@ -142,7 +142,7 @@ export class PersonalInformationComponent implements OnInit {
             // this.checkImageExists(this.personalData.Users.ProfileImage);
             this.displayPicture = this.personalData.Users.ProfileImage;
             this.personalInformation.patchValue(Object.assign({}, this.personalData));
-      
+
 
             console.log("FFFF", this.personalInformation.value)
         } else {
@@ -165,7 +165,7 @@ export class PersonalInformationComponent implements OnInit {
       }
     );
   }
- 
+
   getStatesByCode(type,code, value) {
     if(value== 'change' && type == 'physical') {
       this.personalInformation.patchValue({
@@ -183,14 +183,14 @@ export class PersonalInformationComponent implements OnInit {
       data => {
         if(data.status) {
           if(type == 'physical') {
-      
+
             this.physicalRegionList = data.result;
             if(value == 'onload' && this.personalData.PhysicallState < 0) {
               this.personalInformation.patchValue({
                 PhysicallState: this.physicalRegionList[0].ID
               })
             }
-           
+
           } else if (type =='mailing') {
             this.mailingRegionList = data.result;
             if(value == 'onload' && this.personalData.MailingState < 0) {
@@ -214,7 +214,7 @@ export class PersonalInformationComponent implements OnInit {
     this.error = false;
     // console.log(this.personalInformation.value)
     this.loading = true;
-   
+
     // delete this.personalInformation.value.Users.MemberId
     this.personalInformation.value.PrimaryPhone = this.personalInformation.value.PrimaryPhone.toString();
     if(this.imageFile) {
@@ -233,7 +233,7 @@ export class PersonalInformationComponent implements OnInit {
           this.profileSevice.updatePersonalInformation(this.personalInformation.value)
           .subscribe(data => {
             if(data.status) {
-             
+
               localStorage.setItem('user', JSON.stringify(data.result))
 
               this.success = true;
@@ -250,8 +250,8 @@ export class PersonalInformationComponent implements OnInit {
               // this.bsModalRef.content.closeBtnName = 'Close';
               this.loading = false;
             }
-            
-            
+
+
           })
         } else if(!data.status){
           const initialState = {
@@ -263,7 +263,7 @@ export class PersonalInformationComponent implements OnInit {
           // this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
           // this.bsModalRef.content.closeBtnName = 'Close';
         }
-  
+
       });
     } else {
       this.profileSevice.updatePersonalInformation(this.personalInformation.value)
@@ -292,8 +292,8 @@ export class PersonalInformationComponent implements OnInit {
           // this.bsModalRef.content.closeBtnName = 'Close';
         }
 
-        
-        
+
+
       })
     }
 
@@ -301,27 +301,27 @@ export class PersonalInformationComponent implements OnInit {
   }
 
   uploadImage(file) {
-      
+
     this.imageFile = file;
           if (file.target.files && file.target.files[0]) {
             var reader = new FileReader();
-        
+
             reader.onload = (event:any) => {
               this.profileImage = event.target.result;
             }
-        
+
             reader.readAsDataURL(file.target.files[0]);
             // this.messages.uploadingImage = false;
           }
 
-         
+
             // this.accountInfo.ProfilePicture =this.imageName
             // this.accountInformation.patchValue(
             //   {
             //     profilepicture: this.imageName
             //   }
             // );
-          
+
   //   if(event.target.files[0]) {
   //     let isImageValid = event.target.files[0].type.split('/')[0];
   //     if(isImageValid === 'image') {
@@ -352,7 +352,7 @@ export class PersonalInformationComponent implements OnInit {
     //       setTimeout(() => {
     //         this.profileImage = data.result;
     //       }, 6000);
-          
+
     //     }
     //   }
     // );
@@ -377,11 +377,11 @@ export class PersonalInformationComponent implements OnInit {
       this.imageChangedEvent = file;
       if (file.target.files && file.target.files[0]) {
         var reader = new FileReader();
-  
+
         reader.onload = (event: any) => {
           this.croppieDirective.croppie.bind({ url: event.target.result});
           // this.displayPicture = event.target.result;
-         
+
         }
         reader.readAsDataURL(file.target.files[0]);
       }
@@ -403,44 +403,44 @@ export class PersonalInformationComponent implements OnInit {
               }
               this.messages.uploadingImage = false;
             }
-  
+
           })
       })
-  
+
     }
-    
+
     public croppieOptions: Croppie.CroppieOptions = {
       boundary: { width: 250, height: 250 },
       viewport: { width: 200, height: 200 },
-     
+
       enableOrientation: true,
     };
     @ViewChild('croppie')
-    
-    
+
+
     public croppieDirective: CroppieDirective;
-  
+
     handleUpdate(data) {
       var x = this.croppieDirective.croppie.result('canvas','original').then(function (src) {
         return src;
-        
+
     });
-  
+
     this.deepdive(x);
-      
+
     }
 
-    deepdive(e){  
+    deepdive(e){
       e.then((value)=> {
         this.croppedImageData.base64 = value;
        this.croppedImage = value;
        this.displayPicture = value;
       });
-  
+
     }
 
     zoomPic(url) {
-  
+
         var initialState  = {
           data: url,
           type: 'zoom-admin'
@@ -449,11 +449,11 @@ export class PersonalInformationComponent implements OnInit {
           class: 'custom-modal modal-dialog-centered modal-lg'
         }
         this.bsModalRef = this.modalService.show(ModalsComponent, Object.assign({}, this.config, { initialState }))
-      
+
     }
 
-    
-    
+
+
     check(url) {
       this.authService.checkImageExists(url)
       .subscribe(data =>{

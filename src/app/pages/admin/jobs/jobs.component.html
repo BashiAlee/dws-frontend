@@ -1,0 +1,121 @@
+
+
+    <div class="container">
+      <div class="topContent">
+          <h1>Jobs</h1>
+          <p>See where all of the DWS registered drones are..</p>
+       </div>
+      <div class="custom-tabs">
+        <ul>
+          <li (click)="openActiveJobs()"><a [class.active-link]="isActiveJobs">Active Jobs</a></li>
+          <li (click)="openQuotedJobs()"><a [class.active-link]="!isActiveJobs">Quoted Jobs<span class="badge"></span></a></li>
+        </ul>
+      </div>
+
+      <div class="custom-tabs" >
+        <!--<button  class="BackBtn" (click)="moveBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>-->
+        <!-- <ul>
+          <li ><a  class="active-link " [routerLink]="['personal-information']" [routerLinkActive]="['active-link']" >Personal Information</a></li>
+          <li ><a [routerLink]="['business-information']"  [routerLinkActive]="['active-link']">Business Information</a></li>
+        </ul> -->
+        <!--<button class="ForwardBtn"  (click)="moveForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>-->
+      </div>
+
+       <div class="command-center" *ngIf="isActiveJobs">
+         <div class="row">
+           <div class="col-md-12">
+              <div class="main-div">
+                <div class="table-div">
+                  <div class="table-rows table-heading-row">
+                    <div class="table-heading">Job Title</div>
+                    <div class="table-heading makeCenter">Status</div>
+                    <div class="table-heading">Phone</div>
+                    <div class="table-heading">Country</div>
+                    <div class="table-heading">State</div>
+                    <div class="table-heading">City</div>
+                    <div class="table-heading">Action</div>
+                  </div>
+                  <div class="table-body">
+                    <div *ngFor="let job of activeJobList" class="table-rows table-body-rows">
+                      <div>{{job.JobTitle}}</div>
+                      <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
+                      <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
+                      <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Completed</a></div>
+                      <div class="action makeCenter" *ngIf="job.JobStatus=='pending'"><a class="custom-btn yellow-trans">Pending</a></div>
+                      <div>{{job.PrimaryPhone}}</div>
+                      <div>{{job.PilotCountry}}</div>
+                      <div>{{job.PilotState}}</div>
+                      <div>{{job.City}}</div>
+                      <div class="action makeCenter"><a class="manage-btn">Manage</a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="page-footer">
+                <div class="entries-selector">
+                  <p class="show-entries-p">Show entries per page</p>
+                  <div class="selector-input-container">
+                    <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getAllApprovedPilots(pageNumber,0)">
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="pagination-div">
+                <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+                </div>
+              </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="command-center" *ngIf="!isActiveJobs">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="main-div">
+                <div class="table-div">
+                  <div class="table-rows table-heading-row">
+                    <div class="table-heading">Job Title</div>
+                    <div class="table-heading makeCenter">Status</div>
+                    <div class="table-heading">Phone</div>
+                    <div class="table-heading">Country</div>
+                    <div class="table-heading">State</div>
+                    <div class="table-heading">City</div>
+                    <div class="table-heading">Action</div>
+                  </div>
+                  <div class="table-body">
+                    <div *ngFor="let job of quotedJobList" class="table-rows table-body-rows">
+                      <div>{{job.JobTitle}}</div>
+                      <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
+                      <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
+                      <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Completed</a></div>
+                      <div class="action makeCenter" *ngIf="job.JobStatus=='pending'"><a class="custom-btn yellow-trans">Pending</a></div>
+                      <div>{{job.PrimaryPhone}}</div>
+                      <div>{{job.PilotCountry}}</div>
+                      <div>{{job.PilotState}}</div>
+                      <div>{{job.City}}</div>
+                      <div class="action makeCenter"><a class="manage-btn">Manage</a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="page-footer">
+                <div class="entries-selector">
+                  <p class="show-entries-p">Show entries per page</p>
+                  <div class="selector-input-container">
+                    <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getAllRejectedPilots(pageNumber,0)">
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="pagination-div">
+                  <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>

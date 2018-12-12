@@ -257,7 +257,7 @@ input.custom-input:focus {
 
 textarea.custom-textarea {
   resize: none;
-  height: 150px !important;
+  height: 162px !important;
 }
 
 textarea.custom-textarea:focus {
@@ -389,7 +389,15 @@ textarea.custom-textarea:focus {
 .karla-bold {
   font-family: 'Karla-Bold';
 }
-
+.pt20{
+  padding-top: 20px;
+}
+.pb0{
+  padding-bottom: 0px !important;
+}
+.ml10{
+  margin-left: 10px !important;
+}
 .mTop15 {
   margin-top: 15px !important;
 }
@@ -529,8 +537,29 @@ div.custom-table {
 .mtop30 {
   margin-top: 30px !important;
 }
-
-.custom-ngselect {
+.mt18 {
+  margin-top: 18px !important;
+}
+.ml25{
+  margin-left: -25px !important;
+}
+.custom-checkbox .container input:checked ~ .checkmark, .custom-radio .container input:checked ~ .checkmark {
+  background-color: #ff7676;
+}
+.ng-select.ng-select-single .ng-select-container .ng-value-container, .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+  color:#29abe2  !important;
+}
+.ng-select .ng-clear-wrapper {
+  color:#29abe2  !important;
+}
+// .ng-select .ng-select-container {
+//   color:#29abe2  !important;
+// }
+// .ng-select .ng-arrow-wrapper .ng-arrow {
+//   color:#29abe2  !important;
+//   border-color: transparent transparent #29abe2 !important;
+// }
+.custom-ng-select {
   div.ng-value {
     background-color: $multi-select-label-color !important;
     border: 0 !important;
@@ -1118,4 +1147,82 @@ button:disabled {
 .notAvailable {
   opacity: 0.5;
   pointer-events: none;
+}
+div.custom-datepicker{
+  div.bs-datepicker-head{
+    background-color: #29abe2;
+  }
+ 
+  div.bs-datepicker-body{
+    table
+    tr {
+      td.week {
+        color: #29abe2;
+      }
+
+      td {
+        span.selected {
+          background-color: #29abe2;
+        }
+      }
+    }
+  }
+}
+
+.custom-select1{
+  .ng-arrow-wrapper{
+    .ng-arrow{
+      border-color: #29abe2 transparent transparent;
+      border-style: solid;
+      border-width: 5px 5px 2.5px;
+    }
+  }
+} 
+.ng-select-opened>.ng-select-container .ng-arrow {
+  border-color: transparent transparent #29abe2 !important;
+}
+.ng-select .ng-arrow-wrapper:hover .ng-arrow {
+  border-top-color:  #29abe2 !important;
+}
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+  color:#29abe2 !important;
+}
+.custom-btn{
+  padding: 6px 15px;
+  background: #fff;
+  border-radius: 20px;
+
+}
+.red-trans{
+  border: 1px solid #ff7676;
+  color: #ff7676 !important;
+}
+.gray-trans{
+  border: 1px solid #c4c0c0;
+  color: #c4c0c0 !important;
+}
+.green-trans{
+  border: 1px solid #4dc970;
+  color: #4dc970 !important;
+}
+.yellow-trans{
+  border: 1px solid #f3f714;
+  color: #f3f714 !important;
+}
+.manage-btn{
+  background-color: #29abe2;
+  padding: 9px 18px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  color: white !important;
+}
+
+.removeIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  i {
+    color: $delete-icon-color;
+  }
 }

@@ -110,7 +110,21 @@
 
 
   @media only screen and (max-width:768px){
-
+    .custom-btn{
+      width: 250px !important;
+    }
+    .view-wraper{
+      .view-btn{
+       font-size: 10px;
+      }
+    }
+    .bottom-txt{
+      margin:50px 20px;
+      p{
+          font-size: 20px;
+          width: 100% !important;
+      }
+    }
     div.call-to-action  {
 
         display: block;
@@ -214,6 +228,7 @@
 
 }
 @media only screen and (max-width:480px){
+
     div.rightContent {
         justify-content: center !important;
         div.dropdown-details {
@@ -223,7 +238,7 @@
 
             }
         }
-
+        
         div.main-notification {
             div.notification,div.messages {
                 margin-right: 19px !important;
