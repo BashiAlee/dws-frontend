@@ -21,10 +21,18 @@ export class JobService {
      return response.json();
     }));
   }
-  getAllJobs() {
-    return this.http.get(this.apiUrl + 'job/jobList')
-    .pipe(map((response: any) => {
-     return response.json();
-    }));
+  getActiveJobs(data) {
+    return this.http.get(this.apiUrl + "job/activeJobs/" + data.from + "/" + data.to)
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        })
+      );
+  }
+  getQuotedJobs(data) {
+    return this.http.get(this.apiUrl + 'job/quotedJobs/' + data.from + '/' + data.to)
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
   }
 }

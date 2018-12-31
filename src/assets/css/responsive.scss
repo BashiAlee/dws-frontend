@@ -231,6 +231,7 @@
 
     div.rightContent {
         justify-content: center !important;
+        margin-right: 5px !important;
         div.dropdown-details {
             button.toggler {
 
@@ -238,10 +239,13 @@
 
             }
         }
-        
+
         div.main-notification {
             div.notification,div.messages {
                 margin-right: 19px !important;
+            }
+            .toggle-button {
+              margin-right: -32px;
             }
         }
 

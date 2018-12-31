@@ -2,28 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { JobService } from '../../../services/job/job.service';
 
 @Component({
-  selector: 'app-jobs',
-  templateUrl: './jobs.component.html',
-  styleUrls: ['./jobs.component.scss']
+  selector: "app-jobs",
+  templateUrl: "./jobs.component.html",
+  styleUrls: ["./jobs.component.scss"]
 })
 export class JobsComponent implements OnInit {
   isActiveJobs: any = true;
-  activeJobList:any=[];
-  quotedJobList:any=[];
+  activeJobList: any = [];
+  quotedJobList: any = [];
   paginationData: any = {};
   pageNumber: any = 10;
   maxSize = 5;
   bigTotalItems: any;
   bigCurrentPage = 1;
-  constructor(
-    private jobSevice:JobService
-
-
-  ) { }
+  constructor(private jobSevice: JobService) {}
 
   ngOnInit() {
     this.onPageLoad();
-    this.getAllJobs()
+
   }
   openActiveJobs() {
     this.isActiveJobs = true;
@@ -42,31 +38,32 @@ export class JobsComponent implements OnInit {
     if (this.isActiveJobs) {
       this.bigCurrentPage = 1;
       this.pageNumber = 10;
-      // this.getAllApprovedPilots(data.from, data.to);
+      this.getActiveJobs(data.from, data.to);
     } else {
       this.bigCurrentPage = 1;
       this.pageNumber = 10;
-      // this.getAllRejectedPilots(data.from, data.to);
+      this.getQuotedJobs(data.from, data.to);
     }
   }
-  getAllJobs() {
-    this.jobSevice.getAllJobs()
-    .subscribe(
-      data => {
-        if (data.status && data.result) {
-          data.result.forEach(value => {
-            if (!value.IsQuote){
-              this.activeJobList.push(value)
-            }else{
-              this.quotedJobList.push(value)
-            }
-          });
-        } else  {
-          this.activeJobList = [];
-          this.quotedJobList = [];
-        }
+  getActiveJobs(num, val) {
+    var data = { from: val, to: num };
+    this.jobSevice.getActiveJobs(data).subscribe(data => {
+      if (data.status && data.result) {
+        this.activeJobList = data.result;
+      } else {
+        this.activeJobList = [];
       }
-    );
+    });
+  }
+  getQuotedJobs(num, val) {
+    var data = { from: val, to: num };
+    this.jobSevice.getQuotedJobs(data).subscribe(data => {
+      if (data.status && data.result) {
+        this.quotedJobList = data.result;
+      } else {
+        this.quotedJobList = [];
+      }
+    });
   }
 }
 

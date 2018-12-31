@@ -55,7 +55,7 @@
                 <div class="entries-selector">
                   <p class="show-entries-p">Show entries per page</p>
                   <div class="selector-input-container">
-                    <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getAllApprovedPilots(pageNumber,0)">
+                    <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getActiveJobs(pageNumber,0)">
                       <option value="10">10</option>
                       <option value="20">20</option>
                       <option value="30">30</option>
@@ -104,7 +104,7 @@
                 <div class="entries-selector">
                   <p class="show-entries-p">Show entries per page</p>
                   <div class="selector-input-container">
-                    <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getAllRejectedPilots(pageNumber,0)">
+                    <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getQuotedJobs(pageNumber,0)">
                       <option value="10">10</option>
                       <option value="20">20</option>
                       <option value="30">30</option>

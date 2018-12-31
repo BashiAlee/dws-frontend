@@ -94,7 +94,6 @@
   display: none;
   position:  absolute;
   // margin-top: 7px;
-  z-index: 999999999;
   opacity: 0.8;
   width: 39px;
   height: 52px;
@@ -138,7 +137,7 @@
   display: none;  // Safari and Chrome
 }
 .buttons {
- 
+
   .btn-message {
     background: $primary-color;
     // background: #49cb46;

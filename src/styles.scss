@@ -188,7 +188,9 @@ input.custom-input:focus {
     border-radius: 50%;
     border: 1px solid $primary-color;
   }
-
+.mark1{
+  background: #29abe2 !important;
+}
   /* On mouse-over, add a grey background color */
   // .container:hover input ~ .checkmark {
   //     background-color: $p-color;
@@ -422,6 +424,11 @@ div.ng-select-container {
   max-height: 214px !important;
   border-radius: 3px;
   border: 2px solid $border-input-color !important;
+  .ng-input {
+    input {
+      min-height: 41px !important;
+    }
+  }
 }
 
 
@@ -543,9 +550,7 @@ div.custom-table {
 .ml25{
   margin-left: -25px !important;
 }
-.custom-checkbox .container input:checked ~ .checkmark, .custom-radio .container input:checked ~ .checkmark {
-  background-color: #ff7676;
-}
+
 .ng-select.ng-select-single .ng-select-container .ng-value-container, .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
   color:#29abe2  !important;
 }
@@ -559,7 +564,7 @@ div.custom-table {
 //   color:#29abe2  !important;
 //   border-color: transparent transparent #29abe2 !important;
 // }
-.custom-ng-select {
+.custom-ngselect {
   div.ng-value {
     background-color: $multi-select-label-color !important;
     border: 0 !important;
@@ -1152,7 +1157,7 @@ div.custom-datepicker{
   div.bs-datepicker-head{
     background-color: #29abe2;
   }
- 
+
   div.bs-datepicker-body{
     table
     tr {
@@ -1177,7 +1182,7 @@ div.custom-datepicker{
       border-width: 5px 5px 2.5px;
     }
   }
-} 
+}
 .ng-select-opened>.ng-select-container .ng-arrow {
   border-color: transparent transparent #29abe2 !important;
 }

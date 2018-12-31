@@ -20,8 +20,11 @@ import {
   styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
+  id: any;
+  role: any;
   userInfo: any;
   isAdmin: any;
+  isNavOpen:any;
   currentUserMessages: any = [];
   messageConversationId: any;
   selectedSenderChatName: any;
@@ -33,20 +36,24 @@ export class HeaderComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private messageService: MessagesService
-  ) {}
+  ) {
+    this.id = this.authService.getCurrentUser().ID;
+    this.role = this.authService.getCurrentUser().Role;
+  }
 
   ngOnInit() {
-
     if (this.router.url.split("/")[1] == "admin") {
       this.isAdmin = true;
       this.userInfo = JSON.parse(localStorage.getItem("admin"));
-      this.getAdminMessages().then((data=>{
-        
-      })).catch(e =>{console.log("errrr",e)});
+      this.getAdminMessages()
+        .then(data => {})
+        .catch(e => {
+          console.log("errrr", e);
+        });
     } else {
       this.isAdmin = false;
       this.userInfo = this.authService.getCurrentUser();
-      this.getCurrentUsersMessages()
+      this.getCurrentUsersMessages();
     }
   }
 
@@ -61,8 +68,8 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  test(){
-    console.log("tjis sadasdasdasdasdasd")
+  openMenu() {
+    this.isNavOpen=!this.isNavOpen
   }
 
   getCurrentUsersMessages() {
@@ -78,27 +85,38 @@ export class HeaderComponent implements OnInit {
   }
 
   async getAdminMessages() {
-      let promise = new Promise((resolve, reject) => {
-        this.messageService.getMessagesListOfCurrentUserAdmin("pilot")
+    let promise = new Promise((resolve, reject) => {
+      this.messageService
+        .getMessagesListOfCurrentUserAdmin("pilot")
         .subscribe(dataPilot => {
-            if (dataPilot.status) {
-              this.adminPilotMessages = dataPilot.result
-              this.messageService.getMessagesListOfCurrentUserAdmin("customer")
+          if (dataPilot.status) {
+            this.adminPilotMessages = dataPilot.result;
+            this.messageService
+              .getMessagesListOfCurrentUserAdmin("customer")
               .subscribe(dataCustomer => {
-                  if (dataCustomer.status) {
-                    this.adminCustomerMessages = dataCustomer.result
-                    resolve(this.adminAllMessages = this.adminPilotMessages.concat(this.adminCustomerMessages))
-                  }
+                if (dataCustomer.status) {
+                  this.adminCustomerMessages = dataCustomer.result;
+                  resolve(
+                    (this.adminAllMessages = this.adminPilotMessages.concat(
+                      this.adminCustomerMessages
+                    ))
+                  );
+                }
               });
-            } else {
-              this.messageService.getMessagesListOfCurrentUserAdmin("customer")
+          } else {
+            this.messageService
+              .getMessagesListOfCurrentUserAdmin("customer")
               .subscribe(dataCustomer => {
-                  if (dataCustomer.status) {
-                    this.adminCustomerMessages = dataCustomer.result
-                    resolve(this.adminAllMessages = this.adminPilotMessages.concat(this.adminCustomerMessages))
-                  }
+                if (dataCustomer.status) {
+                  this.adminCustomerMessages = dataCustomer.result;
+                  resolve(
+                    (this.adminAllMessages = this.adminPilotMessages.concat(
+                      this.adminCustomerMessages
+                    ))
+                  );
+                }
               });
-            }
+          }
         });
     });
     let result = await promise;

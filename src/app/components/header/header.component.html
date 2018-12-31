@@ -10,10 +10,9 @@
 
   <div class="rightContent">
       <div class="main-notification">
-         <!-- <span class="nav-pipes toggle-button" ><i class="fa fa-bars" aria-hidden="true">
-              <div class="notify-icon-red"></div>
-            </i>
-            </span> -->
+          <span class="nav-pipes toggle-button d-sm-block d-md-none" (click)="openMenu()">
+           <i class="fa fa-bars" aria-hidden="true"><div class="notify-icon-red"></div></i>
+          </span>
         <ul>
           <li>
             <div class="messages">
@@ -32,7 +31,7 @@
                        </li>
                        <li class="align-text" *ngIf="adminAllMessages && !adminAllMessages.length">
                           <p>No Messages</p>
-                       
+
                        </li>
                     </div>
                     <li class="align-text" *ngFor="let message of currentUserMessages">
@@ -196,17 +195,48 @@
   </div> -->
 
 </nav>
-<div class="drop-menu">
-  <div>00</div>
-  <div>11</div>
-  <div>22</div>
-  <div>33</div>
-  <div>00</div>
-  <div>11</div>
-  <div>22</div>
-  <div>33</div>
-  <div>00</div>
-  <div>11</div>
-  <div>22</div>
-  <div>33</div>
+<div class="custom-sidebar" *ngIf="isNavOpen">
+  <!-- Sidebar -->
+  <nav class="sidebar" [class.collapsingSideBar]="!isNavOpen">
+    <ul class="list-unstyled components">
+      <li class="nav-item notAvailable">
+        <a class="nav-link">
+          <span><i class="fa fa-tachometer"></i>
+            <span class="inner-item" *ngIf="isNavOpen">Dashboard</span>
+          </span>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="(role =='customer')?'nav-item notAvailable':'nav-item'">
+        <a class="nav-link" [routerLink]="['profile',id]" [routerLinkActive]="['active-sidebarlink']">
+          <span><i class="fa fa-user-o" aria-hidden="true"></i>
+            <span class="inner-item" *ngIf="isNavOpen">Profile</span>
+          </span>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="(role =='customer')?'nav-item':'nav-item notAvailable'">
+        <a class="nav-link" [routerLinkActive]="['active-sidebarlink']" [routerLink]="['jobs']">
+          <span class="user-list"><i class="fa fa-users"></i>
+            <span class="inner-item" *ngIf="isNavOpen">Jobs</span>
+            <span *ngIf="isNavOpen" class="badge-value">3</span>
+            <span *ngIf="!isNavOpen" class="small-badge">3</span>
+          </span>
+
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['communication']" [routerLinkActive]="['active-sidebarlink']">
+          <span><i class="fa fa-comment-o"></i>
+            <span class="inner-item" *ngIf="isNavOpen">Communications</span></span>
+        </a>
+      </li>
+      <li class="nav-item notAvailable" [ngClass]="(role =='customer')?'nav-item notAvailable':'nav-item'">
+        <a class="nav-link" href="#">
+          <span><i class="fa fa-calendar" aria-hidden="true"></i>
+            <span class="inner-item" *ngIf="isNavOpen">Job Calendar</span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
 </div>
