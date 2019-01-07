@@ -27,13 +27,19 @@ export class MainLayoutComponent implements OnInit {
     }
 
   }
-
+  onScroll(event) {
+    var documentID=document.getElementById("mobile-menu");
+    if (documentID!=null){
+      document.getElementById("mobile-menu").style.display = "none";
+    }else{
+    }
+  }
   checkSidebar(data) {
-   
+
 
       this.isOpen = data;
-    
-   
+
+
   }
 
   ngOnInit() {

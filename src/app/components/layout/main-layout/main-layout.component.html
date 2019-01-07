@@ -5,16 +5,16 @@
 
         <app-sidebar *ngIf="!isAdmin" (toggleEvent)="checkSidebar($event)"></app-sidebar>
         <app-sidebar-admin *ngIf="isAdmin" (toggleEvent)="checkSidebar($event)"></app-sidebar-admin>
-        
+
     </div>
-    <div class="inner-header mainContent">       
+    <div class="inner-header mainContent" (scroll)="onScroll($event)">
       <app-header></app-header>
       <router-outlet></router-outlet>
     </div>
-    
+
     <!-- <div class="row">
       <div class="col-md-2"> <app-sidebar></app-sidebar></div>
-  
+
       <div class="col-md-10 mainContent">
           <app-header></app-header>
         <router-outlet></router-outlet>
@@ -22,4 +22,3 @@
     </div> -->
   </div>
   <!-- </div> -->
-  

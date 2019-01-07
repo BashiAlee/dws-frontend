@@ -93,6 +93,7 @@
 .BackBtn {
   display: none;
   position:  absolute;
+  z-index: 1;
   // margin-top: 7px;
   opacity: 0.8;
   width: 39px;
@@ -136,28 +137,5 @@
 .custom-tabs::-webkit-scrollbar {
   display: none;  // Safari and Chrome
 }
-.buttons {
 
-  .btn-message {
-    background: $primary-color;
-    // background: #49cb46;
-    color: $white;
-  }
-
-  .btn-approve{
-    // background:$delete-icon-color;
-    background: #49cb46;
-    color: $white;
-   }
-  a {
-    margin: 20px;
-    padding: 17px 40px;
-    border-radius: 30px;
-  }
-  .btn-reject {
-    background:$delete-icon-color;
-    // background: #f00;
-    color: $white;
-  }
-}
 

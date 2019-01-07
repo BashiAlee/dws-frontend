@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   role: any;
   userInfo: any;
   isAdmin: any;
-  isNavOpen:any;
+  isNavOpen: any;
   currentUserMessages: any = [];
   messageConversationId: any;
   selectedSenderChatName: any;
@@ -37,14 +37,18 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private messageService: MessagesService
   ) {
-    this.id = this.authService.getCurrentUser().ID;
-    this.role = this.authService.getCurrentUser().Role;
+    // this.id = this.authService.getCurrentUser().ID;
+    // console.log("this is data",this.authService.getCurrentUser());
+
+    // this.role = this.authService.getCurrentUser().Role;
   }
 
   ngOnInit() {
     if (this.router.url.split("/")[1] == "admin") {
       this.isAdmin = true;
       this.userInfo = JSON.parse(localStorage.getItem("admin"));
+      this.id = this.authService.getCurrentAdmin().ID;
+      this.role = this.authService.getCurrentAdmin().Role;
       this.getAdminMessages()
         .then(data => {})
         .catch(e => {
@@ -53,9 +57,16 @@ export class HeaderComponent implements OnInit {
     } else {
       this.isAdmin = false;
       this.userInfo = this.authService.getCurrentUser();
+      this.id = this.authService.getCurrentUser().ID;
+      this.role = this.authService.getCurrentUser().Role;
       this.getCurrentUsersMessages();
     }
+    //     $(document).click(function(){
+    //   console.log("hereee")
+    // $(".custom-sidebar").hide();
+    // });
   }
+
 
   check(url) {
     this.authService.checkImageExists(url).subscribe(
@@ -69,7 +80,10 @@ export class HeaderComponent implements OnInit {
   }
 
   openMenu() {
-    this.isNavOpen=!this.isNavOpen
+    this.isNavOpen = !this.isNavOpen;
+  }
+  hideDropdown() {
+    this.isNavOpen = false;
   }
 
   getCurrentUsersMessages() {

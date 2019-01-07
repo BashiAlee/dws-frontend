@@ -4,7 +4,7 @@
         <p class="user-name">Documents &amp; Declaration</p>
         <p class="user-description"> Please upload the following documents and agree to the declaration below</p>
       </div>
-  
+
       <div class="user-personal-info">
         <div class="container">
 
@@ -16,7 +16,7 @@
                       <input type="radio" formControlName="Veteran" value='1'>
                       <span class="checkmark"></span>
                     </label>
-      
+
                     <label class="container">No
                       <input type="radio" formControlName="Veteran" value='0'>
                       <span class="checkmark"></span>
@@ -32,7 +32,7 @@
                       <input type="radio" formControlName="AviationLiabilityInsurance" value='1'>
                       <span class="checkmark"></span>
                     </label>
-      
+
                     <label class="container">No
                       <input type="radio"  formControlName="AviationLiabilityInsurance" value='0'>
                       <span class="checkmark"></span>
@@ -40,7 +40,7 @@
                   </div>
                 </div>
           </div>
-  
+
           <div class="row justify-content-center" *ngIf="documentInformation.value.AviationLiabilityInsurance=='1'">
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your aviation liability insurance certificate </label>
@@ -50,12 +50,12 @@
                   <a *ngIf="images.AviationLiabilityInsurancePdf"  [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
                 </object> -->
                 <a [class.enableDiv]="isAdmin" *ngIf="images.AviationLiabilityInsurancePdf" [href]="sanitize.bypassSecurityTrustResourceUrl(images.AviationLiabilityInsurancePdf)">Download</a>
-                
+
                 <div class="image-upload">
                   <label for="file-input1">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </label>
-  
+
                   <input id="file-input1" type="file" (change)="uploadImage($event, 'liability-certificate')" accept="application/pdf"/>
                 </div>
               </div>
@@ -78,10 +78,10 @@
                   <label for="file-input2">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </label>
-  
+
                   <input id="file-input2" type="file" (change)="uploadImage($event, 'copy-liability-certificate')" accept="application/pdf" />
                 </div>
-  
+
               </div>
               <div class="uploader" *ngIf="loaders.copyLiabilityCertificateLoader">
                 <i class="fa fa-circle-o-notch fa-spin"></i>
@@ -90,7 +90,7 @@
             </div>
           </div>
             <div class="row">
-                    
+
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <label for="passportImage" class="custom-input-label">Driver’s License (upload a photo or scan of your driver’s license if required by DWS).</label>
                   <div class="passportImage">
@@ -100,14 +100,14 @@
                       <label for="file-input3">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       </label>
-      
+
                       <input id="file-input3" type="file" accept="image/*" (change)="uploadImage($event, 'license')"/>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="row justify-content-center mtop30">
-                  <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="col-md-3 col-sm-12 col-xs-12">
                       <label for="insuranceCertificate" class="custom-input-label hide-overflow">Upload a photo or scan of your remote pilot certificate.</label>
                     <div class="image-uploader">
                       <img *ngIf="images.PilotCertificateImage" [src]="images.PilotCertificateImage" alt="" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(images.PilotCertificateImage)">
@@ -116,13 +116,13 @@
                         <label for="file-input4">
                           <i class="fa fa-pencil" aria-hidden="true"></i>
                         </label>
-        
+
                         <input id="file-input4" type="file"  accept="image/*" (change)="uploadImage($event, 'pilot-certificate')"/>
                       </div>
                     </div>
                     <p class="aperu-mono mTop15 makeRed">{{documentInformation.value.PilotCertificateImageOrignalName}}</p>
                   </div>
-                  <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="col-md-3 col-sm-12 col-xs-12">
                       <label for="liabilityAvaition" class="custom-input-label hide-overflow">Upload a PDF copy of your most recent recurrent exam result (if applicable)</label>
                     <div class="pdf-uploader"  *ngIf="!loaders.examLoader">
                       <img src="../../../../assets/images/pdf-file.svg" alt="">
@@ -131,10 +131,10 @@
                         <label for="file-input5">
                           <i class="fa fa-pencil" aria-hidden="true"></i>
                         </label>
-        
+
                         <input id="file-input5" type="file" (change)="uploadImage($event, 'exam')" accept="application/pdf"/>
                       </div>
-        
+
                     </div>
                     <div class="uploader" *ngIf="loaders.examLoader">
                       <i class="fa fa-circle-o-notch fa-spin"></i>
@@ -183,7 +183,7 @@
                           <h3 class="mBottom25 mtop30">Achievement</h3>
                           <p>By clicking this box I acknowledge and agree that I have carefully reviewed the list of required materials, documentation and information I have provided to Drone Workforce Solutions, LLC, and the materials, documentation and information submitted and required is true and correct.</p>
                           <p>I also acknowledge and agree that I have carefully reviewed and agree to the <a class="makePink" (click)="openModal(PrivacyPolicy)"> Drone Workforce Solutions, LLC Privacy Policy .</a></p>
-                          <p>I also acknowledge and agree that I have carefully reviewed and agree to the <a class="makePink" (click)="openModal(TermsandConditions)">Drone Workforce Solutions, LLC Terms and 
+                          <p>I also acknowledge and agree that I have carefully reviewed and agree to the <a class="makePink" (click)="openModal(TermsandConditions)">Drone Workforce Solutions, LLC Terms and
                               Conditions Policy .</a> </p>
                               <p>I also acknowledge and agree that by not submitting all of the required information and documentation will cause delays in processing my application.</p>
                         </div>
@@ -199,20 +199,20 @@
                           </div>
                         </div>
                       </div>
-  
+
         </div>
       </div>
 
-  
+
     </div>
-  
+
   </div>
-  
+
   <div class="container">
       <alert type="success" *ngIf="success">
-          You data has been saved successfully
+          Your data has been saved successfully
         </alert>
-  
+
         <alert type="danger" *ngIf="error">
           Error in saving your information
         </alert>
@@ -227,18 +227,18 @@
       <div class="saveButton disableDiv" *ngIf="loading">
         <button ><i class="fa fa-circle-o-notch fa-spin"></i></button>
       </div>
-     
+
     </div>
   </div>
-  
+
 
   <ng-template #TermsandConditions class="modal fade terms-modal">
     <!--<div class="modal-dialog" role="document">-->
     <!--<div class="modal-header">
-  
+
     </div>-->
     <div class="modal-content vision-modal-content">
-  
+
       <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
         <span aria-hidden="true" style="float: right; margin-right: 10px;">&times;</span>
       </button>
@@ -249,7 +249,7 @@
         <br>
         <p style="text-align: justify;
           text-justify: inter-word;">
-  
+
           We reserve the right, in our sole discretion, to modify these Terms and Conditions and any Service fees, if
           applicable, at any time, effective upon the date we post a new set of Terms and Conditions on the data base.
           Your continued use of the data base constitutes your binding acceptance of these Terms and Conditions, including
@@ -290,7 +290,7 @@
           material, documentation and information accessible as audio and/or video streams; Use any trademarks, service
           marks or trade names incorporated into your material, documentation and information and use the likeness of any
           individual whose performance or image is contained in your material.
-  
+
           Protect your password and subscription
           You agree to provide true, accurate, current and complete information about yourself as requested in the
           registration process and to update your material, documentation and information. You may not reveal your
@@ -390,24 +390,24 @@
           implied warranties or limitation of liability for incidental or consequential damages, so the above limitations
           or exclusions may not apply to you. In such states, our liability and that of our third party content providers
           and their respective agents shall be limited to the greatest extent permitted by law.
-  
-  
+
+
         </p>
       </div>
       <div class="modal-footer">
         <button (click)="bsModalRef.hide()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-  
+
     <!--</div>-->
   </ng-template>
   <ng-template #PrivacyPolicy class="modal fade privacy-modal">
     <!--<div class="modal-dialog" role="document">-->
     <!--<div class="modal-header">
-  
+
     </div>-->
     <div class="modal-content vision-modal-content">
-  
+
       <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
         <span aria-hidden="true" style="float: right; margin-right: 10px;">&times;</span>
       </button>
@@ -510,6 +510,6 @@
         <button (click)="bsModalRef.hide()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-  
+
     <!--</div>-->
   </ng-template>

@@ -37,12 +37,10 @@ import {MessagesService} from './services/messages/messages.service';
 import { SearchPipe } from './components/pipes/search-names/search.pipe';
 import { PilotsPipe } from './components/pipes/search-pilots/pilots.pipe';
 import { PostAJobComponent } from './pages/post-a-job/post-a-job.component';
-// import { CroppieComponent } from './components/croppie/croppie.component';
 import { BsDatepickerModule,TimepickerModule } from 'ngx-bootstrap';
 import { JobService } from './services/job/job.service';
 import { JobsComponent } from './pages/admin/jobs/jobs.component';
-
-
+import { ImageCropperModule } from "ngx-image-cropper";
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +68,6 @@ import { JobsComponent } from './pages/admin/jobs/jobs.component';
     PilotsPipe,
     PostAJobComponent,
     JobsComponent,
-    // CroppieComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +78,7 @@ import { JobsComponent } from './pages/admin/jobs/jobs.component';
     DataTablesModule,
     ReactiveFormsModule,
     FormsModule,
+    ImageCropperModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot()

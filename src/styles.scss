@@ -176,7 +176,10 @@ input.custom-input:focus {
     opacity: 0;
     cursor: pointer;
   }
+.container input:checked~.checkmark1 {
+  background-color: #ff7676 !important;
 
+}
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
@@ -341,7 +344,7 @@ textarea.custom-textarea:focus {
     // width: 144px;
     // height: 143px;
     width: 104px;
-    height: 104px;
+    // height: 104px;
     border-radius: 28px;
     box-shadow: 0px 11px 46px 0px rgba(0, 0, 0, 0.2);
   }
@@ -370,7 +373,7 @@ textarea.custom-textarea:focus {
   img {
     // width: 593px;
     width: 100%;
-    height: 309px;
+    // height: 309px;
     border-radius: 28px;
     box-shadow: 0px 11px 46px 0px rgba(0, 0, 0, 0.2)
   }
@@ -511,10 +514,13 @@ div.custom-table {
 .primary-dws-button {
   background: $primary-color;
   color: $white;
-  padding: 12px 45px 12px 45px;
+  padding: 12px 25px 12px 25px;
   border-radius: 32px;
 }
-
+.btn-center{
+  display: grid;
+  justify-content: center;
+}
 .button-secondary-dws {
   background: $secondary-button-color;
   color: $white;
@@ -1229,5 +1235,31 @@ div.custom-datepicker{
   align-items: center;
   i {
     color: $delete-icon-color;
+  }
+}
+.buttons {
+
+  .btn-message {
+    background: $primary-color;
+    // background: #49cb46;
+    color: $white;
+  }
+
+  .btn-approve {
+    // background:$delete-icon-color;
+    background: #49cb46;
+    color: $white;
+  }
+
+  a {
+    margin: 20px;
+    padding: 17px 40px;
+    border-radius: 30px;
+  }
+
+  .btn-reject {
+    background: $delete-icon-color;
+    // background: #f00;
+    color: $white;
   }
 }

@@ -41,12 +41,13 @@
                       <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
                       <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
                       <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Completed</a></div>
+                      <div class="action makeCenter" *ngIf="job.JobStatus=='approved'"><a class="custom-btn green-trans">Approved</a></div>
                       <div class="action makeCenter" *ngIf="job.JobStatus=='pending'"><a class="custom-btn yellow-trans">Pending</a></div>
                       <div>{{job.PrimaryPhone}}</div>
                       <div>{{job.PilotCountry}}</div>
                       <div>{{job.PilotState}}</div>
                       <div>{{job.City}}</div>
-                      <div class="action makeCenter"><a class="manage-btn">Manage</a></div>
+                      <div class="action makeCenter"><a class="manage-btn" [routerLink]="['/admin/job',job.JobId ]">Manage</a></div>
                     </div>
                   </div>
                 </div>
@@ -90,12 +91,13 @@
                       <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
                       <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
                       <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Completed</a></div>
+                      <div class="action makeCenter" *ngIf="job.JobStatus=='approved'"><a class="custom-btn green-trans">Approved</a></div>
                       <div class="action makeCenter" *ngIf="job.JobStatus=='pending'"><a class="custom-btn yellow-trans">Pending</a></div>
                       <div>{{job.PrimaryPhone}}</div>
                       <div>{{job.PilotCountry}}</div>
                       <div>{{job.PilotState}}</div>
                       <div>{{job.City}}</div>
-                      <div class="action makeCenter"><a class="manage-btn">Manage</a></div>
+                      <div class="action makeCenter"><a [routerLink]="['/admin/job',job.JobId]" class="manage-btn">Manage</a></div>
                     </div>
                   </div>
                 </div>

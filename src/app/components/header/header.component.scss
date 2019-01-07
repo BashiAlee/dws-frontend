@@ -72,13 +72,14 @@
       .user-name {
         font-family: 'Apercu-Medium';
         font-size: 17px;
+        line-height: 1.1;
       }
 
       .user-type {
         font-family: 'Apercu-Regular';
         color: $primary-color;
         font-size: 15px;
-        margin-top: -8px !important;
+        margin-top: -3px !important;
       }
     }
   }
@@ -229,7 +230,7 @@
 }
 .custom-sidebar {
   background-color: #fff;
-  z-index: 1;
+  z-index: 3;
   position: fixed;
   width: 230px;
   top: 86px;

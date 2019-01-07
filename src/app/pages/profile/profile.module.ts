@@ -33,7 +33,7 @@ import { HttpModule } from '@angular/http';
 import { ModalModule } from 'ngx-bootstrap';
 import { CroppieModule } from '../../../angular-croppie-module/src/lib/croppie.module';
 import { AlertModule } from 'ngx-bootstrap';
-
+import { ImageCropperModule } from "ngx-image-cropper";
 
 @NgModule({
   imports: [
@@ -45,14 +45,15 @@ import { AlertModule } from 'ngx-bootstrap';
     HttpModule,
     ModalModule.forRoot(),
     CroppieModule,
+    // ImageCropperModule,
     AlertModule.forRoot()
   ],
   declarations: [
-    DocumentDeclarationComponent, 
-    ExperiencePortfolioComponent, 
-    EquipmentComponent, 
+    DocumentDeclarationComponent,
+    ExperiencePortfolioComponent,
+    EquipmentComponent,
     BusinessInformationComponent,
-     PersonalInformationComponent, 
+     PersonalInformationComponent,
     ProfileComponent
   ],
   exports: [

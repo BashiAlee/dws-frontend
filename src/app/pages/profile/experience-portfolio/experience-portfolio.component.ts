@@ -36,6 +36,7 @@ export class ExperiencePortfolioComponent implements OnInit {
   submittedVideos: any;
   updateVideos: any;
   updatePhotos: any;
+  isUploading:any=false;
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
@@ -495,6 +496,7 @@ myInputVariable: ElementRef;
   }
 
   uploadImage(file, type) {
+    console.log("this is data", file);
 
     if(type=='uploadImage') {
       this.imageFiles.uploadPorfolioImage = file;
@@ -658,6 +660,7 @@ myInputVariable: ElementRef;
 
 }
   uploadCoverImage(file, type) {
+
     if(type=='headshot') {
       this.messages.headshotImageChoosed = true;
       var target = file.target || file.srcElement
@@ -668,9 +671,6 @@ myInputVariable: ElementRef;
 
         reader.onload = (event: any) => {
           this.croppieDirective.croppie.bind({ url: event.target.result});
-          // this.headShotPicture = event.target.result
-          // this.displayPicture = event.target.result;
-
         }
         reader.readAsDataURL(file.target.files[0]);
       }
@@ -800,8 +800,8 @@ myInputVariable: ElementRef;
   }
 
   public croppieOptions: Croppie.CroppieOptions = {
-    boundary: { width: 250, height: 250 },
-    viewport: { width: 200, height: 200 },
+    boundary: { width: 200, height: 200 },
+    viewport: { width: 160, height: 160 },
 
     enableOrientation: true,
   };

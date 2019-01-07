@@ -1,9 +1,7 @@
 @import '../../../../variables';
 
-.experience-portfolio-info-details {
+.experience-portfolio {
     padding-top: 45px;
-
-
   .user-name {
     font-family: 'Apercu-Medium';
     text-transform: capitalize;
@@ -11,7 +9,6 @@
     margin-top: 32px;
   }
   .user-id {
-    
     text-transform: uppercase;
     color: $primary-color;
     border: 1px solid $p-color;
@@ -23,10 +20,10 @@
   .user-description {
     font-family: 'Apercu-Regular';
     color: $p-color;
-    font-size: 14px;
+    font-size: 15px;
   }
-
   .custom-input-label {
     color: $input-label;
   }
-}
+
+  }

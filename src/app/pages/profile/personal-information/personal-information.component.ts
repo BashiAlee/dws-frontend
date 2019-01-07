@@ -212,7 +212,6 @@ export class PersonalInformationComponent implements OnInit {
   save() {
     this.success = false;
     this.error = false;
-    // console.log(this.personalInformation.value)
     this.loading = true;
 
     // delete this.personalInformation.value.Users.MemberId

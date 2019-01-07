@@ -230,7 +230,6 @@
 @media only screen and (max-width:480px){
 
     div.rightContent {
-        justify-content: center !important;
         margin-right: 5px !important;
         div.dropdown-details {
             button.toggler {
@@ -245,9 +244,11 @@
                 margin-right: 19px !important;
             }
             .toggle-button {
-              margin-right: -32px;
+                 margin-right: 60px;
+                 padding-left: 5px;
             }
         }
+
 
         div.profile-section {
             .detail {
@@ -329,6 +330,9 @@
   }
 }
 @media screen and (max-width: 330px){
+div.rightContent div.main-notification .toggle-button {
+  margin-right: 15px !important;
+}
   div.entries-selector{
     .selector-input-container{
       padding: 9px 11px 9px 17px;

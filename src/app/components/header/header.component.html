@@ -1,4 +1,4 @@
-<nav class="header navbar navbar-dark bg-dark flex-md-nowrap p-0 custom-navbar">
+<!-- <nav class="header navbar navbar-dark bg-dark flex-md-nowrap p-0 custom-navbar">
   <div class="search-bar">
     <div class="input-group">
       <span class="input-group-append">
@@ -135,67 +135,125 @@
       </div>
 
   </div>
-  <!-- <div class="input-group col-md-6">
-    <span class="input-group-append">
-      <div class="input-group-text bg-transparent border-0"><i class="fa fa-search"></i></div>
-    </span>
-    <input class="form-control py-2" type="search" value="search" id="example-search-input">
+</nav> -->
+
+<nav class="header navbar navbar-dark bg-dark flex-md-nowrap p-0 custom-navbar">
+  <div class="search-bar">
+    <div class="input-group">
+      <span class="input-group-append">
+        <div class="input-group-text bg-transparent border-0"><i class="fa fa-search"></i></div>
+      </span>
+      <input class="form-control py-2" type="search" placeholder="Search your dashboard" id="example-search-input">
+    </div>
   </div>
 
+  <div class="rightContent">
+    <div class="main-notification">
+      <span class="nav-pipes toggle-button d-sm-block d-md-none" (click)="openMenu()">
+        <i class="fa fa-bars" aria-hidden="true">
+          <div class="notify-icon-red"></div>
+        </i>
+      </span>
+          <div class="messages">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+            </a>
+            <div class="dropdown-menu notification-dropdown dropdown-menu-right wow fadeInDown">
+              <ul class="drop-content">
+                <div *ngIf="userInfo.Role == 'admin'">
+                  <li class="align-text" *ngFor="let message of adminAllMessages">
+                    <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
+                    <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png"
+                        alt=""></div>
+                    <div class="detail" [routerLink]="['communication']">
+                      <h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
+                      <p>has message for you.</p>
+                    </div>
+                  </li>
+                  <li class="align-text" *ngIf="adminAllMessages && !adminAllMessages.length">
+                    <p>No Messages</p>
 
-  <div class="col-md-6 row main-notification">
+                  </li>
+                </div>
+                <li class="align-text" *ngFor="let message of currentUserMessages">
+                  <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
+                  <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png"
+                      alt=""></div>
+                  <div class="detail" [routerLink]="['communication']">
+                    <h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
+                    <p>has message for you.</p>
+                  </div>
+                </li>
+                <li class="align-text" *ngIf="currentUserMessages && !currentUserMessages.length">
+                  <div class="detail">
+                    <p>No Messages</p>
+                  </div>
+                </li>
+              </ul>
+              <div class="notify-drop-footer text-center" [routerLink]="['communication']">
+                <a> See All Messages > </a>
+              </div>
+            </div>
+            <div class="notify-icon blue"></div>
+          </div>
+          <div class="notification">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+            </a>
+            <div class="dropdown-menu notification-dropdown dropdown-menu-right wow fadeInDown">
+              <ul class="drop-content">
+                <li class="align-text">
+                  <div class="notify-img"><img src="../../../assets/images/avatar.png" alt=""></div>
+                  <div class="detail">
+                    <h5>Bellashihair</h5>
 
-    <div class="col-md-2 notification">
-      <div class="row">
+                    <p>Started Following you.</p>
+                  </div>
+                </li>
+                <li class="align-text">
+                  <div class="notify-img"><img src="../../../assets/images/avatar.png" alt=""></div>
+                  <div class="detail">
+                    <h5>Bellashihair</h5>
 
-        <div class="col-md-4">
-          <a href="#">
-            <i class="fa fa-envelope-o"></i>
-          </a>
-          <div class="notify-icon blue"></div>
-        </div>
-        <div class="col-md-6">
-          <a href="#">
-            <i class="fa fa-bell-o"></i>
-          </a>
-          <div class="notify-icon pink"></div>
-        </div>
+                    <p>Started Following you.</p>
+                  </div>
+                </li>
+              </ul>
+              <div class="notify-drop-footer text-center">
+                <a href=""> See All Notification > </a>
+              </div>
+            </div>
+            <div class="notify-icon pink"></div>
+          </div>
+    </div>
+    <div class="profile-section">
+      <div class="picture">
+        <img *ngIf="userInfo.ProfileImage" [src]="userInfo.ProfileImage" alt="dp">
+        <img *ngIf="!userInfo.ProfileImage" src="../../../assets/images/avatar.png" alt="dp">
+      </div>
+
+      <div class="detail">
+        <p class="user-name">{{userInfo.FirstName+' '+userInfo.LastName}}</p>
+        <p class="user-type">{{userInfo.Role}}</p>
       </div>
     </div>
 
-    <div class="col-md-3">
-      <div class="row">
-        <div class="col-md-4">
-          <img src="https://www.w3schools.com/bootstrap/sanfran.jpg" class="rounded shadow profile-pic" alt="Cinque Terre">
-        </div>
-        <div class="col-md-8">
-          <div class="col-md-12">
-            <strong>John Doe</strong>
-          </div>
-          <div class="col-md-12">
-            <a href="#"> Pilot</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="dropdown">
-        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
+    <div class="dropdown-details">
+      <div class="btn-group dropdown-button">
+        <button type="button" class="dropdown-toggle toggler" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="dropdown-item" type="button">Action</button>
-          <button class="dropdown-item" type="button">Another action</button>
-          <button class="dropdown-item" type="button">Something else here</button>
+        <div class="dropdown-menu dropdown-menu-right">
+
+          <button class="dropdown-item" type="button" (click)="authService.logout()">Logout</button>
         </div>
       </div>
     </div>
 
-  </div> -->
-
+  </div>
 </nav>
-<div class="custom-sidebar" *ngIf="isNavOpen">
+
+<div class="custom-sidebar" id="mobile-menu" *ngIf="isNavOpen">
   <!-- Sidebar -->
   <nav class="sidebar" [class.collapsingSideBar]="!isNavOpen">
     <ul class="list-unstyled components">
@@ -207,14 +265,14 @@
         </a>
       </li>
       <li class="nav-item" [ngClass]="(role =='customer')?'nav-item notAvailable':'nav-item'">
-        <a class="nav-link" [routerLink]="['profile',id]" [routerLinkActive]="['active-sidebarlink']">
+        <a class="nav-link" [routerLink]="['profile',id]" (click)="hideDropdown()" [routerLinkActive]="['active-sidebarlink']">
           <span><i class="fa fa-user-o" aria-hidden="true"></i>
             <span class="inner-item" *ngIf="isNavOpen">Profile</span>
           </span>
         </a>
       </li>
       <li class="nav-item" [ngClass]="(role =='customer')?'nav-item':'nav-item notAvailable'">
-        <a class="nav-link" [routerLinkActive]="['active-sidebarlink']" [routerLink]="['jobs']">
+        <a class="nav-link" (click)="hideDropdown()" [routerLinkActive]="['active-sidebarlink']" [routerLink]="['jobs']">
           <span class="user-list"><i class="fa fa-users"></i>
             <span class="inner-item" *ngIf="isNavOpen">Jobs</span>
             <span *ngIf="isNavOpen" class="badge-value">3</span>
@@ -224,13 +282,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['communication']" [routerLinkActive]="['active-sidebarlink']">
+        <a class="nav-link" (click)="hideDropdown()"  [routerLink]="['communication']" [routerLinkActive]="['active-sidebarlink']">
           <span><i class="fa fa-comment-o"></i>
             <span class="inner-item" *ngIf="isNavOpen">Communications</span></span>
         </a>
       </li>
       <li class="nav-item notAvailable" [ngClass]="(role =='customer')?'nav-item notAvailable':'nav-item'">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="#" (click)="hideDropdown()">
           <span><i class="fa fa-calendar" aria-hidden="true"></i>
             <span class="inner-item" *ngIf="isNavOpen">Job Calendar</span>
           </span>
@@ -240,3 +298,5 @@
   </nav>
 
 </div>
+
+

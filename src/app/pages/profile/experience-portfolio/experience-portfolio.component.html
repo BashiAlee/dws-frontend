@@ -1,10 +1,10 @@
-<div class="container makeBgWhite mBottom20" [formGroup]="experiencePorfolioInformation" [class.disableDiv]="isAdmin">  
+<div class="container makeBgWhite mBottom20" [formGroup]="experiencePorfolioInformation" [class.disableDiv]="isAdmin">
     <div class="personal-information">
       <div class="experience-portfolio-info-details makeCenter">
         <p class="user-name">Experience &amp; Work Portfolio</p>
         <p class="user-description">Please provide information regarding your experience and work portfolio</p>
       </div>
-  
+
       <div class="user-personal-info">
         <div class="container">
               <div class="row">
@@ -46,7 +46,7 @@
                       <input type="radio" formControlName="TravelOutsideUs" value='1'>
                       <span class="checkmark"></span>
                     </label>
-      
+
                     <label class="container">No
                       <input type="radio" formControlName="TravelOutsideUs" value='0'>
                       <span class="checkmark"></span>
@@ -64,7 +64,7 @@
                             <input type="radio" formControlName="ValidPassport" value='1'>
                             <span class="checkmark"></span>
                           </label>
-            
+
                           <label class="container">No
                             <input type="radio" formControlName="ValidPassport" value='0'>
                             <span class="checkmark"></span>
@@ -73,44 +73,30 @@
                       </div>
                 </div>
 
-                <div class="row justify-content-start">
-                    
+                <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">
-                        <label for="passportImage" class="custom-input-label"> If DWS requires you to upload a copy of your passport, please do so here</label>
+                      <label for="passportImage" class="custom-input-label"> If DWS requires you to upload a copy of your passport, please do so here</label>
                       <div class="passportImage">
                         <img *ngIf="images.PassportImage" [src]="images.PassportImage" alt="" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(images.PassportImage)">
                         <img *ngIf="!images.PassportImage" src="../../../../assets/images/image-placeholder.png" alt="">
-                        
                         <div class="image-upload">
                           <label for="file-input">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                           </label>
-          
                           <input id="file-input" type="file" (change)="uploadImage($event,'passport-pic')"/>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                      <h1 class="form-heading noPadding makeBlock mtop30 mBottom25">Headshot &amp; Personal Photo upload</h1>
+                    <h1 class="form-heading noPadding makeBlock mtop30 mBottom25">Headshot &amp; Personal Photo upload</h1>
                     <div class="col-md-3 col-sm-12 col-xs-12">
-                      <!-- <div class="displayPicture">
-                        <img *ngIf="images.HeadshotImage" [src]="images.HeadshotImage" alt="">
-                        <img *ngIf="!images.HeadshotImage" src="../../../../assets/images/avatar.png" alt="">
-                        <div class="image-upload">
-                          <label for="file-input2">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                          </label>
-          
-                          <input id="file-input2" type="file" (change)="uploadImage($event,'headshot')"/>
-                        </div>
-                      </div> -->
-                      <div class="displayPictureTop">
+                      <div class="displayPictureTop" >
                           <div class="displayPicture">
                             <img *ngIf="messages.headshotImageChoosed" [src]="croppedImageHeadShot" class="croppedImageDiv" />
                             <img *ngIf="headShotPicture && !messages.headshotImageChoosed" [src]="headShotPicture" alt="Display picture" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(headShotPicture)">
                             <img *ngIf="!headShotPicture && !messages.headshotImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
-                            <div class="image-upload">
+                              <div class="image-upload" *ngIf="!messages.personalImageChoosed" >
                               <label for="file-input2">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                               </label>
@@ -124,31 +110,20 @@
                           <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event,'headshot')" *ngIf="messages.headshotImageChoosed" />
                           <button class="btn crop-btn" *ngIf="messages.headshotImageChoosed && !messages.uploadingHeadShotImage" (click)="uploadCroppedImage(croppedImageData, 'headshot')">Crop &amp; Save</button>
                           <div>
-                
+
                           </div>
-                
+
                         </div>
                       <p class="aperu-medium mTop15">Head Shot</p>
                     </div>
+
                     <div class="col-md-3 col-sm-12 col-xs-12">
-                      <!-- <div class="displayPicture">
-                        <img *ngIf="images.OtherPersonalImage" [src]="images.OtherPersonalImage" alt="">
-                        <img *ngIf="!images.OtherPersonalImage" src="../../../../assets/images/avatar.png" alt="">
-                        <div class="image-upload">
-                          <label for="file-input3">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                          </label>
-          
-                          <input id="file-input3" type="file" (change)="uploadImage($event,'personal-pic')"/>
-                        </div>
-          
-                      </div> -->
                       <div class="displayPictureTop">
                           <div class="displayPicture">
                             <img *ngIf="messages.personalImageChoosed" [src]="croppedPersonalPicture" class="croppedImageDiv" />
                             <img *ngIf="personalPicture && !messages.personalImageChoosed" [src]="personalPicture" alt="Display picture" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(personalPicture)">
                             <img *ngIf="!personalPicture && !messages.personalImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
-                            <div class="image-upload">
+                            <div class="image-upload" *ngIf="!messages.headshotImageChoosed">
                               <label for="file-input3">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                               </label>
@@ -159,54 +134,23 @@
                             <label for="pic" class="uploader" *ngIf="messages.uploadingPersonalImage"><i class="fa fa-circle-o-notch fa-spin"></i>
                             </label>
                           </div>
-                          <img #croppie1="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event,'other-personal')" *ngIf="messages.personalImageChoosed" />
+                          <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event,'other-personal')" *ngIf="messages.personalImageChoosed" />
                           <button class="btn crop-btn" *ngIf="messages.personalImageChoosed && !messages.uploadingPersonalImage" (click)="uploadCroppedImage(croppedImageData, 'other-personal')">Crop &amp; Save</button>
                           <div>
-                
+
                           </div>
-                
+
                         </div>
                       <p class="aperu-medium mTop15">Other Personal Picture</p>
                     </div>
-                    <!-- <p class="errorMsg makeBlock mtop30">We Suggest you to Upload a Square Images</p> -->
                   </div>
-          <!-- <div class="row justify-content-center">
-            <div class="col-md-3 makeCenter">
-                
-              <div class="displayPicture">
-                <img src="../../../../assets/images/avatar.png" alt="">
-                <div class="image-upload">
-                  <label for="file-input">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                  </label>
-  
-                  <input id="file-input" type="file" />
-                </div>
-              </div>
-              <p class="aperu-medium mTop15">Business Logo (Primary)</p>
-            </div>
-            <div class="col-md-3 makeCenter">
-              <div class="displayPicture">
-                <img src="../../../../assets/images/avatar.png" alt="">
-                <div class="image-upload">
-                  <label for="file-input">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                  </label>
-  
-                  <input id="file-input" type="file" />
-                </div>
-  
-              </div>
-              <p class="aperu-medium mTop15">Business Logo (Secondary)</p>
-            </div>
-          </div> -->
           <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                   <h1 class="form-heading noPadding">Social/Professional Platforms</h1>
                   <!-- <label for="validPassport" class="custom-input-label">If you don’t have any of the listed platform presence. Please leave that field empty.</label> -->
                 </div>
           </div>
-        
+
             <div class="row">
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
@@ -294,8 +238,8 @@
                         <div class="col-md-6 col-sm-12 col-xs-12">
                           <h4 class="aperu-regular makeBlue">Photographs</h4>
                         </div>
-              
-                        <div class="col-md-6 col-sm-12 col-xs-12">
+
+                        <div class="col-md-6 col-sm-12 col-xs-12 btn-center">
                          <button class="primary-dws-button aperu-regular pull-right" (click)="togglePhotos()">Upload Your Photo</button>
                         </div>
                       </div>
@@ -312,7 +256,7 @@
                                     </div>
                                 </div>
                               </div>
-                    
+
                               <div class="col-md-4 col-sm-6 col-xs-12" *ngIf="!updatePhotos">
                                 <div class="form-group">
                                   <label for="serialnumber" class="custom-input-label">Upload your Photo </label>
@@ -323,7 +267,7 @@
                                     </div> -->
                                 </div>
                               </div>
-                    
+
                               <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                   <label for="Description" class="custom-input-label">Description</label>
@@ -335,10 +279,10 @@
                                 </div>
                               </div>
                             </div>
-                    
+
                             <div class="row">
                               <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
-                                  
+
                                 <button *ngIf="!updatePhotos && !loaders.addPhotoLoader"class="button-secondary-dws" (click)="addPortfolioImageVideo('Image')">Add Photo</button>
                                 <button *ngIf="updatePhotos && !loaders.addPhotoLoader"class="button-secondary-dws" (click)="updatePhotosByID()">Update Photo</button>
                                 <button *ngIf="loaders.addPhotoLoader"class="button-secondary-dws disableDiv"><i class="fa fa-circle-o-notch fa-spin"></i></button>
@@ -377,10 +321,10 @@
                       <div class="row imageGallery" *ngIf="imagesList && !imagesList.length && !loaders.PhotosLoader">
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <p>No Images Exist</p>
-   
+
                           </div>
 
-                
+
                       </div>
 
                       <div class="row  mBottom20 mtop30">
@@ -388,8 +332,8 @@
                             <h4 class="aperu-regular makeBlue">Videos</h4>
                             <!-- <label for="validPassport" class="custom-input-label">You can add Youtube &amp; Vimeo Links along with the Title & Description.</label> -->
                           </div>
-                
-                          <div class="col-md-6 col-sm-12 col-xs-12">
+
+                            <div class="col-md-6 col-sm-12 col-xs-12 btn-center">
                            <button class="primary-dws-button aperu-regular pull-right" (click)="toggleVideo()">Link Video</button>
                           </div>
                         </div>
@@ -406,7 +350,7 @@
                                       </div>
                                   </div>
                                 </div>
-                      
+
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                   <div class="form-group">
                                     <label for="serialnumber" class="custom-input-label">Video Link</label>
@@ -417,7 +361,7 @@
                                       </div>
                                   </div>
                                 </div>
-                      
+
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                   <div class="form-group">
                                     <label for="Description" class="custom-input-label">Description</label>
@@ -429,10 +373,10 @@
                                   </div>
                                 </div>
                               </div>
-                      
+
                               <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 makeCenter">
-                                    
+
                                   <button *ngIf="!updateVideos && !loaders.addVideoLoader"class="button-secondary-dws" (click)="addPortfolioImageVideo('Video')">Add Video</button>
                                   <button *ngIf="updateVideos && !loaders.addVideoLoader"class="button-secondary-dws" (click)="updateVideoByID()">Update Video</button>
                                   <button *ngIf="loaders.addVideoLoader"class="button-secondary-dws disableDiv"><i class="fa fa-circle-o-notch fa-spin"></i></button>
@@ -440,14 +384,14 @@
                               </div>
                               <div class="seperator"></div>
                         </div>
-        
+
                         <div class="row imageGallery"  *ngIf="videosList && videosList.length && !loaders.VideosLoader">
                           <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let videos of videosList">
                             <div class="thumb-img">
-                             <div [class.enableDiv]="isAdmin"> 
-                         
+                             <div [class.enableDiv]="isAdmin">
+
                                <iframe [src]="sanitize.bypassSecurityTrustResourceUrl(videos.Path)" style="width: 100%;" frameborder="0" allowfullscreen></iframe>
-            
+
                               </div>
                             </div>
                             <div class="thumb-title makeBlue mTop15"><p>{{videos.Title}}</p></div>
@@ -460,7 +404,7 @@
                                   <i class="fa fa-trash-o" aria-hidden="true" (click)="openModalWithClass(delete,videos.ID)"></i>
                               </div>
                             </div>
-  
+
                           </div>
                         </div>
                         <div class="row" *ngIf="loaders.VideosLoader">
@@ -472,25 +416,25 @@
                         <div class="row imageGallery" *ngIf="videosList && !videosList.length && !loaders.VideosLoader">
                           <div class="col-md-3 col-sm-6 col-xs-12">
                             <p>No Videos Exist</p>
-     
+
                             </div>
-  
-                  
+
+
                         </div>
-   
-  
+
+
         </div>
       </div>
-  
+
     </div>
-  
+
   </div>
-  
+
   <div class="container">
       <alert type="success" *ngIf="success">
-          You data has been saved successfully
+          Your data has been saved successfully
         </alert>
-  
+
         <alert type="danger" *ngIf="error">
           Error in saving your information
         </alert>
@@ -505,10 +449,10 @@
       <div class="saveButton disableDiv" *ngIf="loading">
         <button ><i class="fa fa-circle-o-notch fa-spin"></i></button>
       </div>
-    
+
     </div>
   </div>
-  
+
 
   <ng-template #delete>
     <div class="modal-header">
@@ -521,10 +465,10 @@
       <h3>Are you Sure, You want to delete this entry?</h3>
       <p>You will not be able to restore this back</p>
     </div>
-  
-  
+
+
     <div class="round-logo">
-  
+
       <img src="../../../../assets/icons/warning.png" alt="success icon">
     </div>
     <div class="footer-content alignButton">

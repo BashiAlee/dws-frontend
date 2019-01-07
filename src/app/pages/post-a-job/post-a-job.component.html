@@ -1,40 +1,51 @@
-<div class="topContent makeCenter" >
+<div class="topContent makeCenter" *ngIf="!isAdmin" >
   <h1 class="pb0">Post a Job</h1>
   <p class="p1">You can post a live job or you can ask for a quote. DWS will then react to your request accordingly.</p>
   <a class="custom-link" href="#">Learn More</a>
 </div>
+<div class="topContent" *ngIf="isAdmin">
+  <h1>Review Jobs</h1>
+  <p>Review Jobs and Let Customer/Pilot know if they are missing
+    something important!</p>
+</div>
+<div class="buttons makeCenter mBottom25" *ngIf="isAdmin">
+<a class="btn-approve profile-buttons" (click)="changeJobStatus('approved')">Approve</a>
+  <!-- <a class="btn-approve"><i class="fa fa-circle-o-notch fa-spin"></i></a> -->
+  <a class="btn-message profile-buttons" [routerLink]="['/admin/communication']">Send a Message</a>
+<a class="btn-reject  profile-buttons" (click)="changeJobStatus('archived')">Reject</a>
+  <!-- <a class="btn-reject"><i class="fa fa-circle-o-notch fa-spin"></i></a> -->
+</div>
 
 
+<form [formGroup]="jobInformation" [class.disableDiv]="isAdmin">
 
-<form [formGroup]="jobInformation">
-
-        <div class="custom-checkbox">
-          <label class="container">
-            <span class="checkbox-txt">Request a Quote</span>
-            <input type="checkbox" formControlName="IsQuote">
-            <p class="checkmark mark"></p>
-            <p><label class="custom-input-label">Leave it un-checked if you're posting a job which you don't require a quote for.</label></p>
-          </label>
-        </div>
+<div class="custom-checkbox ">
+    <label class="container">
+      <span class="checkbox-txt">Request a Quote</span>
+      <input type="checkbox" formControlName="IsQuote">
+<p class="checkmark checkmark1 mark"></p>
+      <p><label class="custom-input-label">Leave it un-checked if you're posting a job which you don't require a quote for.</label></p>
+    </label>
+  </div>
 
 
-  <div class="container makeBgWhite mBottom20 pt20" [class.disableDiv]="isAdmin">
+  <div class="container makeBgWhite mBottom20 pt20">
     <div class="personal-information">
       <div class="user-personal-info">
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
-                <label for="firstName" class="custom-input-label">Title of the Job*</label>
-                <input type="text" class="form-control custom-input" id="firstName" aria-describedby="firstName"
+                <label for="jobTitle" class="custom-input-label">Title of the Job*</label>
+                <input type="text" class="form-control custom-input" id="jobTitle" aria-describedby="jobTitle"
                   formControlName="JobTitle" placeholder="e.g Cover our corporate event">
-                <!-- <div *ngIf="form.Users.controls.FirstName.invalid && (form.Users.controls.FirstName.dirty || form.Users.controls.FirstName.touched)"
+                <!-- <div *ngIf="form.Users.controls.JobTitle.invalid && (form.Users.controls.JobTitle.dirty || form.Users.controls.JobTitle.touched)"
                   class="invalid-feedback">
-                  <div *ngIf="form.Users.controls.FirstName.errors.required">First Name is required</div>
+                  <div *ngIf="form.Users.controls.JobTitle.errors.required">First Name is required</div>
                 </div> -->
               </div>
               <div class="form-group">
-                <label for="Industry" class="custom-input-label">Select Industry</label>
+                <label for="industry" class="custom-input-label">Select Industry</label>
                 <ng-select class="custom-select1" formControlName="Industry" placeholder="Select" [searchable]="false">
                   <ng-option *ngFor="let industry of industriesList" [value]="industry.name">{{industry.name}}</ng-option>
                 </ng-select>
@@ -45,7 +56,7 @@
             </div>
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
-              <label for="firstName" class="custom-input-label">Additional request/Comments</label>
+              <label for="comments" class="custom-input-label">Additional request/Comments</label>
                 <textarea class="form-control custom-textarea" placeholder="Comments" formControlName="Comments"></textarea>
                 <!-- <div *ngIf="form.Notes.invalid && (form.Notes.dirty || form.Notes.touched)" class="invalid-feedback">
                   <div *ngIf="form.Notes.errors.required">Notes is required</div>
@@ -55,12 +66,12 @@
 
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
-                <label for="lastName" class="custom-input-label">Budget</label>
-                <input type="number" class="form-control custom-input" id="lastName" aria-describedby="lastName"
+                <label for="budget" class="custom-input-label">Budget</label>
+                <input type="number" class="form-control custom-input" id="budget" aria-describedby="budget"
                   formControlName="Budget" placeholder="Enter your budget $">
-                <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                <!-- <div *ngIf="form.Users.controls.budget.invalid && (form.Users.controls.budget.dirty || form.Users.controls.budget.touched)"
                   class="invalid-feedback">
-                  <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
+                  <div *ngIf="form.Users.controls.budget.errors.required">Last Name is required</div>
                 </div> -->
               </div>
             </div>
@@ -73,7 +84,7 @@
 
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
-                <label for="lastName" class="custom-input-label">Expected Deliverables</label>
+                <label for="expectedDeliverables" class="custom-input-label">Expected Deliverables</label>
                 <ng-select class="custom-select1" formControlName="ExpectedDeliverables" [searchable]="true"  placeholder="Select From pre-established deliverables">
                   <ng-option *ngFor="let deliverables of expectedDeliverables" [value]="deliverables.name">{{deliverables.name}}</ng-option>
                 </ng-select>
@@ -86,21 +97,21 @@
 
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <label for="lastName" class="custom-input-label">Type your own Deliverables (Separated by Commas)</label>
-                  <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
+                  <label for="ownDeliverables" class="custom-input-label">Type your own Deliverables (Separated by Commas)</label>
+                  <input type="text" class="form-control custom-input" id="ownDeliverables" aria-describedby="ownDeliverables"
                     formControlName="OwnDeliverables"  (input)="addToTagList(jobInformation.value.OwnDeliverables)">
                   <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
                     class="invalid-feedback">
                     <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
                   </div> -->
                 </div>
-      
+
                 <div class="chip" *ngFor="let tags of tagsArray">
                     {{tags}}
                     <!-- <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span> -->
                   </div>
               </div>
-             
+
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <label for="date" class="custom-input-label">Equipment Preferences</label>
                 <div class="row">
@@ -112,7 +123,7 @@
                       <input id="radio2" name="radio" type="radio" [value]="'no'" [(ngModel)]="IsEquipmentPref" [ngModelOptions]="{standalone: true}"/>
                       <label for="radio2">n</label><span>No</span>
                     </div>
-                </div>              
+                </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group mTop15">
@@ -135,36 +146,36 @@
                     <input id="radio4" name="radio1" type="radio" [value]="'range'" [(ngModel)]="IsParticularDate" [ngModelOptions]="{standalone: true}"/>
                     <label for="radio4" class="p16"></label><span class="mt3">Date Range</span>
                   </div>
-                </div>              
+                </div>
               </div>
 
               <div formGroupName="DateRanges" class="col-md-12 col-sm-12 col-xs-12" *ngIf="IsParticularDate=='particular'">
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12">
-                        <label for="lastName" class="custom-input-label mBottom25">Date*</label>
+                        <label for="fromDate" class="custom-input-label mBottom25">Date*</label>
                         <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp1="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
                         <span (click)="setOptions('1')" class="date-icon"><i class="fa fa-calendar"></i></span>
                       </div>
                       <div class="col-md-3 col-sm-6 col-xs-12 blue-txt">
-                        <label for="lastName" class="custom-input-label">From</label>
+                        <label for="from" class="custom-input-label">From</label>
                         <timepicker formControlName="From"></timepicker>
                       </div>
                       <div class="col-md-3 col-sm-6 col-xs-12 blue-txt">
-                        <label for="lastName" class="custom-input-label">To</label>
+                        <label for="to" class="custom-input-label">To</label>
                         <timepicker formControlName="To"></timepicker>
                     </div>
                 </div>
               </div>
-              
+
               <div formGroupName="DateRanges" class="col-md-12 col-sm-12 col-xs-12" *ngIf="IsParticularDate=='range'">
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12">
-                        <label for="lastName" class="custom-input-label mBottom25">From Date*</label>
+                        <label for="fromDate" class="custom-input-label mBottom25">From Date*</label>
                         <input placeholder="8/10/2018" formControlName="FromDate" class="form-control custom-input mTop30" #dp2="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
                         <span (click)="setOptions('2')" class="date-icon"><i class="fa fa-calendar"></i></span>
                       </div>
                       <div class="col-md-4 col-sm-12 col-xs-12">
-                        <label for="lastName" class="custom-input-label mBottom25">To Date*</label>
+                        <label for="toDate" class="custom-input-label mBottom25">To Date*</label>
                         <input placeholder="8/10/2018" formControlName="ToDate" class="form-control custom-input mTop30" #dp3="bsDatepicker" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'custom-datepicker' }" bsDatepicker>
                         <span (click)="setOptions('3')" class="date-icon"><i class="fa fa-calendar"></i></span>
                       </div>
@@ -176,8 +187,8 @@
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                  <label for="lastName" class="custom-input-label">Address line 1</label>
-                  <input type="text" class="form-control custom-input" placeholder="Enter Address line 1" id="lastName" aria-describedby="lastName"
+                  <label for="addressLine1" class="custom-input-label">Address line 1</label>
+                  <input type="text" class="form-control custom-input" placeholder="Enter Address line 1" id="addressLine1" aria-describedby="addressLine1"
                     formControlName="AddressLine1">
                   <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
                     class="invalid-feedback">
@@ -186,7 +197,7 @@
                 </div>
               </div>
 
-              
+
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label for="lastName" class="custom-input-label">Address line 2</label>
@@ -201,7 +212,7 @@
 
               <div class="col-md-4 col-sm-12 col-xs-12">
                   <div class="form-group">
-                  <label for="lastName" class="custom-input-label">Country</label>
+                  <label for="country" class="custom-input-label">Country</label>
                   <ng-select  class="custom-select1" formControlName="Country" [searchable]="true" (change)="getStatesByCode('physical',jobInformation.value.Country, 'change')">
                     <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
                   </ng-select>
@@ -212,8 +223,8 @@
               </div>
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="form-group">
-                  <label for="lastName" class="custom-input-label">City</label>
-                  <input type="text" class="form-control custom-input" placeholder="Wilimington" aria-describedby="lastName"
+                  <label for="city" class="custom-input-label">City</label>
+                  <input type="text" class="form-control custom-input" placeholder="Wilimington" aria-describedby="city"
                     formControlName="City">
                   <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
                     class="invalid-feedback">
@@ -235,7 +246,7 @@
               <div class="col-md-4 col-sm-6 col-xs-12">
                   <div class="form-group">
                     <label for="Zip" class="custom-input-label">Zip</label>
-                    <input type="number" class="form-control custom-input" placeholder="44000" aria-describedby="lastName"
+                    <input type="number" class="form-control custom-input" placeholder="44000" aria-describedby="zip"
                       formControlName="Zip">
                     <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
                       class="invalid-feedback">
@@ -249,21 +260,21 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
-                    <label for="lastName" class="custom-input-label">Primary Email</label>
-                    <input type="email" formControlName="PrimaryEmail" placeholder="Enter Primary Email" class="form-control custom-input" id="lastName" aria-describedby="lastName">
-                    
+                    <label for="primaryEmail" class="custom-input-label">Primary Email</label>
+                    <input type="email" formControlName="PrimaryEmail" placeholder="Enter Primary Email" class="form-control custom-input" id="primaryEmail" aria-describedby="primaryEmail">
+
                     <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
                       <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
                     </div> -->
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                </div>     
-                
+                </div>
+
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
-                    <label for="lastName" class="custom-input-label">Primary Phone</label>
-                    <input type="number" formControlName="PrimaryPhone" placeholder="Enter Primary Phone" class="form-control custom-input" id="lastName" aria-describedby="lastName">
+                    <label for="primaryPhone" class="custom-input-label">Primary Phone</label>
+                    <input type="number" formControlName="PrimaryPhone" placeholder="Enter Primary Phone" class="form-control custom-input" id="primaryPhone" aria-describedby="primaryPhone">
                     <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
                       <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
                     </div> -->
@@ -271,8 +282,8 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
-                    <label for="lastName" class="custom-input-label">Secondary Phone</label>
-                    <input type="number" formControlName="SecondaryPhone" placeholder="Enter Secondary Phone" class="form-control custom-input" id="lastName" aria-describedby="lastName">
+                    <label for="secondaryPhone" class="custom-input-label">Secondary Phone</label>
+                    <input type="number" formControlName="SecondaryPhone" placeholder="Enter Secondary Phone" class="form-control custom-input" id="secondaryPhone" aria-describedby="secondaryPhone">
                     <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
                       <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
                     </div> -->
@@ -303,30 +314,14 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-12 removeIcon">
-                  <a (click)="removeParticularData(i)"><i class="fas fa-trash"></i></a>
+                  <a (click)="removeParticularData(i)"><i class="fa fa-trash"></i></a>
                 </div>
-                
+
                 </div>
               </div>
-                <!-- <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="form-group">
-                        <label for="name" class="custom-input-label">Name</label>
-                        <input type="text" formControlName="ParticularName" placeholder="Enter Name" class="form-control custom-input" id="lastName" aria-describedby="lastName">
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div class="form-group">
-                        <label for="number" class="custom-input-label">Number</label>
-                        <input type="number" formControlName="ParticularNumber" placeholder="Enter Number" class="form-control custom-input" id="lastName" aria-describedby="lastName">
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
           </div>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 
@@ -343,6 +338,6 @@
         shortly. Login to DWS Job Portal and manage your
         job better.</p>
   </div>
-  
+
 </form>
 

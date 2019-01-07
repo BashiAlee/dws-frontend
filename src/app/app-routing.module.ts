@@ -127,6 +127,7 @@ const routes: Routes = [{
         component: PostAJobComponent,
         pathMatch: 'full'
       },
+
     ]
   },
   {
@@ -164,6 +165,11 @@ const routes: Routes = [{
         path: 'jobs-list',
         component: JobsComponent,
         canActivate: [AdminAuthGuard]
+      },
+      {
+        path: 'job/:id',
+        component: PostAJobComponent,
+        pathMatch: 'full'
       },
 
     ]
