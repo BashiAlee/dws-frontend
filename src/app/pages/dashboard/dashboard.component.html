@@ -1,3 +1,173 @@
-<p>
-  dashboard works!
-</p>
+<div class="pilot-dashboard" *ngIf="role=='pilot'">
+  <div class="top-content makeCenter">
+    <h1 class="heading1">Dashboard</h1>
+    <p class="description1">All of the details related to this job will be here</p>
+  </div>
+  <div class="container">
+    <div class="row mTop50">
+      <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
+        <div class="box">
+          <h2 class="blue-txt">20</h2>
+          <p>Total Jobs Completed</p>
+        </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
+        <div class="box">
+          <h2 class="green-txt">14</h2>
+          <p>Completed this month</p>
+        </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
+        <div class="box">
+          <h2 class="yellow-txt">01</h2>
+          <p>New Job</p>
+            <span class="bell-icon yellow-bg">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
+        <div class="box">
+          <h2 class="red-txt">02</h2>
+          <p>Un-read Messages</p>
+          <span class="bell-icon red-bg">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row m50">
+      <div class="col-sm-12 col-xs-12 col-md-8 mTop25">
+      <h3 class="heading2">Overview</h3>
+      <div class="barchart-section mTop50">
+        <div class="">
+          <div id="columnchart_values"></div>
+        </div>
+      </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-md-4 mTop25">
+        <div class="message-section">
+          <h3 class="heading2">Un-read Messages</h3>
+          <span class="circle red-bg">02</span>
+        </div>
+        <div class="message-content mTop25">
+          <div class="admin-msg">
+            <div class="msg-info">
+              <img src="../../../assets/images/avatar.png" alt="">
+              <div class="mTop15">
+                <h2>Admin</h2>
+                <p>9:34 AM</p>
+              </div>
+            </div>
+            <div class="msg-txt">
+              <p>Thankx for posting a new livw job, however we will new some more information.</p>
+            </div>
+            <a href="" class="blue-txt">Reply</a>
+          </div>
+          <div class="admin-msg">
+            <div class="msg-info">
+              <img src="../../../assets/images/avatar.png" alt="">
+              <div class="mTop15">
+                <h2>Admin</h2>
+                <p>9:34 AM</p>
+              </div>
+            </div>
+            <div class="msg-txt">
+              <p>Thankx for posting a new livw job, however we will new some more information.</p>
+            </div>
+            <a href="" class="blue-txt">Reply</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="client-dashboard" *ngIf="role=='customer'">
+  <div class="top-content makeCenter">
+    <h1 class="heading1">Dashboard</h1>
+    <p class="description1">All of the details related to this job will be here</p>
+  </div>
+  <div class="container">
+    <div class="row mTop50">
+      <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
+        <div class="box">
+          <h2 class="blue-txt">20</h2>
+          <p>Total Jobs Posted</p>
+        </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
+        <div class="box">
+          <h2 class="green-txt">14</h2>
+          <p>Jobs Completed</p>
+        </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
+        <div class="box">
+          <h2 class="yellow-txt">01</h2>
+          <p>Pending jobs</p>
+          <span class="bell-icon yellow-bg">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
+        <div class="box">
+          <h2 class="red-txt">02</h2>
+          <p>Un-read Messages</p>
+          <span class="bell-icon red-bg">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row m50">
+      <div class="col-sm-12 col-xs-12 col-md-8 mTop25">
+        <h3 class="heading2">Overview</h3>
+        <div class="barchart-section mTop50">
+          <div class="custom-chart">
+            <div id="columnchart_values"></div>
+            <!-- <pie-chart :data="chartData" name="pie-chart" :colors="['#1a3596', '#14161e','#36a7f7', '#2f3343','#122051']" legend="false"> </pie-chart> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-md-4 mTop25">
+        <div class="message-section">
+          <h3 class="heading2">Un-read Messages</h3>
+          <span class="circle red-bg">02</span>
+        </div>
+        <div class="message-content mTop25">
+          <div class="admin-msg">
+            <div class="msg-info">
+              <img src="../../../assets/images/avatar.png" alt="">
+              <div class="mTop15">
+                <h2>Admin</h2>
+                <p>9:34 AM</p>
+              </div>
+            </div>
+            <div class="msg-txt">
+              <p>Thankx for posting a new livw job, however we will new some more information.</p>
+            </div>
+            <a href="" class="blue-txt">Reply</a>
+          </div>
+          <div class="admin-msg">
+            <div class="msg-info">
+              <img src="../../../assets/images/avatar.png" alt="">
+              <div class="mTop15">
+                <h2>Admin</h2>
+                <p>9:34 AM</p>
+              </div>
+            </div>
+            <div class="msg-txt">
+              <p>Thankx for posting a new livw job, however we will new some more information.</p>
+            </div>
+            <a href="" class="blue-txt">Reply</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

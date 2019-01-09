@@ -12,6 +12,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ModalsComponent } from '../../components/modals/modals.component';
 import { Router, ActivatedRoute } from "@angular/router";
+import { PilotService } from "../../services/admin/pilots/pilots.service";
 
 import * as _ from 'lodash';
 @Component({
@@ -47,6 +48,16 @@ export class PostAJobComponent implements OnInit {
   adminId: any;
   jobStatusArray: any = {};
 
+  isJobRequest: any = true;
+  activeJobList: any = [];
+  quotedJobList: any = [];
+  approvedList: any;
+
+  paginationData: any = {};
+  pageNumber: any = 10;
+  maxSize = 5;
+  bigTotalItems: any;
+  bigCurrentPage = 1;
   config = {
     class: "custom-modal modal-dialog-centered modal-md successModal"
   };
@@ -58,6 +69,7 @@ export class PostAJobComponent implements OnInit {
     private jobSevice: JobService,
     private modalService: BsModalService,
     private route: ActivatedRoute,
+    private pilotService: PilotService,
     private router: Router
   ) {
     if (this.router.url.split("/")[1] == "admin") {
@@ -66,6 +78,7 @@ export class PostAJobComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.onPageLoad();
     this.jobId = this.route.snapshot.paramMap.get("id");
     this.OwnDeliverables1 = [
       {
@@ -86,6 +99,7 @@ export class PostAJobComponent implements OnInit {
         name: "Edited Images"
       }
     ];
+
     this.getJobByID(this.jobId);
     this.getCountriesList();
     this.getStatesByCode("", 231, "");
@@ -152,7 +166,30 @@ export class PostAJobComponent implements OnInit {
       ParticularData: this.formBuilder.array([])
     });
   }
-
+  JobRequest() {
+    this.isJobRequest = true;
+    this.onPageLoad();
+  }
+  AssignPilots() {
+    this.isJobRequest = false;
+    this.onPageLoad();
+  }
+  onPageLoad() {
+    var fromLimit = this.bigCurrentPage.toString() + "0";
+    var data = {
+      from: this.pageNumber, //skip //offsert
+      to: parseInt(fromLimit) - 10 //limit
+    };
+    if (this.isJobRequest) {
+      this.bigCurrentPage = 1;
+      this.pageNumber = 10;
+      // this.getActiveJobs(data.from, data.to);
+    } else {
+      this.bigCurrentPage = 1;
+      this.pageNumber = 10;
+      this.getAllApprovedPilots(data.from, data.to);
+    }
+  }
   setOptions(value) {
     if (value == "1") {
       this.datepicker.toggle();
@@ -171,11 +208,24 @@ export class PostAJobComponent implements OnInit {
     };
     // console.log("this is ",this.jobStatusArray);
     this.jobSevice.jobStatus(this.jobStatusArray).subscribe(data => {
-      console.log("this is data",data);
-
+      console.log("this is data", data);
     });
   }
+  getAllApprovedPilots(num, val) {
+    var data = { from: val, to: num };
+    this.pilotService.getAllApprovedPilots(data).subscribe(data => {
+      console.log("data of pilots", data);
 
+      if (data.status && data.result) {
+
+        this.approvedList = data.result;
+        this.bigTotalItems = parseInt(data.totalRecord);
+      } else if (data.status && !data.result) {
+        this.approvedList = [];
+        this.bigTotalItems = 0;
+      }
+    });
+  }
   getJobByID(jobId) {
     this.jobSevice.getJobByID(jobId).subscribe(data => {
       console.log("data of jobs", data);

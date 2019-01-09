@@ -88,6 +88,33 @@
                       </div>
                     </div>
                   </div>
+                  <!-- image cropper for mobile only -->
+                  <!-- <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+
+                      <div class="displayPicture">
+                      <img [src]="croppedImageHeadShotMobile" />
+
+                        <img *ngIf="!croppedImageHeadShotMobile" src="../../../../assets/images//avatar.png" alt="Display picture">
+                        <div class="image-upload" *ngIf="!messages.personalImageChoosed">
+                          <label for="file-input-mobile1">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                          </label>
+                          <input id="file-input-mobile1" (change)="fileChangeEvent($event)" type="file" accept="image/*" />
+                        </div>
+                      </div>
+
+                      <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+                        [resizeToWidth]="128" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                        (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+                        <img *ngIf="messages.headshotImageChoosed" [src]="croppedImageHeadShot" class="croppedImageDiv" />
+                    </div>
+                    <div class="col-sm-12 col-xs-12">
+                    </div>
+                  </div> -->
+                  <!-- image cropper for mobile only -->
+
                   <div class="row">
                     <h1 class="form-heading noPadding makeBlock mtop30 mBottom25">Headshot &amp; Personal Photo upload</h1>
                     <div class="col-md-3 col-sm-12 col-xs-12">
@@ -109,9 +136,6 @@
                           </div>
                           <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event,'headshot')" *ngIf="messages.headshotImageChoosed" />
                           <button class="btn crop-btn" *ngIf="messages.headshotImageChoosed && !messages.uploadingHeadShotImage" (click)="uploadCroppedImage(croppedImageData, 'headshot')">Crop &amp; Save</button>
-                          <div>
-
-                          </div>
 
                         </div>
                       <p class="aperu-medium mTop15">Head Shot</p>
@@ -136,10 +160,6 @@
                           </div>
                           <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event,'other-personal')" *ngIf="messages.personalImageChoosed" />
                           <button class="btn crop-btn" *ngIf="messages.personalImageChoosed && !messages.uploadingPersonalImage" (click)="uploadCroppedImage(croppedImageData, 'other-personal')">Crop &amp; Save</button>
-                          <div>
-
-                          </div>
-
                         </div>
                       <p class="aperu-medium mTop15">Other Personal Picture</p>
                     </div>

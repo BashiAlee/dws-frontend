@@ -45,7 +45,7 @@ import { ImageCropperModule } from "ngx-image-cropper";
     HttpModule,
     ModalModule.forRoot(),
     CroppieModule,
-    // ImageCropperModule,
+    ImageCropperModule,
     AlertModule.forRoot()
   ],
   declarations: [

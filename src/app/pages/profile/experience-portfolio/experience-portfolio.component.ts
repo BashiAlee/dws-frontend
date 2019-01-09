@@ -222,6 +222,8 @@ export class ExperiencePortfolioComponent implements OnInit {
   success: any;
   error: any;
   loaders: any = {};
+  innerWidth: any ;
+
   @ViewChild('myInput')
 myInputVariable: ElementRef;
   constructor(private formBuilder: FormBuilder, private profileService: ProfileService,
@@ -235,9 +237,24 @@ myInputVariable: ElementRef;
       this.route.parent.url.subscribe((urlPath) => {
         this.id = parseInt(urlPath[1].path);
     })
-    $('html, body').stop().animate({scrollTop: 0}, 500);
+    // $('html, body').stop().animate({scrollTop: 0}, 500);
     }
 
+
+  croppedImageHeadShotMobile: any = '';
+
+  fileChangeEvent(event) {
+    this.imageChangedEvent = event;
+  }
+  imageCropped(event) {
+    this.croppedImageHeadShotMobile = event.base64;
+  }
+  imageLoaded() {
+    // show cropper
+  }
+  loadImageFailed() {
+    // show message
+  }
   ngOnInit() {
 
     // $('html,body').animate({
@@ -245,7 +262,6 @@ myInputVariable: ElementRef;
     // },
     // 'slow');
 
-    console.log("dfsdf", this.id)
     this.addVideo = this.formBuilder.group({
       UserId: [this.id],
       PilotId: [],
@@ -291,6 +307,7 @@ myInputVariable: ElementRef;
       this.getWorkOffered(this.id)
       this.getPortfolioImagesVideosByID(this.id)
       this.geExperiencedPorfolioByID(this.id)
+      console.log("this is called");
     // this.getPortfolioByID();
   }
 

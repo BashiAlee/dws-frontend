@@ -49,8 +49,8 @@
       </div>
 
       <ul class="list-unstyled components">
-        <li class="nav-item notAvailable">
-          <a class="nav-link">
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['dashboard']" [routerLinkActive]="['active-sidebarlink']">
             <span><i class="fa fa-tachometer"></i>
               <span class="inner-item" *ngIf="isOpen">Dashboard</span>
 
@@ -74,12 +74,12 @@
 
           </a>
         </li>
-<li class="nav-item">
-  <a class="nav-link" [routerLink]="['communication']" [routerLinkActive]="['active-sidebarlink']">
-    <span><i class="fa fa-comment-o"></i>
-      <span class="inner-item" *ngIf="isOpen">Communications</span></span>
-  </a>
-</li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['communication']" [routerLinkActive]="['active-sidebarlink']">
+            <span><i class="fa fa-comment-o"></i>
+              <span class="inner-item" *ngIf="isOpen">Communications</span></span>
+          </a>
+        </li>
         <li class="nav-item notAvailable"  [ngClass]="(role =='customer')?'nav-item notAvailable':'nav-item'">
           <a class="nav-link" href="#">
             <span><i class="fa fa-calendar" aria-hidden="true"></i>

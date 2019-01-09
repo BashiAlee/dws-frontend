@@ -22,10 +22,6 @@
           </div>
           <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event)" *ngIf="messages.coverImageChoosed" />
           <button class="btn crop-btn" *ngIf="messages.coverImageChoosed && !messages.uploadingImage" (click)="uploadCroppedImage(croppedImageData)">Crop &amp; Save</button>
-          <div>
-
-          </div>
-
         </div>
         <p class="user-name">{{personalInformation.value.Users.FirstName+' '+personalInformation.value.Users.LastName
           }}</p>

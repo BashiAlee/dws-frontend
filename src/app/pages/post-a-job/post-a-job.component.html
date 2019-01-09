@@ -1,3 +1,37 @@
+<div class="container mTop50">
+  <a href="" class="custom-btn1 blue-txt"><i class="fa fa-arrow-left mr15" aria-hidden="true"></i>My Jobs</a>
+</div>
+<div class="top-content makeCenter">
+  <h1 class="heading1">Corporate Event Coverage</h1>
+  <p class="description1">All of the details related to this job will be here</p>
+  <div class="m50">
+    <span class="custom-btn1 red-txt">JB65465464</span>
+    <a class="custom-btn1 green-txt"><i class="fa fa-circle mr5" aria-hidden="true"></i>
+    Live Job<i class="fa fa-pencil ml15" aria-hidden="true"></i></a>
+  </div>
+</div>
+
+<div class="container mTop100">
+  <div class="row">
+    <div class="col-md-5 col-sm-12 col-xs-12 flex-display">
+      <div class="custom-tabs">
+        <ul class="custom-ul">
+          <li (click)="JobRequest()"><a [class.active-link]="isJobRequest">Job Request</a></li>
+          <li (click)="AssignPilots()"><a [class.active-link]="!isJobRequest">Assign Pilots<span class="badge"></span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-7 col-sm-12 col-xs-12">
+      <div class="flex-display">
+      <p class="mTop15 description1"><i class="fa fa-check" aria-hidden="true"></i>
+      Pilot(s) claimed the job is completed</p><a href="" class="custom-btn1">Rate your expirence</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="isJobRequest">
 <div class="topContent makeCenter" *ngIf="!isAdmin" >
   <h1 class="pb0">Post a Job</h1>
   <p class="p1">You can post a live job or you can ask for a quote. DWS will then react to your request accordingly.</p>
@@ -341,3 +375,52 @@
 
 </form>
 
+</div>
+
+
+
+<div class="command-center container mTop50" *ngIf="!isJobRequest">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-div">
+        <div class="table-div">
+          <div class="table-rows table-heading-row">
+            <div class="table-heading">Name</div>
+            <!-- <div class="table-heading makeCenter">Status</div> -->
+            <div class="table-heading">Email</div>
+            <div class="table-heading">Phone #</div>
+            <div class="table-heading">Country</div>
+            <div class="table-heading">State</div>
+            <div class="table-heading">City</div>
+            <!-- <div class="table-heading">Action</div> -->
+          </div>
+          <div class="table-body">
+            <div class="table-rows table-body-rows" *ngFor="let list of approvedList">
+              <div class="table-content">{{list.FirstName+' '+list.MiddleName+' '+list.LastName}}</div>
+              <div class="table-content">{{list.Email}}</div>
+              <div class="table-content">{{list.Phone ? list.Phone: '-'}}</div>
+              <div class="table-content">{{list.PhysicallCountry ? list.PhysicallCountry: '-'}}</div>
+              <div class="table-content">{{list.PhysicallState ? list.PhysicallState: '-'}}</div>
+              <div class="table-content">{{list.PhysicallCity ? list.PhysicallCity: "-"}}</div>
+              <!-- <div class="action makeCenter"><a class="manage-btn" [routerLink]="['/admin/job',job.JobId ]">Manage</a></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-footer">
+        <div class="entries-selector">
+          <p class="show-entries-p">Show entries per page</p>
+          <div class="selector-input-container">
+            <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getAllApprovedPilots(pageNumber,0)">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+            </select>
+          </div>
+        </div>
+        <div class="pagination-div">
+          <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+        </div>
+      </div>
+    </div>
+  </div>
