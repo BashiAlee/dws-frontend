@@ -24,7 +24,8 @@ export class JobService {
   getActiveJobs(data) {
     return this.http
       .get(this.apiUrl + "job/activeJobs/" + data.from + "/" + data.to)
-      .pipe(map((response: any) => {
+      .pipe(
+        map((response: any) => {
           return response.json();
         })
       );
@@ -32,22 +33,32 @@ export class JobService {
   getQuotedJobs(data) {
     return this.http
       .get(this.apiUrl + "job/quotedJobs/" + data.from + "/" + data.to)
-      .pipe(map((response: any) => {
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        })
+      );
+  }
+  getUserActiveJobs(id) {
+    return this.http.get(this.apiUrl + "job/getUserActiveJobs/" + id)
+      .pipe(
+        map((response: any) => {
           return response.json();
         })
       );
   }
   getJobByID(id) {
-    return this.http.get(this.apiUrl + 'job/getJob/' + id)
-      .pipe(map((response: any) => {
+    return this.http.get(this.apiUrl + "job/getJob/" + id).pipe(
+      map((response: any) => {
         return response.json();
-      }));
+      })
+    );
   }
   jobStatus(data) {
-    return this.http.post(this.apiUrl + "job/jobStatus" ,data)
-      .pipe(map((response: any) => {
-          return response.json();
-        })
-      );
+    return this.http.post(this.apiUrl + "job/jobStatus", data).pipe(
+      map((response: any) => {
+        return response.json();
+      })
+    );
   }
 }

@@ -2,7 +2,7 @@
 @import './variables';
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "assets/css/responsive.scss";
-
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 @font-face {
   font-family: 'Apercu-Medium';
@@ -1411,19 +1411,25 @@ color: $success !important;
 }
 // for backgrond
 .blue-bg {
-  background: $primary-color;
+  background: $primary-color !important;
 }
+
 .red-bg {
-  background: $details-btn;
+  background: $details-btn !important;
 }
 .yellow-bg {
-  background: $warning-modal;
+  background: $warning-modal !important;
 }
 .green-bg {
-  background: $success;
+  background: $success !important;
 }
 // for dashboard only
-
+.blue-border {
+  border-color: $primary-color !important;
+}
+.white-border {
+  border-color: #fff !important;
+}
 .custom-tabs {
   margin-bottom: 28px;
   display: flex;
@@ -1508,3 +1514,18 @@ color: $success !important;
   align-items: center;
 }
 
+// calander style starts from here
+.cal-month-view {
+  .cal-day-badge {
+    background-color: #29abe2;
+  }
+}
+.btn-primary:not(:disabled):not(.disabled).active,
+  {
+  background: #2d94c1 !important;
+}
+.cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
+  color: #29abe2;
+}
+
+// calander style ends here

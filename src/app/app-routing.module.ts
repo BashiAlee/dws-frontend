@@ -60,153 +60,158 @@ import {
 import {
   PostAJobComponent
 } from './pages/post-a-job/post-a-job.component';
-import { JobsComponent } from './pages/admin/jobs/jobs.component';
+import {
+  JobsComponent
+} from './pages/admin/jobs/jobs.component';
+import {
+  JobCalenderComponent
+} from "./pages/job-calender/job-calender.component";
 
-const routes: Routes = [{
-    path: '',
+const routes: Routes = [
+  {
+    path: "",
     component: BlankLayoutComponent,
-    children: [{
-        path: '',
-        redirectTo: 'loginpilot',
-        pathMatch: 'full'
+    children: [
+      {
+        path: "",
+        redirectTo: "loginpilot",
+        pathMatch: "full"
       },
       {
-        path: 'logincustomer',
+        path: "logincustomer",
         component: LoginComponent
       },
       {
-        path: 'loginpilot',
+        path: "loginpilot",
         component: LoginComponent
       },
       {
-        path: 'signupcustomer',
+        path: "signupcustomer",
         component: SignupComponent
       },
       {
-        path: 'signuppilot',
+        path: "signuppilot",
         component: SignupComponent
       }
     ]
   },
   {
-
-    path: 'user',
+    path: "user",
 
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
-    children: [{
-        path: 'user',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
+    children: [
+      {
+        path: "user",
+        redirectTo: "dashboard",
+        pathMatch: "full",
         canActivate: [AuthGuard]
       },
       {
-        path: 'communication',
+        path: "communication",
         component: CommunicationComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'dashboard',
+        path: "dashboard",
         component: DashboardComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'profile',
-        redirectTo: 'profile/:id',
-        pathMatch: 'full',
+        path: "profile",
+        redirectTo: "profile/:id",
+        pathMatch: "full",
         canActivate: [AuthGuard]
       },
       {
-        path: 'profile/:id',
+        path: "profile/:id",
         component: ProfileComponent,
         loadChildren: () => ProfileModule,
         canActivate: [AuthGuard]
       },
       {
-        path: 'jobs',
+        path: "jobs",
         component: PostAJobComponent,
-        pathMatch: 'full'
+        pathMatch: "full"
       },
-
+      {
+        path: "job-calender",
+        component: JobCalenderComponent,
+        pathMatch: "full"
+      }
     ]
   },
   {
-    path: 'admin',
+    path: "admin",
 
     component: MainLayoutComponent,
-    children: [{
-        path: 'command-center',
+    children: [
+      {
+        path: "command-center",
         component: CommandCenterComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: 'communication',
+        path: "communication",
         component: CommunicationComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: 'pilot-list',
+        path: "pilot-list",
         component: PilotListComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: 'profile',
-        redirectTo: 'profile/:id',
-        pathMatch: 'full',
+        path: "profile",
+        redirectTo: "profile/:id",
+        pathMatch: "full",
         canActivate: [AdminAuthGuard]
       },
       {
-        path: 'profile/:id',
+        path: "profile/:id",
         component: ProfileComponent,
         loadChildren: () => ProfileModule,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: 'jobs-list',
+        path: "jobs-list",
         component: JobsComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: 'job/:id',
+        path: "job/:id",
         component: PostAJobComponent,
-        pathMatch: 'full'
-      },
-
+        pathMatch: "full"
+      }
     ]
   },
 
   {
-    path: 'panel',
+    path: "panel",
 
     component: EmptyLayoutComponent,
-    children: [{
-        path: 'admin',
+    children: [
+      {
+        path: "admin",
         component: AdminLoginComponent
-      },
-
+      }
     ]
-
   },
   {
-    path: 'email-verification',
+    path: "email-verification",
 
-    component: VerificationComponent,
-
+    component: VerificationComponent
   },
   {
-    path: 'send-email',
+    path: "send-email",
 
-    component: SendEmailComponent,
-
+    component: SendEmailComponent
   },
   {
-    path: 'forget-password',
+    path: "forget-password",
 
-    component: ForgetPasswordComponent,
-
-  },
-
-
+    component: ForgetPasswordComponent
+  }
 ];
 
 @NgModule({

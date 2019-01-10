@@ -41,6 +41,12 @@ import { BsDatepickerModule,TimepickerModule } from 'ngx-bootstrap';
 import { JobService } from './services/job/job.service';
 import { JobsComponent } from './pages/admin/jobs/jobs.component';
 import { ImageCropperModule } from "ngx-image-cropper";
+import { JobCalenderComponent } from './pages/job-calender/job-calender.component';
+
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CalendarModule, DateAdapter } from "angular-calendar";
+import { adapterFactory } from "angular-calendar/date-adapters/date-fns";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +74,7 @@ import { ImageCropperModule } from "ngx-image-cropper";
     PilotsPipe,
     PostAJobComponent,
     JobsComponent,
+    JobCalenderComponent
   ],
   imports: [
     BrowserModule,
@@ -81,10 +88,16 @@ import { ImageCropperModule } from "ngx-image-cropper";
     ImageCropperModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    NgbModule,
+    BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   entryComponents: [ModalsComponent],
-  providers: [AuthenticationService, AuthGuard, MessagesService,JobService],
+  providers: [AuthenticationService, AuthGuard, MessagesService, JobService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
