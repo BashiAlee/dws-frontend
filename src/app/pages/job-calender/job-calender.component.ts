@@ -34,7 +34,8 @@ const colors: any = {
 export class JobCalenderComponent implements OnInit {
   userInfo: any;
   activeJobList: any = [];
-
+  startTime: any;
+  endTime: any;
   constructor(
     private modal: NgbModal,
     private jobSevice: JobService,
@@ -55,12 +56,11 @@ export class JobCalenderComponent implements OnInit {
   };
 
   refresh: Subject<any> = new Subject();
-  events: CalendarEvent[] = [
-  ];
+  events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = true;
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }){
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }) {
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
       if (
@@ -87,26 +87,41 @@ export class JobCalenderComponent implements OnInit {
         this.activeJobList = data.result;
         console.log("activejobs", this.activeJobList);
 
-        this.activeJobList.forEach((val) => {
-          if (val.DateRanges.FromDate != "" && val.DateRanges.ToDate){
+        this.activeJobList.forEach(val => {
+          if (val.DateRanges.FromDate != "" && val.DateRanges.ToDate) {
             this.events.push({
               title: val.JobTitle,
               start: startOfDay(new Date(val.DateRanges.FromDate)),
               end: endOfDay(new Date(val.DateRanges.ToDate)),
-              color: colors.green,
+              color: colors.green
             });
-          } else if (val.DateRanges.FromDate != ""){
+          } else if (val.DateRanges.FromDate != "") {
+            var date = val.DateRanges.FromDate;
+            date = date.split('T')[0];
+
+            this.startTime=val.DateRanges.From
+            this.startTime = this.startTime.split('T')[1];
+            this.endTime = val.DateRanges.To
+            this.endTime = this.endTime.split('T')[1];
+
+            this.startTime = date + " " + this.startTime;
+            this.endTime = date + " " + this.endTime;
+            console.log("this is this.start imeart time", this.startTime);
+
+            console.log("this is this.endTimeart time",this.endTime);
+
+
             this.events.push({
               title: val.JobTitle,
-              start: startOfDay(new Date(val.DateRanges.FromDate)),
-              // start: (val.DateRanges.From)),
-              // end: addHours(val.DateRanges.To, 0),
+              start: addHours(this.startTime,0),
+
+              end: addHours(this.endTime, 0),
               color: colors.green
             });
           }
 
           this.refresh.next();
-        })
+        });
       } else {
         this.activeJobList = [];
       }
