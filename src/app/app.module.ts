@@ -42,6 +42,7 @@ import { JobsComponent } from './pages/admin/jobs/jobs.component';
 import { ImageCropperModule } from "ngx-image-cropper";
 import { JobCalenderComponent } from './pages/job-calender/job-calender.component';
 
+
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CalendarModule, DateAdapter } from "angular-calendar";
 import { adapterFactory } from "angular-calendar/date-adapters/date-fns";
@@ -49,6 +50,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MomentModule } from "ngx-moment";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { RatingModule } from "ngx-bootstrap/rating";
+import {NgbRating} from '@ng-bootstrap/ng-bootstrap';
 
 import { ClientJobComponent } from './pages/jobs/client-job/client-job.component';
 import { PilotJobListComponent } from './pages/jobs/pilot-job-list/pilot-job-list.component';
@@ -99,13 +101,15 @@ import { ClientJobListComponent } from './pages/jobs/client-job-list/client-job-
     PaginationModule.forRoot(),
     RatingModule.forRoot(),
     NgbModule,
+
     MomentModule,
     NgxChartsModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+   
   ],
   entryComponents: [ModalsComponent],
   providers: [AuthenticationService, AuthGuard, MessagesService, JobService],

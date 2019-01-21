@@ -45,6 +45,8 @@ export class PersonalInformationComponent implements OnInit {
   isAdmin: any;
   success: any;
   error: any;
+  max = 5;
+  rate = 1.5;
   constructor(private formBuilder: FormBuilder, private router: Router,
     private route: ActivatedRoute, private profileSevice: ProfileService,
     private modalService: BsModalService, private authService: AuthenticationService) {
@@ -113,6 +115,12 @@ export class PersonalInformationComponent implements OnInit {
       data => {
         if(data.status) {
             this.personalData = data.result;
+
+            if(this.personalData.Users) {
+              if(this.personalData.Users.Role == 'pilot') {
+                this.rate = this.personalData.Rating;
+              }
+            }
             // if(!this.personalData.PhysicallCountry && !this.personalData.PhysicallState &&  !this.isAdmin) {
             //   const initialState = {
             //     type: 'old-user-empty',

@@ -26,8 +26,25 @@
         <p class="user-name">{{personalInformation.value.Users.FirstName+' '+personalInformation.value.Users.LastName
           }}</p>
         <p class="user-id">{{personalInformation.value.Users.MemberId}}</p>
+        <p *ngIf="personalData && personalData.Users.Role == 'pilot'" class="user-description">Rating: 
+            <ng-template #t let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+                  <span class="half" [style.width.%]="fill"><i class="fa fa-star" aria-hidden="true"></i>
+              
+                  </span><i class="fa fa-star-o" aria-hidden="true"></i>
+              
+                </span>
+              </ng-template>
+              
+              <ngb-rating  [(ngModel)]="rate" [ngModelOptions]="{standalone: true}" [max]="max" [readonly]="isReadonly" [starTemplate]="t" class="pilotRating"></ngb-rating>
+          ({{rate |number : '1.1-1'}})
+
+
+
+        </p>
         <p class="member-since" *ngIf="personalData">Member Since : <span>{{personalData.Users.MemberSince | date:
             'MM/dd/yyyy'}}</span></p>
+        
         <p class="user-description">You may also login using your DWS Member ID Number in the Username field.</p>
       </div>
 

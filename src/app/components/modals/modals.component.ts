@@ -15,7 +15,7 @@ export class ModalsComponent implements OnInit {
   userInfo: any;
   config: any = {};
   max = 5;
-  rate = 1;
+  rate = 1.5;
   isReadonly = false;
   pilotRating:any;
   constructor(

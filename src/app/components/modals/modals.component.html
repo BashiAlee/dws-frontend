@@ -129,11 +129,27 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  <div class="round-logo">
+    <img src="../../../assets/icons/Success.png" alt="success icon">
+  </div>
   <div class="modal-body sucess">
-  <rating [(ngModel)]="rate" [max]="max" [readonly]="isReadonly" (click)="updateRating(rate)"></rating>
+  <!-- <rating [(ngModel)]="rate" [max]="max" [readonly]="isReadonly" (click)="updateRating(rate)" class="rating"></rating> -->
+  <p>Rate your pilot</p>
+
+<ng-template #t let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill"><i class="fa fa-star" aria-hidden="true"></i>
+
+    </span><i class="fa fa-star-o" aria-hidden="true"></i>
+
+  </span>
+</ng-template>
+
+<ngb-rating  [(ngModel)]="rate" [max]="max" [readonly]="isReadonly" (click)="updateRating(rate)" [starTemplate]="t"></ngb-rating>
   </div>
   <div class="footer-content">
-    <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Done</a>
+    <button type="button" class="btn btn-default custom-modal-button success-btn">Done</button>
+    <!-- <a (click)="bsModalRef.hide()">Done</a> -->
   </div>
 </div>
 

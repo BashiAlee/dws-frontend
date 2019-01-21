@@ -34,6 +34,7 @@ import { ModalModule } from 'ngx-bootstrap';
 import { CroppieModule } from '../../../angular-croppie-module/src/lib/croppie.module';
 import { AlertModule } from 'ngx-bootstrap';
 import { ImageCropperModule } from "ngx-image-cropper";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { ImageCropperModule } from "ngx-image-cropper";
     ModalModule.forRoot(),
     CroppieModule,
     ImageCropperModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    NgbModule
   ],
   declarations: [
     DocumentDeclarationComponent,
