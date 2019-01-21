@@ -58,15 +58,14 @@ import {
   CommunicationComponent
 } from './pages/admin/communication/communication.component';
 import {
-  PostAJobComponent
-} from './pages/post-a-job/post-a-job.component';
-import {
   JobsComponent
 } from './pages/admin/jobs/jobs.component';
 import {
   JobCalenderComponent
 } from "./pages/job-calender/job-calender.component";
-
+import { ClientJobComponent } from "./pages/jobs/client-job/client-job.component";
+import { PilotJobListComponent } from "./pages/jobs/pilot-job-list/pilot-job-list.component";
+import { ClientJobListComponent } from "./pages/jobs/client-job-list/client-job-list.component";
 const routes: Routes = [
   {
     path: "",
@@ -130,8 +129,23 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: "jobs",
-        component: PostAJobComponent,
+        path: "create-job",
+        component: ClientJobComponent,
+        pathMatch: "full"
+      },
+      {
+        path: "client-job-list",
+        component: ClientJobListComponent,
+        pathMatch: "full"
+      },
+      {
+        path: "pilot-job-list",
+        component: PilotJobListComponent,
+        pathMatch: "full"
+      },
+      {
+        path: "job/:id",
+        component: ClientJobComponent,
         pathMatch: "full"
       },
       {
@@ -180,7 +194,7 @@ const routes: Routes = [
       },
       {
         path: "job/:id",
-        component: PostAJobComponent,
+        component: ClientJobComponent,
         pathMatch: "full"
       }
     ]

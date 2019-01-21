@@ -1,26 +1,33 @@
+import { Component, ViewChild, OnInit } from "@angular/core";
 import {
-  Component,
-  ViewChild,
-  OnInit
-} from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
-import { ProfileService } from '../../services/profile/profile.service';
-import { JobService } from '../../services/job/job.service';
-import { AuthenticationService } from "../../services/authentication/authentication.service";
-import { BsDaterangepickerDirective, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { ModalsComponent } from '../../components/modals/modals.component';
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+  FormArray
+} from "@angular/forms";
+import { ProfileService } from "../../../services/profile/profile.service";
+import { JobService } from "../../../services/job/job.service";
+import { AuthenticationService } from "../../../services/authentication/authentication.service";
+import {
+  BsDaterangepickerDirective,
+  BsDatepickerConfig
+} from "ngx-bootstrap/datepicker";
+import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
+import { BsModalService } from "ngx-bootstrap/modal";
+import { ModalsComponent } from "../../../components/modals/modals.component";
 import { Router, ActivatedRoute } from "@angular/router";
-import { PilotService } from "../../services/admin/pilots/pilots.service";
+import { PilotService } from "../../../services/admin/pilots/pilots.service";
+import * as moment from "moment";
 
-import * as _ from 'lodash';
+import * as _ from "lodash";
+import { forEach } from "@angular/router/src/utils/collection";
 @Component({
-  selector: "app-post-a-job",
-  templateUrl: "./post-a-job.component.html",
-  styleUrls: ["./post-a-job.component.scss"]
+  selector: "app-client-job",
+  templateUrl: "./client-job.component.html",
+  styleUrls: ["./client-job.component.scss"]
 })
-export class PostAJobComponent implements OnInit {
+export class ClientJobComponent implements OnInit {
   @ViewChild("dp1") datepicker: BsDaterangepickerDirective;
   @ViewChild("dp2") datepicker2: BsDaterangepickerDirective;
   @ViewChild("dp3") datepicker3: BsDaterangepickerDirective;
@@ -45,6 +52,7 @@ export class PostAJobComponent implements OnInit {
   isParticular: any = [];
   jobId: any;
   isAdmin: any;
+  isYou: any;
   adminId: any;
   jobStatusArray: any = {};
 
@@ -52,6 +60,7 @@ export class PostAJobComponent implements OnInit {
   activeJobList: any = [];
   quotedJobList: any = [];
   approvedList: any;
+  loaders: any = {};
 
   paginationData: any = {};
   pageNumber: any = 10;
@@ -79,6 +88,7 @@ export class PostAJobComponent implements OnInit {
 
   ngOnInit() {
     this.onPageLoad();
+
     this.jobId = this.route.snapshot.paramMap.get("id");
     this.OwnDeliverables1 = [
       {
@@ -201,23 +211,76 @@ export class PostAJobComponent implements OnInit {
       this.datepicker3.toggle();
     }
   }
-  changeJobStatus(status) {
+  openRatingModal(){
+    const initialState = { type: "pilotRating" };
+    this.bsModalRef = this.modalService.show(
+      ModalsComponent,
+      Object.assign({}, this.config, { initialState })
+    );
+    this.bsModalRef.content.closeBtnName = "Close";
+    this.loaders.approveProfile = false;
+  }
+  approveJob() {
     this.jobStatusArray = {
       JobId: this.jobData.JobId,
-      Status: status
+      Status: "active",
+      IsQuote: false
     };
-    // console.log("this is ",this.jobStatusArray);
+    this.loaders.approveProfile = true;
+    const initialState = { type: "jobApproved" };
     this.jobSevice.jobStatus(this.jobStatusArray).subscribe(data => {
-      console.log("this is data", data);
+      if (data.status) {
+        this.bsModalRef = this.modalService.show(
+          ModalsComponent,
+          Object.assign({}, this.config, { initialState })
+        );
+        this.bsModalRef.content.closeBtnName = "Close";
+        this.loaders.approveProfile = false;
+      }
+    });
+  }
+  changeJobStatus() {
+    this.jobStatusArray = {
+      JobId: this.jobData.JobId,
+      Status: "completed"
+    };
+    this.loaders.approveProfile = true;
+    const initialState = { type: "jobCompleted" };
+    this.jobSevice.jobStatus(this.jobStatusArray).subscribe(data => {
+      if (data.status) {
+        this.bsModalRef = this.modalService.show(
+          ModalsComponent,
+          Object.assign({}, this.config, { initialState })
+        );
+        this.bsModalRef.content.closeBtnName = "Close";
+        this.loaders.approveProfile = false;
+      }
+    });
+  }
+  rejectJob() {
+    this.jobStatusArray = {
+      JobId: this.jobData.JobId,
+      Status: "archived"
+    };
+    this.loaders.approveProfile = true;
+    const initialState = { type: "jobReject" };
+
+    this.jobSevice.jobStatus(this.jobStatusArray).subscribe(data => {
+      if (data.status) {
+        this.bsModalRef = this.modalService.show(
+          ModalsComponent,
+          Object.assign({}, this.config, { initialState })
+        );
+        this.bsModalRef.content.closeBtnName = "Close";
+        this.loaders.approveProfile = false;
+      }
     });
   }
   getAllApprovedPilots(num, val) {
+    this.isYou = false;
     var data = { from: val, to: num };
     this.pilotService.getAllApprovedPilots(data).subscribe(data => {
-      console.log("data of pilots", data);
-
       if (data.status && data.result) {
-
         this.approvedList = data.result;
         this.bigTotalItems = parseInt(data.totalRecord);
       } else if (data.status && !data.result) {
@@ -226,12 +289,12 @@ export class PostAJobComponent implements OnInit {
       }
     });
   }
+
   getJobByID(jobId) {
     this.jobSevice.getJobByID(jobId).subscribe(data => {
-      console.log("data of jobs", data);
-
       if (data.status) {
         this.jobData = data.result[0];
+        console.log("data of jobs", this.jobData);
         if (
           this.jobData.DateRanges.FromDate != "" &&
           this.jobData.DateRanges.From != "" &&
@@ -251,7 +314,14 @@ export class PostAJobComponent implements OnInit {
           this.jobData.DateRanges.ToDate = new Date(
             this.jobData.DateRanges.ToDate
           );
+          var a = moment(this.jobData.DateRanges.ToDate)
+            .add(1, "days")
+            .calendar();
+          var now = moment();
+          console.log("this is data@@@@@@", this.jobData.DateRanges.ToDate);
         }
+        // a.diff(b, "days");
+
         this.jobInformation.patchValue(Object.assign({}, this.jobData));
         if (this.jobInformation.value.EquipmentPreferences != "") {
           this.IsEquipmentPref = "yes";

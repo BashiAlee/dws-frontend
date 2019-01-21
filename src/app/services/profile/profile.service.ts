@@ -28,7 +28,7 @@ export class ProfileService {
      return response.json();
     }));
   }
-  
+
   getProfilePersonalInfoByID(id) {
     return this.http.get(this.apiUrl + 'getPilotPersonalInformationById/'+id)
     .pipe(map((response: any) => {
@@ -41,7 +41,7 @@ export class ProfileService {
      return response.json();
     }));
   }
-  
+
   getPortfolioVideosImagesByID(id) {
     return this.http.get(this.apiUrl + 'getPortfolioVideosAndImages/'+id)
     .pipe(map((response: any) => {
@@ -74,18 +74,18 @@ export class ProfileService {
     let headers = new Headers();
     var target = file.target || file.srcElement
     headers.append('Content-Type','multipart/form-data');
-    
+
     formData.append('file',new Blob([target.files[0]]),target.files[0].name);
-    
+
     return this.http.post(this.staticUrl+'uploading',formData)
     .pipe(map((response: any) => {
-  
+
      return response.json();
   }));
   }
 
   uploadCroppedImage(file,fileName) {
-   
+
     let formData = new FormData();
     let headers = new Headers();
     headers.append('Content-Type','multipart/form-data');
@@ -135,14 +135,14 @@ export class ProfileService {
      return response.json();
     }));
   }
-  
+
   addProfilioImagesVideos(data) {
     return this.http.post(this.apiUrl + 'addPortfolioVideosAndImages', data)
     .pipe(map((response: any) => {
      return response.json();
     }));
   }
-  
+
   updateExperienceWorkPortfolio(data) {
     return this.http.post(this.apiUrl + 'updateExperienceWorkPortfolio', data)
     .pipe(map((response: any) => {
@@ -176,12 +176,12 @@ export class ProfileService {
     let headers = new Headers();
     var target = file.target || file.srcElement
     headers.append('Content-Type','multipart/form-data');
-    
+
     formData.append('file',new Blob([target.files[0]]),target.files[0].name);
-    
+
     return this.http.post(this.staticUrl+'uploading',formData)
     .pipe(map((response: any) => {
-  
+
      return response.json();
   }));
   }

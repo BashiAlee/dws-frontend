@@ -64,14 +64,23 @@
             </span>
           </a>
         </li>
-        <li class="nav-item" >
-          <a class="nav-link" [routerLinkActive]="['active-sidebarlink']"[routerLink]="['jobs']">
+        <li class="nav-item" *ngIf="role =='customer'">
+          <a class="nav-link" [routerLinkActive]="['active-sidebarlink']" [routerLink]="['create-job']">
             <span class="user-list"><i class="fa fa-users"></i>
               <span class="inner-item" *ngIf="isOpen">Jobs</span>
               <span *ngIf="isOpen" class="badge-value">3</span>
               <span *ngIf="!isOpen" class="small-badge">3</span>
                </span>
 
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="role =='pilot'">
+          <a class="nav-link" [routerLinkActive]="['active-sidebarlink']" [routerLink]="['pilot-job-list']">
+            <span class="user-list"><i class="fa fa-users"></i>
+              <span class="inner-item" *ngIf="isOpen">Jobs</span>
+              <span *ngIf="isOpen" class="badge-value">4</span>
+              <span *ngIf="!isOpen" class="small-badge">4</span>
+            </span>
           </a>
         </li>
         <li class="nav-item">

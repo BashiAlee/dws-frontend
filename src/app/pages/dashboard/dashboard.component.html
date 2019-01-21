@@ -1,4 +1,4 @@
-<div class="pilot-dashboard" *ngIf="role=='pilot'">
+<div class="pilot-dashboard" *ngIf="userInfo.Role=='pilot'">
   <div class="top-content makeCenter">
     <h1 class="heading1">Dashboard</h1>
     <p class="description1">All of the details related to this job will be here</p>
@@ -7,13 +7,13 @@
     <div class="row mTop50">
       <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
         <div class="box">
-          <h2 class="blue-txt">20</h2>
+          <h2 class="blue-txt">{{completedJobs}}</h2>
           <p>Total Jobs Completed</p>
         </div>
       </div>
       <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
         <div class="box">
-          <h2 class="green-txt">14</h2>
+          <h2 class="green-txt">2</h2>
           <p>Completed this month</p>
         </div>
       </div>
@@ -28,7 +28,7 @@
       </div>
       <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
         <div class="box">
-          <h2 class="red-txt">02</h2>
+          <h2 class="red-txt">{{unreadMessages.length}}</h2>
           <p>Un-read Messages</p>
           <span class="bell-icon red-bg">
             <i class="fa fa-bell" aria-hidden="true"></i>
@@ -41,42 +41,58 @@
       <div class="col-sm-12 col-xs-12 col-md-8 mTop25">
       <h3 class="heading2">Overview</h3>
       <div class="barchart-section mTop50">
-        <div class="">
-          <div id="columnchart_values"></div>
-        </div>
+          <div class="barchar-legend ">
+            <div class="flex-display">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26px" height="26px">
+                <path fill-rule="evenodd" fill="#5dcc31" d="M13.000,26.000 C5.820,26.000 0.000,20.180 0.000,13.000 C0.000,5.820 5.820,0.000 13.000,0.000 C20.180,0.000 26.000,5.820 26.000,13.000 C26.000,20.180 20.180,26.000 13.000,26.000 ZM13.000,2.000 C6.925,2.000 2.000,6.925 2.000,13.000 C2.000,19.075 6.925,24.000 13.000,24.000 C19.075,24.000 24.000,19.075 24.000,13.000 C24.000,6.925 19.075,2.000 13.000,2.000 ZM13.000,21.000 C8.582,21.000 5.000,17.418 5.000,13.000 C5.000,8.582 8.582,5.000 13.000,5.000 C17.418,5.000 21.000,8.582 21.000,13.000 C21.000,17.418 17.418,21.000 13.000,21.000 Z" />
+              </svg>
+              <p class="mt-3 p-2">Total Jobs Completed </p>
+            </div>
+            <div class="flex-display">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26px" height="26px">
+                <path fill-rule="evenodd" fill="#fa972c" d="M13.000,26.000 C5.820,26.000 0.000,20.180 0.000,13.000 C0.000,5.820 5.820,0.000 13.000,0.000 C20.180,0.000 26.000,5.820 26.000,13.000 C26.000,20.180 20.180,26.000 13.000,26.000 ZM13.000,2.000 C6.925,2.000 2.000,6.925 2.000,13.000 C2.000,19.075 6.925,24.000 13.000,24.000 C19.075,24.000 24.000,19.075 24.000,13.000 C24.000,6.925 19.075,2.000 13.000,2.000 ZM13.000,21.000 C8.582,21.000 5.000,17.418 5.000,13.000 C5.000,8.582 8.582,5.000 13.000,5.000 C17.418,5.000 21.000,8.582 21.000,13.000 C21.000,17.418 17.418,21.000 13.000,21.000 Z" />
+              </svg>
+              <p class="mt-3 p-2">Completed This Month</p>
+            </div>
+            <div class="flex-display">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26px" height="26px">
+                <path fill-rule="evenodd" fill="#fc5757" d="M13.000,26.000 C5.820,26.000 0.000,20.180 0.000,13.000 C0.000,5.820 5.820,0.000 13.000,0.000 C20.180,0.000 26.000,5.820 26.000,13.000 C26.000,20.180 20.180,26.000 13.000,26.000 ZM13.000,2.000 C6.925,2.000 2.000,6.925 2.000,13.000 C2.000,19.075 6.925,24.000 13.000,24.000 C19.075,24.000 24.000,19.075 24.000,13.000 C24.000,6.925 19.075,2.000 13.000,2.000 ZM13.000,21.000 C8.582,21.000 5.000,17.418 5.000,13.000 C5.000,8.582 8.582,5.000 13.000,5.000 C17.418,5.000 21.000,8.582 21.000,13.000 C21.000,17.418 17.418,21.000 13.000,21.000 Z" />
+              </svg>
+              <p class="mt-3 p-2">New Job</p>
+            </div>
+          </div>
+          <div class="custom-chart">
+            <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient" [xAxis]="showXAxis"
+              [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+            </ngx-charts-bar-vertical>
+            <!-- <div id="columnchart_values"></div> -->
+          </div>
       </div>
       </div>
       <div class="col-sm-12 col-xs-12 col-md-4 mTop25">
         <div class="message-section">
           <h3 class="heading2">Un-read Messages</h3>
-          <span class="circle red-bg">02</span>
+          <span class="circle red-bg">{{unreadMessages.length}}</span>
         </div>
-        <div class="message-content mTop25">
-          <div class="admin-msg">
+        <div class="message-content mTop25" *ngIf="unreadMessages && unreadMessages.length">
+          <div class="admin-msg" *ngFor="let message of unreadMessages">
             <div class="msg-info">
               <img src="../../../assets/images/avatar.png" alt="">
               <div class="mTop15">
                 <h2>Admin</h2>
-                <p>9:34 AM</p>
+                <p>{{message.MessageTime}}</p>
               </div>
             </div>
             <div class="msg-txt">
-              <p>Thankx for posting a new livw job, however we will new some more information.</p>
+              <p>{{message.Message}}</p>
             </div>
-            <a href="" class="blue-txt">Reply</a>
+            <a class="blue-txt" [routerLink]="['/user/communication']">Reply</a>
           </div>
-          <div class="admin-msg">
-            <div class="msg-info">
-              <img src="../../../assets/images/avatar.png" alt="">
-              <div class="mTop15">
-                <h2>Admin</h2>
-                <p>9:34 AM</p>
-              </div>
-            </div>
-            <div class="msg-txt">
-              <p>Thankx for posting a new livw job, however we will new some more information.</p>
-            </div>
-            <a href="" class="blue-txt">Reply</a>
+        </div>
+        <div class="message-content mTop25" *ngIf="unreadMessages && !unreadMessages.length">
+          <div class="makeCenter mTop15">
+            <p> No Un-read found</p>
           </div>
         </div>
       </div>
@@ -85,7 +101,7 @@
 </div>
 
 
-<div class="client-dashboard" *ngIf="role=='customer'">
+<div class="client-dashboard" *ngIf="userInfo.Role=='customer'">
   <div class="top-content makeCenter">
     <h1 class="heading1">Dashboard</h1>
     <p class="description1">All of the details related to this job will be here</p>
@@ -94,19 +110,19 @@
     <div class="row mTop50">
       <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
         <div class="box">
-          <h2 class="blue-txt">20</h2>
+          <h2 class="blue-txt">{{totalJobs}}</h2>
           <p>Total Jobs Posted</p>
         </div>
       </div>
       <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
         <div class="box">
-          <h2 class="green-txt">14</h2>
+          <h2 class="green-txt">{{completedJobs}}</h2>
           <p>Jobs Completed</p>
         </div>
       </div>
       <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
         <div class="box">
-          <h2 class="yellow-txt">01</h2>
+          <h2 class="yellow-txt">{{pendingJobs}}</h2>
           <p>Pending jobs</p>
           <span class="bell-icon yellow-bg">
             <i class="fa fa-bell" aria-hidden="true"></i>
@@ -115,7 +131,7 @@
       </div>
       <div class="col-sm-12 col-xs-12 col-md-6 col-lg-3">
         <div class="box">
-          <h2 class="red-txt">02</h2>
+          <h2 class="red-txt">{{unreadMessages.length}}</h2>
           <p>Un-read Messages</p>
           <span class="bell-icon red-bg">
             <i class="fa fa-bell" aria-hidden="true"></i>
@@ -128,43 +144,58 @@
       <div class="col-sm-12 col-xs-12 col-md-8 mTop25">
         <h3 class="heading2">Overview</h3>
         <div class="barchart-section mTop50">
+          <div class="barchar-legend ">
+            <div class="flex-display">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26px" height="26px">
+                <path fill-rule="evenodd" fill="#5dcc31" d="M13.000,26.000 C5.820,26.000 0.000,20.180 0.000,13.000 C0.000,5.820 5.820,0.000 13.000,0.000 C20.180,0.000 26.000,5.820 26.000,13.000 C26.000,20.180 20.180,26.000 13.000,26.000 ZM13.000,2.000 C6.925,2.000 2.000,6.925 2.000,13.000 C2.000,19.075 6.925,24.000 13.000,24.000 C19.075,24.000 24.000,19.075 24.000,13.000 C24.000,6.925 19.075,2.000 13.000,2.000 ZM13.000,21.000 C8.582,21.000 5.000,17.418 5.000,13.000 C5.000,8.582 8.582,5.000 13.000,5.000 C17.418,5.000 21.000,8.582 21.000,13.000 C21.000,17.418 17.418,21.000 13.000,21.000 Z" />
+              </svg>
+              <p class="mt-3 p-2">Completed</p>
+            </div>
+            <div class="flex-display">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26px" height="26px">
+                <path fill-rule="evenodd" fill="#fa972c" d="M13.000,26.000 C5.820,26.000 0.000,20.180 0.000,13.000 C0.000,5.820 5.820,0.000 13.000,0.000 C20.180,0.000 26.000,5.820 26.000,13.000 C26.000,20.180 20.180,26.000 13.000,26.000 ZM13.000,2.000 C6.925,2.000 2.000,6.925 2.000,13.000 C2.000,19.075 6.925,24.000 13.000,24.000 C19.075,24.000 24.000,19.075 24.000,13.000 C24.000,6.925 19.075,2.000 13.000,2.000 ZM13.000,21.000 C8.582,21.000 5.000,17.418 5.000,13.000 C5.000,8.582 8.582,5.000 13.000,5.000 C17.418,5.000 21.000,8.582 21.000,13.000 C21.000,17.418 17.418,21.000 13.000,21.000 Z" />
+              </svg>
+              <p class="mt-3 p-2">Pending</p>
+            </div>
+            <div class="flex-display">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26px" height="26px">
+                <path fill-rule="evenodd" fill="#fc5757" d="M13.000,26.000 C5.820,26.000 0.000,20.180 0.000,13.000 C0.000,5.820 5.820,0.000 13.000,0.000 C20.180,0.000 26.000,5.820 26.000,13.000 C26.000,20.180 20.180,26.000 13.000,26.000 ZM13.000,2.000 C6.925,2.000 2.000,6.925 2.000,13.000 C2.000,19.075 6.925,24.000 13.000,24.000 C19.075,24.000 24.000,19.075 24.000,13.000 C24.000,6.925 19.075,2.000 13.000,2.000 ZM13.000,21.000 C8.582,21.000 5.000,17.418 5.000,13.000 C5.000,8.582 8.582,5.000 13.000,5.000 C17.418,5.000 21.000,8.582 21.000,13.000 C21.000,17.418 17.418,21.000 13.000,21.000 Z" />
+              </svg>
+              <p class="mt-3 p-2">Deleted</p>
+            </div>
+          </div>
           <div class="custom-chart">
-            <div id="columnchart_values"></div>
-            <!-- <pie-chart :data="chartData" name="pie-chart" :colors="['#1a3596', '#14161e','#36a7f7', '#2f3343','#122051']" legend="false"> </pie-chart> -->
+          <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient" [xAxis]="showXAxis"
+            [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+            (select)="onSelect($event)">
+          </ngx-charts-bar-vertical>
+            <!-- <div id="columnchart_values"></div> -->
           </div>
         </div>
       </div>
       <div class="col-sm-12 col-xs-12 col-md-4 mTop25">
         <div class="message-section">
           <h3 class="heading2">Un-read Messages</h3>
-          <span class="circle red-bg">02</span>
+          <span class="circle red-bg">{{unreadMessages.length}}</span>
         </div>
-        <div class="message-content mTop25">
-          <div class="admin-msg">
+        <div class="message-content mTop25" *ngIf="unreadMessages && unreadMessages.length">
+          <div class="admin-msg" *ngFor="let message of unreadMessages">
             <div class="msg-info">
               <img src="../../../assets/images/avatar.png" alt="">
               <div class="mTop15">
                 <h2>Admin</h2>
-                <p>9:34 AM</p>
+                <p>{{message.MessageTime}}</p>
               </div>
             </div>
             <div class="msg-txt">
-              <p>Thankx for posting a new livw job, however we will new some more information.</p>
+              <p>{{message.Message}}</p>
             </div>
-            <a href="" class="blue-txt">Reply</a>
+            <a class="blue-txt" [routerLink]="['/user/communication']">Reply</a>
           </div>
-          <div class="admin-msg">
-            <div class="msg-info">
-              <img src="../../../assets/images/avatar.png" alt="">
-              <div class="mTop15">
-                <h2>Admin</h2>
-                <p>9:34 AM</p>
-              </div>
-            </div>
-            <div class="msg-txt">
-              <p>Thankx for posting a new livw job, however we will new some more information.</p>
-            </div>
-            <a href="" class="blue-txt">Reply</a>
+        </div>
+        <div class="message-content mTop25" *ngIf="unreadMessages && !unreadMessages.length">
+          <div class="makeCenter mTop15">
+          <p> No Un-read found</p>
           </div>
         </div>
       </div>

@@ -16,16 +16,13 @@
       </div>
 
       <div class="round-logo">
-
         <img src="../../../assets/icons/Success.png" alt="success icon">
       </div>
       <div class="footer-content">
-          <button type="button" class="btn btn-default custom-modal-button success-btn" *ngIf="page && id" (click)="moveToNextRoute(page, id)">Next Step</button>
-          <a (click)="bsModalRef.hide()" *ngIf="page && id">Skip for now</a>
-          <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Ok</a>
-
-        </div>
-
+        <button type="button" class="btn btn-default custom-modal-button success-btn" *ngIf="page && id" (click)="moveToNextRoute(page, id)">Next Step</button>
+        <a (click)="bsModalRef.hide()" *ngIf="page && id">Skip for now</a>
+        <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Got it</a>
+      </div>
 </div>
 
 <div class="modal-inner makeCenter error-custom-modal" *ngIf="type=='error'">
@@ -42,12 +39,11 @@
     </div>
 
     <div class="round-logo">
-
       <img src="../../../assets/icons/heart.png" alt="success icon">
     </div>
     <div class="footer-content">
-        <button type="button" class="btn btn-default custom-modal-button try-later" (click)="bsModalRef.hide()">Try Later</button>
-      </div>
+      <button type="button" class="btn btn-default custom-modal-button try-later" (click)="bsModalRef.hide()">Try Later</button>
+    </div>
 
 </div>
 
@@ -65,13 +61,11 @@
     </div>
 
     <div class="round-logo">
-
       <img src="../../../assets/icons/warning.png" alt="success icon">
     </div>
     <div class="footer-content">
-        <button type="button" class="btn btn-default custom-modal-button warning-btn" (click)="bsModalRef.hide()" >Got it</button>
-      </div>
-
+      <button type="button" class="btn btn-default custom-modal-button warning-btn" (click)="bsModalRef.hide()" >Got it</button>
+    </div>
 </div>
 
 <div class="modal-inner makeCenter" *ngIf="type=='approved'">
@@ -83,117 +77,164 @@
     </div>
     <div class="modal-body sucess">
       <h3>Profile has been approved Successfully Saved</h3>
-
     </div>
 
     <div class="round-logo">
-
       <img src="../../../assets/icons/Success.png" alt="success icon">
     </div>
     <div class="footer-content">
+      <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Back to Home Page</a>
+    </div>
+</div>
+<div class="modal-inner makeCenter" *ngIf="type=='jobApproved'">
+  <div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body sucess">
+    <h3>Job has been approved Successfully Saved</h3>
+  </div>
+  <div class="round-logo">
+    <img src="../../../assets/icons/Success.png" alt="success icon">
+  </div>
+  <div class="footer-content">
+    <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Back to Home Page</a>
+  </div>
+</div>
 
-        <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Back to Home Page</a>
-      </div>
+<div class="modal-inner makeCenter" *ngIf="type=='jobCompleted'">
+  <div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body sucess">
+    <h3>Job has been Completed Successfully</h3>
+  </div>
 
+  <div class="round-logo">
+    <img src="../../../assets/icons/Success.png" alt="success icon">
+  </div>
+  <div class="footer-content">
+    <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Back to Home Page</a>
+  </div>
+</div>
+
+<div class="modal-inner makeCenter" *ngIf="type=='pilotRating'">
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body sucess">
+  <rating [(ngModel)]="rate" [max]="max" [readonly]="isReadonly" (click)="updateRating(rate)"></rating>
+  </div>
+  <div class="footer-content">
+    <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Done</a>
+  </div>
+</div>
+
+<div class="modal-inner makeCenter error-custom-modal" *ngIf="type=='jobReject'">
+  <div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body error">
+    <h3>Job has been rejected</h3>
+  </div>
+
+  <div class="round-logo">
+    <img src="../../../assets/icons/heart.png" alt="success icon">
+  </div>
+  <!-- <div class="footer-content">
+    <button type="button" class="btn btn-default custom-modal-button try-later" (click)="bsModalRef.hide()">Try Later</button>
+  </div> -->
 </div>
 
 <div class="modal-inner makeCenter error-custom-modal" *ngIf="type=='blocked'">
   <div class="modal-header">
       <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
-      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body error">
-      <h3>Profile Successfully Blocked!</h3>
-    </div>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body error">
+    <h3>Profile Successfully Blocked!</h3>
+  </div>
 
-    <div class="round-logo">
-
-      <img src="../../../assets/icons/heart.png" alt="success icon">
-    </div>
-    <div class="footer-content">
-      <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Ok</a>
-      </div>
-
+  <div class="round-logo">
+    <img src="../../../assets/icons/heart.png" alt="success icon">
+  </div>
+  <div class="footer-content">
+  <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Ok</a>
+  </div>
 </div>
 
 <div class="modal-inner makeCenter" *ngIf="type=='zoom'">
-
-        <div class="modal-header">
-          <h4 class="modal-title pull-left">{{data.Title}}</h4>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <img [src]="data.Path" alt="" style="width: 100%;">
-        </div>
-
-
-
-
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{data.Title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-  <div class="modal-inner makeCenter" *ngIf="type=='zoom-admin'">
+  <div class="modal-body">
+    <img [src]="data.Path" alt="" style="width: 100%;">
+  </div>
+</div>
 
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Image</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <img [src]="data" alt="" style="width: 100%;">
-    </div>
-
-
+<div class="modal-inner makeCenter" *ngIf="type=='zoom-admin'">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Image</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img [src]="data" alt="" style="width: 100%;">
+  </div>
 </div>
 
 <div class="modal-inner makeCenter" *ngIf="type=='old-user'">
   <div class="modal-header">
       <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
-      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body maintenance-message">
-      <h3>Scheduled Maintenance Notice!</h3>
-      <p>DWS System is Undergoing a Scheduled Maintenance, Check back in within a day or two.</p>
-    </div>
-
-
-    <div class="round-logo">
-
-      <img src="../../../assets/icons/maintenance.png" alt="success icon">
-    </div>
-    <div class="footer-content">
-        <button type="button" class="btn btn-default custom-modal-button maintenance-btn" (click)="bsModalRef.hide()">Got it</button>
-
-
-      </div>
-
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body maintenance-message">
+    <h3>Scheduled Maintenance Notice!</h3>
+    <p>DWS System is Undergoing a Scheduled Maintenance, Check back in within a day or two.</p>
+  </div>
+  <div class="round-logo">
+    <img src="../../../assets/icons/maintenance.png" alt="success icon">
+  </div>
+  <div class="footer-content">
+    <button type="button" class="btn btn-default custom-modal-button maintenance-btn" (click)="bsModalRef.hide()">Got it</button>
+  </div>
 </div>
 
 <div class="modal-inner makeCenter warning-custom-modal"  *ngIf="type=='old-user-empty'">
   <div class="modal-header">
-      <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
-      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body warning">
-      <h3>A Little Attention Required!</h3>
-      <p>Please add your Country and State information again. We updated our system to assist and serve you better based on your location.</p>
-    </div>
-
-    <div class="round-logo">
-
-      <img src="../../../assets/icons/warning.png" alt="success icon">
-    </div>
-    <div class="footer-content">
-        <button type="button" class="btn btn-default custom-modal-button warning-btn" (click)="bsModalRef.hide()" >Got it</button>
-      </div>
-
+    <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body warning">
+    <h3>A Little Attention Required!</h3>
+    <p>Please add your Country and State information again. We updated our system to assist and serve you better based on your location.</p>
+  </div>
+  <div class="round-logo">
+    <img src="../../../assets/icons/warning.png" alt="success icon">
+  </div>
+  <div class="footer-content">
+    <button type="button" class="btn btn-default custom-modal-button warning-btn" (click)="bsModalRef.hide()" >Got it</button>
+  </div>
 </div>
 
 

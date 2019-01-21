@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="topContent">
+    <h1>Jobs</h1>
+    <p>All of your Jobs Quoted Requests can be managed here. </p>
+  </div>
+  <div class="custom-tabs">
+    <ul>
+      <li (click)="openActiveJobs()"><a [class.active-link]="isActiveJobs">Active Jobs</a></li>
+      <li (click)="openQuotedJobs()"><a [class.active-link]="!isActiveJobs">Quoted Jobs<span class="badge"></span></a></li>
+    </ul>
+  </div>
+
+  <div class="command-center" *ngIf="isActiveJobs">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-div">
+          <div class="table-div">
+            <div class="table-rows table-heading-row">
+              <div class="table-heading">Job Title</div>
+              <div class="table-heading makeCenter">Status</div>
+              <div class="table-heading">Phone</div>
+              <div class="table-heading">Country</div>
+              <div class="table-heading">State</div>
+              <div class="table-heading">City</div>
+              <div class="table-heading">Action</div>
+            </div>
+            <div class="table-body">
+              <div *ngFor="let job of activeJobList" class="table-rows table-body-rows">
+                <div>{{job.JobTitle}}</div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Active</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='completed'"><a class="custom-btn green-trans">Cpmpleted</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='approved'"><a class="custom-btn green-trans">Approved</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='pending'"><a class="custom-btn yellow-trans">Pending</a></div>
+                <div>{{job.PrimaryPhone}}</div>
+                <div>{{job.PilotCountry}}</div>
+                <div>{{job.PilotState}}</div>
+                <div>{{job.City}}</div>
+                <div class="action makeCenter"><a class="manage-btn" [routerLink]="['/user/job',job.JobId]">Manage</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-footer">
+          <div class="entries-selector">
+            <p class="show-entries-p">Show entries per page</p>
+            <div class="selector-input-container">
+              <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getActiveJobs(pageNumber,0)">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+          </div>
+          <div class="pagination-div">
+            <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="command-center" *ngIf="!isActiveJobs">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-div">
+          <div class="table-div">
+            <div class="table-rows table-heading-row">
+              <div class="table-heading">Job Title</div>
+              <div class="table-heading makeCenter">Status</div>
+              <div class="table-heading">Phone</div>
+              <div class="table-heading">Country</div>
+              <div class="table-heading">State</div>
+              <div class="table-heading">City</div>
+              <div class="table-heading">Action</div>
+            </div>
+            <div class="table-body">
+              <div *ngFor="let job of quotedJobList" class="table-rows table-body-rows">
+                <div>{{job.JobTitle}}</div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Completed</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='approved'"><a class="custom-btn green-trans">Approved</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='pending'"><a class="custom-btn yellow-trans">Pending</a></div>
+                <div>{{job.PrimaryPhone}}</div>
+                <div>{{job.PilotCountry}}</div>
+                <div>{{job.PilotState}}</div>
+                <div>{{job.City}}</div>
+                <div class="action makeCenter"><a [routerLink]="['/user/job',job.JobId]" class="manage-btn">Manage</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-footer">
+          <div class="entries-selector">
+            <p class="show-entries-p">Show entries per page</p>
+            <div class="selector-input-container">
+              <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getQuotedJobs(pageNumber,0)">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+          </div>
+          <div class="pagination-div">
+            <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

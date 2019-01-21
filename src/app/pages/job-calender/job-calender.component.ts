@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { JobService } from './../../services/job/job.service';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMo
 import { Subject } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CalendarEvent, CalendarView} from "angular-calendar";
+import * as moment from "moment";
 const colors: any = {
   red: {
     primary: "#f14b4b",
@@ -34,12 +36,14 @@ const colors: any = {
 export class JobCalenderComponent implements OnInit {
   userInfo: any;
   activeJobList: any = [];
+  jobList: any = [];
   startTime: any;
   endTime: any;
   constructor(
     private modal: NgbModal,
     private jobSevice: JobService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
   ) {}
   ngOnInit() {
     this.userInfo = this.authService.getCurrentUser();
@@ -57,8 +61,7 @@ export class JobCalenderComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
   events: CalendarEvent[] = [];
-
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen: boolean = false;
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }) {
     if (isSameMonth(date, this.viewDate)) {
@@ -74,53 +77,47 @@ export class JobCalenderComponent implements OnInit {
     }
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  handleEvent(event: CalendarEvent): void {
     console.log("this is data", event);
-
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: "lg" });
+    this.router.navigate(["user/job", event.color]);
   }
 
   getUserActiveJobs(id) {
     this.jobSevice.getUserActiveJobs(id).subscribe(data => {
       if (data.status && data.result) {
         this.activeJobList = data.result;
-        console.log("activejobs", this.activeJobList);
 
         this.activeJobList.forEach(val => {
           if (val.DateRanges.FromDate != "" && val.DateRanges.ToDate) {
             this.events.push({
               title: val.JobTitle,
-              start: startOfDay(new Date(val.DateRanges.FromDate)),
-              end: endOfDay(new Date(val.DateRanges.ToDate)),
-              color: colors.green
+              start: startOfDay(
+                new Date(moment(val.DateRanges.FromDate).format("lll"))
+              ),
+              end: endOfDay(
+                new Date(moment(val.DateRanges.ToDate).format("lll"))
+              ),
+              color: val.JobId
             });
+            this.refresh.next();
           } else if (val.DateRanges.FromDate != "") {
             var date = val.DateRanges.FromDate;
-            date = date.split('T')[0];
+            this.startTime = val.DateRanges.From;
+            this.endTime = val.DateRanges.To;
 
-            this.startTime=val.DateRanges.From
-            this.startTime = this.startTime.split('T')[1];
-            this.endTime = val.DateRanges.To
-            this.endTime = this.endTime.split('T')[1];
-
-            this.startTime = date + " " + this.startTime;
-            this.endTime = date + " " + this.endTime;
-            console.log("this is this.start imeart time", this.startTime);
-
-            console.log("this is this.endTimeart time",this.endTime);
-
+            this.startTime =
+              date.split("T")[0] + " " + this.startTime.split("T")[1];
+            this.endTime =
+              date.split("T")[0] + " " + this.endTime.split("T")[1];
 
             this.events.push({
               title: val.JobTitle,
-              start: addHours(this.startTime,0),
-
+              start: addHours(this.startTime, 0),
               end: addHours(this.endTime, 0),
-              color: colors.green
+              color: val.JobId
             });
+            this.refresh.next();
           }
-
-          this.refresh.next();
         });
       } else {
         this.activeJobList = [];

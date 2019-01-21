@@ -763,20 +763,17 @@ input[type=number] {
 }
 
 .topContent {
-
   text-align: center;
-
   h1 {
     font-family: 'Apercu-Medium';
     padding-top: 100px;
-    padding-bottom: 25px;
     font-size: 34px;
   }
 
   p {
     width: 42%;
     margin: 0 auto;
-    font-size: 18px;
+    font-size: 20px;
     font-family: 'Apercu-Regular';
     padding-bottom: 30px;
     color: $p-color;
@@ -1103,9 +1100,13 @@ div.dataTables_length {
 
 .disableDiv {
     pointer-events: none !important;
+}
+.disableBtn{
+    pointer-events: none !important;
+    background: #9595a2 !important;
+    color: #fff !important;
 
 }
-
 .enableDiv {
   pointer-events: visible !important;
 }
@@ -1226,8 +1227,16 @@ div.custom-datepicker{
   padding: 17px 30px;
   margin: 5px 10px;
   border-radius: 30px;
+  color: #fff !important;
   background: #fff;
   font-size: 16px;
+}
+.custom-btn2 {
+  margin: 5px 10px;
+  border-radius: 30px;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 12px;
 }
 .red-trans{
   border: 1px solid #ff7676;
@@ -1257,6 +1266,8 @@ div.custom-datepicker{
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
+  margin-top: 10px;
   i {
     color: $delete-icon-color;
   }
@@ -1329,6 +1340,11 @@ div.custom-datepicker{
  }
  .barchart-section {
    background: #fff;
+   .barchar-legend{
+      display: flex;
+      justify-content: space-evenly !important;
+      align-items: center;
+   }
  }
  .message-section{
   display: flex;
@@ -1348,7 +1364,8 @@ div.custom-datepicker{
  }
   .message-content {
     background: #fff;
-    min-height: 400px;
+    height: 472px;
+    overflow: auto;
     padding: 10px 20px;
     .admin-msg{
       .msg-info {
@@ -1394,7 +1411,7 @@ div.custom-datepicker{
  .heading2{
   color: #73738a;
   font-size: 1.8em;
-  font-weight: 400;
+  font-weight: 200;
  }
 // for text
 .blue-txt{
@@ -1413,7 +1430,6 @@ color: $success !important;
 .blue-bg {
   background: $primary-color !important;
 }
-
 .red-bg {
   background: $details-btn !important;
 }
@@ -1423,9 +1439,21 @@ color: $success !important;
 .green-bg {
   background: $success !important;
 }
+.orange-bg {
+  background-image: linear-gradient(to right, rgb(253, 149, 89) 0%, rgb(252, 102, 38) 100%);
+  background-image: -moz-linear-gradient(to right, rgb(253, 149, 89) 0%, rgb(252, 102, 38) 100%);
+  background-image: -ms-linear-gradient(to right, rgb(253, 149, 89) 0%, rgb(252, 102, 38) 100%);
+}
+.green-g-bg {
+  background-image: linear-gradient(to right, rgb(65, 183, 81) 0%, rgb(52, 173, 220) 100%);
+  background-image: -moz-linear-gradient(to right, rgb(65, 183, 81) 0%, rgb(52, 173, 220) 100%);
+  background-image: -ms-linear-gradient(to right, rgb(65, 183, 81) 0%, rgb(52, 173, 220) 100%);
+}
 // for dashboard only
 .blue-border {
   border-color: $primary-color !important;
+  margin: 1px 1px 1px 0px !important;
+
 }
 .white-border {
   border-color: #fff !important;
@@ -1509,12 +1537,14 @@ color: $success !important;
   margin: 0px !important;
 }
 .flex-display{
-  display: flex;
-  justify-content: space-evenly;
+  display: flex ;
+  justify-content: space-evenly !important;
   align-items: center;
 }
 
 // calander style starts from here
+
+.calender{
 .cal-month-view {
   .cal-day-badge {
     background-color: #29abe2;
@@ -1524,8 +1554,19 @@ color: $success !important;
   {
   background: #2d94c1 !important;
 }
+
 .cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
   color: #29abe2;
+}
+
+.btn-outline-secondary:hover {
+  color: #fff;
+  background-color: #29abe2 !important;
+}
+}
+.ngx-charts {
+  background: #fff;
+  width: 730px;
 }
 
 // calander style ends here

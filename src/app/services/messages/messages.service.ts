@@ -44,6 +44,14 @@ export class MessagesService {
         })
       );
   }
+  getUnreadMessagesById(userid) {
+    return this.http.get(this.apiUrl + "getUnreadMessages/" + userid)
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        })
+      );
+  }
 
   sendMessageToAdmin(data){
     return this.http.post(this.apiUrl + 'pilot/messageAdmin', data)

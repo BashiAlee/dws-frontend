@@ -7,10 +7,6 @@
   </div>
   <div class="modal-body">
     <div>
-      Action:
-      <pre>{{ modalData?.action }}</pre>
-    </div>
-    <div>
       Event:
       <pre>{{ modalData?.event | json }}</pre>
     </div>
@@ -35,7 +31,7 @@
           <div class="btn btn-outline-secondary blue-border" mwlCalendarToday [(viewDate)]="viewDate">
             Today
           </div>
-<div class="btn btn-primary blue-bg white-border" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+          <div class="btn btn-primary blue-bg white-border" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
             (viewDateChange)="activeDayIsOpen = false">
             Next
           </div>
@@ -62,9 +58,10 @@
 
     <div [ngSwitch]="view">
       <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-        [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)">
+        [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent($event.event)">
       </mwl-calendar-month-view>
-      <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+<mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [tooltipAppendToBody]="false" [viewDate]="viewDate" [events]="events"
+  [refresh]="refresh"
         (eventClicked)="handleEvent('Clicked', $event.event)">
       </mwl-calendar-week-view>
       <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"

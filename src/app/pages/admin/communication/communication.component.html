@@ -38,7 +38,7 @@
             <div class="aside-body-div">
 
               <div class="aside-body-main-child" *ngIf="currentUserMessages && currentUserMessages.length">
-               
+
                 <div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages | pilots: searchPilot"
                   (click)="getAllMessages(currentList)">
                   <div class="sidebar-image-container" [ngClass]="(currentRole != 'admin')?'makeSmall':''">
@@ -55,9 +55,9 @@
                     <div class="sidebar-img-text makeCenter mTop15">
                         <p> No conversation found</p>
                       </div>
-                   
+
                 </div>
-                
+
               </div>
               <div class="aside-body-main-child" *ngIf="currentUserMessages && !currentUserMessages.length">
                 <!-- <div class="aside-scroll-child"> -->
@@ -82,7 +82,7 @@
                 </div>
               </div>
             </div>
-        
+
             <div class="matti-body makeCenter" id="messages-scroll"  *ngIf="!allMessagesByConversationId ">
               <div class="messageEmptyBody">
                   <i class="fa fa-comments" aria-hidden="true"></i>
@@ -118,6 +118,7 @@
                       <p>{{ messages.MessageTime | date: 'hh:mma' }}</p>
                       <div [ngClass]="(onlineUserId != messages.MessageFrom)?'msg-p':'blue-msg-p'">
                         <p>{{ messages.Message }}</p>
+                        <!-- admin messages -->
                       </div>
                     </div>
                   </div>
@@ -165,7 +166,7 @@
           <div class="sidebar-img-text makeCenter mTop15 mBottom25">
               <p> No record found</p>
             </div>
-         
+
           </div>
     </div>
   </div>
