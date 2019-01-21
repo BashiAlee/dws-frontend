@@ -367,22 +367,22 @@ export class ClientJobComponent implements OnInit {
     this.jobInformation.value.Zip = this.jobInformation.value.Zip.toString();
     this.jobInformation.value.PrimaryPhone = this.jobInformation.value.PrimaryPhone.toString();
     this.jobInformation.value.SecondaryPhone = this.jobInformation.value.SecondaryPhone.toString();
-    this.jobSevice
-      .saveJobInformation(this.jobInformation.value)
+    this.jobSevice.saveJobInformation(this.jobInformation.value)
       .subscribe(data => {
         if (data.status) {
+          if (this.jobInformation.value.IsQuote){
+
+          }
           const initialState = {
-            type: "success"
-          };
+            type: "jobPosted"
+            // type: "warning"
+           };
           this.bsModalRef = this.modalService.show(
             ModalsComponent,
             Object.assign({}, this.config, { initialState })
           );
           this.bsModalRef.content.closeBtnName = "Close";
         } else {
-          // this.loading = false;
-          // this.success = false;
-          // this.error = true;
           const initialState = {
             type: "error"
           };

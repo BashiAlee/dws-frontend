@@ -10,18 +10,16 @@
         <p>Continue to the Next Step & Complete
             your Profile Application</p>
       </div>
-
       <div class="modal-body sucess" *ngIf="!page && !id">
         <h3>Your Data is uploaded Successfully</h3>
       </div>
-
       <div class="round-logo">
         <img src="../../../assets/icons/Success.png" alt="success icon">
       </div>
       <div class="footer-content">
         <button type="button" class="btn btn-default custom-modal-button success-btn" *ngIf="page && id" (click)="moveToNextRoute(page, id)">Next Step</button>
         <a (click)="bsModalRef.hide()" *ngIf="page && id">Skip for now</a>
-        <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Got it</a>
+        <a class="custom-btn green-bg white-txt" (click)="bsModalRef.hide()" *ngIf="!page && !id">Got it</a>
       </div>
 </div>
 
@@ -37,14 +35,12 @@
       <p>Something is Broken. We Suggest you to
         try again later.</p>
     </div>
-
     <div class="round-logo">
       <img src="../../../assets/icons/heart.png" alt="success icon">
     </div>
     <div class="footer-content">
       <button type="button" class="btn btn-default custom-modal-button try-later" (click)="bsModalRef.hide()">Try Later</button>
     </div>
-
 </div>
 
 <div class="modal-inner makeCenter warning-custom-modal" *ngIf="type=='warning'">
@@ -86,6 +82,25 @@
       <a (click)="bsModalRef.hide()" *ngIf="!page && !id">Back to Home Page</a>
     </div>
 </div>
+
+<div class="modal-inner makeCenter" *ngIf="type=='jobPosted'">
+  <div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body sucess">
+    <h3>Your Quoted Request has been submitted.</h3>
+  </div>
+  <div class="round-logo">
+    <img src="../../../assets/icons/Success.png" alt="success icon">
+  </div>
+  <div class="footer-content">
+    <button type="button" class="btn btn-default custom-modal-button success-btn" (click)="bsModalRef.hide()">Got it</button>
+  </div>
+</div>
+
 <div class="modal-inner makeCenter" *ngIf="type=='jobApproved'">
   <div class="modal-header">
     <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
@@ -94,7 +109,7 @@
     </button>
   </div>
   <div class="modal-body sucess">
-    <h3>Job has been approved Successfully Saved</h3>
+    <h3>Your Quoted Request has been submitted.</h3>
   </div>
   <div class="round-logo">
     <img src="../../../assets/icons/Success.png" alt="success icon">
