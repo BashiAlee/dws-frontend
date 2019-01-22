@@ -374,13 +374,21 @@ export class ClientJobComponent implements OnInit {
     this.jobSevice.saveJobInformation(this.jobInformation.value)
       .subscribe(data => {
         if (data.status) {
+          var initialState = {};
           if (this.jobInformation.value.IsQuote){
-
+           initialState = {
+              type: "jobPosted"
+              // type: "warning"
+             } 
+    
           }
-          const initialState = {
-            type: "jobPosted"
-            // type: "warning"
-           };
+          else {
+            initialState = {
+               type: "jobPostedLive"
+               // type: "warning"
+              };
+            }
+
           this.bsModalRef = this.modalService.show(
             ModalsComponent,
             Object.assign({}, this.config, { initialState })
