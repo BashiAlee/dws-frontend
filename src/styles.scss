@@ -926,6 +926,7 @@ font-family: 'Apercu-Medium';
       font-family: 'Apercu-Regular';
     }
   }
+  
   .maintenance-message {
     h3 {
       color: $primary-color;
@@ -1576,3 +1577,21 @@ color: $success !important;
 }
 
 // calander style ends here
+
+
+//rating
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  color: #29abe2;
+}
+.full {
+  color: #29abe2;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #29abe2;
+}
