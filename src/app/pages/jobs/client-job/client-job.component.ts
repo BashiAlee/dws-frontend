@@ -153,29 +153,29 @@ export class ClientJobComponent implements OnInit {
     this.jobInformation = this.formBuilder.group({
       UserId: [this.userInfo.ID],
       IsQuote: [false],
-      JobTitle: [""],
-      Comments: [""],
+      JobTitle: ["", Validators.required],
+      Comments: ["",Validators.required],
       Industry: [null],
-      Budget: [],
-      EquipmentPreferences: [""],
-      ExpectedDeliverables: [null],
-      OwnDeliverables: [""],
+      Budget: [Validators.required],
+      EquipmentPreferences: ["",Validators.required],
+      ExpectedDeliverables: [null,Validators.required],
+      OwnDeliverables: ["",Validators.required],
       DateRanges: this.formBuilder.group({
-        DateRangeID: [""],
-        FromDate: [""],
-        From: [""],
-        To: [""],
-        ToDate: [""]
+        DateRangeID: ["",Validators.required],
+        FromDate: ["",Validators.required],
+        From: ["",Validators.required],
+        To: ["",Validators.required],
+        ToDate: ["",Validators.required]
       }),
-      AddressLine1: [""],
-      AddressLine2: [""],
+      AddressLine1: ["",Validators.required],
+      AddressLine2: ["",Validators.required],
       Country: 231,
-      City: [""],
-      State: [],
-      Zip: [""],
-      PrimaryEmail: [""],
-      PrimaryPhone: [""],
-      SecondaryPhone: [""],
+      City: ["",Validators.required],
+      State: [Validators.required],
+      Zip: ["",Validators.required],
+      PrimaryEmail: ["",Validators.required],
+      PrimaryPhone: ["",Validators.required],
+      SecondaryPhone: ["",Validators.required],
       ParticularData: this.formBuilder.array([])
     });
   }
@@ -441,8 +441,8 @@ export class ClientJobComponent implements OnInit {
   addParticularData() {
     const control = <FormArray>this.jobInformation.controls["ParticularData"];
     const addrCtrl = this.formBuilder.group({
-      ParticularName: [""],
-      ParticularNumber: []
+      ParticularName: ["",Validators.required],
+      ParticularNumber: [Validators.required]
     });
     control.push(addrCtrl);
   }
@@ -452,4 +452,6 @@ export class ClientJobComponent implements OnInit {
     control.removeAt(index);
     //.removeAt(this.images.value.findIndex(image => image.id === 502))
   }
+
+  get form() { return this.jobInformation.controls; }
 }

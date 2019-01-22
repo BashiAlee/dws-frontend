@@ -96,28 +96,28 @@
                   <label for="jobTitle" class="custom-input-label">Title of the Job*</label>
                   <input type="text" class="form-control custom-input" id="jobTitle" aria-describedby="jobTitle"
                     formControlName="JobTitle" placeholder="e.g Cover our corporate event">
-                  <!-- <div *ngIf="form.Users.controls.JobTitle.invalid && (form.Users.controls.JobTitle.dirty || form.Users.controls.JobTitle.touched)"
+                  <div *ngIf="form.JobTitle.invalid && (form.JobTitle.dirty || form.JobTitle.touched)"
                   class="invalid-feedback">
-                  <div *ngIf="form.Users.controls.JobTitle.errors.required">First Name is required</div>
-                </div> -->
+                  <div *ngIf="form.JobTitle.errors.required">Title is required</div>
+                </div>
                 </div>
                 <div class="form-group">
                   <label for="industry" class="custom-input-label">Select Industry</label>
                   <ng-select class="custom-select1" formControlName="Industry" placeholder="Select" [searchable]="false">
                     <ng-option *ngFor="let industry of industriesList" [value]="industry.name">{{industry.name}}</ng-option>
                   </ng-select>
-                  <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
-                  <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
-                </div> -->
+                  <div *ngIf="form.Industry.invalid && (form.Industry.dirty || form.Industry.touched)" class="invalid-feedback">
+                  <div *ngIf="form.Industry.errors.required">Industry is required</div>
+                </div>
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label for="comments" class="custom-input-label">Additional request/Comments</label>
                   <textarea class="form-control custom-textarea" placeholder="Comments" formControlName="Comments"></textarea>
-                  <!-- <div *ngIf="form.Notes.invalid && (form.Notes.dirty || form.Notes.touched)" class="invalid-feedback">
-                  <div *ngIf="form.Notes.errors.required">Notes is required</div>
-                </div> -->
+                  <div *ngIf="form.Comments.invalid && (form.Comments.dirty || form.Comments.touched)" class="invalid-feedback">
+                  <div *ngIf="form.Comments.errors.required">Comments is required</div>
+                </div>
                 </div>
               </div>
 
@@ -126,10 +126,10 @@
                   <label for="budget" class="custom-input-label">Budget</label>
                   <input type="number" class="form-control custom-input" id="budget" aria-describedby="budget"
                     formControlName="Budget" placeholder="Enter your budget $">
-                  <!-- <div *ngIf="form.Users.controls.budget.invalid && (form.Users.controls.budget.dirty || form.Users.controls.budget.touched)"
+                  <div *ngIf="form.Budget.invalid && (form.Budget.dirty || form.Budget.touched)"
                   class="invalid-feedback">
-                  <div *ngIf="form.Users.controls.budget.errors.required">Last Name is required</div>
-                </div> -->
+                  <div *ngIf="form.Budget.errors.required">Budget is required</div>
+                </div>
                 </div>
               </div>
 
@@ -147,9 +147,9 @@
                     <ng-option *ngFor="let deliverables of expectedDeliverables" [value]="deliverables.name">{{deliverables.name}}</ng-option>
                   </ng-select>
                   <!-- <span class="select-iner">Select From pre-established deliverables</span> -->
-                  <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
-                  <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
-                </div> -->
+                  <div *ngIf="form.ExpectedDeliverables.invalid && (form.ExpectedDeliverables.dirty || form.ExpectedDeliverables.touched)" class="invalid-feedback">
+                  <div *ngIf="form.ExpectedDeliverables.errors.required">Expected Deliverables is required</div>
+                </div>
                 </div>
               </div>
 
@@ -159,10 +159,10 @@
                     Commas)</label>
                   <input type="text" class="form-control custom-input" id="ownDeliverables" aria-describedby="ownDeliverables"
                     formControlName="OwnDeliverables" (input)="addToTagList(jobInformation.value.OwnDeliverables)">
-                  <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                  <div *ngIf="form.OwnDeliverables.invalid && (form.OwnDeliverables.dirty || form.OwnDeliverables.touched)"
                     class="invalid-feedback">
-                    <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
-                  </div> -->
+                    <div *ngIf="form.OwnDeliverables.errors.required">Own Deliverables is required</div>
+                  </div>
                 </div>
 
                 <div class="chip" *ngFor="let tags of tagsArray">
@@ -190,9 +190,9 @@
                 <div class="form-group mTop15">
                   <textarea class="form-control custom-textarea" *ngIf="IsEquipmentPref=='yes'" placeholder="Type your equipment preferences"
                     formControlName="EquipmentPreferences"></textarea>
-                  <!-- <div *ngIf="form.Notes.invalid && (form.Notes.dirty || form.Notes.touched)" class="invalid-feedback">
-                      <div *ngIf="form.Notes.errors.required">Notes is required</div>
-                    </div> -->
+                  <div *ngIf="form.EquipmentPreferences.invalid && (form.EquipmentPreferences.dirty || form.EquipmentPreferences.touched)" class="invalid-feedback">
+                      <div *ngIf="form.EquipmentPreferences.errors.required">Equipment Preferences is required</div>
+                    </div>
                 </div>
               </div>
 
@@ -260,10 +260,10 @@
                   <label for="addressLine1" class="custom-input-label">Address line 1</label>
                   <input type="text" class="form-control custom-input" placeholder="Enter Address line 1" id="addressLine1"
                     aria-describedby="addressLine1" formControlName="AddressLine1">
-                  <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                  <div *ngIf="form.AddressLine1.invalid && (form.AddressLine1.dirty || form.AddressLine1.touched)"
                     class="invalid-feedback">
-                    <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
-                  </div> -->
+                    <div *ngIf="form.AddressLine1.errors.required">Address is required</div>
+                  </div>
                 </div>
               </div>
 
@@ -273,10 +273,10 @@
                   <label for="lastName" class="custom-input-label">Address line 2</label>
                   <input type="text" class="form-control custom-input" placeholder="Enter Address line 2" id="lastName"
                     aria-describedby="lastName" formControlName="AddressLine2">
-                  <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                  <div *ngIf="form.AddressLine2.invalid && (form.AddressLine2.dirty || form.AddressLine2.touched)"
                     class="invalid-feedback">
-                    <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
-                  </div> -->
+                    <div *ngIf="form.AddressLine2.errors.required">Address is required</div>
+                  </div>
                 </div>
               </div>
 
@@ -286,9 +286,9 @@
                   <ng-select class="custom-select1" formControlName="Country" [searchable]="true" (change)="getStatesByCode('physical',jobInformation.value.Country, 'change')">
                     <ng-option *ngFor="let country of countriesList" [value]="country.ID">{{country.Name}}</ng-option>
                   </ng-select>
-                  <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
-                    <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
-                  </div> -->
+                  <div *ngIf="form.Country.invalid && (form.Country.dirty || form.Country.touched)" class="invalid-feedback">
+                    <div *ngIf="form.Country.errors.required">Country is required</div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-4 col-sm-12 col-xs-12">
@@ -296,10 +296,10 @@
                   <label for="city" class="custom-input-label">City</label>
                   <input type="text" class="form-control custom-input" placeholder="Wilimington" aria-describedby="city"
                     formControlName="City">
-                  <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                  <div *ngIf="form.City.invalid && (form.City.dirty || form.City.touched)"
                     class="invalid-feedback">
-                    <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
-                  </div> -->
+                    <div *ngIf="form.City.errors.required">City is required</div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-4 col-sm-12 col-xs-12">
@@ -308,9 +308,9 @@
                   <ng-select class="custom-select1" formControlName="State" [searchable]="true">
                     <ng-option *ngFor="let state of regionList" [value]="state.ID">{{state.Name}}</ng-option>
                   </ng-select>
-                  <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
-                    <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
-                  </div> -->
+                  <div *ngIf="form.State.invalid && (form.State.dirty || form.State.touched)" class="invalid-feedback">
+                    <div *ngIf="form.State.errors.required">State is required</div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-4 col-sm-6 col-xs-12">
@@ -318,10 +318,10 @@
                   <label for="Zip" class="custom-input-label">Zip</label>
                   <input type="number" class="form-control custom-input" placeholder="44000" aria-describedby="zip"
                     formControlName="Zip">
-                  <!-- <div *ngIf="form.Users.controls.LastName.invalid && (form.Users.controls.LastName.dirty || form.Users.controls.LastName.touched)"
+                  <div *ngIf="form.Zip.invalid && (form.Zip.dirty || form.Zip.touched)"
                       class="invalid-feedback">
-                      <div *ngIf="form.Users.controls.LastName.errors.required">Last Name is required</div>
-                    </div> -->
+                      <div *ngIf="form.Zip.errors.required">Zip is required</div>
+                    </div>
                 </div>
               </div>
 
@@ -334,9 +334,9 @@
                   <input type="email" formControlName="PrimaryEmail" placeholder="Enter Primary Email" class="form-control custom-input"
                     id="primaryEmail" aria-describedby="primaryEmail">
 
-                  <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
-                      <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
-                    </div> -->
+                  <div *ngIf="form.PrimaryEmail.invalid && (form.PrimaryEmail.dirty || form.PrimaryEmail.touched)" class="invalid-feedback">
+                      <div *ngIf="form.PrimaryEmail.errors.required">PrimaryEmail is required</div>
+                    </div>
                 </div>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
@@ -347,9 +347,9 @@
                   <label for="primaryPhone" class="custom-input-label">Primary Phone</label>
                   <input type="number" formControlName="PrimaryPhone" placeholder="Enter Primary Phone" class="form-control custom-input"
                     id="primaryPhone" aria-describedby="primaryPhone">
-                  <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
-                      <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
-                    </div> -->
+                  <div *ngIf="form.PrimaryPhone.invalid && (form.PrimaryPhone.dirty || form.PrimaryPhone.touched)" class="invalid-feedback">
+                      <div *ngIf="form.PrimaryPhone.errors.required">Primary Phone is required</div>
+                    </div>
                 </div>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
@@ -357,9 +357,9 @@
                   <label for="secondaryPhone" class="custom-input-label">Secondary Phone</label>
                   <input type="number" formControlName="SecondaryPhone" placeholder="Enter Secondary Phone" class="form-control custom-input"
                     id="secondaryPhone" aria-describedby="secondaryPhone">
-                  <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
-                      <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
-                    </div> -->
+                  <div *ngIf="form.SecondaryPhone.invalid && (form.SecondaryPhone.dirty || form.SecondaryPhone.touched)" class="invalid-feedback">
+                      <div *ngIf="form.SecondaryPhone.errors.required">Secondary Phone is required</div>
+                    </div>
                 </div>
               </div>
 
@@ -375,8 +375,8 @@
                       <label for="ParticularName" class="custom-input-label">Particular Name</label>
                       <input type="text" formControlName="ParticularName" placeholder="Enter Name" class="form-control custom-input"
                         id="particularName" aria-describedby="particularName">
-                      <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
-                      <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                      <!-- <div *ngIf="particularData.invalid && (particularData.dirty || particularData.touched)" class="invalid-feedback">
+                      <div *ngIf="particularData.errors">Particular Name is required</div>
                     </div> -->
                     </div>
                   </div>
@@ -385,8 +385,8 @@
                       <label for="ParticularNumber" class="custom-input-label">Particular Number</label>
                       <input type="number" formControlName="ParticularNumber" placeholder="Enter Number" class="form-control custom-input"
                         id="particularNumber" aria-describedby="particularNumber">
-                      <!-- <div *ngIf="form.Suffix.invalid && (form.Suffix.dirty || form.Suffix.touched)" class="invalid-feedback">
-                      <div *ngIf="form.Suffix.errors.required">Suffix is required</div>
+                      <!-- <div *ngIf="particularData.invalid && (particularData.dirty || particularData.touched)" class="invalid-feedbck">
+                      <div *ngIf="particularData.errors.required">particular Number is required</div>
                     </div> -->
                     </div>
                   </div>
@@ -406,9 +406,9 @@
       <div class="container">
         <div class="row makeCenter">
           <div class="col-md-12 col-sm-12 col-xs-12 mTop100">
-            <button class="custom-btn post-btn" *ngIf="!jobInformation.value.IsQuote" (click)="save()">Post this as
+            <button class="custom-btn post-btn" *ngIf="!jobInformation.value.IsQuote" [disabled]="jobInformation.invalid" (click)="save()">Post this as
               Live Job</button>
-            <button class="custom-btn quote-btn" *ngIf="jobInformation.value.IsQuote" (click)="save()">Post this as
+            <button class="custom-btn quote-btn" *ngIf="jobInformation.value.IsQuote" [disabled]="jobInformation.invalid" (click)="save()">Post this as
               Quote</button>
           </div>
         </div>
