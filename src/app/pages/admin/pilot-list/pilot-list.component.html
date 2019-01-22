@@ -111,6 +111,8 @@
                   <div class="action" *ngIf="jobId"><a class="custom-btn blue-bg white-txt p1530" (click)="assignPilot(jobId,list.ID)">Assign</a></div>
                   <div class="action" *ngIf="!jobId"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
                </div>
+                <alert type="success" [dismissOnTimeout]="timeout" *ngIf="apiResponse.success">{{ msg }} </alert>
+                <alert type="danger" [dismissOnTimeout]="timeout" *ngIf="apiResponse.fail">{{ msg }} </alert>
                </div>
              </div>
            </div>

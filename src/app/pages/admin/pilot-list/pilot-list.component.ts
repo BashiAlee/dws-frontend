@@ -29,6 +29,9 @@ export class PilotListComponent implements OnInit {
   allPilots: any = [];
   jobId:any;
   pilotIds:any=[];
+  apiResponse:any={};
+  timeout:any=0;
+  msg:any;
   constructor(
     private pilotService: PilotService,
     private router: Router,
@@ -115,18 +118,27 @@ export class PilotListComponent implements OnInit {
     }
   }
   assignPilot(jobId,pilotId){
-    // this.pilotIds.push({PilotId :pilotId})
+    this.apiResponse.fail = false;
+    this.apiResponse.success = false;
     var data = {
       JobId:jobId,
       PilotIds: [{ PilotId:pilotId}],
       Status:'assigned',
     };
+
     this.jobService.assignPolits(data).subscribe(data => {
+      console.log("this is data",data);
+
       if (data.status && data.result) {
-        console.log("this is assigned");
+        this.apiResponse.success = true;
+          this.msg= data.message,
+          this.timeout=2500
 
-      } else if (data.status && !data.result) {
-
+      } else {
+        console.log("this is called");
+        this.apiResponse.fail = true;
+          this.msg= data.message,
+          this.timeout= 2500
       }
     });
 
