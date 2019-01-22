@@ -37,7 +37,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-7 col-sm-12 col-xs-12" *ngIf="userInfo.Role=='customer'">
+      <div class="col-md-7 col-sm-12 col-xs-12" *ngIf="jobData && userInfo.Role=='customer' && jobData.JobStatus=='completed'">
         <div class="flex-display">
           <p class="mTop15 description1"><i class="fa fa-check" aria-hidden="true"></i>
           Pilot(s) claimed the job is completed</p><a (click)="openRatingModal()" class="custom-btn1 orange-bg">Rate your
@@ -66,11 +66,11 @@
     <p>Review Jobs and Let Customer/Pilot know if they are missing
       something important!</p>
   </div>
-<!-- <div class="buttons makeCenter mBottom25" *ngIf="jobData && jobData.IsQuote">
-    <a class="btn-approve profile-buttons" *ngIf="!isAdmin" (click)="approveJob()">Approve</a>
-    <a class="btn-message profile-buttons" [routerLink]="['/admin/communication']">Send a Message</a>
-    <a class="btn-reject  profile-buttons" (click)="rejectJob()">Reject</a>
-  </div> -->
+  <div class="buttons makeCenter mBottom25" *ngIf="jobData && jobData.length ||isAdmin">
+    <a class="btn-approve profile-buttons white-txt" [routerLink]="['/admin/pilot-list',jobId]">Assign pilot</a>
+    <a class="btn-message profile-buttons white-txt" [routerLink]="['/admin/communication']">Send a Message</a>
+    <a class="btn-reject  profile-buttons white-txt" (click)="rejectJob()">Delete</a>
+  </div>
 
 
 <form [formGroup]="jobInformation" [class.disableDiv]="isAdmin || jobId">

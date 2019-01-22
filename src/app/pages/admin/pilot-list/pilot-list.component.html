@@ -2,29 +2,16 @@
 
     <div class="container">
       <div class="topContent">
-               <h1>Pilots</h1>
-               <p>See where all of the DWS registered drones are..</p>
-       </div>
+          <h1>Pilots</h1>
+          <p>See where all of the DWS registered drones are..</p>
+      </div>
 
       <div class="custom-tabs">
-
         <ul>
           <li (click)="openApprovedPilot()"><a [class.active-link]="isApprovedPilots">Approved Pilots</a></li>
           <li (click)="openPendingPilot()"><a [class.active-link]="!isApprovedPilots">Pending Approval <span class="badge">{{pendingList?pendingList.length:'0'}}</span></a></li>
         </ul>
-
       </div>
-
-      <div class="custom-tabs" >
-        <!--<button  class="BackBtn" (click)="moveBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>-->
-        <!-- <ul>
-          <li ><a  class="active-link " [routerLink]="['personal-information']" [routerLinkActive]="['active-link']" >Personal Information</a></li>
-          <li ><a [routerLink]="['business-information']"  [routerLinkActive]="['active-link']">Business Information</a></li>
-        </ul> -->
-        <!--<button class="ForwardBtn"  (click)="moveForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>-->
-      </div>
-
-
 
        <div class="command-center" *ngIf="isApprovedPilots">
          <div class="row inputs-container1">
@@ -121,7 +108,8 @@
                   <div>{{list.PhysicallCity ? list.PhysicallCity: "-"}}</div>
                   <!-- <div>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</div> -->
                   <!-- <div class="action"><a [routerLink]="['/admin/profile',list.UserId]" class="detail-btn" [class.disabledAnchor]="list.Suffix=='nil'">Details</a></div> -->
-                  <div class="action"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
+                  <div class="action" *ngIf="jobId"><a class="custom-btn blue-bg white-txt p1530" (click)="assignPilot(jobId,list.ID)">Assign</a></div>
+                  <div class="action" *ngIf="!jobId"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
                </div>
                </div>
              </div>

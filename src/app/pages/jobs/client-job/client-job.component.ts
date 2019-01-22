@@ -84,12 +84,15 @@ export class ClientJobComponent implements OnInit {
     if (this.router.url.split("/")[1] == "admin") {
       this.isAdmin = true;
     }
+
   }
 
   ngOnInit() {
     this.onPageLoad();
 
     this.jobId = this.route.snapshot.paramMap.get("id");
+    console.log("this is data from component", this.jobId);
+
     this.OwnDeliverables1 = [
       {
         name: ""
@@ -185,6 +188,7 @@ export class ClientJobComponent implements OnInit {
     this.onPageLoad();
   }
   onPageLoad() {
+
     var fromLimit = this.bigCurrentPage.toString() + "0";
     var data = {
       from: this.pageNumber, //skip //offsert
@@ -289,73 +293,73 @@ export class ClientJobComponent implements OnInit {
       }
     });
   }
-
   getJobByID(jobId) {
-    this.jobSevice.getJobByID(jobId).subscribe(data => {
-      if (data.status) {
-        this.jobData = data.result[0];
-        console.log("data of jobs", this.jobData);
-        if (
-          this.jobData.DateRanges.FromDate != "" &&
-          this.jobData.DateRanges.From != "" &&
-          this.jobData.DateRanges.To != ""
-        ) {
-          this.jobData.DateRanges.FromDate = new Date(
-            this.jobData.DateRanges.FromDate
-          );
-        }
-        if (
-          this.jobData.DateRanges.FromDate != "" &&
-          this.jobData.DateRanges.ToDate != ""
-        ) {
-          this.jobData.DateRanges.FromDate = new Date(
-            this.jobData.DateRanges.FromDate
-          );
-          this.jobData.DateRanges.ToDate = new Date(
-            this.jobData.DateRanges.ToDate
-          );
-          var a = moment(this.jobData.DateRanges.ToDate)
-            .add(1, "days")
-            .calendar();
-          var now = moment();
-          console.log("this is data@@@@@@", this.jobData.DateRanges.ToDate);
-        }
-        // a.diff(b, "days");
+      this.jobSevice.getJobByID(jobId).subscribe(data => {
+        if (data.status) {
+          this.jobData = data.result[0];
+          console.log("data of jobs", this.jobData);
+          if (
+            this.jobData.DateRanges.FromDate != "" &&
+            this.jobData.DateRanges.From != "" &&
+            this.jobData.DateRanges.To != ""
+          ) {
+            this.jobData.DateRanges.FromDate = new Date(
+              this.jobData.DateRanges.FromDate
+            );
+          }
+          if (
+            this.jobData.DateRanges.FromDate != "" &&
+            this.jobData.DateRanges.ToDate != ""
+          ) {
+            this.jobData.DateRanges.FromDate = new Date(
+              this.jobData.DateRanges.FromDate
+            );
+            this.jobData.DateRanges.ToDate = new Date(
+              this.jobData.DateRanges.ToDate
+            );
+            var a = moment(this.jobData.DateRanges.ToDate)
+              .add(1, "days")
+              .calendar();
+            var now = moment();
+            console.log("this is data@@@@@@", this.jobData.DateRanges.ToDate);
+          }
+          // a.diff(b, "days");
 
-        this.jobInformation.patchValue(Object.assign({}, this.jobData));
-        if (this.jobInformation.value.EquipmentPreferences != "") {
-          this.IsEquipmentPref = "yes";
-        }
-        if (
-          this.jobInformation.value.DateRanges.FromDate != "" &&
-          this.jobInformation.value.DateRanges.From != "" &&
-          this.jobInformation.value.DateRanges.To != ""
-        ) {
-          this.IsParticularDate = "particular";
-        }
-        if (
-          this.jobInformation.value.DateRanges.FromDate != "" &&
-          this.jobInformation.value.DateRanges.ToDate != ""
-        ) {
-          this.IsParticularDate = "range";
-        }
-        if (this.jobInformation.value.ParticularData != null) {
-          const control = <FormArray>(
-            this.jobInformation.controls["ParticularData"]
-          );
+          this.jobInformation.patchValue(Object.assign({}, this.jobData));
+          if (this.jobInformation.value.EquipmentPreferences != "") {
+            this.IsEquipmentPref = "yes";
+          }
+          if (
+            this.jobInformation.value.DateRanges.FromDate != "" &&
+            this.jobInformation.value.DateRanges.From != "" &&
+            this.jobInformation.value.DateRanges.To != ""
+          ) {
+            this.IsParticularDate = "particular";
+          }
+          if (
+            this.jobInformation.value.DateRanges.FromDate != "" &&
+            this.jobInformation.value.DateRanges.ToDate != ""
+          ) {
+            this.IsParticularDate = "range";
+          }
+          if (this.jobInformation.value.ParticularData != null) {
+            const control = <FormArray>(
+              this.jobInformation.controls["ParticularData"]
+            );
 
-          this.jobData.ParticularData.forEach(value => {
-            const addrCtrl = this.formBuilder.group({
-              ParticularName: [value.ParticularName],
-              ParticularNumber: [value.ParticularNumber]
+            this.jobData.ParticularData.forEach(value => {
+              const addrCtrl = this.formBuilder.group({
+                ParticularName: [value.ParticularName],
+                ParticularNumber: [value.ParticularNumber]
+              });
+              control.push(addrCtrl);
             });
-            control.push(addrCtrl);
-          });
+          }
+
+        } else {
+          this.jobData = [];
         }
-      } else {
-        this.jobData = [];
-      }
-    });
+      });
   }
   save() {
     // this.success = false;

@@ -161,16 +161,18 @@
             <div class="dropdown-menu notification-dropdown dropdown-menu-right wow fadeInDown">
               <ul class="drop-content">
                 <div *ngIf="userInfo.Role == 'admin'">
-                  <li class="align-text" *ngFor="let message of adminAllMessages">
-                    <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
-                    <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png"
-                        alt=""></div>
-                    <div class="detail" [routerLink]="['communication']">
-                      <h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
-                      <p>has message for you.</p>
-                    </div>
-                  </li>
-                  <li class="align-text" *ngIf="adminAllMessages && !adminAllMessages.length">
+                  <ng-template *ngIf="adminAllMessages && adminAllMessages.length">
+                    <li class="align-text" *ngFor="let message of adminAllMessages">
+                      <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
+                      <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png" alt=""></div>
+                      <div class="detail" [routerLink]="['communication']">
+                        <h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
+                        <p>has message for you.</p>
+                      </div>
+                    </li>
+                  </ng-template>
+
+                  <li class="" *ngIf="adminAllMessages && !adminAllMessages.length">
                     <p>No Messages</p>
 
                   </li>

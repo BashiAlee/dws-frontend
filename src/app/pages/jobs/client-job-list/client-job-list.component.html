@@ -30,8 +30,8 @@
                 <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Active</a></div>
-                <div class="action makeCenter" *ngIf="job.JobStatus=='completed'"><a class="custom-btn green-trans">Cpmpleted</a></div>
-                <div class="action makeCenter" *ngIf="job.JobStatus=='approved'"><a class="custom-btn green-trans">Approved</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='completed'"><a class="custom-btn green-trans">Completed</a></div>
+                <!-- <div class="action makeCenter" *ngIf="job.JobStatus=='approved'"><a class="custom-btn green-trans">Approved</a></div> -->
                 <div class="action makeCenter" *ngIf="job.JobStatus=='pending'"><a class="custom-btn yellow-trans">Pending</a></div>
                 <div>{{job.PrimaryPhone}}</div>
                 <div>{{job.PilotCountry}}</div>
@@ -46,7 +46,7 @@
           <div class="entries-selector">
             <p class="show-entries-p">Show entries per page</p>
             <div class="selector-input-container">
-              <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getActiveJobs(pageNumber,0)">
+              <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getUserActiveJobs(pageNumber,0)">
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="30">30</option>
@@ -80,8 +80,9 @@
                 <div>{{job.JobTitle}}</div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
-                <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Completed</a></div>
-                <div class="action makeCenter" *ngIf="job.JobStatus=='approved'"><a class="custom-btn green-trans">Approved</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Active</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='completed'"><a class="custom-btn green-trans">Completed</a></div>
+                <!-- <div class="action makeCenter" *ngIf="job.JobStatus=='approved'"><a class="custom-btn green-trans">Approved</a></div> -->
                 <div class="action makeCenter" *ngIf="job.JobStatus=='pending'"><a class="custom-btn yellow-trans">Pending</a></div>
                 <div>{{job.PrimaryPhone}}</div>
                 <div>{{job.PilotCountry}}</div>
@@ -96,7 +97,7 @@
           <div class="entries-selector">
             <p class="show-entries-p">Show entries per page</p>
             <div class="selector-input-container">
-              <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getQuotedJobs(pageNumber,0)">
+              <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getUserQuotedJobs(pageNumber,0)">
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="30">30</option>

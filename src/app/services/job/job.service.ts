@@ -83,4 +83,11 @@ export class JobService {
       })
     );
   }
+  assignPolits(data) {
+    return this.http.post(this.apiUrl + "job/AssignPilot", data).pipe(
+      map((response: any) => {
+        return response.json();
+      })
+    );
+  }
 }

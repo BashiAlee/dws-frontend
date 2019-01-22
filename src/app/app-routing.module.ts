@@ -176,6 +176,11 @@ const routes: Routes = [
         canActivate: [AdminAuthGuard]
       },
       {
+        path: "pilot-list/:id",
+        component: PilotListComponent,
+        canActivate: [AdminAuthGuard]
+      },
+      {
         path: "profile",
         redirectTo: "profile/:id",
         pathMatch: "full",
