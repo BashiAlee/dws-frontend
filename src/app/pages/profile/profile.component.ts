@@ -4,6 +4,7 @@ import { PilotService } from '../../services/admin/pilots/pilots.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ModalsComponent } from '../../components/modals/modals.component';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { Location } from '@angular/common';
 
 declare var $: any;
 @Component({
@@ -20,7 +21,7 @@ export class ProfileComponent implements OnInit {
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
-  constructor(private route: ActivatedRoute, private router: Router, private pilotService: PilotService, private modalService: BsModalService, private authService: AuthenticationService) {
+  constructor(private route: ActivatedRoute, private router: Router, private pilotService: PilotService, private modalService: BsModalService, private authService: AuthenticationService, private location: Location) {
     
 
     if(this.router.url.split('/')[1] =='admin') {
@@ -78,5 +79,9 @@ export class ProfileComponent implements OnInit {
         }
       }
     )
+  }
+
+  backToPage() {
+    this.location.back();
   }
 }

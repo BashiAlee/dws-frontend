@@ -142,10 +142,11 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label for="expectedDeliverables" class="custom-input-label">Expected Deliverables</label>
-                  <ng-select class="custom-select1" formControlName="ExpectedDeliverables" [searchable]="true"
+                  <ng-select formControlName="ExpectedDeliverables" [searchable]="true"   [multiple]="true" class="custom-ngselect job-custom-select"
                     placeholder="Select From pre-established deliverables">
                     <ng-option *ngFor="let deliverables of expectedDeliverables" [value]="deliverables.name">{{deliverables.name}}</ng-option>
                   </ng-select>
+                
                   <!-- <span class="select-iner">Select From pre-established deliverables</span> -->
                   <div *ngIf="form.ExpectedDeliverables.invalid && (form.ExpectedDeliverables.dirty || form.ExpectedDeliverables.touched)" class="invalid-feedback">
                   <div *ngIf="form.ExpectedDeliverables.errors.required">Expected Deliverables is required</div>
