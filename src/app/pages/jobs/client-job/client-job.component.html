@@ -406,9 +406,9 @@
       <div class="container">
         <div class="row makeCenter">
           <div class="col-md-12 col-sm-12 col-xs-12 mTop100">
-            <button class="custom-btn post-btn" *ngIf="!jobInformation.value.IsQuote" [disabled]="jobInformation.invalid" (click)="save()">Post this as
+            <button class="custom-btn post-btn" *ngIf="!jobInformation.value.IsQuote"  (click)="save()">Post this as
               Live Job</button>
-            <button class="custom-btn quote-btn" *ngIf="jobInformation.value.IsQuote" [disabled]="jobInformation.invalid" (click)="save()">Post this as
+            <button class="custom-btn quote-btn" *ngIf="jobInformation.value.IsQuote"  (click)="save()">Post this as
               Quote</button>
           </div>
         </div>

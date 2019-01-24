@@ -122,7 +122,10 @@ export class PilotListComponent implements OnInit {
     this.apiResponse.success = false;
     var data = {
       JobId:jobId,
-      PilotIds: [{ PilotId:pilotId}],
+      PilotIds: [{
+        PilotId:pilotId,
+        JobStatus: 'assigned',
+      }],
       Status:'assigned',
     };
 
