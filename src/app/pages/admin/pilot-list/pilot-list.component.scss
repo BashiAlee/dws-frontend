@@ -104,6 +104,11 @@ div.command-center {
       line-height: 65px;
     }
   }
+  div.extended-table {
+    grid-template-columns: 13% 11% 9% 10% 9% 8% 11% 10% !important;
+  }
+
+
   .table-heading{
     color: $table-heading;
     padding: 10px;
@@ -293,4 +298,3 @@ div.command-center {
     }
   }
 }
-

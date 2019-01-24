@@ -157,15 +157,15 @@ export class ClientJobComponent implements OnInit {
       Comments: ["",Validators.required],
       Industry: [null],
       Budget: [Validators.required],
-      EquipmentPreferences: ["",Validators.required],
+      EquipmentPreferences: [""],
       ExpectedDeliverables: [null,Validators.required],
       OwnDeliverables: ["",Validators.required],
       DateRanges: this.formBuilder.group({
-        DateRangeID: ["",Validators.required],
-        FromDate: ["",Validators.required],
-        From: ["",Validators.required],
-        To: ["",Validators.required],
-        ToDate: ["",Validators.required]
+        DateRangeID: [""],
+        FromDate: [""],
+        From: [""],
+        To: [""],
+        ToDate: [""]
       }),
       AddressLine1: ["",Validators.required],
       AddressLine2: ["",Validators.required],
@@ -326,6 +326,7 @@ export class ClientJobComponent implements OnInit {
           // a.diff(b, "days");
 
           this.jobInformation.patchValue(Object.assign({}, this.jobData));
+          this.jobInformation.value.ExpectedDeliverables = this.jobData.ExpectedDeliverables.split(',');
           if (this.jobInformation.value.EquipmentPreferences != "") {
             this.IsEquipmentPref = "yes";
           }
@@ -365,9 +366,11 @@ export class ClientJobComponent implements OnInit {
     // this.success = false;
     // this.error = false;
     // this.loading = true;
+
     this.jobInformation.value.Budget = parseFloat(
       this.jobInformation.value.Budget
     );
+    this.jobInformation.value.ExpectedDeliverables = this.jobInformation.value.ExpectedDeliverables.toString();
     this.jobInformation.value.Zip = this.jobInformation.value.Zip.toString();
     this.jobInformation.value.PrimaryPhone = this.jobInformation.value.PrimaryPhone.toString();
     this.jobInformation.value.SecondaryPhone = this.jobInformation.value.SecondaryPhone.toString();

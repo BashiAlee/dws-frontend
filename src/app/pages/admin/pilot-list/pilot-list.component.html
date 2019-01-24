@@ -86,8 +86,8 @@
               </tbody>
             </table> -->
              <div class="main-div">
-             <div class="table-div">
-               <div class="table-rows table-heading-row">
+             <div class="table-div" >
+               <div class="table-rows table-heading-row"  [ngClass]="{'extended-table':jobId}">
 
                  <div class="table-heading">Name</div>
                  <div class="table-heading">Email</div>
@@ -95,11 +95,11 @@
                  <div class="table-heading">Country</div>
                  <div class="table-heading">State</div>
                  <div class="table-heading">City</div>
-                 <!-- <div class="table-heading">Status</div> -->
                  <div class="table-heading">Action</div>
+                 <div class="table-heading" *ngIf="jobId">View</div>
                </div>
                <div class="table-body">
-               <div class="table-rows table-body-rows" *ngFor="let list of approvedList">
+               <div class="table-rows table-body-rows" *ngFor="let list of approvedList"  [ngClass]="{'extended-table':jobId}">
                   <div>{{list.FirstName+' '+list.MiddleName+' '+list.LastName}}</div>
                   <div>{{list.Email}}</div>
                   <div>{{list.Phone ? list.Phone: '-'}}</div>
@@ -109,7 +109,7 @@
                   <!-- <div>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</div> -->
                   <!-- <div class="action"><a [routerLink]="['/admin/profile',list.UserId]" class="detail-btn" [class.disabledAnchor]="list.Suffix=='nil'">Details</a></div> -->
                   <div class="action" *ngIf="jobId"><a class="custom-btn blue-bg white-txt p1530" (click)="assignPilot(jobId,list.ID)">Assign</a></div>
-                  <div class="action" *ngIf="!jobId"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
+                  <div class="action"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
                </div>
                 <alert type="success" [dismissOnTimeout]="timeout" *ngIf="apiResponse.success">{{ msg }} </alert>
                 <alert type="danger" [dismissOnTimeout]="timeout" *ngIf="apiResponse.fail">{{ msg }} </alert>
