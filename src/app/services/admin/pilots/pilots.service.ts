@@ -98,10 +98,17 @@ export class PilotService {
     );
   }
   assignedPilot(id) {
-    return this.http.get(this.apiUrl + "job/AssignedPilot/" + id).pipe(
+    return this.http.get(this.apiUrl + "job/assignedPilot/" + id).pipe(
       map((response: any) => {
         return response.json();
       })
     );
+  }
+  pilotJobs(id) {
+    return this.http.get(this.apiUrl + "job/pilotJobs/" + id).pipe(
+        map((response: any) => {
+          return response.json();
+        })
+      );
   }
 }

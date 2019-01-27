@@ -59,7 +59,7 @@ export class ClientJobComponent implements OnInit {
   isJobRequest: any = true;
   activeJobList: any = [];
   quotedJobList: any = [];
-  approvedList: any;
+  assignedPilotList: any;
   loaders: any = {};
 
   paginationData: any = {};
@@ -84,7 +84,6 @@ export class ClientJobComponent implements OnInit {
     if (this.router.url.split("/")[1] == "admin") {
       this.isAdmin = true;
     }
-
   }
 
   ngOnInit() {
@@ -154,12 +153,12 @@ export class ClientJobComponent implements OnInit {
       UserId: [this.userInfo.ID],
       IsQuote: [false],
       JobTitle: ["", Validators.required],
-      Comments: ["",Validators.required],
+      Comments: ["", Validators.required],
       Industry: [null],
       Budget: [Validators.required],
       EquipmentPreferences: [""],
-      ExpectedDeliverables: [null,Validators.required],
-      OwnDeliverables: ["",Validators.required],
+      ExpectedDeliverables: [null, Validators.required],
+      OwnDeliverables: ["", Validators.required],
       DateRanges: this.formBuilder.group({
         DateRangeID: [""],
         FromDate: [""],
@@ -167,15 +166,15 @@ export class ClientJobComponent implements OnInit {
         To: [""],
         ToDate: [""]
       }),
-      AddressLine1: ["",Validators.required],
-      AddressLine2: ["",Validators.required],
+      AddressLine1: ["", Validators.required],
+      AddressLine2: ["", Validators.required],
       Country: 231,
-      City: ["",Validators.required],
+      City: ["", Validators.required],
       State: [Validators.required],
-      Zip: ["",Validators.required],
-      PrimaryEmail: ["",Validators.required],
-      PrimaryPhone: ["",Validators.required],
-      SecondaryPhone: ["",Validators.required],
+      Zip: ["", Validators.required],
+      PrimaryEmail: ["", Validators.required],
+      PrimaryPhone: ["", Validators.required],
+      SecondaryPhone: ["", Validators.required],
       ParticularData: this.formBuilder.array([])
     });
   }
@@ -188,7 +187,6 @@ export class ClientJobComponent implements OnInit {
     this.onPageLoad();
   }
   onPageLoad() {
-
     var fromLimit = this.bigCurrentPage.toString() + "0";
     var data = {
       from: this.pageNumber, //skip //offsert
@@ -201,7 +199,7 @@ export class ClientJobComponent implements OnInit {
     } else {
       this.bigCurrentPage = 1;
       this.pageNumber = 10;
-      this.getAllApprovedPilots(data.from, data.to);
+      this.getAssignPolitList(this.jobId);
     }
   }
   setOptions(value) {
@@ -215,7 +213,7 @@ export class ClientJobComponent implements OnInit {
       this.datepicker3.toggle();
     }
   }
-  openRatingModal(){
+  openRatingModal() {
     const initialState = { type: "pilotRating" };
     this.bsModalRef = this.modalService.show(
       ModalsComponent,
@@ -245,6 +243,7 @@ export class ClientJobComponent implements OnInit {
   }
   changeJobStatus() {
     this.jobStatusArray = {
+      PilotId:this.userInfo.ID,
       JobId: this.jobData.JobId,
       Status: "completed"
     };
@@ -280,87 +279,87 @@ export class ClientJobComponent implements OnInit {
       }
     });
   }
-  getAllApprovedPilots(num, val) {
+  getAssignPolitList(jobId) {
     this.isYou = false;
-    var data = { from: val, to: num };
-    this.pilotService.getAllApprovedPilots(data).subscribe(data => {
+    this.jobSevice.getAssignPolits(jobId).subscribe(data => {
       if (data.status && data.result) {
-        this.approvedList = data.result;
+        this.assignedPilotList = data.result;
         this.bigTotalItems = parseInt(data.totalRecord);
-      } else if (data.status && !data.result) {
-        this.approvedList = [];
+      } else {
+        this.assignedPilotList = [];
         this.bigTotalItems = 0;
       }
     });
   }
   getJobByID(jobId) {
-      this.jobSevice.getJobByID(jobId).subscribe(data => {
-        if (data.status) {
-          this.jobData = data.result[0];
-          console.log("data of jobs", this.jobData);
-          if (
-            this.jobData.DateRanges.FromDate != "" &&
-            this.jobData.DateRanges.From != "" &&
-            this.jobData.DateRanges.To != ""
-          ) {
-            this.jobData.DateRanges.FromDate = new Date(
-              this.jobData.DateRanges.FromDate
-            );
-          }
-          if (
-            this.jobData.DateRanges.FromDate != "" &&
-            this.jobData.DateRanges.ToDate != ""
-          ) {
-            this.jobData.DateRanges.FromDate = new Date(
-              this.jobData.DateRanges.FromDate
-            );
-            this.jobData.DateRanges.ToDate = new Date(
-              this.jobData.DateRanges.ToDate
-            );
-            var a = moment(this.jobData.DateRanges.ToDate)
-              .add(1, "days")
-              .calendar();
-            var now = moment();
-            console.log("this is data@@@@@@", this.jobData.DateRanges.ToDate);
-          }
-          // a.diff(b, "days");
-
-          this.jobInformation.patchValue(Object.assign({}, this.jobData));
-          this.jobInformation.value.ExpectedDeliverables = this.jobData.ExpectedDeliverables.split(',');
-          if (this.jobInformation.value.EquipmentPreferences != "") {
-            this.IsEquipmentPref = "yes";
-          }
-          if (
-            this.jobInformation.value.DateRanges.FromDate != "" &&
-            this.jobInformation.value.DateRanges.From != "" &&
-            this.jobInformation.value.DateRanges.To != ""
-          ) {
-            this.IsParticularDate = "particular";
-          }
-          if (
-            this.jobInformation.value.DateRanges.FromDate != "" &&
-            this.jobInformation.value.DateRanges.ToDate != ""
-          ) {
-            this.IsParticularDate = "range";
-          }
-          if (this.jobInformation.value.ParticularData != null) {
-            const control = <FormArray>(
-              this.jobInformation.controls["ParticularData"]
-            );
-
-            this.jobData.ParticularData.forEach(value => {
-              const addrCtrl = this.formBuilder.group({
-                ParticularName: [value.ParticularName],
-                ParticularNumber: [value.ParticularNumber]
-              });
-              control.push(addrCtrl);
-            });
-          }
-
-        } else {
-          this.jobData = [];
+    this.jobSevice.getJobByID(jobId).subscribe(data => {
+      if (data.status) {
+        this.jobData = data.result;
+        console.log("data of jobs", this.jobData);
+        if (
+          this.jobData.DateRanges.FromDate != "" &&
+          this.jobData.DateRanges.From != "" &&
+          this.jobData.DateRanges.To != ""
+        ) {
+          this.jobData.DateRanges.FromDate = new Date(
+            this.jobData.DateRanges.FromDate
+          );
         }
-      });
+        if (
+          this.jobData.DateRanges.FromDate != "" &&
+          this.jobData.DateRanges.ToDate != ""
+        ) {
+          this.jobData.DateRanges.FromDate = new Date(
+            this.jobData.DateRanges.FromDate
+          );
+          this.jobData.DateRanges.ToDate = new Date(
+            this.jobData.DateRanges.ToDate
+          );
+          var a = moment(this.jobData.DateRanges.ToDate)
+            .add(1, "days")
+            .calendar();
+          var now = moment();
+          console.log("this is data@@@@@@", this.jobData.DateRanges.ToDate);
+        }
+        // a.diff(b, "days");
+
+        this.jobInformation.patchValue(Object.assign({}, this.jobData));
+        this.jobInformation.value.ExpectedDeliverables = this.jobData.ExpectedDeliverables.split(
+          ","
+        );
+        if (this.jobInformation.value.EquipmentPreferences != "") {
+          this.IsEquipmentPref = "yes";
+        }
+        if (
+          this.jobInformation.value.DateRanges.FromDate != "" &&
+          this.jobInformation.value.DateRanges.From != "" &&
+          this.jobInformation.value.DateRanges.To != ""
+        ) {
+          this.IsParticularDate = "particular";
+        }
+        if (
+          this.jobInformation.value.DateRanges.FromDate != "" &&
+          this.jobInformation.value.DateRanges.ToDate != ""
+        ) {
+          this.IsParticularDate = "range";
+        }
+        if (this.jobInformation.value.ParticularData != null) {
+          const control = <FormArray>(
+            this.jobInformation.controls["ParticularData"]
+          );
+
+          this.jobData.ParticularData.forEach(value => {
+            const addrCtrl = this.formBuilder.group({
+              ParticularName: [value.ParticularName],
+              ParticularNumber: [value.ParticularNumber]
+            });
+            control.push(addrCtrl);
+          });
+        }
+      } else {
+        this.jobData = [];
+      }
+    });
   }
   save() {
     // this.success = false;
@@ -374,23 +373,22 @@ export class ClientJobComponent implements OnInit {
     this.jobInformation.value.Zip = this.jobInformation.value.Zip.toString();
     this.jobInformation.value.PrimaryPhone = this.jobInformation.value.PrimaryPhone.toString();
     this.jobInformation.value.SecondaryPhone = this.jobInformation.value.SecondaryPhone.toString();
-    this.jobSevice.saveJobInformation(this.jobInformation.value)
+    this.jobSevice
+      .saveJobInformation(this.jobInformation.value)
       .subscribe(data => {
         if (data.status) {
           var initialState = {};
-          if (this.jobInformation.value.IsQuote){
-           initialState = {
+          if (this.jobInformation.value.IsQuote) {
+            initialState = {
               type: "jobPosted"
               // type: "warning"
-             } 
-    
-          }
-          else {
+            };
+          } else {
             initialState = {
-               type: "jobPostedLive"
-               // type: "warning"
-              };
-            }
+              type: "jobPostedLive"
+              // type: "warning"
+            };
+          }
 
           this.bsModalRef = this.modalService.show(
             ModalsComponent,
@@ -452,7 +450,7 @@ export class ClientJobComponent implements OnInit {
   addParticularData() {
     const control = <FormArray>this.jobInformation.controls["ParticularData"];
     const addrCtrl = this.formBuilder.group({
-      ParticularName: ["",Validators.required],
+      ParticularName: ["", Validators.required],
       ParticularNumber: [Validators.required]
     });
     control.push(addrCtrl);
@@ -464,5 +462,7 @@ export class ClientJobComponent implements OnInit {
     //.removeAt(this.images.value.findIndex(image => image.id === 502))
   }
 
-  get form() { return this.jobInformation.controls; }
+  get form() {
+    return this.jobInformation.controls;
+  }
 }

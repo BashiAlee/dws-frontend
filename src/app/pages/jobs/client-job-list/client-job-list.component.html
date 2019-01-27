@@ -24,10 +24,10 @@
               <div class="table-heading">City</div>
               <div class="table-heading">Action</div>
             </div>
-            <div class="table-body">
+            <div class="table-body" *ngIf="activeJobList && activeJobList.length">
               <div *ngFor="let job of activeJobList" class="table-rows table-body-rows">
                 <div>{{job.JobTitle}}</div>
-                <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn green-trans">Assigned</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Active</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='completed'"><a class="custom-btn green-trans">Completed</a></div>
@@ -38,6 +38,11 @@
                 <div>{{job.PilotState}}</div>
                 <div>{{job.City}}</div>
                 <div class="action makeCenter"><a class="manage-btn" [routerLink]="['/user/job',job.JobId]">Manage</a></div>
+              </div>
+            </div>
+            <div class="table-body" *ngIf="activeJobList && !activeJobList.length">
+              <div class="makeCenter">
+                <p>No Live Jobs</p>
               </div>
             </div>
           </div>
@@ -75,12 +80,12 @@
               <div class="table-heading">City</div>
               <div class="table-heading">Action</div>
             </div>
-            <div class="table-body">
+            <div class="table-body" *ngIf="quotedJobList && quotedJobList.length">
               <div *ngFor="let job of quotedJobList" class="table-rows table-body-rows">
                 <div>{{job.JobTitle}}</div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
-                <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Active</a></div>
+                <div class="action makeCenter" *ngIf="job.IsQuote"><a class="custom-btn green-trans">Quote</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='completed'"><a class="custom-btn green-trans">Completed</a></div>
                 <!-- <div class="action makeCenter" *ngIf="job.JobStatus=='approved'"><a class="custom-btn green-trans">Approved</a></div> -->
                 <div class="action makeCenter" *ngIf="job.JobStatus=='pending'"><a class="custom-btn yellow-trans">Pending</a></div>
@@ -89,6 +94,11 @@
                 <div>{{job.PilotState}}</div>
                 <div>{{job.City}}</div>
                 <div class="action makeCenter"><a [routerLink]="['/user/job',job.JobId]" class="manage-btn">Manage</a></div>
+              </div>
+            </div>
+            <div class="table-body" *ngIf="quotedJobList && !quotedJobList.length">
+              <div class="makeCenter">
+                <p>No Quote Jobs</p>
               </div>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { PilotService } from './../../services/admin/pilots/pilots.service';
 import { Router } from "@angular/router";
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { JobService } from './../../services/job/job.service';
@@ -36,18 +37,24 @@ const colors: any = {
 export class JobCalenderComponent implements OnInit {
   userInfo: any;
   activeJobList: any = [];
-  jobList: any = [];
+  pilotJobList: any = [];
   startTime: any;
   endTime: any;
   constructor(
     private modal: NgbModal,
     private jobSevice: JobService,
+    private pilotService: PilotService,
     private authService: AuthenticationService,
     private router: Router
   ) {}
   ngOnInit() {
     this.userInfo = this.authService.getCurrentUser();
-    this.getUserActiveJobs(this.userInfo.ID);
+    if (this.userInfo.Role == 'customer') {
+      this.getUserActiveJobs(this.userInfo.ID);
+     }
+    else{
+      this.getPilotJobs(this.userInfo.ID);
+    }
   }
   @ViewChild("modalContent")
   modalContent: TemplateRef<any>;
@@ -78,7 +85,7 @@ export class JobCalenderComponent implements OnInit {
   }
 
   handleEvent(event: CalendarEvent): void {
-    console.log("this is data", event);
+    // console.log("this is data", event);
     this.router.navigate(["user/job", event.color]);
   }
 
@@ -121,6 +128,48 @@ export class JobCalenderComponent implements OnInit {
         });
       } else {
         this.activeJobList = [];
+      }
+    });
+  }
+  getPilotJobs(id) {
+    this.pilotService.pilotJobs(id).subscribe(data => {
+      if (data.status && data.result) {
+        this.pilotJobList = data.result;
+        console.log("this id pilot jobs",this.pilotJobList);
+        this.pilotJobList.forEach(val => {
+          if (val.DateRanges.FromDate != "" && val.DateRanges.ToDate) {
+            this.events.push({
+              title: val.JobTitle,
+              start: startOfDay(
+                new Date(moment(val.DateRanges.FromDate).format("lll"))
+              ),
+              end: endOfDay(
+                new Date(moment(val.DateRanges.ToDate).format("lll"))
+              ),
+              color: val.JobId
+            });
+            this.refresh.next();
+          } else if (val.DateRanges.FromDate != "") {
+            var date = val.DateRanges.FromDate;
+            this.startTime = val.DateRanges.From;
+            this.endTime = val.DateRanges.To;
+
+            this.startTime =
+              date.split("T")[0] + " " + this.startTime.split("T")[1];
+            this.endTime =
+              date.split("T")[0] + " " + this.endTime.split("T")[1];
+
+            this.events.push({
+              title: val.JobTitle,
+              start: addHours(this.startTime, 0),
+              end: addHours(this.endTime, 0),
+              color: val.JobId
+            });
+            this.refresh.next();
+          }
+        });
+      } else {
+        this.pilotJobList = [];
       }
     });
   }

@@ -132,7 +132,7 @@ export class PilotListComponent implements OnInit {
     this.jobService.assignPolits(data).subscribe(data => {
       console.log("this is data",data);
 
-      if (data.status && data.result) {
+      if (data.status) {
         this.apiResponse.success = true;
           this.msg= data.message,
           this.timeout=2500

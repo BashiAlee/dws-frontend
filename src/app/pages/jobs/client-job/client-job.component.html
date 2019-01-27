@@ -135,7 +135,7 @@
 
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="view-wraper">
-                  <a class="view-btn" href="#"><img src="../../../assets/icons/box.png" alt="error">View Packages</a>
+                  <a class="view-btn"><img src="../../../assets/icons/box.png" alt="error">View Packages</a>
                 </div>
               </div>
 
@@ -146,7 +146,7 @@
                     placeholder="Select From pre-established deliverables">
                     <ng-option *ngFor="let deliverables of expectedDeliverables" [value]="deliverables.name">{{deliverables.name}}</ng-option>
                   </ng-select>
-                
+
                   <!-- <span class="select-iner">Select From pre-established deliverables</span> -->
                   <div *ngIf="form.ExpectedDeliverables.invalid && (form.ExpectedDeliverables.dirty || form.ExpectedDeliverables.touched)" class="invalid-feedback">
                   <div *ngIf="form.ExpectedDeliverables.errors.required">Expected Deliverables is required</div>
@@ -440,16 +440,21 @@
             <div class="table-heading">City</div>
             <!-- <div class="table-heading">Action</div> -->
           </div>
-          <div class="table-body">
-            <div class="table-rows table-body-rows" *ngFor="let list of approvedList">
-              <div class="table-content">{{list.FirstName+' '+list.MiddleName+' '+list.LastName}} <span class="red-bg custom-btn2"
-                  *ngIf="list.ID==userInfo.ID">You</span></div>
-              <div class="table-content">{{list.Email}}</div>
-              <div class="table-content">{{list.Phone ? list.Phone: '-'}}</div>
-              <div class="table-content">{{list.PhysicallCountry ? list.PhysicallCountry: '-'}}</div>
-              <div class="table-content">{{list.PhysicallState ? list.PhysicallState: '-'}}</div>
-              <div class="table-content">{{list.PhysicallCity ? list.PhysicallCity: "-"}}</div>
+          <div class="table-body" *ngIf="assignedPilotList && assignedPilotList.length">
+            <div class="table-rows table-body-rows" *ngFor="let pilot of assignedPilotList">
+              <div class="table-content">{{pilot.FirstName+' '+pilot.LastName}} <span class="red-bg custom-btn2"
+              *ngIf="pilot.PilotId==userInfo.ID">You</span></div>
+              <div class="table-content">{{pilot.Email}}</div>
+              <div class="table-content">{{pilot.Phone ? pilot.Phone: '-'}}</div>
+              <div class="table-content">{{pilot.Country ? pilot.Country: '-'}}</div>
+              <div class="table-content">{{pilot.State ? pilot.State: '-'}}</div>
+              <div class="table-content">{{pilot.City ? pilot.City: "-"}}</div>
               <!-- <div class="action makeCenter"><a class="manage-btn" [routerLink]="['/admin/job',job.JobId ]">Manage</a></div> -->
+            </div>
+          </div>
+          <div class="table-body" *ngIf="assignedPilotList && !assignedPilotList.length">
+            <div class="makeCenter">
+              <p>No Pilot Assigned</p>
             </div>
           </div>
         </div>

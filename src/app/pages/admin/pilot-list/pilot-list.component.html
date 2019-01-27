@@ -54,37 +54,10 @@
            </div>
 
          </div>
-
+        <alert type="success" [dismissOnTimeout]="timeout" *ngIf="apiResponse.success">{{ msg }} </alert>
+        <alert type="danger" [dismissOnTimeout]="timeout" *ngIf="apiResponse.fail">{{ msg }} </alert>
          <div class="row">
            <div class="col-md-12">
-<!--
-            <table datatable [dtOptions]="dtOptions" class="row-border hover custom-datatable">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Country</th>
-                  <th>State</th>
-                  <th>City</th>
-                  <th>Status</th>
-                  <th>Action</th>
-
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let list of pilotList">
-                  <td>{{list.Users.FirstName+' '+list.Users.LastName}}</td>
-                  <td>{{list.Users.Email}}</td>
-                  <td>{{list.PrimaryPhone}}</td>
-                  <td>{{list.Country.Name}}</td>
-                  <td>{{list.State.Name}}</td>
-                  <td>{{list.PhysicallCity}}</td>
-                  <td>{{list.ProfileApproved=='1'? 'Approved': 'Blocked'}}</td>
-                  <td><a [routerLink]="['/admin/profile',list.UserId]" class="details-btn">Details</a></td>
-                </tr>
-              </tbody>
-            </table> -->
              <div class="main-div">
              <div class="table-div" >
                <div class="table-rows table-heading-row"  [ngClass]="{'extended-table':jobId}">
@@ -111,8 +84,7 @@
                   <div class="action" *ngIf="jobId"><a class="custom-btn blue-bg white-txt p1530" (click)="assignPilot(jobId,list.ID)">Assign</a></div>
                   <div class="action"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
                </div>
-                <alert type="success" [dismissOnTimeout]="timeout" *ngIf="apiResponse.success">{{ msg }} </alert>
-                <alert type="danger" [dismissOnTimeout]="timeout" *ngIf="apiResponse.fail">{{ msg }} </alert>
+
                </div>
              </div>
            </div>
@@ -203,22 +175,21 @@
                 <div class="table-heading">Action</div>
               </div>
               <div class="table-body" *ngIf="pendingList && pendingList.length">
-              <div class="table-rows table-body-rows" *ngFor="let list of pendingList">
-                 <div>{{list.FirstName+' '+list.MiddleName+' '+list.LastName}}</div>
-                 <div>{{list.Email}}</div>
-                 <div>{{list.Phone ? list.Phone: '-'}}</div>
-                 <div>{{list.PhysicallCountry ? list.PhysicallCountry: '-'}}</div>
-                 <div>{{list.PhysicallState ? list.PhysicallState: '-'}}</div>
-                 <div>{{list.PhysicallCity ? list.PhysicallCity: "-"}}</div>
-                 <div class="action"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
-              </div>
+                <div class="table-rows table-body-rows" *ngFor="let list of pendingList">
+                  <div>{{list.FirstName+' '+list.MiddleName+' '+list.LastName}}</div>
+                  <div>{{list.Email}}</div>
+                  <div>{{list.Phone ? list.Phone: '-'}}</div>
+                  <div>{{list.PhysicallCountry ? list.PhysicallCountry: '-'}}</div>
+                  <div>{{list.PhysicallState ? list.PhysicallState: '-'}}</div>
+                  <div>{{list.PhysicallCity ? list.PhysicallCity: "-"}}</div>
+                  <div class="action"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
+                </div>
               </div>
               <div class="table-body" *ngIf="pendingList && !pendingList.length">
                 <div class="table-rows table-body-rows">
                   <p>Not Found</p>
-
                 </div>
-                </div>
+              </div>
             </div>
           </div>
             <div class="page-footer">
