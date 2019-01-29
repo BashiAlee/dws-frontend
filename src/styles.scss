@@ -926,7 +926,7 @@ font-family: 'Apercu-Medium';
       font-family: 'Apercu-Regular';
     }
   }
-  
+
   .maintenance-message {
     h3 {
       color: $primary-color;
@@ -1263,6 +1263,12 @@ ng-select.job-custom-select .ng-select-container .ng-value-container .ng-placeho
   border: 1px solid #f3f714;
   color: #f3f714 !important;
 }
+.orange-trans {
+  border: 1px solid #fa972c !important;
+  color: #fa972c !important;
+}
+
+
 .manage-btn{
   background-color: #29abe2;
   padding: 9px 18px;

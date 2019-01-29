@@ -27,7 +27,7 @@
             <div class="table-body" *ngIf="activeJobList && activeJobList.length">
               <div *ngFor="let job of activeJobList" class="table-rows table-body-rows">
                 <div>{{job.JobTitle}}</div>
-                <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn green-trans">Assigned</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn orange-trans">Assigned</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='active'"><a class="custom-btn green-trans">Active</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='completed'"><a class="custom-btn green-trans">Completed</a></div>
@@ -83,7 +83,7 @@
             <div class="table-body" *ngIf="quotedJobList && quotedJobList.length">
               <div *ngFor="let job of quotedJobList" class="table-rows table-body-rows">
                 <div>{{job.JobTitle}}</div>
-                <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn red-trans">Assigned</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn orange-trans">Assigned</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
                 <div class="action makeCenter" *ngIf="job.IsQuote"><a class="custom-btn green-trans">Quote</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='completed'"><a class="custom-btn green-trans">Completed</a></div>

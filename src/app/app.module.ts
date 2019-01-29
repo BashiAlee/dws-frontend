@@ -55,6 +55,9 @@ import { AlertModule } from "ngx-bootstrap/alert";
 import { ClientJobComponent } from './pages/jobs/client-job/client-job.component';
 import { PilotJobListComponent } from './pages/jobs/pilot-job-list/pilot-job-list.component';
 import { ClientJobListComponent } from './pages/jobs/client-job-list/client-job-list.component';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { ClientListComponent } from './pages/admin/client-list/client-list.component';
+import { AdminJobCalenderComponent } from './pages/admin/admin-job-calender/admin-job-calender.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +87,10 @@ import { ClientJobListComponent } from './pages/jobs/client-job-list/client-job-
     JobCalenderComponent,
     ClientJobComponent,
     PilotJobListComponent,
-    ClientJobListComponent
+    ClientJobListComponent,
+    AdminDashboardComponent,
+    ClientListComponent,
+    AdminJobCalenderComponent
   ],
   imports: [
     BrowserModule,

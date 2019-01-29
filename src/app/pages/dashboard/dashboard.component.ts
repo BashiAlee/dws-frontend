@@ -68,22 +68,22 @@ export class DashboardComponent implements OnInit {
               value: this.deletedJobs
             }
           ];
-        } else {
-          this.single = [
-            {
-              name: "Completed Jobs",
-              value: this.completedJobs
-            },
-            {
-              name: "Pending Jobs",
-              value: this.pendingJobs
-            },
-            {
-              name: "Deleted Jobs",
-              value: this.deletedJobs
-            }
-          ];
         }
+      }).catch((err) => {
+        this.single = [
+          {
+            name: "Completed Jobs",
+            value: this.completedJobs
+          },
+          {
+            name: "Pending Jobs",
+            value: this.pendingJobs
+          },
+          {
+            name: "Deleted Jobs",
+            value: this.deletedJobs
+          }
+        ];
       });
       Object.assign(this, this.single);
     } else {
@@ -103,22 +103,22 @@ export class DashboardComponent implements OnInit {
               value: this.newJob
             }
           ];
-        } else {
-          this.single = [
-            {
-              name: "Total Jobs Completed",
-              value: this.completedJobs
-            },
-            {
-              name: "Completed This Month",
-              value: this.completedThisMonth
-            },
-            {
-              name: "New Job",
-              value: this.newJob
-            }
-          ];
         }
+      }).catch((err) => {
+        this.single = [
+          {
+            name: "Total Jobs Completed",
+            value: this.completedJobs
+          },
+          {
+            name: "Completed This Month",
+            value: this.completedThisMonth
+          },
+          {
+            name: "New Job",
+            value: this.newJob
+          }
+        ];
       });
       Object.assign(this, this.single);
     }

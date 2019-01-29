@@ -217,6 +217,8 @@ export class ClientJobComponent implements OnInit {
       this.datepicker3.toggle();
     }
   }
+
+
   openRatingModal() {
     const initialState = { type: "pilotRating" };
     this.bsModalRef = this.modalService.show(

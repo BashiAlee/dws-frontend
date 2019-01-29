@@ -17,8 +17,8 @@ export class PilotListComponent implements OnInit {
   maxSize = 5;
   bigTotalItems: any;
   bigCurrentPage = 1;
-  pendingList: any;
-  approvedList: any;
+  pendingList: any=[];
+  approvedList: any=[];
   isApprovedPilots: any = true;
   keyword: any;
   selectedOption: any;
@@ -64,7 +64,7 @@ export class PilotListComponent implements OnInit {
 
   ngOnInit() {
     this.jobId = this.route.snapshot.paramMap.get("id");
-    console.log("this is data from component", this.jobId);
+    // console.log("this is data from component", this.jobId);
     // setTimeout(() => {
     //   var url_string = window.location.href;
     //   var url = new URL(url_string);
@@ -130,7 +130,7 @@ export class PilotListComponent implements OnInit {
     };
 
     this.jobService.assignPolits(data).subscribe(data => {
-      console.log("this is data",data);
+      // console.log("this is data",data);
 
       if (data.status) {
         this.apiResponse.success = true;
@@ -138,7 +138,7 @@ export class PilotListComponent implements OnInit {
           this.timeout=2500
 
       } else {
-        console.log("this is called");
+        // console.log("this is called");
         this.apiResponse.fail = true;
           this.msg= data.message,
           this.timeout= 2500

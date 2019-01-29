@@ -1,0 +1,71 @@
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Job Information</h5>
+    <button type="button" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      Event:
+      <!-- <pre>{{ modalData?.event | json }}</pre> -->
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary">OK</button>
+  </div>
+</ng-template>
+<div class="container-fluid mTop50">
+  <div class="top-content makeCenter">
+    <h1 class="heading1">Jobs Calender</h1>
+    <p class="description1">View all of your live jobs on Calender</p>
+  </div>
+  <div class="makeBgWhite calender">
+    <div class="row text-center mTop50">
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div class="btn btn-primary blue-bg white-border" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+            (viewDateCzhange)="activeDayIsOpen = false">
+            Previous
+          </div>
+          <div class="btn btn-outline-secondary blue-border" mwlCalendarToday [(viewDate)]="viewDate">
+            Today
+          </div>
+          <div class="btn btn-primary blue-bg white-border" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+            (viewDateChange)="activeDayIsOpen = false">
+            Next
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div class="btn btn-primary blue-bg white-border" (click)="view = CalendarView.Month" [class.active]="view === CalendarView.Month">
+            Month
+          </div>
+          <div class="btn btn-primary blue-bg white-border" (click)="view = CalendarView.Week" [class.active]="view === CalendarView.Week">
+            Week
+          </div>
+          <div class="btn btn-primary blue-bg white-border" (click)="view = CalendarView.Day" [class.active]="view === CalendarView.Day">
+            Day
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+        [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent($event.event)">
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [tooltipAppendToBody]="false" [viewDate]="viewDate"
+        [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)">
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+        (eventClicked)="handleEvent('Clicked', $event.event)">
+      </mwl-calendar-day-view>
+    </div>
+  </div>
+</div>

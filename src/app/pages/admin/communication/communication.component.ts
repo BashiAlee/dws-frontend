@@ -62,7 +62,7 @@ export class CommunicationComponent implements OnInit {
       var dataOnlineUser = this.authService.getCurrentAdmin();
       this.onlineUserId = dataOnlineUser.ID;
       this.currentRole = dataOnlineUser.Role;
-     
+
     }
 
     //scrolling messages to bottom
@@ -92,7 +92,7 @@ export class CommunicationComponent implements OnInit {
           this.getAllMessages(data.result[0]);
           this.messageConversationId = data.result[0].ConversationId;
         } else {
-          console.log("Messages Not recieved ", data.message);
+          // console.log("Messages Not recieved ", data.message);
         }
       });
     } else {
@@ -111,13 +111,13 @@ export class CommunicationComponent implements OnInit {
               data.result[0].SenderMiddleName +
               " " +
               data.result[0].SenderLastName;
-      
+
             // this.lastMessageDate = data.result[0].MessageTime;
             this.getAllMessages(data.result[0]);
             // console.log("date ", data.result[0].MessageTime)
             this.messageConversationId = data.result[0].ConversationId;
           } else {
-            console.log("Messages Not recieved ", data.message);
+            // console.log("Messages Not recieved ", data.message);
           }
         });
     }
@@ -160,7 +160,7 @@ export class CommunicationComponent implements OnInit {
           // console.log("date ", data.result[0].MessageTime)
           this.messageConversationId = data.result[0].ConversationId;
         } else {
-          console.log("Messages Not recieved ", data.message);
+          // console.log("Messages Not recieved ", data.message);
         }
       });
   }
@@ -174,7 +174,7 @@ export class CommunicationComponent implements OnInit {
       " " +
       data.SenderLastName;
     //
-    console.log(this.selectedSenderChatName);
+    // console.log(this.selectedSenderChatName);
     // console.log("Online User ---> ", this.authService.getCurrentUser());
     this.messageService
       .getAllMessagesByConversationId(selectedConversationId, this.onlineUserId)
@@ -208,10 +208,10 @@ export class CommunicationComponent implements OnInit {
             }
           }
         } else {
-          console.log(
-            "Error Recieving Message ---> ",
-            selectedConversationIdResult.message
-          );
+          // console.log(
+          //   "Error Recieving Message ---> ",
+          //   selectedConversationIdResult.message
+          // );
         }
       });
   }
@@ -234,9 +234,9 @@ export class CommunicationComponent implements OnInit {
           this.activeClass = false;
           var elements = document.querySelectorAll('.mattie-scroll-container-div');
           var len = elements.length;
-          console.log('scroll');
-          console.log(elements);
-          console.log("asdasdas  ----> ", this.allMessagesByConversationId.length);
+          // console.log('scroll');
+          // console.log(elements);
+          // console.log("asdasdas  ----> ", this.allMessagesByConversationId.length);
           const el = elements[this.allMessagesByConversationId.length-1] as HTMLElement;
 
           el.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest"});
@@ -263,27 +263,27 @@ export class CommunicationComponent implements OnInit {
           this.activeClass = false;
           var elements = document.querySelectorAll('.mattie-scroll-container-div');
           var len = elements.length;
-          console.log('scroll');
-          console.log(elements.length);
-          console.log("asdasdas  ----> ",this.allMessagesByConversationId.length);
+          // console.log('scroll');
+          // console.log(elements.length);
+          // console.log("asdasdas  ----> ",this.allMessagesByConversationId.length);
           const el = elements[this.allMessagesByConversationId.length-1] as HTMLElement;
           el.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest"});
         } else {
-          console.log("Message Not Sent ", newData.message);
+          // console.log("Message Not Sent ", newData.message);
         }
       });
     }
   }
 
   selectUser(resultSearchedUser) {
-    console.log("Selected User ---> ", resultSearchedUser.FirstName);
+    // console.log("Selected User ---> ", resultSearchedUser.FirstName);
     this.selectedSenderChatName =
       resultSearchedUser.FirstName +
       " " +
       resultSearchedUser.MiddleName +
       " " +
       resultSearchedUser.LastName;
-    console.log("Selected User ---> ", this.selectedSenderChatName);
+    // console.log("Selected User ---> ", this.selectedSenderChatName);
     this.selectedUser = resultSearchedUser;
     this.modalRef.hide();
     this.modalRef = null;
@@ -348,5 +348,5 @@ export class CommunicationComponent implements OnInit {
     //  return '../../../../assets/images/avatar.png';
     // })
   }
-  
+
 }

@@ -16,7 +16,15 @@ export class PilotService {
     this.apiUrl = environment.apiURL;
     this.staticUrl = environment.uploadUrl;
   }
-
+  getAllClients(data) {
+    return this.http
+      .get(this.apiUrl + "admin/allClients/" + data.from + "/" + data.to)
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        })
+      );
+  }
   getAllPilots(data) {
     return this.http
       .get(this.apiUrl + "admin/allPilots/" + data.from + "/" + data.to)
@@ -25,6 +33,13 @@ export class PilotService {
           return response.json();
         })
       );
+  }
+  getAllJobs() {
+    return this.http.get(this.apiUrl + "admin/allJobs").pipe(
+      map((response: any) => {
+        return response.json();
+      })
+    );
   }
   getAllApprovedPilots(data) {
     return this.http
@@ -106,9 +121,9 @@ export class PilotService {
   }
   pilotJobs(id) {
     return this.http.get(this.apiUrl + "job/pilotJobs/" + id).pipe(
-        map((response: any) => {
-          return response.json();
-        })
-      );
+      map((response: any) => {
+        return response.json();
+      })
+    );
   }
 }

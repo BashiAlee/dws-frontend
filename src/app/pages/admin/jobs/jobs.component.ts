@@ -10,7 +10,6 @@ export class JobsComponent implements OnInit {
   isActiveJobs: any = true;
   activeJobList: any = [];
   quotedJobList: any = [];
-  paginationData: any = {};
   pageNumber: any = 10;
   maxSize = 5;
   bigTotalItems: any;

@@ -20,7 +20,7 @@
             <div class="table-body" *ngIf="pilotJobList && pilotJobList.length">
                 <div *ngFor="let job of pilotJobList" class="table-rows table-body-rows">
                 <div>{{job.JobTitle}}</div>
-                <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn green-trans">Assigned</a></div>
+                <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn orange-trans">Assigned</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='archived'"><a class="custom-btn gray-trans">Archived</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='completed'"><a class="custom-btn green-trans">Completed</a></div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='approved'"><a class="custom-btn green-trans">Approved</a></div>

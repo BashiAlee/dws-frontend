@@ -6,6 +6,11 @@
       class="fa fa-arrow-left mr15" aria-hidden="true"></i>My
     Jobs</a>
 </div>
+<div class="container mTop50" *ngIf="isAdmin">
+  <a href="" class="custom-btn1 blue-txt" [routerLink]="['/admin/jobs-list']"><i class="fa fa-arrow-left mr15"
+    aria-hidden="true"></i>All Jobs</a>
+</div>
+
 <div *ngIf="jobId">
   <div class="top-content makeCenter">
     <div *ngIf="!isAdmin">

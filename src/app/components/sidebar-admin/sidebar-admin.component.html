@@ -50,16 +50,15 @@
 
         <ul class="list-unstyled components">
 
-            <li class="nav-item notAvailable">
-                <a class="nav-link">
+            <li class="nav-item">
+                  <a class="nav-link" [routerLink]="['/admin/dashboard']" [routerLinkActive]="['active-sidebarlink']">
                   <span><i class="fa fa-tachometer"></i>
                     <span class="inner-item" *ngIf="isOpen">Dashboard</span>
-
                   </span>
                 </a>
               </li>
-              <li class="nav-item notAvailable">
-                <a class="nav-link" [routerLink]="['profile','14']" [routerLinkActive]="['active-sidebarlink']">
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/admin/client-list']" [routerLinkActive]="['active-sidebarlink']">
                   <span><i class="fa fa-user-o" aria-hidden="true"></i>
                     <span class="inner-item" *ngIf="isOpen">Clients</span>
                   </span>
@@ -88,8 +87,8 @@
                     <span class="inner-item" *ngIf="isOpen">Communications</span></span>
                 </a>
               </li>
-              <li class="nav-item notAvailable">
-                <a class="nav-link" href="#">
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['admin-job-calender']" [routerLinkActive]="['active-sidebarlink']">
                   <span><i class="fa fa-calendar" aria-hidden="true"></i>
                     <span class="inner-item" *ngIf="isOpen">Job Calendar</span>
                     </span>

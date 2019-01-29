@@ -66,6 +66,9 @@ import {
 import { ClientJobComponent } from "./pages/jobs/client-job/client-job.component";
 import { PilotJobListComponent } from "./pages/jobs/pilot-job-list/pilot-job-list.component";
 import { ClientJobListComponent } from "./pages/jobs/client-job-list/client-job-list.component";
+import { AdminDashboardComponent } from "./pages/admin/admin-dashboard/admin-dashboard.component";
+import { ClientListComponent } from "./pages/admin/client-list/client-list.component";
+import { AdminJobCalenderComponent } from "./pages/admin/admin-job-calender/admin-job-calender.component";
 const routes: Routes = [
   {
     path: "",
@@ -161,6 +164,16 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       {
+        path: "dashboard",
+        component: AdminDashboardComponent,
+        canActivate: [AdminAuthGuard]
+      },
+      {
+        path: "client-list",
+        component: ClientListComponent,
+        canActivate: [AdminAuthGuard]
+      },
+      {
         path: "command-center",
         component: CommandCenterComponent,
         canActivate: [AdminAuthGuard]
@@ -200,6 +213,11 @@ const routes: Routes = [
       {
         path: "job/:id",
         component: ClientJobComponent,
+        pathMatch: "full"
+      },
+      {
+        path: "admin-job-calender",
+        component: AdminJobCalenderComponent,
         pathMatch: "full"
       }
     ]

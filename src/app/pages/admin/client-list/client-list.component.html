@@ -1,0 +1,180 @@
+<div class="container">
+  <div class="topContent">
+    <h1>Clients</h1>
+    <p>All of the DWS registered clients are..</p>
+  </div>
+  <!-- <div class="custom-tabs">
+    <ul>
+      <li (click)="openApprovedPilot()"><a [class.active-link]="isApprovedPilots">Approved Pilots</a></li>
+      <li (click)="openPendingPilot()"><a [class.active-link]="!isApprovedPilots">Pending Approval <span class="badge">{{pendingList?pendingList.length:'0'}}</span></a></li>
+    </ul>
+  </div> -->
+
+  <div class="command-center">
+    <!-- <div class="row inputs-container1">
+      <div class="div-pilot-select">
+        <div class="form-group">
+          <label for="state" class="custom-input-label makeBlack">Search Pilot by</label>
+          <ng-select [(ngModel)]="selectedOption" [searchable]="false">
+            <ng-option *ngFor="let se of search" [value]="se.value">{{se.name}}</ng-option>
+          </ng-select>
+        </div>
+      </div>
+      <div class="input-city-div">
+        <div *ngIf="selectedOption == 'zipcode' || selectedOption == 'city' || !selectedOption">
+          <div class="form-group">
+            <input [(ngModel)]="keyword" type="text" class="form-control custom-inputm input-city" id="city"
+              aria-describedby="keyword" placeholder="Keyword">
+          </div>
+        </div>
+        <div *ngIf="selectedOption == 'state'">
+          <div class="form-group">
+            <ng-select [(ngModel)]="keyword" [searchable]="true">
+              <ng-option *ngFor="let s of states" [value]="s.ID">{{s.Name}}</ng-option>
+            </ng-select>
+          </div>
+        </div>
+        <div *ngIf="selectedOption == 'country'">
+          <div class="form-group">
+            <ng-select [(ngModel)]="keyword" [searchable]="true">
+              <ng-option *ngFor="let c of countires" [value]="c.ID">{{c.Name}}</ng-option>
+            </ng-select>
+          </div>
+        </div>
+      </div>
+      <div class="filter-button-div">
+        <button class="custom-primary-button filter-btn" (click)="searchPilot()" [disabled]="!keyword">Filter</button>
+      </div>
+
+      <div class="download-link-div">
+        <a (click)="downloadCSV('approved')" class="download-link">Export Pilot data <i class="fa fa-download"></i> </a>
+      </div>
+
+    </div>
+    <alert type="success" [dismissOnTimeout]="timeout" *ngIf="apiResponse.success">{{ msg }} </alert>
+    <alert type="danger" [dismissOnTimeout]="timeout" *ngIf="apiResponse.fail">{{ msg }} </alert> -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-div">
+          <div class="table-div">
+            <div class="table-rows table-heading-row" [ngClass]="{'extended-table':jobId}">
+
+              <div class="table-heading">Name</div>
+              <div class="table-heading">Email</div>
+              <div class="table-heading">Phone</div>
+              <div class="table-heading">Country</div>
+              <div class="table-heading">State</div>
+              <div class="table-heading">City</div>
+              <div class="table-heading">Action</div>
+            </div>
+            <div class="table-body" *ngIf="clientList && clientList.length">
+              <div class="table-rows table-body-rows" *ngFor="let list of clientList" [ngClass]="{'extended-table':jobId}">
+                <div>{{list.FirstName+' '+list.MiddleName+' '+list.LastName}}</div>
+                <div>{{list.Email}}</div>
+                <div>{{list.Phone ? list.Phone: '-'}}</div>
+                <div>{{list.PhysicallCountry ? list.PhysicallCountry: '-'}}</div>
+                <div>{{list.PhysicallState ? list.PhysicallState: '-'}}</div>
+                <div>{{list.PhysicallCity ? list.PhysicallCity: "-"}}</div>
+                <div class="action"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
+              </div>
+            </div>
+            <div class="table-body" *ngIf="clientList && !clientList.length">
+              <div class="table-rows table-body-rows">
+                <p>No Registered Clients</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-footer">
+          <div class="entries-selector">
+            <p class="show-entries-p">Show entries per page</p>
+            <div class="selector-input-container">
+              <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="GetAllClients(pageNumber,0)">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+          </div>
+          <div class="pagination-div">
+            <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="command-center" *ngIf="!isApprovedPilots">
+    <div class="row inputs-container1">
+      <div class="div-pilot-select">
+        <div class="form-group">
+          <label for="state" class="custom-input-label makeBlack">Search Pilot by</label>
+          <ng-select [searchable]="false">
+            <ng-option *ngFor="let se of search">{{se.name}}</ng-option>
+          </ng-select>
+        </div>
+      </div>
+      <div class="input-city-div">
+
+        <div class="form-group">
+          <input type="text" class="form-control custom-inputm input-city" id="city" aria-describedby="city"
+            placeholder="City Name">
+        </div>
+      </div>
+      <div class="filter-button-div">
+        <button class="custom-primary-button filter-btn">Filter</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-div">
+          <div class="table-div">
+            <div class="table-rows table-heading-row">
+
+              <div class="table-heading">Name</div>
+              <div class="table-heading">Email</div>
+              <div class="table-heading">Phone</div>
+              <div class="table-heading">Country</div>
+              <div class="table-heading">State</div>
+              <div class="table-heading">City</div>
+              <div class="table-heading">Action</div>
+            </div>
+            <div class="table-body" *ngIf="pendingList && pendingList.length">
+              <div class="table-rows table-body-rows" *ngFor="let list of pendingList">
+                <div>{{list.FirstName+' '+list.MiddleName+' '+list.LastName}}</div>
+                <div>{{list.Email}}</div>
+                <div>{{list.Phone ? list.Phone: '-'}}</div>
+                <div>{{list.PhysicallCountry ? list.PhysicallCountry: '-'}}</div>
+                <div>{{list.PhysicallState ? list.PhysicallState: '-'}}</div>
+                <div>{{list.PhysicallCity ? list.PhysicallCity: "-"}}</div>
+                <div class="action"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
+              </div>
+            </div>
+            <div class="table-body" *ngIf="pendingList && !pendingList.length">
+              <div class="table-rows table-body-rows">
+                <p>Not Found</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-footer">
+          <div class="entries-selector">
+            <p class="show-entries-p">Show entries per page</p>
+            <div class="selector-input-container">
+              <select class="selector-input" type="number" [(ngModel)]="pageNumber" (change)="getAllRejectedPilots(pageNumber,0)">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+          </div>
+          <div class="pagination-div">
+            <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" (pageChanged)="onPageLoad($event)"></pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> -->
+</div>

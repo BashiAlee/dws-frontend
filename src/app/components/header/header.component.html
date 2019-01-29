@@ -160,8 +160,8 @@
             </a>
             <div class="dropdown-menu notification-dropdown dropdown-menu-right wow fadeInDown">
               <ul class="drop-content">
-                <div *ngIf="userInfo.Role == 'admin'">
-                  <ng-template *ngIf="adminAllMessages && adminAllMessages.length">
+                <div *ngIf="userInfo.Role == 'admin';else else_part">
+                  <ng-template *ngIf="adminAllMessages.length">
                     <li class="align-text" *ngFor="let message of adminAllMessages">
                       <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
                       <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png" alt=""></div>
@@ -172,11 +172,13 @@
                     </li>
                   </ng-template>
 
-                  <li class="" *ngIf="adminAllMessages && !adminAllMessages.length">
-                    <p>No Messages</p>
+
+                  <li class="" *ngIf="!adminAllMessages.length">
+                    <p>No Messages {{adminAllMessages.length}}</p>
 
                   </li>
                 </div>
+              <ng-template #else_part>
                 <li class="align-text" *ngFor="let message of currentUserMessages">
                   <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
                   <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png"
@@ -191,6 +193,7 @@
                     <p>No Messages</p>
                   </div>
                 </li>
+              </ng-template>
               </ul>
               <div class="notify-drop-footer text-center" [routerLink]="['communication']">
                 <a> See All Messages > </a>
