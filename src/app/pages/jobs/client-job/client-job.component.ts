@@ -74,6 +74,7 @@ export class ClientJobComponent implements OnInit {
     class: "custom-modal modal-dialog-centered modal-md successModal"
   };
   expectedDeliverables: any = [];
+  isPassed: any = false;
   constructor(
     private formBuilder: FormBuilder,
     private profileSevice: ProfileService,
@@ -336,11 +337,24 @@ export class ClientJobComponent implements OnInit {
             this.IsParticularDate = "particular";
             var endTime = new Date(this.jobInformation.value.DateRanges.To).getTime();
             var now = new Date().getTime();
-            var distance = endTime - now;
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            this.remainingTime = hours + "h " + minutes + "m " + seconds + "s "
+
+            if(endTime < now) {
+              this.isPassed = true;
+              var distance = endTime - now;
+              var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+              this.remainingTime = hours + "h " + minutes + "m " + seconds + "s "
+              
+            } else {
+              this.isPassed = false;
+              var distance = endTime - now;
+              var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+              this.remainingTime = hours + "h " + minutes + "m " + seconds + "s "
+            }
+
             // this.remainingTime = moment(endTime).calendar();
           }
         if (
@@ -351,6 +365,11 @@ export class ClientJobComponent implements OnInit {
           var endDate = new Date(this.jobInformation.value.DateRanges.ToDate).getTime();
           var now1 = new Date().getTime();
           var distance = endDate - now1;
+          if(endTime < now) {
+            this.isPassed = true;
+          } else {
+            this.isPassed = false
+          }
           // var timeDiff = Math.abs(now1.getTime() - endDate.getTime());
           this.remainingDays = Math.floor(distance / (1000 * 60 * 60 * 24));
         }

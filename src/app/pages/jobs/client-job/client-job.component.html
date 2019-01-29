@@ -22,10 +22,14 @@
     </div>
     <div class="m50" *ngIf="userInfo.Role=='pilot'">
       <span class="custom-btn1 red-txt" *ngIf="jobData">{{jobData.JobId}}</span>
-      <a class="custom-btn1 green-txt" *ngIf="IsParticularDate =='range'"><i class="fa fa-circle mr5" aria-hidden="true"></i>
+      <a class="custom-btn1 green-txt" *ngIf="IsParticularDate =='range' && !isPassed"><i class="fa fa-circle mr5" aria-hidden="true"></i>
       Assigned Job, <span>{{remainingDays}}</span> Days Remaining</a>
-      <a class="custom-btn1 green-txt" *ngIf="IsParticularDate =='particular'"><i class="fa fa-circle mr5" aria-hidden="true"></i>
+      <a class="custom-btn1 red-btn-txt" *ngIf="IsParticularDate =='range' && isPassed"><i class="fa fa-circle mr5" aria-hidden="true"></i>
+        Job Expired, Time passed <span>{{remainingDays}}</span> Days</a>
+      <a class="custom-btn1 green-txt" *ngIf="IsParticularDate =='particular' && !isPassed"><i class="fa fa-circle mr5" aria-hidden="true"></i>
       Assigned Job, Ends in <span>{{remainingTime}}</span></a>
+      <a class="custom-btn1 red-btn-txt" *ngIf="IsParticularDate =='particular' && isPassed"><i class="fa fa-circle mr5" aria-hidden="true"></i>
+        Job Expired, Time passed <span>{{remainingTime}}</span></a>
     </div>
   </div>
 
