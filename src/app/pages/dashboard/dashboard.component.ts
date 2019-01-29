@@ -1,3 +1,4 @@
+import { PilotService } from './../../services/admin/pilots/pilots.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { JobService } from './../../services/job/job.service';
@@ -13,6 +14,7 @@ declare var google;
   styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
+  pilotJobList: any;
   single: any[];
   multi: any[];
 
@@ -28,83 +30,113 @@ export class DashboardComponent implements OnInit {
     domain: ["#5dcc31", "#fa972c", "#fc5757"]
   };
 
-  userInfo: any;
-  adminInfo:any;
-  // currentUserMessages: any = [];
-  // allMessagesByConversationId: any;
-  // selectedSenderChatName: any;
-  // messageConversationId: any;
-  // lastMessageDate: any;
-  // pilotMessages: any;
-  // isPilotTab: any = true;
-  // tabRole: any = "pilot";
-  // onlineUserId: any;
-  // userType: any;
-  // adminMessageToUserId: any;
-  // selectedUser: any;
+   colorSchemePilot = {
+    domain: ["#29abe2", "#5dcc31", "#fa972c"]
+  };
 
+  userInfo: any;
+  adminInfo: any;
+  newJob: any = 0;
   completedJobs: any = 0;
+  completedThisMonth: any = 0;
   totalJobs: any = 0;
   pendingJobs: any = 0;
   deletedJobs: any = 0;
 
-  unreadMessages:any=[];
+  unreadMessages: any = [];
   constructor(
     private authService: AuthenticationService,
     private jobSevice: JobService,
+    private pilotService: PilotService,
     private messageService: MessagesService
   ) {
     this.userInfo = this.authService.getCurrentUser();
-    this.GetCurrentUserJobs(this.userInfo.ID).then(res => {
-      if (res) {
-        this.single = [
-          {
-            name: "Completed Jobs",
-            value: this.completedJobs
-          },
-          {
-            name: "Pending Jobs",
-            value: this.pendingJobs
-          },
-          {
-            name: "Deleted Jobs",
-            value: this.deletedJobs
-          }
-        ];
-      } else {
-        this.single = [
-          {
-            name: "Completed Jobs",
-            value: this.completedJobs
-          },
-          {
-            name: "Pending Jobs",
-            value: this.pendingJobs
-          },
-          {
-            name: "Deleted Jobs",
-            value: this.deletedJobs
-          }
-        ];
-      }
-    });
-    Object.assign(this, this.single);
+    if (this.userInfo.Role == "customer") {
+      this.GetCurrentUserJobs(this.userInfo.ID).then(res => {
+        if (res) {
+          this.single = [
+            {
+              name: "Completed Jobs",
+              value: this.completedJobs
+            },
+            {
+              name: "Pending Jobs",
+              value: this.pendingJobs
+            },
+            {
+              name: "Deleted Jobs",
+              value: this.deletedJobs
+            }
+          ];
+        } else {
+          this.single = [
+            {
+              name: "Completed Jobs",
+              value: this.completedJobs
+            },
+            {
+              name: "Pending Jobs",
+              value: this.pendingJobs
+            },
+            {
+              name: "Deleted Jobs",
+              value: this.deletedJobs
+            }
+          ];
+        }
+      });
+      Object.assign(this, this.single);
+    } else {
+      this.GetPilotJobs(this.userInfo.ID).then(res => {
+        if (res) {
+          this.single = [
+            {
+              name: "Total Jobs Completed",
+              value: this.completedJobs
+            },
+            {
+              name: "Completed This Month",
+              value: this.completedThisMonth
+            },
+            {
+              name: "New Job",
+              value: this.newJob
+            }
+          ];
+        } else {
+          this.single = [
+            {
+              name: "Total Jobs Completed",
+              value: this.completedJobs
+            },
+            {
+              name: "Completed This Month",
+              value: this.completedThisMonth
+            },
+            {
+              name: "New Job",
+              value: this.newJob
+            }
+          ];
+        }
+      });
+      Object.assign(this, this.single);
+    }
   }
 
   ngOnInit() {
-    this.GetUnreadMessagesById(this.userInfo.ID)
+    this.GetUnreadMessagesById(this.userInfo.ID);
   }
   // onSelect(event) {
   //   console.log("kjbjkbkbkb", event);
   // }
-  GetUnreadMessagesById(id){
+  GetUnreadMessagesById(id) {
     this.messageService.getUnreadMessagesById(id).subscribe(data => {
       if (data.status) {
         data.result.forEach(val => {
           val.MessageTime = moment(val.MessageTime).format("LT");
           this.unreadMessages.push(val);
         });
-
       } else {
         // console.log("Messages fdvdfvdfvfd ", this.unreadMessages);
         this.unreadMessages[0];
@@ -116,6 +148,8 @@ export class DashboardComponent implements OnInit {
       this.jobSevice.getCurrentUserJobs(id).subscribe(data => {
         if (data.status && data.result) {
           this.totalJobs = data.result.length;
+          console.log("kjbjkbkbkb", this.totalJobs);
+
           data.result.forEach((val, index) => {
             // if(this.userInfo.Role=='pilot'){
             //   console.log("this is val");
@@ -144,4 +178,39 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  GetPilotJobs(id) {
+    return new Promise((resolve, reject) => {
+      this.pilotService.pilotJobs(id).subscribe(data => {
+        if (data.status && data.result) {
+          this.pilotJobList = data.result;
+
+          this.pilotJobList.forEach((val, index) => {
+            if (val.PilotIds) {
+              val.PilotIds.forEach((res, index) => {
+
+                if (this.userInfo.ID == res.PilotId && res.JobStatus == "completed") {
+                    this.completedJobs++;
+                    var date=res.JobCompletionTime
+                    console.log("this is it",moment(res.JobCompletionTime).month())
+                    // else if (this.userInfo.ID == res.PilotId && res.JobStatus == "completed") {
+                    //   this.completedThisMonth++;
+                    // } 
+                }else if (this.userInfo.ID == res.PilotId && res.JobStatus == "assigned") {
+                  this.newJob++;
+                }
+              });
+            }
+            if (index == data.result.length - 1) {
+              resolve(true);
+            }
+          });
+        } else {
+          this.totalJobs = 0;
+          this.completedJobs = 0;
+          this.pendingJobs = 0;
+          reject(false);
+        }
+      });
+    });
+  }
 }

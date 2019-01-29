@@ -61,6 +61,9 @@ export class ClientJobComponent implements OnInit {
   quotedJobList: any = [];
   assignedPilotList: any;
   loaders: any = {};
+  remainingDays: any = 0;
+  remainingTime:any=0;
+  pilotData:any={}
 
   paginationData: any = {};
   pageNumber: any = 10;
@@ -175,7 +178,8 @@ export class ClientJobComponent implements OnInit {
       PrimaryEmail: ["", Validators.required],
       PrimaryPhone: ["", Validators.required],
       SecondaryPhone: ["", Validators.required],
-      ParticularData: this.formBuilder.array([])
+      ParticularData: this.formBuilder.array([]),
+      JobStartingTime:[""]
     });
   }
   JobRequest() {
@@ -245,7 +249,8 @@ export class ClientJobComponent implements OnInit {
     this.jobStatusArray = {
       PilotId:this.userInfo.ID,
       JobId: this.jobData.JobId,
-      Status: "completed"
+      Status: "completed",
+      JobCompletionTime:moment().format("MMM Do YY"),
     };
     this.loaders.approveProfile = true;
     const initialState = { type: "jobCompleted" };
@@ -294,39 +299,32 @@ export class ClientJobComponent implements OnInit {
   getJobByID(jobId) {
     this.jobSevice.getJobByID(jobId).subscribe(data => {
       if (data.status) {
+
         this.jobData = data.result;
-        console.log("data of jobs", this.jobData);
-        if (
-          this.jobData.DateRanges.FromDate != "" &&
-          this.jobData.DateRanges.From != "" &&
-          this.jobData.DateRanges.To != ""
-        ) {
+        console.log("this is data", this.jobData);
+        if (this.jobData.DateRanges.FromDate != "" && this.jobData.DateRanges.From != "" && this.jobData.DateRanges.To != "") {
           this.jobData.DateRanges.FromDate = new Date(
             this.jobData.DateRanges.FromDate
           );
         }
-        if (
-          this.jobData.DateRanges.FromDate != "" &&
-          this.jobData.DateRanges.ToDate != ""
-        ) {
+        else{
           this.jobData.DateRanges.FromDate = new Date(
             this.jobData.DateRanges.FromDate
           );
           this.jobData.DateRanges.ToDate = new Date(
             this.jobData.DateRanges.ToDate
           );
-          var a = moment(this.jobData.DateRanges.ToDate)
-            .add(1, "days")
-            .calendar();
-          var now = moment();
-          console.log("this is data@@@@@@", this.jobData.DateRanges.ToDate);
-        }
+          }
+
         // a.diff(b, "days");
 
         this.jobInformation.patchValue(Object.assign({}, this.jobData));
-        this.jobInformation.value.ExpectedDeliverables = this.jobData.ExpectedDeliverables.split(
-          ","
-        );
+        this.jobInformation.patchValue({
+          ExpectedDeliverables: this.jobData.ExpectedDeliverables.split(
+            ","
+          )
+        });
+
         if (this.jobInformation.value.EquipmentPreferences != "") {
           this.IsEquipmentPref = "yes";
         }
@@ -335,13 +333,26 @@ export class ClientJobComponent implements OnInit {
           this.jobInformation.value.DateRanges.From != "" &&
           this.jobInformation.value.DateRanges.To != ""
         ) {
-          this.IsParticularDate = "particular";
-        }
+            this.IsParticularDate = "particular";
+            var endTime = new Date(this.jobInformation.value.DateRanges.To).getTime();
+            var now = new Date().getTime();
+            var distance = endTime - now;
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            this.remainingTime = hours + "h " + minutes + "m " + seconds + "s "
+            // this.remainingTime = moment(endTime).calendar();
+          }
         if (
           this.jobInformation.value.DateRanges.FromDate != "" &&
           this.jobInformation.value.DateRanges.ToDate != ""
         ) {
           this.IsParticularDate = "range";
+          var endDate = new Date(this.jobInformation.value.DateRanges.ToDate).getTime();
+          var now1 = new Date().getTime();
+          var distance = endDate - now1;
+          // var timeDiff = Math.abs(now1.getTime() - endDate.getTime());
+          this.remainingDays = Math.floor(distance / (1000 * 60 * 60 * 24));
         }
         if (this.jobInformation.value.ParticularData != null) {
           const control = <FormArray>(
@@ -355,12 +366,22 @@ export class ClientJobComponent implements OnInit {
             });
             control.push(addrCtrl);
           });
+
+          this.jobData.PilotIds.forEach(val => {
+            if (val.PilotId==this.userInfo.ID){
+              this.pilotData=val;
+            }
+
+          });
+          console.log("this is bibik ta", this.pilotData);
+
         }
       } else {
         this.jobData = [];
       }
     });
   }
+
   save() {
     // this.success = false;
     // this.error = false;
@@ -373,8 +394,21 @@ export class ClientJobComponent implements OnInit {
     this.jobInformation.value.Zip = this.jobInformation.value.Zip.toString();
     this.jobInformation.value.PrimaryPhone = this.jobInformation.value.PrimaryPhone.toString();
     this.jobInformation.value.SecondaryPhone = this.jobInformation.value.SecondaryPhone.toString();
-    this.jobSevice
-      .saveJobInformation(this.jobInformation.value)
+    // console.log("job Data", this.jobInformation.value);s
+    if (this.jobInformation.value.DateRanges.FromDate != "" && this.jobInformation.value.DateRanges.From != "" && this.jobInformation.value.DateRanges.To != "") {
+      this.jobInformation.value.DateRanges.FromDate = moment(this.jobInformation.value.DateRanges.FromDate).format("ll");
+      this.jobInformation.value.DateRanges.From = moment(this.jobInformation.value.DateRanges.From).format("lll");
+      this.jobInformation.value.DateRanges.To = moment(this.jobInformation.value.DateRanges.To).format("lll");
+    }else{
+      this.jobInformation.value.DateRanges.FromDate = moment(this.jobInformation.value.DateRanges.FromDate).format("ll");
+      this.jobInformation.value.DateRanges.ToDate = moment(this.jobInformation.value.DateRanges.ToDate).format("ll");
+    }
+
+
+
+    // console.log("data of jobs", this.jobInformation.value);
+
+    this.jobSevice.saveJobInformation(this.jobInformation.value)
       .subscribe(data => {
         if (data.status) {
           var initialState = {};

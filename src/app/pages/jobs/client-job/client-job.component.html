@@ -22,8 +22,10 @@
     </div>
     <div class="m50" *ngIf="userInfo.Role=='pilot'">
       <span class="custom-btn1 red-txt" *ngIf="jobData">{{jobData.JobId}}</span>
-      <a class="custom-btn1 green-txt"><i class="fa fa-circle mr5" aria-hidden="true"></i>
-        Active Job, <span>03</span> days remaining</a>
+      <a class="custom-btn1 green-txt" *ngIf="IsParticularDate =='range'"><i class="fa fa-circle mr5" aria-hidden="true"></i>
+      Assigned Job, <span>{{remainingDays}}</span> Days Remaining</a>
+      <a class="custom-btn1 green-txt" *ngIf="IsParticularDate =='particular'"><i class="fa fa-circle mr5" aria-hidden="true"></i>
+      Assigned Job, Ends in <span>{{remainingTime}}</span></a>
     </div>
   </div>
 
@@ -48,7 +50,9 @@
         <div class="flex-display">
           <p class="mTop15 description1">
             <a class="custom-btn1 green-g-bg">I am on Location</a>
-            <a (click)="changeJobStatus()" class="custom-btn1 orange-bg">Mark the job as completed</a>
+            <a (click)="changeJobStatus()" *ngIf="pilotData.JobStatus=='assigned'" class="custom-btn1 orange-bg">Mark the job as
+            completed</a>
+            <a class="custom-btn1 orange-bg" *ngIf="pilotData.JobStatus=='completed'">Job Is Completed</a>
         </div>
       </div>
     </div>

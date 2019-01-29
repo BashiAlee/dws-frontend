@@ -17,7 +17,7 @@
               <div class="table-heading">City</div>
               <div class="table-heading">Action</div>
             </div>
-            <div class="table-body">
+            <div class="table-body" *ngIf="pilotJobList && pilotJobList.length">
                 <div *ngFor="let job of pilotJobList" class="table-rows table-body-rows">
                 <div>{{job.JobTitle}}</div>
                 <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn green-trans">Assigned</a></div>
@@ -30,6 +30,11 @@
                 <div>{{job.PilotState}}</div>
                 <div>{{job.City}}</div>
                 <div class="action makeCenter"><a class="manage-btn" [routerLink]="['/user/job',job.JobId ]">Manage</a></div>
+              </div>
+            </div>
+            <div class="table-body" *ngIf="pilotJobList && !pilotJobList.length">
+              <div class="makeCenter">
+                <p>No Assigned Jobs</p>
               </div>
             </div>
           </div>

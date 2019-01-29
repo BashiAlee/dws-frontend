@@ -95,6 +95,9 @@ export class JobCalenderComponent implements OnInit {
         this.activeJobList = data.result;
 
         this.activeJobList.forEach(val => {
+         val.DateRanges.From = moment.utc(val.DateRanges.From).format();
+         val.DateRanges.To = moment.utc(val.DateRanges.To).format();
+
           if (val.DateRanges.FromDate != "" && val.DateRanges.ToDate) {
             this.events.push({
               title: val.JobTitle,
@@ -107,20 +110,16 @@ export class JobCalenderComponent implements OnInit {
               color: val.JobId
             });
             this.refresh.next();
-          } else if (val.DateRanges.FromDate != "") {
+          } else{
             var date = val.DateRanges.FromDate;
             this.startTime = val.DateRanges.From;
             this.endTime = val.DateRanges.To;
-
-            this.startTime =
-              date.split("T")[0] + " " + this.startTime.split("T")[1];
-            this.endTime =
-              date.split("T")[0] + " " + this.endTime.split("T")[1];
-
+            this.startTime = date + " " + this.startTime.split("T")[1];
+            this.endTime = date + " " + this.endTime.split("T")[1];
             this.events.push({
               title: val.JobTitle,
-              start: addHours(this.startTime, 0),
-              end: addHours(this.endTime, 0),
+              start: addHours(this.startTime.replace("Z", ""), 0),
+              end: addHours(this.endTime.replace("Z", ""), 0),
               color: val.JobId
             });
             this.refresh.next();
@@ -137,6 +136,8 @@ export class JobCalenderComponent implements OnInit {
         this.pilotJobList = data.result;
         console.log("this id pilot jobs",this.pilotJobList);
         this.pilotJobList.forEach(val => {
+          val.DateRanges.From = moment.utc(val.DateRanges.From).format();
+          val.DateRanges.To = moment.utc(val.DateRanges.To).format();
           if (val.DateRanges.FromDate != "" && val.DateRanges.ToDate) {
             this.events.push({
               title: val.JobTitle,
@@ -149,20 +150,16 @@ export class JobCalenderComponent implements OnInit {
               color: val.JobId
             });
             this.refresh.next();
-          } else if (val.DateRanges.FromDate != "") {
+          } else {
             var date = val.DateRanges.FromDate;
             this.startTime = val.DateRanges.From;
             this.endTime = val.DateRanges.To;
-
-            this.startTime =
-              date.split("T")[0] + " " + this.startTime.split("T")[1];
-            this.endTime =
-              date.split("T")[0] + " " + this.endTime.split("T")[1];
-
+            this.startTime = date + " " + this.startTime.split("T")[1];
+            this.endTime = date + " " + this.endTime.split("T")[1];
             this.events.push({
               title: val.JobTitle,
-              start: addHours(this.startTime, 0),
-              end: addHours(this.endTime, 0),
+              start: addHours(this.startTime.replace("Z", ""), 0),
+              end: addHours(this.endTime.replace("Z", ""), 0),
               color: val.JobId
             });
             this.refresh.next();
