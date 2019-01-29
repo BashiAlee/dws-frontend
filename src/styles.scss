@@ -1444,6 +1444,11 @@ ng-select.job-custom-select .ng-select-container .ng-value-container .ng-placeho
 .green-txt{
 color: $success !important;
 }
+
+.red-btn-txt{
+  color:$details-btn !important;
+  border: 1px solid $details-btn !important;
+}
 // for backgrond
 .blue-bg {
   background: $primary-color !important;
