@@ -39,7 +39,7 @@ export class ClientJobListComponent implements OnInit {
   }
   onPageLoad() {
     this.userInfo = this.authService.getCurrentUser();
-    console.log("user info,", this.userInfo);
+    // console.log("user info,", this.userInfo);
     this.getUserActiveJobs(this.userInfo.ID);
     this.getUserQuotedJobs(this.userInfo.ID);
 
@@ -58,7 +58,7 @@ export class ClientJobListComponent implements OnInit {
   }
   getUserActiveJobs(id) {
     this.jobSevice.getUserActiveJobs(id).subscribe(data => {
-      console.log("this is jobid,", data);
+      // console.log("this is jobid,", data);
 
       if (data.status && data.result) {
         this.activeJobList = data.result;
@@ -69,7 +69,7 @@ export class ClientJobListComponent implements OnInit {
   }
   getUserQuotedJobs(id) {
     this.jobSevice.getUserQuotedJobs(id).subscribe(data => {
-      console.log("this is quoted,", data);
+      // console.log("this is quoted,", data);
       if (data.status && data.result) {
         this.quotedJobList = data.result;
       } else {

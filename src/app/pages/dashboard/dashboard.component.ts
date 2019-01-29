@@ -127,9 +127,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.GetUnreadMessagesById(this.userInfo.ID);
   }
-  // onSelect(event) {
-  //   console.log("kjbjkbkbkb", event);
-  // }
   GetUnreadMessagesById(id) {
     this.messageService.getUnreadMessagesById(id).subscribe(data => {
       if (data.status) {
@@ -138,7 +135,6 @@ export class DashboardComponent implements OnInit {
           this.unreadMessages.push(val);
         });
       } else {
-        // console.log("Messages fdvdfvdfvfd ", this.unreadMessages);
         this.unreadMessages[0];
       }
     });
@@ -148,15 +144,8 @@ export class DashboardComponent implements OnInit {
       this.jobSevice.getCurrentUserJobs(id).subscribe(data => {
         if (data.status && data.result) {
           this.totalJobs = data.result.length;
-          console.log("kjbjkbkbkb", this.totalJobs);
-
+          // console.log("kjbjkbkbkb", this.totalJobs);
           data.result.forEach((val, index) => {
-            // if(this.userInfo.Role=='pilot'){
-            //   console.log("this is val");
-
-            //   var d = new Date();
-            //   var n = d.getMonth();
-            // }
             if (val.JobStatus == "completed") {
               this.completedJobs++;
             } else if (val.IsQuote == true) {
@@ -187,14 +176,15 @@ export class DashboardComponent implements OnInit {
           this.pilotJobList.forEach((val, index) => {
             if (val.PilotIds) {
               val.PilotIds.forEach((res, index) => {
-
                 if (this.userInfo.ID == res.PilotId && res.JobStatus == "completed") {
                     this.completedJobs++;
-                    var date=res.JobCompletionTime
-                    console.log("this is it",moment(res.JobCompletionTime).month())
-                    // else if (this.userInfo.ID == res.PilotId && res.JobStatus == "completed") {
-                    //   this.completedThisMonth++;
-                    // } 
+                  var month = new Date(res.JobCompletionTime);
+                  var jobMonth = moment(month).format("MMMM YYYY");
+                  var currentMonth = moment().format('MMMM YYYY');
+
+                  if (moment(jobMonth).isSame(currentMonth) ) {
+                      this.completedThisMonth++;
+                    }
                 }else if (this.userInfo.ID == res.PilotId && res.JobStatus == "assigned") {
                   this.newJob++;
                 }

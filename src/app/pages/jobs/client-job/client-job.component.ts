@@ -93,7 +93,7 @@ export class ClientJobComponent implements OnInit {
     this.onPageLoad();
 
     this.jobId = this.route.snapshot.paramMap.get("id");
-    console.log("this is data from component", this.jobId);
+    // console.log("this is data from component", this.jobId);
 
     this.OwnDeliverables1 = [
       {
@@ -250,7 +250,7 @@ export class ClientJobComponent implements OnInit {
       PilotId:this.userInfo.ID,
       JobId: this.jobData.JobId,
       Status: "completed",
-      JobCompletionTime:moment().format("MMM Do YY"),
+      JobCompletionTime: moment().format("YYYY-MM-DD[T]HH:mm:ss"),
     };
     this.loaders.approveProfile = true;
     const initialState = { type: "jobCompleted" };
@@ -301,7 +301,7 @@ export class ClientJobComponent implements OnInit {
       if (data.status) {
 
         this.jobData = data.result;
-        console.log("this is data", this.jobData);
+        // console.log("this is data", this.jobData);
         if (this.jobData.DateRanges.FromDate != "" && this.jobData.DateRanges.From != "" && this.jobData.DateRanges.To != "") {
           this.jobData.DateRanges.FromDate = new Date(
             this.jobData.DateRanges.FromDate
@@ -373,7 +373,7 @@ export class ClientJobComponent implements OnInit {
             }
 
           });
-          console.log("this is bibik ta", this.pilotData);
+          // console.log("this is bibik ta", this.pilotData);
 
         }
       } else {
