@@ -4,9 +4,30 @@
             grid-template-columns: 50% 50%;
         }
     }
-  .profile-buttons{
-    margin: 20px;
+    .profile-buttons{
+      margin: 20px;
+    }
+  .row{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    margin-right: -8px;
+    margin-left: -31px;
+    .col-md-5{
+      max-width: 100%;
+    }
+    .outer-btn{
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: center;
+    }
+    .custom-btn1{
+      padding: 10px 16px!important;
+      margin: 3px 10px !important;
+      width: 162px;
+    }
   }
+
   }
   @media only screen and (max-width: 1500px) {
     div.custom-tabs {
@@ -24,7 +45,6 @@
   .mainContent{
     padding: 0 10px !important;
   }
-
 }
 //this
 @media screen and (max-width:1300px) {
@@ -41,6 +61,14 @@
 @media (max-width: 1330px) {
   .table-div{
     width: 1170px;
+  }
+}
+@media screen and (max-width:1250px) {
+  .row{
+    display: block!important;
+    .outer-btn{
+      padding: 10px 0 10px 0;
+    }
   }
 }
   @media only screen and (max-width: 1150px) {
@@ -107,8 +135,6 @@
     margin: 15px 100px;
   }
 }
-
-
   @media only screen and (max-width:768px){
     .custom-btn{
       width: 250px !important;
@@ -227,6 +253,14 @@
     }
 
 }
+@media only screen and (max-width:580px){
+  .mainContent{
+    padding: 0 10px !important;
+    .m50{
+      display: grid;
+    }
+  }
+}
 @media only screen and (max-width:480px){
 
     div.rightContent {
@@ -294,6 +328,17 @@
   }
   .main-div{
     padding: 30px!important;
+  }
+  .custom-btn1{
+    padding: 17px 11px!important;
+  }
+  .row{
+    .custom-tabs{
+      margin: 0 -52px;
+    }
+    .custom-btn1{
+      margin: 3px 3px !important;
+    }
   }
 }
 
@@ -444,8 +489,17 @@ div.rightContent div.main-notification .toggle-button {
 //    }
 //  }
 //}
-//@media (min-width: 576px) {
-//  .container {
-//    max-width: 100% !important;
-//  }
-//}
+@media (min-width: 576px) {
+  .col-sm-12{
+    max-width: 100%!important;
+  }
+}
+
+@media (min-width: 380px) {
+  .row{
+    .custom-btn1{
+      padding: 10px 12px!important;
+      width: 162px;
+    }
+  }
+}

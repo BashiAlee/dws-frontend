@@ -1560,9 +1560,8 @@ color: $success !important;
   margin: 0px !important;
 }
 .flex-display{
-  display: flex ;
-  justify-content: space-evenly !important;
-  align-items: center;
+  display: grid;
+  justify-content: center;
 }
 
 // calander style starts from here
