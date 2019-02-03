@@ -29,7 +29,7 @@ export class ClientListComponent implements OnInit {
   }
   GetAllClients(num, val) {
     var data = { from: val, to: num };
-    this.pilotService.getAllApprovedPilots(data).subscribe(data => {
+    this.pilotService.getAllClients(data).subscribe(data => {
       if (data.status && data.result) {
         this.clientList = data.result;
         console.log("this is clients list",this.clientList);

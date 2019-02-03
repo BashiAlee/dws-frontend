@@ -11,13 +11,14 @@ import { PilotService } from "../../services/admin/pilots/pilots.service";
 })
 export class ModalsComponent implements OnInit {
   type: string;
+  PilotId:any;
   closeBtnName: string;
   userInfo: any;
   config: any = {};
   max = 5;
   rate = 1.5;
   isReadonly = false;
-  pilotRating:any;
+  pilotRating: any;
   constructor(
     public bsModalRef: BsModalRef,
     private router: Router,
@@ -30,16 +31,13 @@ export class ModalsComponent implements OnInit {
     this.rate = 0;
     this.isReadonly = false;
   }
-  updateRating(rating) {
-    console.log("this ins rating", rating);
-
+  updateRating(rating, pilotId) {
     this.pilotRating = {
-      UserId: this.userInfo.ID,
-      Rating: rating,
+      UserId: pilotId,
+      Rating: rating
     };
     this.pilotService.updatePilotRating(this.pilotRating).subscribe(data => {
       if (data.status) {
-        console.log("this is rating",data);
       }
     });
   }
@@ -57,7 +55,7 @@ export class ModalsComponent implements OnInit {
     this.bsModalRef.hide();
   }
   closeModal() {
-    // BsModalRef.hide();
+    this.bsModalRef.hide();
   }
   // openModal(template: TemplateRef<any>) {
   //   this.modalRef = this.modelServie.show(template);

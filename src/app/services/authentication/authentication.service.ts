@@ -47,11 +47,11 @@ export class AuthenticationService {
     return JSON.parse(localStorage.getItem("admin"));
   }
 
-  logout() {
-    localStorage.removeItem('user');
-    localStorage.removeItem('admin');
-    this.router.navigate(['']);
-  }
+  // logout() {
+  //   localStorage.removeItem('user');
+  //   localStorage.removeItem('admin');
+  //   this.router.navigate(['']);
+  // }
 
   verifyToken(token) {
     return this.http.get(this.apiUrl + 'pilot/verifyToken/'+token)

@@ -51,8 +51,9 @@
       <div class="col-md-7 col-sm-12 col-xs-12" *ngIf="jobData && userInfo.Role=='customer' && jobData.JobStatus=='completed'">
         <div class="flex-display">
           <p class="mTop15 description1"><i class="fa fa-check" aria-hidden="true"></i>
-          Pilot(s) claimed the job is completed</p><a (click)="openRatingModal()" class="custom-btn1 orange-bg">Rate your
-          expirence</a>
+          Pilot(s) claimed the job is completed</p>
+          <!-- <a (click)="openRatingModal()" class="custom-btn1 orange-bg">Rate your -->
+          <!-- expirence</a> -->
         </div>
       </div>
       <div class="col-md-7 col-sm-12 col-xs-12" *ngIf="userInfo.Role=='pilot'">
@@ -80,7 +81,7 @@
       something important!</p>
   </div>
   <div class="buttons makeCenter mBottom25" *ngIf="jobData && jobData.length ||isAdmin">
-    <a class="btn-approve profile-buttons white-txt" [routerLink]="['/admin/pilot-list',jobId]">Assign pilot</a>
+    <a class="btn-approve profile-buttons white-txt" *ngIf="!jobInformation.value.IsQuote" [routerLink]="['/admin/pilot-list',jobId]">Assign pilot</a>
     <a class="btn-message profile-buttons white-txt" [routerLink]="['/admin/communication']">Send a Message</a>
     <a class="btn-reject  profile-buttons white-txt" (click)="rejectJob()">Delete</a>
   </div>
@@ -451,7 +452,7 @@
             <div class="table-heading">Country</div>
             <div class="table-heading">State</div>
             <div class="table-heading">City</div>
-            <!-- <div class="table-heading">Action</div> -->
+            <div class="table-heading">Rating</div>
           </div>
           <div class="table-body" *ngIf="assignedPilotList && assignedPilotList.length">
             <div class="table-rows table-body-rows" *ngFor="let pilot of assignedPilotList">
@@ -462,7 +463,10 @@
               <div class="table-content">{{pilot.Country ? pilot.Country: '-'}}</div>
               <div class="table-content">{{pilot.State ? pilot.State: '-'}}</div>
               <div class="table-content">{{pilot.City ? pilot.City: "-"}}</div>
-              <!-- <div class="action makeCenter"><a class="manage-btn" [routerLink]="['/admin/job',job.JobId ]">Manage</a></div> -->
+              <div class="table-content makeCenter" [class.disableDiv]="jobData.JobStatus=='assigned'"><i (click)="openRatingModal(pilot.PilotId)"
+              class="fa fa-line-chart rating"
+              aria-hidden="true"></i></div>
+              <!-- <div class="action makeCenter"><a class="manage-btn">Manage</a></div> -->
             </div>
           </div>
           <div class="table-body" *ngIf="assignedPilotList && !assignedPilotList.length">

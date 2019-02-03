@@ -220,8 +220,8 @@ export class ClientJobComponent implements OnInit {
   }
 
 
-  openRatingModal() {
-    const initialState = { type: "pilotRating" };
+  openRatingModal(pilotId) {
+    const initialState = { type: "pilotRating", PilotId: pilotId };
     this.bsModalRef = this.modalService.show(
       ModalsComponent,
       Object.assign({}, this.config, { initialState })
@@ -229,6 +229,7 @@ export class ClientJobComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = "Close";
     this.loaders.approveProfile = false;
   }
+
   approveJob() {
     this.jobStatusArray = {
       JobId: this.jobData.JobId,
@@ -347,7 +348,7 @@ export class ClientJobComponent implements OnInit {
               var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
               var seconds = Math.floor((distance % (1000 * 60)) / 1000);
               this.remainingTime = hours + "h " + minutes + "m " + seconds + "s "
-              
+
             } else {
               this.isPassed = false;
               var distance = endTime - now;
@@ -379,7 +380,9 @@ export class ClientJobComponent implements OnInit {
           const control = <FormArray>(
             this.jobInformation.controls["ParticularData"]
           );
-
+          if (this.jobInformation.value.OwnDeliverables) {
+            this.addToTagList(this.jobInformation.value.OwnDeliverables);
+          }
           this.jobData.ParticularData.forEach(value => {
             const addrCtrl = this.formBuilder.group({
               ParticularName: [value.ParticularName],

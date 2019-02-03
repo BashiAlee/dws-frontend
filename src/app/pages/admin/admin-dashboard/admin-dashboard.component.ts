@@ -96,11 +96,9 @@ export class AdminDashboardComponent implements OnInit {
             val.MessageTime = moment(val.MessageTime).format("LT");
             this.unreadMessages.push(val);
           } else {
-            console.log("user unread messages", val);
+            // console.log("user unread messages", val);
           }
-          console.log("admin unread messages", val);
-
-
+          // console.log("admin unread messages", val);
         });
       } else {
         this.unreadMessages[0];
@@ -140,7 +138,7 @@ export class AdminDashboardComponent implements OnInit {
       this.pilotService.getAllJobs().subscribe(data => {
         if (data.status && data.result) {
           this.pilotJobList = data.result;
-          console.log("this is data", this.pilotJobList);
+          // console.log("this is data", this.pilotJobList);
 
           this.pilotJobList.forEach((val, index) => {
             if (val.JobStatus == "completed") {

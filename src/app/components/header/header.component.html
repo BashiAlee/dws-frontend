@@ -154,82 +154,82 @@
           <div class="notify-icon-red"></div>
         </i>
       </span>
-          <div class="messages">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-            </a>
-            <div class="dropdown-menu notification-dropdown dropdown-menu-right wow fadeInDown">
-              <ul class="drop-content">
-                <div *ngIf="userInfo.Role == 'admin';else else_part">
-                  <ng-template *ngIf="adminAllMessages.length">
-                    <li class="align-text" *ngFor="let message of adminAllMessages">
-                      <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
-                      <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png" alt=""></div>
-                      <div class="detail" [routerLink]="['communication']">
-                        <h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
-                        <p>has message for you.</p>
-                      </div>
-                    </li>
-                  </ng-template>
-
-
-                  <li class="" *ngIf="!adminAllMessages.length">
-                    <p>No Messages {{adminAllMessages.length}}</p>
-
-                  </li>
-                </div>
-              <ng-template #else_part>
-                <li class="align-text" *ngFor="let message of currentUserMessages">
+      <div class="messages">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-envelope-o"></i>
+        </a>
+        <div class="dropdown-menu notification-dropdown dropdown-menu-right wow fadeInDown">
+          <ul class="drop-content">
+            <div *ngIf="userInfo.Role == 'admin';else else_part">
+              <div *ngIf="adminAllMessages.length">
+                <li class="align-text" *ngFor="let message of adminAllMessages">
                   <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
                   <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png"
                       alt=""></div>
                   <div class="detail" [routerLink]="['communication']">
                     <h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
-                    <p>has message for you.</p>
+                    <p>{{message.Message}}</p>
                   </div>
                 </li>
-                <li class="align-text" *ngIf="currentUserMessages && !currentUserMessages.length">
-                  <div class="detail">
-                    <p>No Messages</p>
-                  </div>
-                </li>
-              </ng-template>
-              </ul>
-              <div class="notify-drop-footer text-center" [routerLink]="['communication']">
-                <a> See All Messages > </a>
               </div>
+              <li class="" *ngIf="!adminAllMessages.length">
+                <p>No Messages</p>
+
+              </li>
             </div>
-            <div class="notify-icon blue"></div>
+            <ng-template #else_part>
+              <li class="align-text" *ngFor="let message of currentUserMessages">
+                <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
+                <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png" alt=""></div>
+                <div class="detail" [routerLink]="['communication']">
+                  <h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
+                  <p>{{message.Message}}</p>
+                </div>
+              </li>
+              <li class="align-text" *ngIf="currentUserMessages && !currentUserMessages.length">
+                <div class="detail">
+                  <p>No Messages</p>
+                </div>
+              </li>
+            </ng-template>
+          </ul>
+          <div class="notify-drop-footer text-center" [routerLink]="['communication']">
+            <a> See All Messages > </a>
           </div>
-          <div class="notification">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-            </a>
-            <div class="dropdown-menu notification-dropdown dropdown-menu-right wow fadeInDown">
-              <ul class="drop-content">
-                <li class="align-text">
-                  <div class="notify-img"><img src="../../../assets/images/avatar.png" alt=""></div>
-                  <div class="detail">
-                    <h5>Bellashihair</h5>
+        </div>
+        <div *ngIf="currentUserMessages && currentUserMessages.length || adminAllMessages && adminAllMessages.length"
+          class="notify-icon blue"></div>
+      </div>
+      <div class="notification">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-bell-o"></i>
+        </a>
+        <div class="dropdown-menu notification-dropdown dropdown-menu-right wow fadeInDown">
+          <ul class="drop-content">
+            <li class="align-text">
+              <div class="notify-img"><img src="../../../assets/images/avatar.png" alt=""></div>
+              <div class="detail">
+                <h5>Bellashihair</h5>
 
-                    <p>Started Following you.</p>
-                  </div>
-                </li>
-                <li class="align-text">
-                  <div class="notify-img"><img src="../../../assets/images/avatar.png" alt=""></div>
-                  <div class="detail">
-                    <h5>Bellashihair</h5>
-
-                    <p>Started Following you.</p>
-                  </div>
-                </li>
-              </ul>
-              <div class="notify-drop-footer text-center">
-                <a href=""> See All Notification > </a>
+                <p>Started Following you.</p>
               </div>
-            </div>
-            <div class="notify-icon pink"></div>
+            </li>
+            <li class="align-text">
+              <div class="notify-img"><img src="../../../assets/images/avatar.png" alt=""></div>
+              <div class="detail">
+                <h5>Bellashihair</h5>
+
+                <p>Started Following you.</p>
+              </div>
+            </li>
+          </ul>
+          <div class="notify-drop-footer text-center">
+            <a href=""> See All Notification > </a>
           </div>
+        </div>
+        <div class="notify-icon pink"></div>
+<!-- <div *ngIf="currentUserMessages && currentUserMessages.length || adminAllMessages && adminAllMessages.length" class="notify-icon pink"></div> -->
+      </div>
     </div>
     <div class="profile-section">
       <div class="picture">
@@ -250,7 +250,7 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right">
 
-          <button class="dropdown-item" type="button" (click)="authService.logout()">Logout</button>
+          <button class="dropdown-item" type="button" (click)="logout()">Logout</button>
         </div>
       </div>
     </div>
@@ -287,13 +287,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="hideDropdown()"  [routerLink]="['communication']" [routerLinkActive]="['active-sidebarlink']">
+        <a class="nav-link" (click)="hideDropdown()" [routerLink]="['communication']" [routerLinkActive]="['active-sidebarlink']">
           <span><i class="fa fa-comment-o"></i>
             <span class="inner-item" *ngIf="isNavOpen">Communications</span></span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="hideDropdown()"  [routerLink]="['job-calender']" [routerLinkActive]="['active-sidebarlink']">
+        <a class="nav-link" (click)="hideDropdown()" [routerLink]="['job-calender']" [routerLinkActive]="['active-sidebarlink']">
           <span><i class="fa fa-calendar" aria-hidden="true"></i>
             <span class="inner-item" *ngIf="isNavOpen">Job Calendar</span>
           </span>
@@ -303,5 +303,3 @@
   </nav>
 
 </div>
-
-
