@@ -48,7 +48,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-7 col-sm-12 col-xs-12" *ngIf="jobData && userInfo.Role=='customer' && jobData.JobStatus=='completed'">
+      <div class=" col-sm-12 col-xs-12" *ngIf="jobData && userInfo.Role=='customer' && jobData.JobStatus=='completed'">
         <div class="flex-display">
           <p class="mTop15 description1"><i class="fa fa-check" aria-hidden="true"></i>
           Pilot(s) claimed the job is completed</p>
@@ -56,13 +56,22 @@
           <!-- expirence</a> -->
         </div>
       </div>
-      <div class="col-md-7 col-sm-12 col-xs-12" *ngIf="userInfo.Role=='pilot'">
-        <div class="flex-display">
-          <p class="mTop15 description1">
-            <a class="custom-btn1 green-g-bg">I am on Location</a>
-            <a (click)="changeJobStatus()" *ngIf="pilotData.JobStatus=='assigned'" class="custom-btn1 orange-bg">Mark the job as
-            completed</a>
-            <a class="custom-btn1 orange-bg" *ngIf="pilotData.JobStatus=='completed'">Job Is Completed</a>
+      <!--<div class="col-md-7 col-sm-12 col-xs-12" *ngIf="userInfo.Role=='pilot'">-->
+        <!--<div class="flex-display">-->
+          <!--<p class="mTop15 description1">-->
+            <!--<a class="custom-btn1 green-g-bg">I am on Location</a>-->
+            <!--<a (click)="changeJobStatus()" *ngIf="pilotData.JobStatus=='assigned'" class="custom-btn1 orange-bg">Mark the job as-->
+            <!--completed</a>-->
+            <!--<a class="custom-btn1 orange-bg" *ngIf="pilotData.JobStatus=='completed'">Job Is Completed</a>-->
+        <!--</div>-->
+      <!--</div>-->
+      <div class="outer-btn">
+        <div class="btn-3">
+          <button class="custom-btn1 green-g-bg">i am on location</button>
+        </div>
+        <div class="btn-3">
+          <button class="custom-btn1 orange-bg" (click)="changeJobStatus()" *ngIf="pilotData.JobStatus=='assigned'">Mark the job as Completed</button>
+          <button class="custom-btn1 orange-bg" *ngIf="pilotData.JobStatus=='completed'">Job is Completed</button>
         </div>
       </div>
     </div>
