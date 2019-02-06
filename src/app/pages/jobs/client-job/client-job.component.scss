@@ -385,6 +385,13 @@ div.command-center {
     .table-content {
       padding: 15px 0px;
     }
+    .user-info{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 80px;
+      float: left;
+    }
   }
 
   .table-heading {
@@ -491,3 +498,8 @@ div.command-center {
  }
 
 
+  .extended-table-client {
+    div.table-rows {
+      grid-template-columns: 15% 13% 16% 10% 9% 8%;
+    }
+  }

@@ -262,28 +262,37 @@
   <!-- Sidebar -->
   <nav class="sidebar" [class.collapsingSideBar]="!isNavOpen">
     <ul class="list-unstyled components">
-      <li class="nav-item notAvailable">
-        <a class="nav-link">
+      <li class="nav-item">
+        <a class="nav-link" (click)="hideDropdown()" [routerLink]="['dashboard']" [routerLinkActive]="['active-sidebarlink']">
           <span><i class="fa fa-tachometer"></i>
             <span class="inner-item" *ngIf="isNavOpen">Dashboard</span>
           </span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['profile',id]" (click)="hideDropdown()" [routerLinkActive]="['active-sidebarlink']">
+      <li class="nav-item" [ngClass]="(userInfo.Role =='customer')?'nav-item ':'nav-item'">
+        <a class="nav-link" [routerLink]="['profile',userInfo.ID]" (click)="hideDropdown()" [routerLinkActive]="['active-sidebarlink']">
           <span><i class="fa fa-user-o" aria-hidden="true"></i>
             <span class="inner-item" *ngIf="isNavOpen">Profile</span>
           </span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="hideDropdown()" [routerLinkActive]="['active-sidebarlink']" [routerLink]="['jobs']">
+      <li class="nav-item" *ngIf="userInfo.Role =='customer'">
+        <a class="nav-link" (click)="hideDropdown()" [routerLinkActive]="['active-sidebarlink']" [routerLink]="['create-job']">
           <span class="user-list"><i class="fa fa-users"></i>
             <span class="inner-item" *ngIf="isNavOpen">Jobs</span>
             <span *ngIf="isNavOpen" class="badge-value">3</span>
             <span *ngIf="!isNavOpen" class="small-badge">3</span>
           </span>
 
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="userInfo.Role =='pilot'">
+        <a class="nav-link" (click)="hideDropdown()" [routerLinkActive]="['active-sidebarlink']" [routerLink]="['pilot-job-list']">
+          <span class="user-list"><i class="fa fa-users"></i>
+            <span class="inner-item" *ngIf="isNavOpen">Jobs</span>
+            <span *ngIf="isNavOpen" class="badge-value">4</span>
+            <span *ngIf="!isNavOpen" class="small-badge">4</span>
+          </span>
         </a>
       </li>
       <li class="nav-item">

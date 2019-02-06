@@ -50,6 +50,16 @@ export class DashboardComponent implements OnInit {
     private pilotService: PilotService,
     private messageService: MessagesService
   ) {
+    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    console.log("this is called", width);
+
+    if (width < 800) {
+      this.view = [400, 200];
+      console.log("this is called", window.pageXOffset);
+
+
+    } else {
+    }
     this.userInfo = this.authService.getCurrentUser();
     if (this.userInfo.Role == "customer") {
       this.GetCurrentUserJobs(this.userInfo.ID).then(res => {
