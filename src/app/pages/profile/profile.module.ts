@@ -35,6 +35,7 @@ import { CroppieModule } from '../../../angular-croppie-module/src/lib/croppie.m
 import { AlertModule } from 'ngx-bootstrap';
 import { ImageCropperModule } from "ngx-image-cropper";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EquipmentComponent,
     BusinessInformationComponent,
      PersonalInformationComponent,
-    ProfileComponent
+    ProfileComponent,
+    CustomerProfileComponent
   ],
   exports: [
     ProfileComponent

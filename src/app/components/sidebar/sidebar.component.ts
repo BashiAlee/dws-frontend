@@ -16,6 +16,8 @@ export class SidebarComponent implements OnInit {
   constructor(private authService :AuthenticationService) {
     this.id = this.authService.getCurrentUser().ID;
     this.role = this.authService.getCurrentUser().Role;
+  
+    
     var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     if(width < 768) {
       this.isOpen = false;

@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'document-declaration', component: DocumentDeclarationComponent },
   { path:'equipment' ,component: EquipmentComponent },
   { path:'personal-information' ,component: PersonalInformationComponent },
-  { path:'experience-portfolio' ,component: ExperiencePortfolioComponent },
+  { path:'experience-portfolio' ,component: ExperiencePortfolioComponent }
 
   
 ];

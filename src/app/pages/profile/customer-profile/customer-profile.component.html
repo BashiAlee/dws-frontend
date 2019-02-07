@@ -1,0 +1,126 @@
+<form [formGroup]="personalInformation">
+    <div class="container mTop50" *ngIf="isAdmin">
+        <a class="custom-btn1 blue-txt" (click)="goBack()"><i class="fa fa-arrow-left mr15"
+          aria-hidden="true"></i>Back to list</a>
+      </div>
+  <!-- <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event)" /> -->
+
+  <div class="container makeBgWhite mBottom20" [class.disableDiv]="isAdmin">
+    <div class="personal-information" style="margin-top: 50px;">
+      <div class="profile-details makeCenter">
+        <div class="displayPictureTop">
+          <div class="displayPicture">
+            <img *ngIf="messages.coverImageChoosed" [src]="croppedImage" class="croppedImageDiv"  />
+            <img *ngIf="displayPicture && !messages.coverImageChoosed" [src]="displayPicture" alt="Display picture" [class.enableDiv]="isAdmin" (click)="isAdmin && zoomPic(displayPicture)">
+            <img *ngIf="!displayPicture && !messages.coverImageChoosed" src="../../../../assets/images//avatar.png" alt="Display picture">
+            <div class="image-upload">
+              <label for="file-input">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </label>
+              <input id="file-input" (change)="uploadCoverImage($event)" type="file" accept="image/*" />
+            </div>
+          </div>
+          <div class="display_pic-upload">
+            <label for="pic" class="uploader" *ngIf="messages.uploadingImage"><i class="fa fa-circle-o-notch fa-spin"></i>
+            </label>
+          </div>
+          <img #croppie="croppie" [croppieOptions]="croppieOptions" (update)="handleUpdate($event)" *ngIf="messages.coverImageChoosed" />
+          <button class="btn crop-btn" *ngIf="messages.coverImageChoosed && !messages.uploadingImage" (click)="uploadCroppedImage(croppedImageData)">Crop &amp; Save</button>
+        </div>
+        <p class="user-name">{{personalInformation.value.FirstName+' '+personalInformation.value.LastName
+          }}</p>
+        <p class="user-id">{{personalInformation.value.MemberId}}</p>
+        <p class="member-since" *ngIf="personalData">Member Since : <span>{{personalData.CreatedAt | date:
+            'MM/dd/yyyy'}}</span></p>
+        
+        <p class="user-description">You may also login using your DWS Member ID Number in the Username field.</p>
+      </div>
+
+      <div class="user-personal-info">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="firstName" class="custom-input-label">First Name</label>
+                <input type="text" class="form-control custom-input" id="firstName" aria-describedby="firstName"
+                  formControlName="FirstName" placeholder="First Name">
+                <div *ngIf="form.FirstName.invalid && (form.FirstName.dirty || form.FirstName.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.FirstName.errors.required">First Name is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="lastName" class="custom-input-label">Last Name</label>
+                <input type="text" class="form-control custom-input" id="lastName" aria-describedby="lastName"
+                  formControlName="LastName" placeholder="Last Name">
+                <div *ngIf="form.LastName.invalid && (form.LastName.dirty || form.LastName.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.LastName.errors.required">Last Name is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+   
+
+      <div class="other-info">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="PrimaryPhone" class="custom-input-label">Primary Phone</label>
+                <input type="number" class="form-control custom-input" id="PrimaryPhone" formControlName="PrimaryPhone"
+                  aria-describedby="PrimaryPhone" placeholder="Primary Phone">
+                <div *ngIf="form.PrimaryPhone.invalid && (form.PrimaryPhone.dirty || form.PrimaryPhone.touched)" class="invalid-feedback">
+                  <div *ngIf="form.PrimaryPhone.errors.required">Phone is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="date" class="custom-input-label">Date of Birth</label>
+                <input type="date" class="form-control custom-input" id="date" aria-describedby="data" formControlName="Dob">
+                <div *ngIf="form.Dob.invalid && (form.Dob.dirty || form.Dob.touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="form.Dob.errors.required">Date of birth is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="container">
+      <alert type="success" *ngIf="success">
+          Your data has been saved successfully
+        </alert>
+
+        <alert type="danger" *ngIf="error">
+          Error in saving your information
+        </alert>
+    <div class="call-to-action" [class.disableDiv]="isAdmin">
+      <!-- <div class="goBack">
+        <button disabled>Previous Step</button>
+      </div> -->
+      <p>Save your Personal Information and Continue to next Step.</p>
+      <div class="saveButton" *ngIf="!loading">
+        <button (click)="save()">Save/Update</button>
+      </div>
+      <div class="saveButton disableDiv" *ngIf="loading">
+        <button><i class="fa fa-circle-o-notch fa-spin"></i></button>
+      </div>
+
+    </div>
+  </div>
+</form>

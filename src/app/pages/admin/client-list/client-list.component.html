@@ -75,7 +75,7 @@
                 <div>{{list.PhysicallCountry ? list.PhysicallCountry: '-'}}</div>
                 <div>{{list.PhysicallState ? list.PhysicallState: '-'}}</div>
                 <div>{{list.PhysicallCity ? list.PhysicallCity: "-"}}</div>
-                <div class="action"><a [routerLink]="['/admin/profile',list.ID]" class="detail-btn">Details</a></div>
+                <div class="action"><a [routerLink]="['/admin/customer/profile',list.ID]" class="detail-btn">Details</a></div>
               </div>
             </div>
             <div class="table-body" *ngIf="clientList && !clientList.length">

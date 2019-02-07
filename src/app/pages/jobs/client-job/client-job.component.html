@@ -468,10 +468,15 @@
               <div class="table-content">{{pilot.Country ? pilot.Country: '-'}}</div>
               <div class="table-content">{{pilot.State ? pilot.State: '-'}}</div>
               <div class="table-content">{{pilot.City ? pilot.City: "-"}}</div>
-              <div class="table-content makeCenter" *ngIf="userInfo.Role=='customer'" [class.disableDiv]="jobData.JobStatus=='assigned'"><i
-              (click)="openRatingModal(pilot.PilotId)"
+              <div class="table-content makeCenter" *ngIf="userInfo.Role=='customer'" [class.disableDiv]="jobData.JobStatus=='assigned'">
+                <!-- <i
+             
               class="fa fa-line-chart rating"
-              aria-hidden="true"></i></div>
+              aria-hidden="true"></i> -->
+
+              <img src="../../../../assets/icons/rating-star.png"  style="width: 30px;" (click)="openRatingModal(pilot.PilotId)" alt="">
+            
+            </div>
               <!-- <div class="action makeCenter"><a class="manage-btn">Manage</a></div> -->
             </div>
           </div>

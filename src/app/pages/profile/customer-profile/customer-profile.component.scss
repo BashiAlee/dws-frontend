@@ -1,0 +1,52 @@
+@import '../../../../variables';
+
+.profile-details {
+    padding-top: 45px;
+
+
+  .user-name {
+    font-family: 'Apercu-Medium';
+    text-transform: capitalize;
+    font-size: 33px;
+    margin-top: 27px;
+    font-size: 24px;
+  }
+  .user-id {
+    
+    text-transform: uppercase;
+    color: $primary-color;
+    border: 1px solid $p-color;
+    display: inline-block;
+    padding: 10px 25px 10px 25px;
+    border-radius: 26px;
+    font-family: 'Apercu-Mono';
+    font-size: 19px;
+  }
+  .user-description {
+    font-family: 'Apercu-Regular';
+    color: $p-color;
+  }
+
+  .member-since{
+    color: #ff566a;
+    font-family: 'Apercu-Regular';
+
+    span {
+      font-family: 'Apercu-Bold';
+    }
+  }
+
+  .custom-input-label {
+    color: $input-label;
+  }
+}
+
+.pilotRating {
+  pointer-events: none;
+  span {
+   
+    font-size: 17px;
+  
+  }
+}
+
