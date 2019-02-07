@@ -385,7 +385,8 @@ div.command-center {
     .table-content {
       padding: 15px 0px;
     }
-    .user-info{
+
+    .user-info {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -485,21 +486,33 @@ div.command-center {
   }
 
 }
- .rating {
+
+.rating {
   font-size: 23px !important;
   color: #29abe2 !important;
- }
+}
 
- .disableDiv{
-   pointer-events: none ;
-   i{
-     color:#ccc !important;
-   }
- }
+.disableDiv {
+  pointer-events: none;
 
-
-  .extended-table-client {
-    div.table-rows {
-      grid-template-columns: 15% 13% 16% 10% 9% 8%;
-    }
+  i {
+    color: #ccc !important;
   }
+}
+
+.outer-btn {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.row1 {
+  justify-content: space-around !important;
+}
+
+.extended-table-client {
+  div.table-rows {
+    grid-template-columns: 15% 13% 16% 10% 9% 8%;
+  }
+}

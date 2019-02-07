@@ -53,16 +53,17 @@
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'RobotoCondensed-Bold';
-  src:url("./assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf");
+  src: url("./assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'RobotoCondensed-Light';
-  src:url("./assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf");
+  src: url("./assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf");
   font-weight: normal;
   font-style: normal;
 
@@ -70,17 +71,21 @@
 
 @font-face {
   font-family: 'CarroisGothic-Regular';
-  src:url("./assets/fonts/CarroisGothic-Regular/CarroisGothic-Regular.ttf");
+  src: url("./assets/fonts/CarroisGothic-Regular/CarroisGothic-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
-html,body,app-root,.alignItems{
+
+html,
+body,
+app-root,
+.alignItems {
   // min-height: 100vh;
   // height:100%;
   // width: 100%;
 }
 
-div.mainContent{
+div.mainContent {
   height: 100vh;
   overflow-y: auto;
 }
@@ -97,21 +102,25 @@ i {
     cursor: pointer;
   }
 }
+
 a {
 
   &:hover {
     cursor: pointer;
   }
 }
+
 input:focus {
   box-shadow: none !important;
 }
+
 button {
   border: none;
 
   &:hover {
     cursor: pointer;
   }
+
   &:focus {
     outline: 0 !important;
   }
@@ -176,10 +185,12 @@ input.custom-input:focus {
     opacity: 0;
     cursor: pointer;
   }
-.container input:checked~.checkmark1 {
-  background-color: #ff7676 !important;
 
-}
+  .container input:checked~.checkmark1 {
+    background-color: #ff7676 !important;
+
+  }
+
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
@@ -191,9 +202,11 @@ input.custom-input:focus {
     border-radius: 50%;
     border: 1px solid $primary-color;
   }
-.mark1{
-  background: #29abe2 !important;
-}
+
+  .mark1 {
+    background: #29abe2 !important;
+  }
+
   /* On mouse-over, add a grey background color */
   // .container:hover input ~ .checkmark {
   //     background-color: $p-color;
@@ -235,6 +248,7 @@ input.custom-input:focus {
   margin-bottom: 81px;
   clear: both;
   color: $input-label-color;
+
   .container {
     // width: 50%;
     width: 112px;
@@ -282,6 +296,7 @@ textarea.custom-textarea:focus {
 
   .goBack {
     justify-self: right;
+
     button {
       width: 233px;
       box-shadow: 0px 11px 46px 0px rgba(190, 66, 241, 0.2);
@@ -291,8 +306,10 @@ textarea.custom-textarea:focus {
       border-radius: 32px;
     }
   }
+
   .saveButton {
     justify-self: left;
+
     button {
       width: 233px;
       box-shadow: 0px 11px 16px 0px rgba(190, 66, 241, 0.35);
@@ -302,6 +319,7 @@ textarea.custom-textarea:focus {
       border-radius: 32px;
     }
   }
+
   p {
     color: $buttons-desc-color;
     grid-row: 2/3;
@@ -350,7 +368,8 @@ textarea.custom-textarea:focus {
   }
 }
 
-.pdf-uploader, .image-uploader {
+.pdf-uploader,
+.image-uploader {
   position: relative;
   display: flex;
   align-items: center;
@@ -394,27 +413,35 @@ textarea.custom-textarea:focus {
 .karla-bold {
   font-family: 'Karla-Bold';
 }
-.pt20{
+
+.pt20 {
   padding-top: 20px;
 }
-.p1530{
+
+.p1530 {
   padding: 10px 25px !important;
 }
-.pb0{
+
+.pb0 {
   padding-bottom: 0px !important;
 }
-.ml10{
+
+.ml10 {
   margin-left: 10px !important;
 }
+
 .ml15 {
   margin-left: 15px !important;
 }
-.mr5{
+
+.mr5 {
   margin-right: 5px !important;
 }
+
 .mr15 {
   margin-right: 15px !important;
 }
+
 .mTop15 {
   margin-top: 15px !important;
 }
@@ -422,20 +449,28 @@ textarea.custom-textarea:focus {
 .mTop25 {
   margin-top: 25px !important;
 }
+
 .mTop50 {
   margin-top: 50px !important;
 }
+
 .mTop100 {
   margin-top: 100px !important;
 }
+
 .mBottom25 {
   margin-bottom: 25px !important;
+}
+
+.mBottom50 {
+  margin-bottom: 50px !important;
 }
 
 .mBottom20 {
   margin-bottom: 20px !important;
 }
-.m50{
+
+.m50 {
   margin: 25px 0px;
 }
 
@@ -448,6 +483,7 @@ div.ng-select-container {
   max-height: 214px !important;
   border-radius: 3px;
   border: 2px solid $border-input-color !important;
+
   .ng-input {
     input {
       min-height: 41px !important;
@@ -538,10 +574,12 @@ div.custom-table {
   padding: 12px 25px 12px 25px;
   border-radius: 32px;
 }
-.btn-center{
+
+.btn-center {
   display: grid;
   justify-content: center;
 }
+
 .button-secondary-dws {
   background: $secondary-button-color;
   color: $white;
@@ -557,6 +595,7 @@ div.custom-table {
 .for-three-columns {
   grid-template-columns: repeat(3, 1fr);
 }
+
 .for-seven-columns {
   grid-template-columns: repeat(7, 1fr);
 }
@@ -571,19 +610,24 @@ div.custom-table {
 .mtop30 {
   margin-top: 30px !important;
 }
+
 .mt18 {
   margin-top: 18px !important;
 }
-.ml25{
+
+.ml25 {
   margin-left: -25px !important;
 }
 
-.ng-select.ng-select-single .ng-select-container .ng-value-container, .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
-  color:#29abe2  !important;
+.ng-select.ng-select-single .ng-select-container .ng-value-container,
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+  color: #29abe2 !important;
 }
+
 .ng-select .ng-clear-wrapper {
-  color:#29abe2  !important;
+  color: #29abe2 !important;
 }
+
 // .ng-select .ng-select-container {
 //   color:#29abe2  !important;
 // }
@@ -707,13 +751,15 @@ div.custom-table {
 .invalid-feedback {
   display: block !important;
 }
+
 button.disabledButton {
   cursor: no-drop;
   opacity: 0.6;
 }
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-     -webkit-appearance: none !important;
+  -webkit-appearance: none !important;
 }
 
 input[type=number] {
@@ -767,6 +813,7 @@ input[type=number] {
 
 .topContent {
   text-align: center;
+
   h1 {
     font-family: 'Apercu-Medium';
     padding-top: 100px;
@@ -782,6 +829,7 @@ input[type=number] {
     color: $p-color;
   }
 }
+
 .makeBlack {
   color: $black;
 }
@@ -800,6 +848,7 @@ input[type=number] {
   bottom: 0;
   top: 30px;
 }
+
 .alignToBottom {
   position: absolute;
   bottom: 0;
@@ -812,9 +861,12 @@ div.dataTables_wrapper {
   padding-bottom: 60px;
 
 
-  div.dataTables_filter, div.dataTables_paginate,div.dataTables_info {
+  div.dataTables_filter,
+  div.dataTables_paginate,
+  div.dataTables_info {
     display: none;
   }
+
   div.dataTables_length {
     position: absolute;
 
@@ -822,9 +874,8 @@ div.dataTables_wrapper {
     left: 0;
     right: 0;
   }
-  .custom-datatable {
 
-  }
+  .custom-datatable {}
 
   div.dataTables_scrollBody {
     height: 410px !important;
@@ -842,7 +893,8 @@ div.dataTables_wrapper {
   margin: 100px auto;
 }
 
-.double-bounce1, .double-bounce2 {
+.double-bounce1,
+.double-bounce2 {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -862,15 +914,26 @@ div.dataTables_wrapper {
 }
 
 @-webkit-keyframes sk-bounce {
-  0%, 100% { -webkit-transform: scale(0.0) }
-  50% { -webkit-transform: scale(1.0) }
+
+  0%,
+  100% {
+    -webkit-transform: scale(0.0)
+  }
+
+  50% {
+    -webkit-transform: scale(1.0)
+  }
 }
 
 @keyframes sk-bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(0.0);
     -webkit-transform: scale(0.0);
-  } 50% {
+  }
+
+  50% {
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
@@ -884,7 +947,8 @@ div.custom-modal {
     border-radius: 29px;
     border: 4px solid $modal-border;
 
-    .modal-header,.modal-footer{
+    .modal-header,
+    .modal-footer {
       border: 0;
     }
 
@@ -913,13 +977,14 @@ div.custom-modal {
       width: 60px;
     }
   }
-  .modal-body.sucess
-  {
+
+  .modal-body.sucess {
     h3 {
-color: $success;
-font-size: 28px;
-font-family: 'Apercu-Medium';
+      color: $success;
+      font-size: 28px;
+      font-family: 'Apercu-Medium';
     }
+
     p {
       color: $modal-text-color;
       font-size: 24px;
@@ -932,42 +997,47 @@ font-family: 'Apercu-Medium';
       color: $primary-color;
       font-size: 28px;
       font-family: 'Apercu-Medium';
-          }
-          p {
-            color: $modal-text-color;
-            font-size: 24px;
-            font-family: 'Apercu-Regular';
-          }
+    }
+
+    p {
+      color: $modal-text-color;
+      font-size: 24px;
+      font-family: 'Apercu-Regular';
+    }
 
   }
-  .modal-body.error,.modal-body.delete
-  {
+
+  .modal-body.error,
+  .modal-body.delete {
     h3 {
-color: $error-modal;
-font-size: 28px;
-font-family: 'Apercu-Medium';
+      color: $error-modal;
+      font-size: 28px;
+      font-family: 'Apercu-Medium';
     }
+
     p {
       color: $modal-text-color;
       font-size: 24px;
       font-family: 'Apercu-Regular';
     }
   }
-  .modal-body.warning
-  {
+
+  .modal-body.warning {
     h3 {
-color: $warning-modal;
-font-size: 28px;
-font-family: 'Apercu-Medium';
+      color: $warning-modal;
+      font-size: 28px;
+      font-family: 'Apercu-Medium';
     }
+
     p {
       color: $modal-text-color;
       font-size: 24px;
       font-family: 'Apercu-Regular';
     }
   }
+
   .footer-content {
-    .custom-modal-button.success-btn{
+    .custom-modal-button.success-btn {
       display: block;
       margin: 0 auto;
       border-radius: 33px;
@@ -979,7 +1049,8 @@ font-family: 'Apercu-Medium';
       height: 66px;
       margin-bottom: 20px;
     }
-    .custom-modal-button.try-later{
+
+    .custom-modal-button.try-later {
       display: block;
       margin: 0 auto;
       border-radius: 33px;
@@ -991,7 +1062,8 @@ font-family: 'Apercu-Medium';
       height: 66px;
       margin-bottom: 20px;
     }
-    .custom-modal-button.warning-btn{
+
+    .custom-modal-button.warning-btn {
       display: block;
       margin: 0 auto;
       border-radius: 33px;
@@ -1003,7 +1075,8 @@ font-family: 'Apercu-Medium';
       height: 66px;
       margin-bottom: 20px;
     }
-    .custom-modal-button.maintenance-btn{
+
+    .custom-modal-button.maintenance-btn {
       display: block;
       margin: 0 auto;
       border-radius: 33px;
@@ -1021,6 +1094,7 @@ font-family: 'Apercu-Medium';
       font-size: 16px;
       color: $modal-text-color;
     }
+
     .yes-btn {
       display: block;
       margin: 0 auto;
@@ -1033,6 +1107,7 @@ font-family: 'Apercu-Medium';
       height: 66px;
       margin-bottom: 20px;
     }
+
     .no-btn {
       display: block;
       margin: 0 auto;
@@ -1046,6 +1121,7 @@ font-family: 'Apercu-Medium';
       margin-bottom: 20px;
     }
   }
+
   .alignButton {
     display: flex;
     justify-content: center;
@@ -1053,6 +1129,7 @@ font-family: 'Apercu-Medium';
   }
 
 }
+
 //custom modal end
 .successMessage {
   background: $success;
@@ -1060,6 +1137,7 @@ font-family: 'Apercu-Medium';
   text-align: center;
   padding: 20px;
 }
+
 .errorMessage {
   background: #f00;
   color: $white;
@@ -1076,11 +1154,13 @@ font-family: 'Apercu-Medium';
 .makeRightFlex {
   justify-content: flex-end;
 }
+
 //data table pilot list
 
-div.command-center div.dataTables_wrapper.no-footer .dataTables_scrollBody{
+div.command-center div.dataTables_wrapper.no-footer .dataTables_scrollBody {
   border-bottom: 0 !important;
 }
+
 div.command-center div.dataTables_scroll {
   border-radius: 10px !important;
   border-width: 2px !important;
@@ -1088,6 +1168,7 @@ div.command-center div.dataTables_scroll {
   border-color: rgb(216, 216, 228) !important;
   background: $white;
 }
+
 div.dataTables_length {
   label {
     color: $black;
@@ -1100,17 +1181,20 @@ div.dataTables_length {
     }
   }
 }
+
 // Datatables end
 
 .disableDiv {
-    pointer-events: none !important;
+  pointer-events: none !important;
 }
-.disableBtn{
-    pointer-events: none !important;
-    background: #9595a2 !important;
-    color: #fff !important;
+
+.disableBtn {
+  pointer-events: none !important;
+  background: #9595a2 !important;
+  color: #fff !important;
 
 }
+
 .enableDiv {
   pointer-events: visible !important;
 }
@@ -1122,7 +1206,7 @@ div.dataTables_length {
 .crop-btn {
   background: $primary-color;
   margin-top: 9px;
-  color:$white;
+  color: $white;
   margin-bottom: 8px;
 
 }
@@ -1139,6 +1223,7 @@ div.dataTables_length {
 button:disabled {
   cursor: no-drop;
 }
+
 .disabled {
   pointer-events: none;
 }
@@ -1149,26 +1234,27 @@ button:disabled {
 }
 
 
-.about-banner{
+.about-banner {
   display: grid;
-    grid-template-columns: 1fr;
+  grid-template-columns: 1fr;
 
-    img {
-      width: 100%;
-      grid-row: 1/2;
-      grid-column: 1/2;
-      height: 220px;
-    }
+  img {
+    width: 100%;
+    grid-row: 1/2;
+    grid-column: 1/2;
+    height: 220px;
+  }
 
-    .centered {
-      grid-row: 1/2;
-      grid-column: 1/2;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  .centered {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -1182,14 +1268,14 @@ button:disabled {
   opacity: 0.5;
   pointer-events: none;
 }
-div.custom-datepicker{
-  div.bs-datepicker-head{
+
+div.custom-datepicker {
+  div.bs-datepicker-head {
     background-color: #29abe2;
   }
 
-  div.bs-datepicker-body{
-    table
-    tr {
+  div.bs-datepicker-body {
+    table tr {
       td.week {
         color: #29abe2;
       }
@@ -1203,35 +1289,39 @@ div.custom-datepicker{
   }
 }
 
-.custom-select1{
-  .ng-arrow-wrapper{
-    .ng-arrow{
+.custom-select1 {
+  .ng-arrow-wrapper {
+    .ng-arrow {
       border-color: #29abe2 transparent transparent;
       border-style: solid;
       border-width: 5px 5px 2.5px;
     }
   }
 }
+
 .ng-select-opened>.ng-select-container .ng-arrow {
   border-color: transparent transparent #29abe2 !important;
 }
+
 .ng-select .ng-arrow-wrapper:hover .ng-arrow {
-  border-top-color:  #29abe2 !important;
-}
-.ng-select .ng-select-container .ng-value-container .ng-placeholder {
-  color:#29abe2 !important;
+  border-top-color: #29abe2 !important;
 }
 
-ng-select.job-custom-select .ng-select-container .ng-value-container .ng-placeholder  {
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+  color: #29abe2 !important;
+}
+
+ng-select.job-custom-select .ng-select-container .ng-value-container .ng-placeholder {
   top: 12px !important;
 }
 
-.custom-btn{
+.custom-btn {
   padding: 6px 15px;
   background: #fff;
   border-radius: 20px;
 }
-.custom-btn1{
+
+.custom-btn1 {
   border: 1px solid #c5c5c7;
   padding: 17px 30px;
   margin: 5px 10px;
@@ -1240,6 +1330,7 @@ ng-select.job-custom-select .ng-select-container .ng-value-container .ng-placeho
   background: #fff;
   font-size: 16px;
 }
+
 .custom-btn2 {
   margin: 5px 10px;
   border-radius: 30px;
@@ -1247,29 +1338,34 @@ ng-select.job-custom-select .ng-select-container .ng-value-container .ng-placeho
   padding: 5px 10px;
   font-size: 12px;
 }
-.red-trans{
+
+.red-trans {
   border: 1px solid #ff7676;
   color: #ff7676 !important;
 }
-.gray-trans{
+
+.gray-trans {
   border: 1px solid #c4c0c0;
   color: #c4c0c0 !important;
 }
-.green-trans{
+
+.green-trans {
   border: 1px solid #4dc970;
   color: #4dc970 !important;
 }
-.yellow-trans{
+
+.yellow-trans {
   border: 1px solid #f3f714;
   color: #f3f714 !important;
 }
+
 .orange-trans {
   border: 1px solid #fa972c !important;
   color: #fa972c !important;
 }
 
 
-.manage-btn{
+.manage-btn {
   background-color: #29abe2;
   padding: 9px 18px;
   border: none;
@@ -1277,16 +1373,19 @@ ng-select.job-custom-select .ng-select-container .ng-value-container .ng-placeho
   outline: none;
   color: white !important;
 }
+
 .removeIcon {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 20px;
   margin-top: 10px;
+
   i {
     color: $delete-icon-color;
   }
 }
+
 .buttons {
 
   .btn-message {
@@ -1317,17 +1416,20 @@ ng-select.job-custom-select .ng-select-container .ng-value-container .ng-placeho
 // for dashboard only
 .top-content {
   padding-top: 15px;
-  .heading1{
+
+  .heading1 {
     text-transform: capitalize;
     font-size: 2.7em;
     margin-top: 32px;
 
   }
 }
+
 .description1 {
   color: #73738a;
   font-size: 1.2em;
 }
+
 .box {
   position: relative;
   border-radius: 8px;
@@ -1344,28 +1446,33 @@ ng-select.job-custom-select .ng-select-container .ng-value-container .ng-placeho
   }
 
 }
- .bell-icon {
-   position: absolute;
-   top: -25px;
-   right: -27px;
-   color: #fff;
-   font-size: 1.4em;
-   padding: 10px 15px;
-   border-radius: 50%;
- }
- .barchart-section {
-   background: #fff;
-   .barchar-legend{
-      display: flex;
-      justify-content: space-evenly !important;
-      align-items: center;
-   }
- }
- .message-section{
+
+.bell-icon {
+  position: absolute;
+  top: -25px;
+  right: -27px;
+  color: #fff;
+  font-size: 1.4em;
+  padding: 10px 15px;
+  border-radius: 50%;
+}
+
+.barchart-section {
+  background: #fff;
+
+  .barchar-legend {
+    display: flex;
+    justify-content: space-evenly !important;
+    align-items: center;
+  }
+}
+
+.message-section {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  .circle{
+
+  .circle {
     display: grid;
     justify-content: center;
     line-height: 60px;
@@ -1376,111 +1483,128 @@ ng-select.job-custom-select .ng-select-container .ng-value-container .ng-placeho
     color: #fff;
     font-size: 1.4em;
   }
- }
-  .message-content {
-    background: #fff;
-    height: 472px;
-    overflow: auto;
-    padding: 10px 20px;
-    .admin-msg{
-      .msg-info {
-        display: flex;
-        align-items: center;
+}
 
-        img {
-          width: 50px;
-          border-radius: 50%;
-          margin-right: 10px;
-        }
+.message-content {
+  background: #fff;
+  height: 497px;
+  overflow: auto;
+  padding: 10px 20px;
 
-        h2 {
-          font-size: 1.1rem;
-          margin-bottom: 0px;
-          color: $primary-color;
-        }
+  .admin-msg {
+    .msg-info {
+      display: flex;
+      align-items: center;
 
-        p {
-          color: #73738a;
-        }
+      img {
+        width: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
       }
 
-      .msg-txt {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        margin: 10px 0px;
-        padding: 10px 10px 0px 10px;
-
-        p {
-          font-size: 0.9em;
-          color: #73738a;
-        }
+      h2 {
+        font-size: 1.1rem;
+        margin-bottom: 0px;
+        color: $primary-color;
       }
 
-      a {
-        display: flex;
-        justify-content: flex-end;
+      p {
+        color: #73738a;
       }
     }
 
+    .msg-txt {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 10px 0px;
+      padding: 10px 10px 0px 10px;
+
+      p {
+        font-size: 0.9em;
+        color: #73738a;
+      }
+    }
+
+    a {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
- .heading2{
+
+}
+
+.heading2 {
   color: #73738a;
   font-size: 1.8em;
   font-weight: 200;
- }
-// for text
-.white-txt{
-  color: #fff !important;
-}
-.blue-txt{
-  color: $primary-color !important;
-}
-.red-txt{
-  color:$details-btn !important;
-}
-.yellow-txt{
-  color: $warning-modal !important;
-}
-.green-txt{
-color: $success !important;
 }
 
-.red-btn-txt{
-  color:$details-btn !important;
+// for text
+.white-txt {
+  color: #fff !important;
+}
+
+.blue-txt {
+  color: $primary-color !important;
+}
+
+.red-txt {
+  color: $details-btn !important;
+}
+
+.yellow-txt {
+  color: $warning-modal !important;
+}
+
+.green-txt {
+  color: $success !important;
+}
+
+.red-btn-txt {
+  color: $details-btn !important;
   border: 1px solid $details-btn !important;
 }
+
 // for backgrond
 .blue-bg {
   background: $primary-color !important;
 }
+
 .red-bg {
   background: $details-btn !important;
 }
+
 .yellow-bg {
   background: $warning-modal !important;
 }
+
 .green-bg {
   background: $success !important;
 }
+
 .orange-bg {
   background-image: linear-gradient(to right, rgb(253, 149, 89) 0%, rgb(252, 102, 38) 100%);
   background-image: -moz-linear-gradient(to right, rgb(253, 149, 89) 0%, rgb(252, 102, 38) 100%);
   background-image: -ms-linear-gradient(to right, rgb(253, 149, 89) 0%, rgb(252, 102, 38) 100%);
 }
+
 .green-g-bg {
   background-image: linear-gradient(to right, rgb(65, 183, 81) 0%, rgb(52, 173, 220) 100%);
   background-image: -moz-linear-gradient(to right, rgb(65, 183, 81) 0%, rgb(52, 173, 220) 100%);
   background-image: -ms-linear-gradient(to right, rgb(65, 183, 81) 0%, rgb(52, 173, 220) 100%);
 }
+
 // for dashboard only
 .blue-border {
   border-color: $primary-color !important;
   margin: 1px 1px 1px 0px !important;
 
 }
+
 .white-border {
   border-color: #fff !important;
 }
+
 .custom-tabs {
   margin-bottom: 28px;
   display: flex;
@@ -1556,36 +1680,47 @@ color: $success !important;
     }
   }
 }
-.custom-ul{
+
+.custom-ul {
   margin: 0px !important;
 }
-.flex-display{
+
+.flex-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.flex-display1 {
   display: grid;
   justify-content: center;
 }
 
 // calander style starts from here
 
-.calender{
-.cal-month-view {
-  .cal-day-badge {
-    background-color: #29abe2;
+.calender {
+  .cal-month-view {
+    .cal-day-badge {
+      background-color: #29abe2;
+    }
+  }
+
+  .btn-primary:not(:disabled):not(.disabled).active,
+    {
+    background: #2d94c1 !important;
+  }
+
+  .cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
+    color: #29abe2;
+  }
+
+  .btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #29abe2 !important;
   }
 }
-.btn-primary:not(:disabled):not(.disabled).active,
-  {
-  background: #2d94c1 !important;
-}
 
-.cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
-  color: #29abe2;
-}
-
-.btn-outline-secondary:hover {
-  color: #fff;
-  background-color: #29abe2 !important;
-}
-}
 .ngx-charts {
   background: #fff;
   width: 730px;
@@ -1601,9 +1736,11 @@ color: $success !important;
   font-size: 3rem;
   color: #29abe2;
 }
+
 .full {
   color: #29abe2;
 }
+
 .half {
   position: absolute;
   display: inline-block;
