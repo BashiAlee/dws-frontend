@@ -69,6 +69,7 @@ import { ClientJobListComponent } from "./pages/jobs/client-job-list/client-job-
 import { AdminDashboardComponent } from "./pages/admin/admin-dashboard/admin-dashboard.component";
 import { ClientListComponent } from "./pages/admin/client-list/client-list.component";
 import { AdminJobCalenderComponent } from "./pages/admin/admin-job-calender/admin-job-calender.component";
+import { CustomerProfileComponent } from './pages/profile/customer-profile/customer-profile.component';
 const routes: Routes = [
   {
     path: "",
@@ -129,6 +130,11 @@ const routes: Routes = [
         path: "profile/:id",
         component: ProfileComponent,
         loadChildren: () => ProfileModule,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "customer/profile/:id",
+        component: CustomerProfileComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -203,6 +209,11 @@ const routes: Routes = [
         path: "profile/:id",
         component: ProfileComponent,
         loadChildren: () => ProfileModule,
+        canActivate: [AdminAuthGuard]
+      },
+      {
+        path: "customer/profile/:id",
+        component: CustomerProfileComponent,
         canActivate: [AdminAuthGuard]
       },
       {
