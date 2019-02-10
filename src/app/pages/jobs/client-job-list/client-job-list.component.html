@@ -6,7 +6,7 @@
   <div class="custom-tabs">
     <ul>
       <li (click)="openActiveJobs()"><a [class.active-link]="isActiveJobs">Active Jobs</a></li>
-      <li (click)="openQuotedJobs()"><a [class.active-link]="!isActiveJobs">Quote Jobs<span class="badge"></span></a></li>
+      <li (click)="openQuotedJobs()"><a [class.active-link]="!isActiveJobs">Quotes<span class="badge"></span></a></li>
     </ul>
   </div>
 
@@ -98,7 +98,7 @@
             </div>
             <div class="table-body" *ngIf="quotedJobList && !quotedJobList.length">
               <div class="makeCenter">
-                <p>No Quote Jobs</p>
+                <p>No Quotes</p>
               </div>
             </div>
           </div>

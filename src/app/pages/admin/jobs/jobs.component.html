@@ -8,7 +8,7 @@
       <div class="custom-tabs">
         <ul>
           <li (click)="openActiveJobs()"><a [class.active-link]="isActiveJobs">Active Jobs</a></li>
-          <li (click)="openQuotedJobs()"><a [class.active-link]="!isActiveJobs">Quote Jobs<span class="badge"></span></a></li>
+          <li (click)="openQuotedJobs()"><a [class.active-link]="!isActiveJobs">Quotes<span class="badge"></span></a></li>
         </ul>
       </div>
 
@@ -21,6 +21,7 @@
                     <div class="table-heading">Job Title</div>
                     <div class="table-heading makeCenter">Status</div>
                     <div class="table-heading">Phone</div>
+                    <div class="table-heading">Posted By</div>
                     <div class="table-heading">Country</div>
                     <div class="table-heading">State</div>
                     <div class="table-heading">City</div>
@@ -36,6 +37,7 @@
                       <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn orange-trans">Assigned</a></div>
                       <!-- <div class="action makeCenter" *ngIf="job.JobStatus=='pending'"><a class="custom-btn orange-trans">Pending</a></div> -->
                       <div>{{job.PrimaryPhone}}</div>
+                      <div>{{job.PostedBy}}</div>
                       <div>{{job.PilotCountry}}</div>
                       <div>{{job.PilotState}}</div>
                       <div>{{job.City}}</div>
@@ -77,6 +79,7 @@
                     <div class="table-heading">Job Title</div>
                     <div class="table-heading makeCenter">Status</div>
                     <div class="table-heading">Phone</div>
+                    <div class="table-heading">Posted By</div>
                     <div class="table-heading">Country</div>
                     <div class="table-heading">State</div>
                     <div class="table-heading">City</div>
@@ -90,6 +93,7 @@
                       <div class="action makeCenter" *ngIf="job.JobStatus=='completed'"><a class="custom-btn green-trans">Completed</a></div>
                       <div class="action makeCenter" *ngIf="job.JobStatus=='assigned'"><a class="custom-btn orange-trans">Assigned</a></div>
                       <div>{{job.PrimaryPhone}}</div>
+                      <div>{{job.PostedBy}}</div>
                       <div>{{job.PilotCountry}}</div>
                       <div>{{job.PilotState}}</div>
                       <div>{{job.City}}</div>

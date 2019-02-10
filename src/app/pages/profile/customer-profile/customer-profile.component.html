@@ -32,7 +32,7 @@
         <p class="user-id">{{personalInformation.value.MemberId}}</p>
         <p class="member-since" *ngIf="personalData">Member Since : <span>{{personalData.CreatedAt | date:
             'MM/dd/yyyy'}}</span></p>
-        
+
         <p class="user-description">You may also login using your DWS Member ID Number in the Username field.</p>
       </div>
 
@@ -67,7 +67,7 @@
 
         </div>
       </div>
-   
+
 
       <div class="other-info">
         <div class="container">
@@ -82,16 +82,15 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
-                <label for="date" class="custom-input-label">Date of Birth</label>
-                <input type="date" class="form-control custom-input" id="date" aria-describedby="data" formControlName="Dob">
-                <div *ngIf="form.Dob.invalid && (form.Dob.dirty || form.Dob.touched)"
-                  class="invalid-feedback">
-                  <div *ngIf="form.Dob.errors.required">Date of birth is required</div>
-                </div>
+                <label for="PrimaryPhone" class="custom-input-label disableDiv">Email</label>
+                <input type="email" class="form-control custom-input" id="PrimaryPhone" formControlName="Email"
+                  aria-describedby="Email" placeholder="Email">
+
               </div>
             </div>
+
           </div>
 
         </div>
