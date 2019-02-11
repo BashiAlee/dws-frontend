@@ -174,7 +174,6 @@
               </div>
               <li class="" *ngIf="!adminAllMessages.length">
                 <p>No Messages</p>
-
               </li>
             </div>
             <ng-template #else_part>
@@ -200,35 +199,34 @@
         <div *ngIf="currentUserMessages && currentUserMessages.length || adminAllMessages && adminAllMessages.length"
           class="notify-icon blue"></div>
       </div>
+
       <div class="notification">
         <a class="dropdown-toggle" data-toggle="dropdown">
           <i class="fa fa-bell-o"></i>
         </a>
         <div class="dropdown-menu notification-dropdown dropdown-menu-right wow fadeInDown">
           <ul class="drop-content">
-            <li class="align-text">
-              <div class="notify-img"><img src="../../../assets/images/avatar.png" alt=""></div>
-              <div class="detail">
-                <h5>Bellashihair</h5>
-
-                <p>Started Following you.</p>
+              <div *ngIf="currentUserNotification && currentUserNotification.length">
+                <li class="align-text" *ngFor="let notification of currentUserNotification">
+                    <div class="notify-img"><img src="../../../assets/images/job-icon.png" alt=""></div>
+                    <div class="detail" (click)="readNotification()" [routerLink]="['/user/job/'+notification.JobId]">
+                      <p>{{notification.Message}}</p>
+                    </div>
+                </li>
               </div>
-            </li>
-            <li class="align-text">
-              <div class="notify-img"><img src="../../../assets/images/avatar.png" alt=""></div>
-              <div class="detail">
-                <h5>Bellashihair</h5>
-
-                <p>Started Following you.</p>
-              </div>
-            </li>
+               <li class="align-text" *ngIf="currentUserNotification && !currentUserNotification.length">
+                <div class="detail">
+                  <p>No Notifications</p>
+                </div>
+              </li>
           </ul>
-          <div class="notify-drop-footer text-center">
-            <a href=""> See All Notification > </a>
+          <div class="notify-drop-footer text-center" (click)="viewAllNotification()">
+            <a> See All Notification > </a>
           </div>
         </div>
-        <div class="notify-icon pink"></div>
-<!-- <div *ngIf="currentUserMessages && currentUserMessages.length || adminAllMessages && adminAllMessages.length" class="notify-icon pink"></div> -->
+        <div *ngIf="isViewed">
+          <div class="notify-icon pink"></div>
+        </div>
       </div>
     </div>
     <div class="profile-section">

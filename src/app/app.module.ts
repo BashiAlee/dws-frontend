@@ -33,31 +33,32 @@ import { SendEmailComponent } from './pages/send-email/send-email.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { PaginationModule } from 'ngx-bootstrap';
 import { CommunicationComponent } from './pages/admin/communication/communication.component';
-import {MessagesService} from './services/messages/messages.service';
+import { MessagesService } from './services/messages/messages.service';
 import { SearchPipe } from './components/pipes/search-names/search.pipe';
 import { PilotsPipe } from './components/pipes/search-pilots/pilots.pipe';
-import { BsDatepickerModule,TimepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, TimepickerModule } from 'ngx-bootstrap';
 import { JobService } from './services/job/job.service';
 import { JobsComponent } from './pages/admin/jobs/jobs.component';
-import { ImageCropperModule } from "ngx-image-cropper";
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { JobCalenderComponent } from './pages/job-calender/job-calender.component';
 
 
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { CalendarModule, DateAdapter } from "angular-calendar";
-import { adapterFactory } from "angular-calendar/date-adapters/date-fns";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MomentModule } from "ngx-moment";
-import { NgxChartsModule } from "@swimlane/ngx-charts";
-import { RatingModule } from "ngx-bootstrap/rating";
-import {NgbRating} from '@ng-bootstrap/ng-bootstrap';
-import { AlertModule } from "ngx-bootstrap/alert";
+import { MomentModule } from 'ngx-moment';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { RatingModule } from 'ngx-bootstrap/rating';
+import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
+import { AlertModule } from 'ngx-bootstrap/alert';
 import { ClientJobComponent } from './pages/jobs/client-job/client-job.component';
 import { PilotJobListComponent } from './pages/jobs/pilot-job-list/pilot-job-list.component';
 import { ClientJobListComponent } from './pages/jobs/client-job-list/client-job-list.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { ClientListComponent } from './pages/admin/client-list/client-list.component';
 import { AdminJobCalenderComponent } from './pages/admin/admin-job-calender/admin-job-calender.component';
+import { NotificationListComponent } from './pages/notification-list/notification-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +91,8 @@ import { AdminJobCalenderComponent } from './pages/admin/admin-job-calender/admi
     ClientJobListComponent,
     AdminDashboardComponent,
     ClientListComponent,
-    AdminJobCalenderComponent
+    AdminJobCalenderComponent,
+    NotificationListComponent
   ],
   imports: [
     BrowserModule,
@@ -122,4 +124,4 @@ import { AdminJobCalenderComponent } from './pages/admin/admin-job-calender/admi
   providers: [AuthenticationService, AuthGuard, MessagesService, JobService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

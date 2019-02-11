@@ -62,201 +62,207 @@ import {
 } from './pages/admin/jobs/jobs.component';
 import {
   JobCalenderComponent
-} from "./pages/job-calender/job-calender.component";
-import { ClientJobComponent } from "./pages/jobs/client-job/client-job.component";
-import { PilotJobListComponent } from "./pages/jobs/pilot-job-list/pilot-job-list.component";
-import { ClientJobListComponent } from "./pages/jobs/client-job-list/client-job-list.component";
-import { AdminDashboardComponent } from "./pages/admin/admin-dashboard/admin-dashboard.component";
-import { ClientListComponent } from "./pages/admin/client-list/client-list.component";
-import { AdminJobCalenderComponent } from "./pages/admin/admin-job-calender/admin-job-calender.component";
+} from './pages/job-calender/job-calender.component';
+import { ClientJobComponent } from './pages/jobs/client-job/client-job.component';
+import { PilotJobListComponent } from './pages/jobs/pilot-job-list/pilot-job-list.component';
+import { ClientJobListComponent } from './pages/jobs/client-job-list/client-job-list.component';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { ClientListComponent } from './pages/admin/client-list/client-list.component';
+import { AdminJobCalenderComponent } from './pages/admin/admin-job-calender/admin-job-calender.component';
 import { CustomerProfileComponent } from './pages/profile/customer-profile/customer-profile.component';
+import { NotificationListComponent } from './pages/notification-list/notification-list.component';
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: BlankLayoutComponent,
     children: [
       {
-        path: "",
-        redirectTo: "loginpilot",
-        pathMatch: "full"
+        path: '',
+        redirectTo: 'loginpilot',
+        pathMatch: 'full'
       },
       {
-        path: "logincustomer",
+        path: 'logincustomer',
         component: LoginComponent
       },
       {
-        path: "loginpilot",
+        path: 'loginpilot',
         component: LoginComponent
       },
       {
-        path: "signupcustomer",
+        path: 'signupcustomer',
         component: SignupComponent
       },
       {
-        path: "signuppilot",
+        path: 'signuppilot',
         component: SignupComponent
       }
     ]
   },
   {
-    path: "user",
+    path: 'user',
 
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
       {
-        path: "user",
-        redirectTo: "dashboard",
-        pathMatch: "full",
+        path: 'user',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
         canActivate: [AuthGuard]
       },
       {
-        path: "communication",
+        path: 'communication',
         component: CommunicationComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: "dashboard",
+        path: 'notifications',
+        component: NotificationListComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'dashboard',
         component: DashboardComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: "profile",
-        redirectTo: "profile/:id",
-        pathMatch: "full",
+        path: 'profile',
+        redirectTo: 'profile/:id',
+        pathMatch: 'full',
         canActivate: [AuthGuard]
       },
       {
-        path: "profile/:id",
+        path: 'profile/:id',
         component: ProfileComponent,
         loadChildren: () => ProfileModule,
         canActivate: [AuthGuard]
       },
       {
-        path: "customer/profile/:id",
+        path: 'customer/profile/:id',
         component: CustomerProfileComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: "create-job",
+        path: 'create-job',
         component: ClientJobComponent,
-        pathMatch: "full"
+        pathMatch: 'full'
       },
       {
-        path: "client-job-list",
+        path: 'client-job-list',
         component: ClientJobListComponent,
-        pathMatch: "full"
+        pathMatch: 'full'
       },
       {
-        path: "pilot-job-list",
+        path: 'pilot-job-list',
         component: PilotJobListComponent,
-        pathMatch: "full"
+        pathMatch: 'full'
       },
       {
-        path: "job/:id",
+        path: 'job/:id',
         component: ClientJobComponent,
-        pathMatch: "full"
+        pathMatch: 'full'
       },
       {
-        path: "job-calender",
+        path: 'job-calender',
         component: JobCalenderComponent,
-        pathMatch: "full"
+        pathMatch: 'full'
       }
     ]
   },
   {
-    path: "admin",
+    path: 'admin',
 
     component: MainLayoutComponent,
     children: [
       {
-        path: "dashboard",
+        path: 'dashboard',
         component: AdminDashboardComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: "client-list",
+        path: 'client-list',
         component: ClientListComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: "command-center",
+        path: 'command-center',
         component: CommandCenterComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: "communication",
+        path: 'communication',
         component: CommunicationComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: "pilot-list",
+        path: 'pilot-list',
         component: PilotListComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: "pilot-list/:id",
+        path: 'pilot-list/:id',
         component: PilotListComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: "profile",
-        redirectTo: "profile/:id",
-        pathMatch: "full",
+        path: 'profile',
+        redirectTo: 'profile/:id',
+        pathMatch: 'full',
         canActivate: [AdminAuthGuard]
       },
       {
-        path: "profile/:id",
+        path: 'profile/:id',
         component: ProfileComponent,
         loadChildren: () => ProfileModule,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: "customer/profile/:id",
+        path: 'customer/profile/:id',
         component: CustomerProfileComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: "jobs-list",
+        path: 'jobs-list',
         component: JobsComponent,
         canActivate: [AdminAuthGuard]
       },
       {
-        path: "job/:id",
+        path: 'job/:id',
         component: ClientJobComponent,
-        pathMatch: "full"
+        pathMatch: 'full'
       },
       {
-        path: "admin-job-calender",
+        path: 'admin-job-calender',
         component: AdminJobCalenderComponent,
-        pathMatch: "full"
+        pathMatch: 'full'
       }
     ]
   },
 
   {
-    path: "panel",
+    path: 'panel',
 
     component: EmptyLayoutComponent,
     children: [
       {
-        path: "admin",
+        path: 'admin',
         component: AdminLoginComponent
       }
     ]
   },
   {
-    path: "email-verification",
+    path: 'email-verification',
 
     component: VerificationComponent
   },
   {
-    path: "send-email",
+    path: 'send-email',
 
     component: SendEmailComponent
   },
   {
-    path: "forget-password",
+    path: 'forget-password',
 
     component: ForgetPasswordComponent
   }

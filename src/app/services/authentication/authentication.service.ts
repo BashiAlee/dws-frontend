@@ -10,23 +10,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  apiUrl : any;
+  apiUrl: any;
   staticUrl: any;
   constructor(private http: Http, private router: Router) {
-      this.apiUrl = environment.apiURL;
-      this.staticUrl = environment.uploadUrl;
-   }
-   login(data) {
-    return this.http.post(this.apiUrl + 'login',data)
-    .pipe(map((response: any) => {
-     return response.json();
-    }));
+    this.apiUrl = environment.apiURL;
+    this.staticUrl = environment.uploadUrl;
+  }
+  login(data) {
+    return this.http.post(this.apiUrl + 'login', data)
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
   }
   adminlogin(data) {
-    return this.http.post(this.apiUrl + 'admin/login',data)
-    .pipe(map((response: any) => {
-     return response.json();
-    }));
+    return this.http.post(this.apiUrl + 'admin/login', data)
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
   }
 
   signup(data) {
@@ -43,10 +43,22 @@ export class AuthenticationService {
     return JSON.parse(localStorage.getItem('user'));
   }
 
-  getCurrentAdmin(){
+  getCurrentAdmin() {
     return JSON.parse(localStorage.getItem("admin"));
   }
 
+  getJobCountUser(id) {
+    return this.http.get(this.apiUrl + 'job/jobCounterUser/' + id)
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
+  }
+  getJobCountAdmin() {
+    return this.http.get(this.apiUrl + 'job/jobCounterAdmin')
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
+  }
   // logout() {
   //   localStorage.removeItem('user');
   //   localStorage.removeItem('admin');
@@ -54,36 +66,36 @@ export class AuthenticationService {
   // }
 
   verifyToken(token) {
-    return this.http.get(this.apiUrl + 'pilot/verifyToken/'+token)
-    .pipe(map((response: any) => {
-     return response.json();
-    }));
+    return this.http.get(this.apiUrl + 'pilot/verifyToken/' + token)
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
   }
 
   sendEmail(data) {
-    return this.http.post(this.apiUrl + 'pilot/forgotPassword',data)
-    .pipe(map((response: any) => {
-     return response.json();
-    }));
+    return this.http.post(this.apiUrl + 'pilot/forgotPassword', data)
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
   }
 
   verifyForgotPassword(token) {
-    return this.http.get(this.apiUrl + 'pilot/verifyTokenForgotPassword/'+token)
-    .pipe(map((response: any) => {
-     return response.json();
-    }));
+    return this.http.get(this.apiUrl + 'pilot/verifyTokenForgotPassword/' + token)
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
   }
   changePassword(data) {
-    return this.http.post(this.apiUrl + 'pilot/changePassword',data)
-    .pipe(map((response: any) => {
-     return response.json();
-    }));
+    return this.http.post(this.apiUrl + 'pilot/changePassword', data)
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
   }
 
   checkImageExists(url) {
     return this.http.get(url)
-    .pipe(map((response: any) => {
-     return response.json();
-    }));
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
   }
 }

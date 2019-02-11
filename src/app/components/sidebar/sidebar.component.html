@@ -75,8 +75,8 @@
           <a class="nav-link" [routerLinkActive]="['active-sidebarlink']" [routerLink]="['create-job']">
             <span class="user-list"><i class="fa fa-users"></i>
               <span class="inner-item" *ngIf="isOpen">Jobs</span>
-              <span *ngIf="isOpen" class="badge-value">3</span>
-              <span *ngIf="!isOpen" class="small-badge">3</span>
+              <span *ngIf="isOpen" class="badge-value">{{jobCount}}</span>
+              <span *ngIf="!isOpen" class="small-badge">{{jobCount}}</span>
                </span>
 
           </a>

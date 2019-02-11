@@ -390,7 +390,7 @@ div.command-center {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      width: 80px;
+      width: 131px;
       float: left;
     }
   }
@@ -513,6 +513,6 @@ div.command-center {
 
 .extended-table-client {
   div.table-rows {
-    grid-template-columns: 15% 13% 16% 10% 9% 8%;
+    grid-template-columns: 20% 15% 16% 10% 9% 8%;
   }
 }

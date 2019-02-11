@@ -47,7 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-    margin-right: 26px;
+  margin-right: 26px;
 
   .profile-section {
     display: flex;
@@ -112,7 +112,8 @@
       }
     }
 
-    .notification,.messages {
+    .notification,
+    .messages {
       position: relative;
       margin-right: 50px;
 
@@ -129,14 +130,17 @@
           display: none;
         }
       }
+
       .notification-dropdown {
         min-width: 300px;
         padding: 0;
+
         .drop-content {
           padding: 0 20px 0 20px;
           min-height: 250px;
           max-height: 250px;
           overflow-y: scroll;
+
           li {
             display: grid;
             grid-template-columns: 55px auto;
@@ -150,6 +154,7 @@
               height: 39px;
               border-radius: 10px;
             }
+
             &:hover {
               cursor: pointer;
             }
@@ -166,6 +171,7 @@
               font-family: 'Apercu-Medium';
               font-size: 15px;
             }
+
             p {
               font-family: 'Apercu-Regular';
               margin: 0;
@@ -174,6 +180,7 @@
             }
           }
         }
+
         .notify-drop-footer {
           border-top: 1px solid $p-color;
           bottom: 0;
@@ -185,6 +192,7 @@
 
             color: $primary-color;
             font-size: 15px;
+
             &:hover {
               text-decoration: none;
             }
@@ -196,6 +204,7 @@
     ul {
       margin-bottom: 0;
       display: inherit;
+
       li {
         list-style-type: none;
       }
@@ -207,6 +216,7 @@
       &:after {
         display: none;
       }
+
       background: transparent;
 
       width: 38px;
@@ -228,6 +238,7 @@
     }
   }
 }
+
 .custom-sidebar {
   background-color: #fff;
   z-index: 3;
@@ -235,6 +246,7 @@
   width: 230px;
   top: 86px;
   left: 10px;
+
   .sidebar-header {
     display: flex;
     height: 86px;
