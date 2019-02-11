@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef} from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { BsModalService } from "ngx-bootstrap/modal";
 import { MessagesService } from "../../../services/messages/messages.service";
 import { AuthenticationService } from "../../../services/authentication/authentication.service";
@@ -34,11 +34,13 @@ export class CommunicationComponent implements OnInit {
   isPilotTab: any = true;
   tabRole: any = "pilot";
   currentRole: any;
+  messageFromID: any;
   constructor(
     private messageService: MessagesService,
     private authService: AuthenticationService,
     private router: Router,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -48,7 +50,20 @@ export class CommunicationComponent implements OnInit {
       this.selectedSenderChatName = "Admin";
       this.lastMessageDate = Date.now();
     } else {
+
       this.userType = "ADMIN";
+      this.route.queryParams.subscribe(params => {
+       if(params.role == "customer") {
+        this.isPilotTab = false;
+        this.messageFromID = parseInt(params.id);
+        this.getMessagesByRole(params.role)
+       } else {
+        this.isPilotTab = true;
+        this.messageFromID = parseInt(params.id);
+        this.getMessagesByRole(params.role)
+       }
+    });
+      
     }
 
     this.onPageLoadCommunication();
@@ -77,20 +92,24 @@ export class CommunicationComponent implements OnInit {
       var data = this.userInfo;
       this.messageService.getMessagesListOfCurrentUser(data).subscribe(data => {
         // console.log("Messages List ----> ", data.result);
+        this.currentUserMessages = data.result;
         if (data.status == true) {
-          this.currentUserMessages = data.result;
-          this.selectedSenderChatName =
-            data.result[0].SenderFirstName +
-            " " +
-            data.result[0].SenderMiddleName +
-            " " +
-            data.result[0].SenderLastName;
-          // this.lastMessageDate = data.result[0].MessageTime;
-          // console.log("date ",this.lastMessageDate)
 
+          
+            this.selectedSenderChatName =
+              data.result[0].SenderFirstName +
+              " " +
+              data.result[0].SenderMiddleName +
+              " " +
+              data.result[0].SenderLastName;
+            // this.lastMessageDate = data.result[0].MessageTime;
+            // console.log("date ",this.lastMessageDate)
+  
+  
+            this.getAllMessages(data.result[0]);
+            this.messageConversationId = data.result[0].ConversationId;
+        
 
-          this.getAllMessages(data.result[0]);
-          this.messageConversationId = data.result[0].ConversationId;
         } else {
           // console.log("Messages Not recieved ", data.message);
         }
@@ -104,6 +123,7 @@ export class CommunicationComponent implements OnInit {
         .subscribe(data => {
           // console.log("Messages List ----> ", data.result);
           if (data.status == true && data.result) {
+            
             this.currentUserMessages = data.result;
             this.selectedSenderChatName =
               data.result[0].SenderFirstName +
@@ -348,5 +368,6 @@ export class CommunicationComponent implements OnInit {
     //  return '../../../../assets/images/avatar.png';
     // })
   }
+
 
 }

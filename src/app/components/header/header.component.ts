@@ -12,7 +12,7 @@ import {
   AuthenticationService
 } from '../../services/authentication/authentication.service';
 import {
-  Router
+  Router, NavigationExtras
 } from '@angular/router';
 @Component({
   selector: "app-header",
@@ -163,5 +163,16 @@ export class HeaderComponent implements OnInit {
           }
         });
     });
+  }
+  
+  openCommunication(from,role) {
+
+    let params: NavigationExtras = {
+      queryParams: {
+        id: from,
+        role: role
+      }
+    }
+    this.router.navigate(['/admin/communication'], params)
   }
 }
