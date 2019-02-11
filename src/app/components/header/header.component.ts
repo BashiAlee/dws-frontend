@@ -15,7 +15,7 @@ import {
   AuthenticationService
 } from '../../services/authentication/authentication.service';
 import {
-  Router
+  Router, NavigationExtras
 } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 @Component({
@@ -196,5 +196,16 @@ export class HeaderComponent implements OnInit {
           }
         });
     });
+  }
+  
+  openCommunication(from,role) {
+
+    let params: NavigationExtras = {
+      queryParams: {
+        id: from,
+        role: role
+      }
+    }
+    this.router.navigate(['/admin/communication'], params)
   }
 }
