@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { PilotService } from '../../services/admin/pilots/pilots.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ModalsComponent } from '../../components/modals/modals.component';
@@ -18,16 +18,28 @@ export class ProfileComponent implements OnInit {
   isAdmin: any;
   loaders: any = {};
   user: any;
+  role: any;
+  userID: any;
   config = {
     class: "custom-modal modal-dialog-centered modal-md"
   };
   constructor(private route: ActivatedRoute, private router: Router, private pilotService: PilotService, private modalService: BsModalService, private authService: AuthenticationService, private location: Location) {
     
-
+   
+    
     if(this.router.url.split('/')[1] =='admin') {
       this.isAdmin = true;
     }else {
       this.isAdmin = false;
+    }
+
+    if(this.router.url.split('/')[4] =='personal-information' && this.router.url.split('/')[1] =='admin') {
+      this.role = "pilot"
+      this.userID = parseInt(this.router.url.split('/')[3]);
+    }
+    if(this.router.url.split('/')[2] =='customer' && this.router.url.split('/')[1] =='admin') {
+      this.role = "customer"
+      this.userID = parseInt(this.router.url.split('/')[4]);
     }
 
    }
@@ -83,5 +95,15 @@ export class ProfileComponent implements OnInit {
 
   backToPage() {
     this.location.back();
+  }
+
+  sendMessage() {
+    let params: NavigationExtras = {
+      queryParams: {
+        id: this.userID,
+        role: this.role
+      }
+    }
+   this.router.navigate(['/admin/communication'], params)
   }
 }
