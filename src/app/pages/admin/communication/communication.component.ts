@@ -5,6 +5,7 @@ import { MessagesService } from '../../../services/messages/messages.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import * as _ from 'lodash';
+import { config } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -56,11 +57,11 @@ export class CommunicationComponent implements OnInit {
         if (params.role == 'customer') {
           this.isPilotTab = false;
           this.messageFromID = parseInt(params.id);
-          this.getMessagesByRole(params.role)
-        } else {
+          this.getMessagesByRole(params.role, this.messageFromID)
+        } else if(params.role == 'pilot'){
           this.isPilotTab = true;
           this.messageFromID = parseInt(params.id);
-          this.getMessagesByRole(params.role)
+          this.getMessagesByRole(params.role, this.messageFromID)
         }
       });
 
@@ -70,13 +71,13 @@ export class CommunicationComponent implements OnInit {
 
     // get online user data
     if (this.userType === 'PILOT') {
-      console.log('yhis is pilot', this.userType);
+      // console.log('yhis is pilot', this.userType);
 
       var dataOnlineUser = this.authService.getCurrentUser();
       this.onlineUserId = dataOnlineUser.ID;
       this.currentRole = dataOnlineUser.Role;
     } else {
-      console.log('yhis is other', this.userType);
+      // console.log('yhis is other', this.userType);
 
       var dataOnlineUser = this.authService.getCurrentAdmin();
       this.onlineUserId = dataOnlineUser.ID;
@@ -92,6 +93,8 @@ export class CommunicationComponent implements OnInit {
     this.activeClass = false;
   }
   onPageLoadCommunication() {
+
+    
     if (this.userType === 'PILOT') {
       this.messageService.getMessagesListOfCurrentUser(this.userInfo.ID).subscribe(data => {
         // console.log('Messages List ----> ', data.result);
@@ -106,13 +109,6 @@ export class CommunicationComponent implements OnInit {
           // this.lastMessageDate = data.result[0].MessageTime;
           // console.log('date ',this.lastMessageDate)
 
-
-          this.selectedSenderChatName =
-            data.result[0].SenderFirstName +
-            ' ' +
-            data.result[0].SenderMiddleName +
-            ' ' +
-            data.result[0].SenderLastName;
           // this.lastMessageDate = data.result[0].MessageTime;
           // console.log('date ',this.lastMessageDate)
 
@@ -135,7 +131,24 @@ export class CommunicationComponent implements OnInit {
           // console.log('Messages List ----> ', data.result);
           if (data.status === true && data.result) {
             this.currentUserMessages = data.result;
-            this.selectedSenderChatName =
+            if(this.messageFromID) {
+              // console.log("SDFSDFSDF hereee----->>>", this.messageFromID);
+              
+      
+             var temp =  this.currentUserMessages.filter(value => value.MessageTo == parseInt( this.messageFromID));
+             this.selectedSenderChatName =
+             temp[0].SenderFirstName +
+             ' ' +
+             temp[0].SenderMiddleName +
+             ' ' +
+             temp[0].SenderLastName;
+
+           // this.lastMessageDate = temp[0].MessageTime;
+           this.getAllMessages(temp[0]);
+           // console.log('date ', data.result[0].MessageTime)
+           this.messageConversationId = temp[0].ConversationId;
+            } else {
+                       this.selectedSenderChatName =
               data.result[0].SenderFirstName +
               ' ' +
               data.result[0].SenderMiddleName +
@@ -146,6 +159,19 @@ export class CommunicationComponent implements OnInit {
             this.getAllMessages(data.result[0]);
             // console.log('date ', data.result[0].MessageTime)
             this.messageConversationId = data.result[0].ConversationId;
+            }
+         
+            // this.selectedSenderChatName =
+            //   data.result[0].SenderFirstName +
+            //   ' ' +
+            //   data.result[0].SenderMiddleName +
+            //   ' ' +
+            //   data.result[0].SenderLastName;
+
+            // // this.lastMessageDate = data.result[0].MessageTime;
+            // this.getAllMessages(data.result[0]);
+            // // console.log('date ', data.result[0].MessageTime)
+            // this.messageConversationId = data.result[0].ConversationId;
           } else {
             // console.log('Messages Not recieved ', data.message);
           }
@@ -153,8 +179,11 @@ export class CommunicationComponent implements OnInit {
     }
   }
 
-  getMessagesByRole(role) {
-    console.log('yhis is data', this.userType);
+  getMessagesByRole(role, id?) {
+   
+    
+    
+    console.log('yhis is data', this.userType,this.messageFromID);
 
     if (role === 'pilot') {
       this.currentUserMessages = [];
@@ -181,7 +210,27 @@ export class CommunicationComponent implements OnInit {
         // console.log('Messages List ----> ', data.result);
         if (data.status === true && data.result) {
           this.currentUserMessages = data.result;
-          this.selectedSenderChatName =
+          
+            if(id) {
+    
+      
+             var temp =  this.currentUserMessages.filter(value => value.MessageTo == parseInt( this.messageFromID));
+             
+             
+             this.selectedSenderChatName =
+             temp[0].SenderFirstName +
+             ' ' +
+             temp[0].SenderMiddleName +
+             ' ' +
+             temp[0].SenderLastName;
+
+           // this.lastMessageDate = temp[0].MessageTime;
+           this.getAllMessages(temp[0]);
+           // console.log('date ', data.result[0].MessageTime)
+           this.messageConversationId = temp[0].ConversationId;
+            
+          } else {
+            this.selectedSenderChatName =
             data.result[0].SenderFirstName +
             ' ' +
             data.result[0].SenderMiddleName +
@@ -191,6 +240,7 @@ export class CommunicationComponent implements OnInit {
           this.getAllMessages(data.result[0]);
           // console.log('date ', data.result[0].MessageTime)
           this.messageConversationId = data.result[0].ConversationId;
+          }
         } else {
           // console.log('Messages Not recieved ', data.message);
         }
@@ -205,6 +255,20 @@ export class CommunicationComponent implements OnInit {
       data.SenderMiddleName +
       ' ' +
       data.SenderLastName;
+    var role;
+    if(this.isPilotTab) {
+      role = 'pilot'
+    } else if(!this.isPilotTab) {
+      role = 'customer'
+    }
+    this.router.navigate([], { 
+      queryParams: {
+        id: data.MessageTo,
+        role: role
+      }
+    });
+   
+
     //
     // console.log(this.selectedSenderChatName);
     // console.log('Online User ---> ', this.authService.getCurrentUser());
@@ -238,6 +302,14 @@ export class CommunicationComponent implements OnInit {
               // console.log('chek to ', this.selectedUser);
               this.selectedUser = '';
             }
+            if(document.getElementsByClassName('last')[0]) {
+              // $( window ).scrollTo('.last')[0];
+              // var objDiv = $(".last")[0];
+              // var h = objDiv.get(0).scrollHeight;
+              // objDiv.animate({scrollTop: h});
+              document.getElementsByClassName('last')[0].scrollIntoView();
+            }
+     
           }
         } else {
           // console.log(
@@ -269,9 +341,11 @@ export class CommunicationComponent implements OnInit {
           // console.log('scroll');
           // console.log(elements);
           // console.log('asdasdas  ----> ', this.allMessagesByConversationId.length);
-          const el = elements[this.allMessagesByConversationId.length - 1] as HTMLElement;
+          // const el = elements[this.allMessagesByConversationId.length-1] as HTMLElement;
 
-          el.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+          // el.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+          // $(".mattie-scroll-container-div").scrollTop($('.mattie-scroll-container-div')[0].scrollHeight)
+
         } else {
           console.log('Message Not Sent ', newData.message);
         }
@@ -298,8 +372,8 @@ export class CommunicationComponent implements OnInit {
           // console.log('scroll');
           // console.log(elements.length);
           // console.log('asdasdas  ----> ',this.allMessagesByConversationId.length);
-          const el = elements[this.allMessagesByConversationId.length - 1] as HTMLElement;
-          el.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+          // const el = elements[this.allMessagesByConversationId.length - 1] as HTMLElement;
+          // el.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
         } else {
           // console.log('Message Not Sent ', newData.message);
         }
@@ -328,9 +402,9 @@ export class CommunicationComponent implements OnInit {
 
     if (this.userType === 'PILOT') {
 
-      $('div.mainContent').animate({
-        scrollTop: $('div.matti-body-input-div').offset().top
-      }, 1000)
+      // $('div.mainContent').animate({
+      //   scrollTop: $('div.matti-body-input-div').offset().top
+      // }, 1000)
       this.activeClass = true;
     } else {
       // console.log('current role ----> ',this.tabRole)

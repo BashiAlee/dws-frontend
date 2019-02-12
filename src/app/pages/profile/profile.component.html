@@ -14,7 +14,7 @@
         <a class="btn-approve profile-buttons white-txt" *ngIf="!loaders.approveProfile" (click)="approveProfile()">Approve
           This Profile</a>
         <a class="btn-approve" *ngIf="loaders.approveProfile" ><i class="fa fa-circle-o-notch fa-spin"></i></a>
-        <a class="btn-message profile-buttons" [routerLink]="['/admin/communication']">Send a Message</a>
+        <a class="btn-message profile-buttons" (click)="sendMessage()" style="color: #fff">Send a Message</a>
         <a class="btn-reject  profile-buttons white-txt" *ngIf="!loaders.rejectProfile" (click)="rejectProfile()">Reject This
           Profile</a>
         <a  class="btn-reject" *ngIf="loaders.rejectProfile" ><i class="fa fa-circle-o-notch fa-spin"></i></a>
