@@ -21,6 +21,13 @@ export class NotificationService {
       })
     );
   }
+  notificationStatus(data) {
+    return this.http.post(this.apiUrl + 'notification/notificationStatus', data).pipe(
+      map((response: any) => {
+        return response.json();
+      })
+    );
+  }
 
   getUnViewedUserNotification(id) {
     return this.http.get(this.apiUrl + 'notification/unviewedUserNotification/' + id).pipe(

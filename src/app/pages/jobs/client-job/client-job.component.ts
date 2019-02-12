@@ -33,6 +33,7 @@ export class ClientJobComponent implements OnInit {
   @ViewChild('dp2') datepicker2: BsDaterangepickerDirective;
   @ViewChild('dp3') datepicker3: BsDaterangepickerDirective;
   userInfo: any;
+  adminData: any = [];
   bsModalRef: BsModalRef;
   jobInformation: FormGroup;
   industriesList: any = [];
@@ -91,14 +92,14 @@ export class ClientJobComponent implements OnInit {
     if (this.router.url.split('/')[1] === 'admin') {
       this.isAdmin = true;
     }
+    this.route.params.subscribe(val => {
+      this.onPageLoad();
+      this.jobId = val['id'];
+      this.getJobByID(this.jobId);
+    });
   }
 
   ngOnInit() {
-    this.onPageLoad();
-
-    this.jobId = this.route.snapshot.paramMap.get('id');
-    // console.log('this is data from component', this.jobId);
-
     this.OwnDeliverables1 = [
       {
         name: ''
@@ -128,6 +129,8 @@ export class ClientJobComponent implements OnInit {
       this.userInfo = this.authService.getCurrentAdmin();
     } else {
       this.userInfo = this.authService.getCurrentUser();
+      this.getAdmin();
+
     }
     this.industriesList = [
       {
@@ -222,7 +225,13 @@ export class ClientJobComponent implements OnInit {
       this.datepicker3.toggle();
     }
   }
-
+  getAdmin() {
+    this.authService.getAdmin().subscribe(data => {
+      if (data.status) {
+        this.adminData = data.result;
+      }
+    });
+  }
 
   openRatingModal(pilotId) {
     const initialState = { type: 'pilotRating', PilotId: pilotId };
@@ -266,13 +275,25 @@ export class ClientJobComponent implements OnInit {
     const initialState = { type: 'jobCompleted' };
     this.jobSevice.jobStatus(this.jobStatusArray).subscribe(data => {
       if (data.status) {
-        const notificationdata = {
-          UserId: this.jobData.UserId,
-          Message: 'Your Job has been marked completed. Please rate the Pilot(s)',
-        };
-        this.notification.saveNotification(notificationdata)
-          .subscribe(data1 => {
-          });
+        const notificationdata = [
+          {
+            UserId: this.jobData.UserId,
+            Message: 'Your Job has been marked completed. Please rate the Pilot(s)',
+            JobId: this.jobData.JobId,
+          },
+          {
+            UserId: this.adminData.ID,
+            Message: this.jobData.JobTitle + '' + 'has been market completed',
+            JobId: this.jobData.JobId,
+          },
+
+        ];
+        notificationdata.forEach(val => {
+          this.notification.saveNotification(val)
+            .subscribe(data1 => {
+            });
+        });
+
         this.bsModalRef = this.modalService.show(
           ModalsComponent,
           Object.assign({}, this.config, { initialState })
@@ -404,7 +425,7 @@ export class ClientJobComponent implements OnInit {
             control.push(addrCtrl);
           });
 
-          if (this.jobData.PilotIds.length > 0) {
+          if (this.jobData.PilotIds && this.jobData.PilotIds.length > 0) {
             this.jobData.PilotIds.forEach(val => {
               if (val.PilotId === this.userInfo.ID) {
                 this.pilotData = val;
@@ -453,8 +474,8 @@ export class ClientJobComponent implements OnInit {
           var initialState = {};
           if (this.jobInformation.value.IsQuote) {
             const notificationdata = {
-              UserId: this.userInfo.ID,
-              Message: 'Your Quote has been posted Successfully',
+              UserId: this.adminData.ID,
+              Message: 'A customer posted a quote',
               JobId: data.jobId,
             };
             this.notification.saveNotification(notificationdata)
@@ -466,8 +487,8 @@ export class ClientJobComponent implements OnInit {
             };
           } else {
             const notificationdata = {
-              UserId: this.userInfo.ID,
-              Message: 'Your Job is now Live',
+              UserId: this.adminData.ID,
+              Message: 'A customer posted a live job',
               JobId: data.jobId,
             };
             this.notification.saveNotification(notificationdata)

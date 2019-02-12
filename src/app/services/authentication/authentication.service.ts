@@ -46,7 +46,12 @@ export class AuthenticationService {
   getCurrentAdmin() {
     return JSON.parse(localStorage.getItem("admin"));
   }
-
+  getAdmin() {
+    return this.http.get(this.apiUrl + 'admin/getAdmin')
+      .pipe(map((response: any) => {
+        return response.json();
+      }));
+  }
   getJobCountUser(id) {
     return this.http.get(this.apiUrl + 'job/jobCounterUser/' + id)
       .pipe(map((response: any) => {

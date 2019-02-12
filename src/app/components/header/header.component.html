@@ -209,7 +209,7 @@
               <div *ngIf="currentUserNotification && currentUserNotification.length">
                 <li class="align-text" *ngFor="let notification of currentUserNotification">
                     <div class="notify-img"><img src="../../../assets/images/job-icon.png" alt=""></div>
-                    <div class="detail" (click)="readNotification()" [routerLink]="['/user/job/'+notification.JobId]">
+                    <div class="detail" (click)="changeNotificationStatus(notification.NotificationId,notification.JobId)">
                       <p>{{notification.Message}}</p>
                     </div>
                 </li>
