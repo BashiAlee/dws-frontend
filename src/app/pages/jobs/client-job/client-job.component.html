@@ -46,7 +46,7 @@
     </div>
     <div class="buttons makeCenter mBottom25" *ngIf="jobData && jobData.length ||isAdmin">
       <a class="btn-approve profile-buttons white-txt" *ngIf="!jobInformation.value.IsQuote" (click)='goToAssignPilots()'>Assign pilot</a>
-      <a class="btn-message profile-buttons white-txt" [routerLink]="['/admin/communication']">Send a Message</a>
+      <a class="btn-message profile-buttons white-txt" (click)="sendMessage(jobData.UserId,'customer')">Send a Message</a>
       <a class="btn-reject  profile-buttons white-txt" (click)="rejectJob()">Delete</a>
     </div>
     <div class="row" [ngClass]="{'row1':userInfo.Role=='pilot'}">
@@ -459,6 +459,7 @@
             <div class="table-heading">State</div>
             <div class="table-heading">City</div>
             <div class="table-heading" *ngIf="userInfo.Role=='customer'">Rating</div>
+            <div class="table-heading" *ngIf="userInfo.Role=='admin'">Action</div>
           </div>
           <div class="table-body" *ngIf="assignedPilotList && assignedPilotList.length">
             <div class="table-rows table-body-rows" *ngFor="let pilot of assignedPilotList">
@@ -478,7 +479,7 @@
               <img src="../../../../assets/icons/rating-star.png"  style="width: 30px;" (click)="openRatingModal(pilot.PilotId,jobData.JobId,jobData.JobTitle)" alt="">
 
             </div>
-              <!-- <div class="action makeCenter"><a class="manage-btn">Manage</a></div> -->
+              <div class="action makeCenter"  *ngIf="userInfo.Role=='admin'"><a class="manage-btn">Unassign</a></div>
             </div>
           </div>
           <div class="table-body" *ngIf="assignedPilotList && !assignedPilotList.length">

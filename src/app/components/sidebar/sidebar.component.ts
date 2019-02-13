@@ -50,7 +50,7 @@ export class SidebarComponent implements OnInit {
       if (data.status) {
         this.jobCount = data.result;
       } else {
-        this.jobCount = [];
+        this.jobCount = 0;
       }
     });
   }

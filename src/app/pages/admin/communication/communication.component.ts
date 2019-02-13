@@ -5,7 +5,8 @@ import { MessagesService } from '../../../services/messages/messages.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import * as _ from 'lodash';
-import { config } from 'rxjs';
+// import { interval, Subscription } from 'rxjs';
+
 declare var $: any;
 
 @Component({
@@ -36,6 +37,7 @@ export class CommunicationComponent implements OnInit {
   tabRole: any = 'pilot';
   currentRole: any;
   messageFromID: any;
+  // subscription: Subscription;
   constructor(
     private messageService: MessagesService,
     private authService: AuthenticationService,
@@ -46,7 +48,8 @@ export class CommunicationComponent implements OnInit {
 
   ngOnInit() {
 
-
+    // const source = interval(30000);
+    // this.subscription = source.subscribe(val => this.onPageLoadCommunication());
     this.userInfo = this.authService.getCurrentUser();
     if (this.router.url.split('/')[1] === 'user') {
       this.userType = 'PILOT';
@@ -138,7 +141,15 @@ export class CommunicationComponent implements OnInit {
               // console.log("SDFSDFSDF hereee----->>>", this.messageFromID);
               
       
-             var temp =  this.currentUserMessages.filter(value => value.MessageTo == parseInt( this.messageFromID));
+              var temp =  this.currentUserMessages.filter(value => {
+                if(value.MessageFrom == this.userInfo.ID) {
+                  return value.MessageTo == this. messageFromID;
+                } else {
+                  return value.MessageFrom == this. messageFromID;
+                }
+              });
+              console.log("GFDGDFDFGDFG", temp);
+              
              this.selectedSenderChatName =
              temp[0].SenderFirstName +
              ' ' +
@@ -216,7 +227,13 @@ export class CommunicationComponent implements OnInit {
             if(id) {
     
       
-             var temp =  this.currentUserMessages.filter(value => value.MessageTo == parseInt( this.messageFromID));
+              var temp =  this.currentUserMessages.filter(value => {
+                if(value.MessageFrom == this.userInfo.ID) {
+                  return value.MessageTo == this. messageFromID;
+                } else {
+                  return value.MessageFrom == this. messageFromID;
+                }
+              });
              
              
              this.selectedSenderChatName =
@@ -270,7 +287,14 @@ export class CommunicationComponent implements OnInit {
     //     role: role
     //   }
     // });
-    history.replaceState(null, null, 'admin/communication'+'?id='+data.MessageTo+'&role='+role);
+
+    var id = 0;
+    if(data.MessageFrom == this.userInfo.ID) {
+      id = data.MessageTo
+    } else {
+      id = data.MessageFrom
+    }
+    history.replaceState(null, null, 'admin/communication'+'?id='+id+'&role='+role);
 
     //
     // console.log(this.selectedSenderChatName);
