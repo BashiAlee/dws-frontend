@@ -10,16 +10,6 @@
   }
 
   .row {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-around;
-    margin-right: -8px;
-    margin-left: -31px;
-
-    .col-md-5 {
-      max-width: 100%;
-    }
-
     .outer-btn {
       display: grid;
       grid-template-columns: auto auto;

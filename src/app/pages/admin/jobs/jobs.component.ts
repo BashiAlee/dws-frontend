@@ -14,7 +14,7 @@ export class JobsComponent implements OnInit {
   maxSize = 5;
   bigTotalItems: any;
   bigCurrentPage = 1;
-  constructor(private jobSevice: JobService) {}
+  constructor(private jobSevice: JobService) { }
 
   ngOnInit() {
     this.onPageLoad();

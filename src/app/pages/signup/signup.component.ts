@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit{
+export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   success: any;
   error: any;
@@ -18,24 +18,24 @@ export class SignupComponent implements OnInit{
   constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private route: ActivatedRoute, private router: Router) {
 
 
-    if(this.router.url.split('/')[1]=='signuppilot') {
+    if (this.router.url.split('/')[1] == 'signuppilot') {
       this.type = 'pilot'
     }
-    if(this.router.url.split('/')[1]=='signupcustomer') {
+    if (this.router.url.split('/')[1] == 'signupcustomer') {
       this.type = 'customer'
     }
-   }
+  }
   ngOnInit() {
 
     this.signupForm = this.formBuilder.group({
       Email: ['', [Validators.required, Validators.email]],
       FirstName: ['', Validators.required],
-      MiddleName: ['',Validators.required],
-      LastName: ['',Validators.required],
-      Phone: ['',[Validators.required]],
-      Role: [this.type,Validators.required],
-      Password: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
-      ConfirmPassword: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(100)]]
+      MiddleName: ['', Validators.required],
+      LastName: ['', Validators.required],
+      Phone: ['', [Validators.required]],
+      Role: [this.type, Validators.required],
+      Password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
+      ConfirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]]
     })
   }
 
@@ -48,17 +48,17 @@ export class SignupComponent implements OnInit{
     this.signupForm.patchValue({ Role: this.type });
     delete this.signupForm.value.ConfirmPassword;
     this.authService.signup(this.signupForm.value)
-    .subscribe(
-      data => {
-        if(data.status) {
-          this.loading = false;
-          this.success = data.message;
-        } else if(!data.status) {
-          this.error = data.message;
-          this.loading = false;
+      .subscribe(
+        data => {
+          if (data.status) {
+            this.loading = false;
+            this.success = data.message;
+          } else if (!data.status) {
+            this.error = data.message;
+            this.loading = false;
+          }
         }
-      }
-    )
+      )
   }
 
 }

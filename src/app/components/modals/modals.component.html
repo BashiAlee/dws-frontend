@@ -178,7 +178,7 @@
   </span>
 </ng-template>
 
-<ngb-rating  [(ngModel)]="rate" [max]="max" [readonly]="isReadonly" (click)="updateRating(rate,PilotId)" [starTemplate]="t"></ngb-rating>
+<ngb-rating  [(ngModel)]="rate" [max]="max" [readonly]="isReadonly" (click)="updateRating(rate,PilotId,JobId,JobTitle)" [starTemplate]="t"></ngb-rating>
   </div>
   <div class="footer-content">
     <button type="button" (click)="bsModalRef.hide()" class="btn btn-default custom-modal-button success-btn">Done</button>

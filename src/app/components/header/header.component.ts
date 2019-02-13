@@ -53,6 +53,9 @@ export class HeaderComponent implements OnInit {
     if (this.router.url.split('/')[1] === 'admin') {
       this.isAdmin = true;
       this.userInfo = this.authService.getCurrentAdmin();
+      this.GetUnViewedUserNotification(this.userInfo.ID);
+      const source = interval(30000);
+      this.subscription = source.subscribe(val => this.GetUnViewedUserNotification(this.userInfo.ID));
       this.getAllAdminMessages().then(res => {
         this.adminAllMessages = res;
       }).catch(err => {
@@ -97,15 +100,33 @@ export class HeaderComponent implements OnInit {
   hideDropdown() {
     this.isNavOpen = false;
   }
-  readNotification() {
-    console.log('this is id ');
-
-    this.isViewed = false;
-    // this.router.navigate(['/user/job/', this.currentUserNotification.JobId]);
-  }
   viewAllNotification() {
     this.isViewed = false;
     this.router.navigate(['/user/notifications']);
+  }
+  changeNotificationStatus(notId, jobId, pilotId) {
+    const notificationData = {
+      NotificationId: notId,
+    };
+    this.notificationService.notificationStatus(notificationData).subscribe(data => {
+      if (data.status) {
+        if (this.userInfo.Role === 'admin') {
+          console.log("this is id", pilotId);
+
+          if (pilotId > 0) {
+            this.GetUnViewedUserNotification(this.userInfo.ID);
+            this.router.navigate(['/admin/profile/' + pilotId]);
+            return;
+          }
+          this.GetUnViewedUserNotification(this.userInfo.ID);
+          this.router.navigate(['/admin/job/' + jobId]);
+        } else {
+          this.GetUnViewedUserNotification(this.userInfo.ID);
+          this.router.navigate(['/user/job/' + jobId]);
+        }
+
+      }
+    });
   }
   getCurrentUsersMessages(id) {
     this.messageService.getMessagesListOfCurrentUser(id).subscribe(data => {
@@ -197,8 +218,8 @@ export class HeaderComponent implements OnInit {
         });
     });
   }
-  
-  openCommunication(from,role) {
+
+  openCommunication(from, role) {
 
     let params: NavigationExtras = {
       queryParams: {
