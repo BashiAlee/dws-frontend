@@ -59,6 +59,7 @@
                 </div>
 
               </div>
+       
               <div class="aside-body-main-child" *ngIf="currentUserMessages && !currentUserMessages.length">
                 <!-- <div class="aside-scroll-child"> -->
                   <div class="sidebar-image-container">
@@ -87,6 +88,13 @@
               <div class="messageEmptyBody">
                   <i class="fa fa-comments" aria-hidden="true"></i>
                   <p>No Chat Found! click start new chat </p>
+              </div>
+
+            </div>
+            <div class="matti-body makeCenter" id="messages-scroll"  *ngIf="loading ">
+              <div class="messageEmptyBody">
+                  <i class="fa fa-comments" aria-hidden="true"></i>
+                  <p>Loading</p>
               </div>
 
             </div>

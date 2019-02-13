@@ -5,7 +5,7 @@ import { MessagesService } from '../../../services/messages/messages.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import * as _ from 'lodash';
-// import { interval, Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 declare var $: any;
 
@@ -37,7 +37,8 @@ export class CommunicationComponent implements OnInit {
   tabRole: any = 'pilot';
   currentRole: any;
   messageFromID: any;
-  // subscription: Subscription;
+  loading: any = false;
+  subscription: Subscription;
   constructor(
     private messageService: MessagesService,
     private authService: AuthenticationService,
@@ -48,8 +49,7 @@ export class CommunicationComponent implements OnInit {
 
   ngOnInit() {
 
-    // const source = interval(30000);
-    // this.subscription = source.subscribe(val => this.onPageLoadCommunication());
+  
     this.userInfo = this.authService.getCurrentUser();
     if (this.router.url.split('/')[1] === 'user') {
       this.userType = 'PILOT';
@@ -71,6 +71,8 @@ export class CommunicationComponent implements OnInit {
       });
 
     }
+    const source = interval(20000);
+    this.subscription = source.subscribe(val => this.loadAfter20Sec(this.userType));
 
     this.onPageLoadCommunication();
 
@@ -97,6 +99,25 @@ export class CommunicationComponent implements OnInit {
     // assigning active calss on feildfocus
     this.activeClass = false;
   }
+
+  loadAfter20Sec(type) {
+    if(type == "ADMIN") {
+      this.route.queryParams.subscribe(params => {
+        if (params.role == 'customer') {
+          this.isPilotTab = false;
+          this.messageFromID = parseInt(params.id);
+          this.getMessagesByRole(params.role, this.messageFromID)
+        } else if(params.role == 'pilot'){
+          this.isPilotTab = true;
+          this.messageFromID = parseInt(params.id);
+          this.getMessagesByRole(params.role, this.messageFromID)
+        }
+      });
+    } else {
+      this.onPageLoadCommunication();
+    }
+  }
+  
   onPageLoadCommunication() {
 
 
@@ -267,7 +288,7 @@ export class CommunicationComponent implements OnInit {
   }
 
   getAllMessages(data) {
-
+    this.loading = true;
     var selectedConversationId = data.ConversationId;
     this.selectedSenderChatName =
       data.SenderFirstName +
@@ -305,7 +326,7 @@ export class CommunicationComponent implements OnInit {
         if (selectedConversationIdResult.status === true) {
           this.allMessagesByConversationId =
             selectedConversationIdResult.result;
-          // console.log(this.allMessagesByConversationId)
+          
           this.messageConversationId =
             selectedConversationIdResult.result[0].ConversationId;
           // this.lastMessageDate = selectedConversationIdResult.result[0].MessageTime;
@@ -338,7 +359,10 @@ export class CommunicationComponent implements OnInit {
             }
      
           }
+
+          this.loading = false;
         } else {
+          this.loading = false;
           // console.log(
           //   'Error Recieving Message ---> ',
           //   selectedConversationIdResult.message
