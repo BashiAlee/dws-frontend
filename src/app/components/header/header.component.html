@@ -166,7 +166,7 @@
                   <div class="notify-img" *ngIf="message.ProfileImage"><img [src]="message.ProfileImage" alt=""></div>
                   <div class="notify-img" *ngIf="!message.ProfileImage"><img src="../../../assets/images/avatar.png"
                       alt=""></div>
-                  <div class="detail" (click)="openCommunication(message.MessageFrom,message.MessageFromRole)">
+                  <div class="detail" (click)="openCommunication(message.MessageTo,message.MessageFromRole)">
                     <h5>{{message.SenderFirstName + ' ' +message.SenderLastName}}</h5>
                     <p>{{message.Message}}</p>
                   </div>

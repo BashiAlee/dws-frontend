@@ -283,7 +283,7 @@ export class ClientJobComponent implements OnInit {
           },
           {
             UserId: this.adminData.ID,
-            Message: this.jobData.JobTitle + ' ' + 'has been market completed',
+            Message: this.jobData.JobTitle + '  ' + 'has been marked completed',
             JobId: this.jobData.JobId,
           },
 
