@@ -233,8 +233,8 @@ export class ClientJobComponent implements OnInit {
     });
   }
 
-  openRatingModal(pilotId) {
-    const initialState = { type: 'pilotRating', PilotId: pilotId };
+  openRatingModal(pilotId, jobId, title) {
+    const initialState = { type: 'pilotRating', PilotId: pilotId, JobId: jobId, JobTitle: title };
     this.bsModalRef = this.modalService.show(
       ModalsComponent,
       Object.assign({}, this.config, { initialState })
@@ -283,7 +283,7 @@ export class ClientJobComponent implements OnInit {
           },
           {
             UserId: this.adminData.ID,
-            Message: this.jobData.JobTitle + '' + 'has been market completed',
+            Message: this.jobData.JobTitle + ' ' + 'has been market completed',
             JobId: this.jobData.JobId,
           },
 

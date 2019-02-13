@@ -104,13 +104,20 @@ export class HeaderComponent implements OnInit {
     this.isViewed = false;
     this.router.navigate(['/user/notifications']);
   }
-  changeNotificationStatus(notId, jobId) {
+  changeNotificationStatus(notId, jobId, pilotId) {
     const notificationData = {
       NotificationId: notId,
     };
     this.notificationService.notificationStatus(notificationData).subscribe(data => {
       if (data.status) {
         if (this.userInfo.Role === 'admin') {
+          console.log("this is id", pilotId);
+
+          if (pilotId > 0) {
+            this.GetUnViewedUserNotification(this.userInfo.ID);
+            this.router.navigate(['/admin/profile/' + pilotId]);
+            return;
+          }
           this.GetUnViewedUserNotification(this.userInfo.ID);
           this.router.navigate(['/admin/job/' + jobId]);
         } else {

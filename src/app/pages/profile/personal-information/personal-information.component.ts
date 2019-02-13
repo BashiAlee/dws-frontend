@@ -311,7 +311,7 @@ export class PersonalInformationComponent implements OnInit {
 
       reader.onload = (event: any) => {
         this.profileImage = event.target.result;
-      }
+      };
 
       reader.readAsDataURL(file.target.files[0]);
       // this.messages.uploadingImage = false;
@@ -415,9 +415,9 @@ export class PersonalInformationComponent implements OnInit {
     boundary: { width: 250, height: 250 },
     viewport: { width: 200, height: 200 },
 
-    enableOrientation: true;
+    enableOrientation: true,
   };
-  @ViewChild('croppie');
+  @ViewChild('croppie')
   public croppieDirective: CroppieDirective;
 
   handleUpdate(data) {
