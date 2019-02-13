@@ -307,7 +307,7 @@ export class CommunicationComponent implements OnInit {
               // var objDiv = $(".last")[0];
               // var h = objDiv.get(0).scrollHeight;
               // objDiv.animate({scrollTop: h});
-              document.getElementsByClassName('last')[0].scrollIntoView();
+              // document.getElementsByClassName('last')[0].scrollIntoView();
             }
      
           }
