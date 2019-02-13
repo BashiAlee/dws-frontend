@@ -45,6 +45,8 @@ export class CommunicationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+
     this.userInfo = this.authService.getCurrentUser();
     if (this.router.url.split('/')[1] === 'user') {
       this.userType = 'PILOT';
@@ -93,6 +95,7 @@ export class CommunicationComponent implements OnInit {
     this.activeClass = false;
   }
   onPageLoadCommunication() {
+
 
     
     if (this.userType === 'PILOT') {
@@ -183,7 +186,6 @@ export class CommunicationComponent implements OnInit {
    
     
     
-    console.log('yhis is data', this.userType,this.messageFromID);
 
     if (role === 'pilot') {
       this.currentUserMessages = [];
@@ -248,6 +250,7 @@ export class CommunicationComponent implements OnInit {
   }
 
   getAllMessages(data) {
+
     var selectedConversationId = data.ConversationId;
     this.selectedSenderChatName =
       data.SenderFirstName +
@@ -261,13 +264,13 @@ export class CommunicationComponent implements OnInit {
     } else if(!this.isPilotTab) {
       role = 'customer'
     }
-    this.router.navigate([], { 
-      queryParams: {
-        id: data.MessageTo,
-        role: role
-      }
-    });
-   
+    // this.router.navigate([], { 
+    //   queryParams: {
+    //     id: data.MessageTo,
+    //     role: role
+    //   }
+    // });
+    history.replaceState(null, null, 'admin/communication'+'?id='+data.MessageTo+'&role='+role);
 
     //
     // console.log(this.selectedSenderChatName);
@@ -454,6 +457,7 @@ export class CommunicationComponent implements OnInit {
     //  return '../../../../assets/images/avatar.png';
     // })
   }
+
 
 
 }
