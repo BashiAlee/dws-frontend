@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="jobData && userInfo.Role=='customer' && jobData.JobStatus=='completed'">
+      <div class="offset-md-2 col-md-6 col-sm-12 col-xs-12" *ngIf="jobData && userInfo.Role=='customer' && jobData.JobStatus=='completed'">
         <div class="flex-display">
           <p class="mTop50 description1"><i class="fa fa-check" aria-hidden="true"></i>
           Pilot(s) claimed the job is completed</p>
@@ -460,7 +460,6 @@
             <div class="table-heading">Country</div>
             <div class="table-heading">State</div>
             <div class="table-heading">City</div>
-            <div class="table-heading" *ngIf="userInfo.Role=='admin'">Manage</div>
             <div class="table-heading" *ngIf="userInfo.Role=='customer'">Rating</div>
             <div class="table-heading" *ngIf="userInfo.Role=='admin'">Action</div>
           </div>
@@ -473,7 +472,7 @@
               <div class="table-content">{{pilot.Country ? pilot.Country: '-'}}</div>
               <div class="table-content">{{pilot.State ? pilot.State: '-'}}</div>
               <div class="table-content">{{pilot.City ? pilot.City: "-"}}</div>
-              <div class="table-content" *ngIf="userInfo.Role=='admin'"><a class="custom-btn blue-bg white-txt p1530" (click)="unAssignPilot(jobId,pilot.PilotId,jobData.JobTitle)">Unassign</a></div>
+              <div class="table-content" *ngIf="userInfo.Role=='admin'"><a class="custom-btn blue-bg white-txt p1530" [class.disableBtn]="jobData.JobStatus =='completed'" (click)="unAssignPilot(jobId,pilot.PilotId,jobData.JobTitle)">Unassign</a></div>
               <div class="table-content makeCenter" *ngIf="userInfo.Role=='customer'" [class.disableDiv]="jobData.JobStatus=='assigned'">
               <img src="../../../../assets/icons/rating-star.png"  style="width: 30px;" (click)="openRatingModal(pilot.PilotId,jobData.JobId,jobData.JobTitle)" alt="">
             </div>
