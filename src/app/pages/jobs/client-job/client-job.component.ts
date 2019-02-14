@@ -73,6 +73,9 @@ export class ClientJobComponent implements OnInit {
   maxSize = 5;
   bigTotalItems: any;
   bigCurrentPage = 1;
+  apiResponse: any = {};
+  timeout: any = 0;
+  msg: any;
   config = {
     class: 'custom-modal modal-dialog-centered modal-md successModal'
   };
@@ -82,7 +85,7 @@ export class ClientJobComponent implements OnInit {
     private formBuilder: FormBuilder,
     private profileSevice: ProfileService,
     private authService: AuthenticationService,
-    private jobSevice: JobService,
+    private jobService: JobService,
     private notification: NotificationService,
     private modalService: BsModalService,
     private route: ActivatedRoute,
@@ -232,7 +235,36 @@ export class ClientJobComponent implements OnInit {
       }
     });
   }
+  unAssignPilot(jobId, pilotId, jobTitle) {
+    this.apiResponse.fail = false;
+    this.apiResponse.success = false;
+    const data = {
+      JobId: jobId,
+      PilotId: pilotId,
+    };
 
+    this.jobService.unAssignPolit(data).subscribe(data => {
+      // console.log('this is data', this.creatorId);
+      const notificationdata = {
+        UserId: pilotId,
+        Message: 'You are unassigned from ' + ' ' + jobTitle,
+      };
+      if (data.status) {
+        this.notification.saveNotification(notificationdata)
+          .subscribe(data1 => {
+          });
+        this.apiResponse.success = true;
+        this.msg = data.message;
+        this.timeout = 2500;
+      } else {
+        // console.log('this is called');
+        this.apiResponse.fail = true;
+        this.msg = data.message,
+          this.timeout = 2500;
+      }
+    });
+
+  }
   openRatingModal(pilotId, jobId, title) {
     const initialState = { type: 'pilotRating', PilotId: pilotId, JobId: jobId, JobTitle: title };
     this.bsModalRef = this.modalService.show(
@@ -253,7 +285,7 @@ export class ClientJobComponent implements OnInit {
     };
     this.loaders.approveProfile = true;
     const initialState = { type: 'jobApproved' };
-    this.jobSevice.jobStatus(this.jobStatusArray).subscribe(data => {
+    this.jobService.jobStatus(this.jobStatusArray).subscribe(data => {
       if (data.status) {
         this.bsModalRef = this.modalService.show(
           ModalsComponent,
@@ -273,7 +305,7 @@ export class ClientJobComponent implements OnInit {
     };
     this.loaders.approveProfile = true;
     const initialState = { type: 'jobCompleted' };
-    this.jobSevice.jobStatus(this.jobStatusArray).subscribe(data => {
+    this.jobService.jobStatus(this.jobStatusArray).subscribe(data => {
       if (data.status) {
         const notificationdata = [
           {
@@ -311,7 +343,7 @@ export class ClientJobComponent implements OnInit {
     this.loaders.approveProfile = true;
     const initialState = { type: 'jobReject' };
 
-    this.jobSevice.jobStatus(this.jobStatusArray).subscribe(data => {
+    this.jobService.jobStatus(this.jobStatusArray).subscribe(data => {
       if (data.status) {
         this.bsModalRef = this.modalService.show(
           ModalsComponent,
@@ -324,7 +356,7 @@ export class ClientJobComponent implements OnInit {
   }
   getAssignPolitList(jobId) {
     this.isYou = false;
-    this.jobSevice.getAssignPolits(jobId).subscribe(data => {
+    this.jobService.getAssignPolits(jobId).subscribe(data => {
       if (data.status && data.result) {
         this.assignedPilotList = data.result;
         this.bigTotalItems = parseInt(data.totalRecord);
@@ -335,7 +367,7 @@ export class ClientJobComponent implements OnInit {
     });
   }
   getJobByID(jobId) {
-    this.jobSevice.getJobByID(jobId).subscribe(data => {
+    this.jobService.getJobByID(jobId).subscribe(data => {
       if (data.status) {
 
         this.jobData = data.result;
@@ -468,7 +500,7 @@ export class ClientJobComponent implements OnInit {
 
     // console.log('data of jobs', this.jobInformation.value);
 
-    this.jobSevice.saveJobInformation(this.jobInformation.value)
+    this.jobService.saveJobInformation(this.jobInformation.value)
       .subscribe(data => {
         if (data.status) {
           var initialState = {};

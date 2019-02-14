@@ -142,10 +142,12 @@ export class PilotListComponent implements OnInit {
         {
           UserId: pilotId,
           Message: 'A Job has been assigned to you',
+          JobId: jobId,
         },
         {
           UserId: parseInt(this.creatorId, 10),
           Message: 'Pilot(s) are assigned to your Job',
+          JobId: jobId,
         }
       ];
       if (data.status) {
