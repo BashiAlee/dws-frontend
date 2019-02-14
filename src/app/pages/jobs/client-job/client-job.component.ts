@@ -339,7 +339,7 @@ export class ClientJobComponent implements OnInit {
       if (data.status) {
 
         this.jobData = data.result;
-        // console.log('this is data', this.jobData);
+        console.log('this is data', this.jobData);
         if (this.jobData.DateRanges.FromDate != '' && this.jobData.DateRanges.From != '' && this.jobData.DateRanges.To != '') {
           this.jobData.DateRanges.FromDate = new Date(
             this.jobData.DateRanges.FromDate

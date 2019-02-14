@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { MessagesService } from '../../../services/messages/messages.service';
@@ -39,6 +39,8 @@ export class CommunicationComponent implements OnInit {
   messageFromID: any;
   loading: any = false;
   subscription: Subscription;
+  urlRole:'';
+  @ViewChild("messageInput") inputEl: ElementRef;
   constructor(
     private messageService: MessagesService,
     private authService: AuthenticationService,
@@ -60,10 +62,12 @@ export class CommunicationComponent implements OnInit {
       this.userType = 'ADMIN';
       this.route.queryParams.subscribe(params => {
         if (params.role == 'customer') {
+          this.urlRole = params.role;
           this.isPilotTab = false;
           this.messageFromID = parseInt(params.id);
           this.getMessagesByRole(params.role, this.messageFromID)
         } else if(params.role == 'pilot'){
+          this.urlRole = params.role;
           this.isPilotTab = true;
           this.messageFromID = parseInt(params.id);
           this.getMessagesByRole(params.role, this.messageFromID)
@@ -71,7 +75,7 @@ export class CommunicationComponent implements OnInit {
       });
 
     }
-    const source = interval(20000);
+    const source = interval(10000);
     this.subscription = source.subscribe(val => this.loadAfter20Sec(this.userType));
 
     this.onPageLoadCommunication();
@@ -103,6 +107,7 @@ export class CommunicationComponent implements OnInit {
   loadAfter20Sec(type) {
     if(type == "ADMIN") {
       this.route.queryParams.subscribe(params => {
+        this.urlRole = params.role;
         if (params.role == 'customer') {
           this.isPilotTab = false;
           this.messageFromID = parseInt(params.id);
@@ -113,14 +118,12 @@ export class CommunicationComponent implements OnInit {
           this.getMessagesByRole(params.role, this.messageFromID)
         }
       });
-    } else {
+    } 
       this.onPageLoadCommunication();
-    }
+    
   }
   
   onPageLoadCommunication() {
-
-
     
     if (this.userType === 'PILOT') {
       this.messageService.getMessagesListOfCurrentUser(this.userInfo.ID).subscribe(data => {
@@ -164,9 +167,9 @@ export class CommunicationComponent implements OnInit {
       
               var temp =  this.currentUserMessages.filter(value => {
                 if(value.MessageFrom == this.userInfo.ID) {
-                  return value.MessageTo == this. messageFromID;
+                  return value.MessageTo == this.messageFromID;
                 } else {
-                  return value.MessageFrom == this. messageFromID;
+                  return value.MessageFrom == this.messageFromID;
                 }
               });
               console.log("GFDGDFDFGDFG", temp);
@@ -315,6 +318,9 @@ export class CommunicationComponent implements OnInit {
     } else {
       id = data.MessageFrom
     }
+
+    this.messageFromID = id;
+
     history.replaceState(null, null, 'admin/communication'+'?id='+id+'&role='+role);
 
     //
@@ -418,13 +424,18 @@ export class CommunicationComponent implements OnInit {
           this.onPageLoadCommunication();
           this.message = '';
           this.activeClass = false;
-          var elements = document.querySelectorAll('.mattie-scroll-container-div');
-          var len = elements.length;
+        
           // console.log('scroll');
           // console.log(elements.length);
           // console.log('asdasdas  ----> ',this.allMessagesByConversationId.length);
-          // const el = elements[this.allMessagesByConversationId.length - 1] as HTMLElement;
-          // el.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+          setTimeout(() => {
+            var elements = document.querySelectorAll('.mattie-scroll-container-div');
+            var len = elements.length;
+            const el = elements[elements.length - 1] as HTMLElement;
+            el.scrollIntoView();
+           
+          }, 1000);
+  
         } else {
           // console.log('Message Not Sent ', newData.message);
         }

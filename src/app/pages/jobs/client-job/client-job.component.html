@@ -44,8 +44,8 @@
       <p>Review Jobs and Let Customer/Pilot know if they are missing
         something important!</p>
     </div>
-    <div class="buttons makeCenter mBottom25" *ngIf="jobData && jobData.length ||isAdmin">
-      <a class="btn-approve profile-buttons white-txt" *ngIf="!jobInformation.value.IsQuote" (click)='goToAssignPilots()'>Assign pilot</a>
+    <div class="buttons makeCenter mBottom25" *ngIf="jobData && isAdmin">
+      <a class="btn-approve profile-buttons white-txt" *ngIf="!jobInformation.value.IsQuote" [class.disableBtn]="jobData.JobStatus =='completed'" (click)='goToAssignPilots()'>Assign pilot</a>
       <a class="btn-message profile-buttons white-txt" (click)="sendMessage(jobData.UserId,'customer')">Send a Message</a>
       <a class="btn-reject  profile-buttons white-txt" (click)="rejectJob()">Delete</a>
     </div>
@@ -479,7 +479,7 @@
               <img src="../../../../assets/icons/rating-star.png"  style="width: 30px;" (click)="openRatingModal(pilot.PilotId,jobData.JobId,jobData.JobTitle)" alt="">
 
             </div>
-              <div class="action makeCenter"  *ngIf="userInfo.Role=='admin'"><a class="manage-btn">Unassign</a></div>
+              <div class="action makeCenter" *ngIf="userInfo.Role=='admin'"><a class="manage-btn" [class.disableAnchor]="jobData.JobStatus == 'completed'">Unassign</a></div>
             </div>
           </div>
           <div class="table-body" *ngIf="assignedPilotList && !assignedPilotList.length">
