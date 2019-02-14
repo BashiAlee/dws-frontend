@@ -516,3 +516,8 @@ div.command-center {
     grid-template-columns: 20% 15% 16% 10% 9% 8%;
   }
 }
+
+.disableAnchor {
+  background: #cdcdcd;
+  pointer-events: none;
+}

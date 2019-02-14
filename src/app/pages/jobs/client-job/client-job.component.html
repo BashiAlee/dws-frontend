@@ -44,9 +44,9 @@
       <p>Review Jobs and Let Customer/Pilot know if they are missing
         something important!</p>
     </div>
-    <div class="buttons makeCenter mBottom25" *ngIf="jobData && jobData.length ||isAdmin">
-      <a class="btn-approve profile-buttons white-txt" *ngIf="!jobInformation.value.IsQuote" (click)='goToAssignPilots()'>Assign pilot</a>
-      <a class="btn-message profile-buttons white-txt" [routerLink]="['/admin/communication']">Send a Message</a>
+    <div class="buttons makeCenter mBottom25" *ngIf="jobData && isAdmin">
+      <a class="btn-approve profile-buttons white-txt" *ngIf="!jobInformation.value.IsQuote" [class.disableBtn]="jobData.JobStatus =='completed'" (click)='goToAssignPilots()'>Assign pilot</a>
+      <a class="btn-message profile-buttons white-txt" (click)="sendMessage(jobData.UserId,'customer')">Send a Message</a>
       <a class="btn-reject  profile-buttons white-txt" (click)="rejectJob()">Delete</a>
     </div>
     <div class="row" [ngClass]="{'row1':userInfo.Role=='pilot'}">
@@ -462,6 +462,7 @@
             <div class="table-heading">City</div>
             <div class="table-heading" *ngIf="userInfo.Role=='admin'">Manage</div>
             <div class="table-heading" *ngIf="userInfo.Role=='customer'">Rating</div>
+            <div class="table-heading" *ngIf="userInfo.Role=='admin'">Action</div>
           </div>
           <div class="table-body" *ngIf="assignedPilotList && assignedPilotList.length">
             <div class="table-rows table-body-rows" *ngFor="let pilot of assignedPilotList">

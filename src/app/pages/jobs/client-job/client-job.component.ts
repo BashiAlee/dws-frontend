@@ -17,7 +17,7 @@ import {
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ModalsComponent } from '../../../components/modals/modals.component';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { PilotService } from '../../../services/admin/pilots/pilots.service';
 import * as moment from 'moment';
 
@@ -371,7 +371,7 @@ export class ClientJobComponent implements OnInit {
       if (data.status) {
 
         this.jobData = data.result;
-        // console.log('this is data', this.jobData);
+        console.log('this is data', this.jobData);
         if (this.jobData.DateRanges.FromDate != '' && this.jobData.DateRanges.From != '' && this.jobData.DateRanges.To != '') {
           this.jobData.DateRanges.FromDate = new Date(
             this.jobData.DateRanges.FromDate
@@ -606,5 +606,15 @@ export class ClientJobComponent implements OnInit {
 
   get form() {
     return this.jobInformation.controls;
+  }
+
+  sendMessage(id,role) {
+    let params: NavigationExtras = {
+      queryParams: {
+        id: id,
+        role: role
+      }
+    }
+    this.router.navigate(['/admin/communication'], params)
   }
 }
