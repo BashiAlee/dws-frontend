@@ -75,8 +75,8 @@ export class CommunicationComponent implements OnInit {
       });
 
     }
-    const source = interval(10000);
-    this.subscription = source.subscribe(val => this.loadAfter20Sec(this.userType));
+    // const source = interval(10000);
+    // this.subscription = source.subscribe(val => this.loadAfter20Sec(this.userType));
 
     this.onPageLoadCommunication();
 
@@ -428,13 +428,27 @@ export class CommunicationComponent implements OnInit {
           // console.log('scroll');
           // console.log(elements.length);
           // console.log('asdasdas  ----> ',this.allMessagesByConversationId.length);
-          setTimeout(() => {
-            var elements = document.querySelectorAll('.mattie-scroll-container-div');
-            var len = elements.length;
-            const el = elements[elements.length - 1] as HTMLElement;
-            el.scrollIntoView();
+          // setTimeout(() => {
+          //   var elements = document.querySelectorAll('.mattie-scroll-container-div');
+          //   var len = elements.length;
+          //   const el = elements[elements.length - 1] as HTMLElement;
+          //   el.scrollIntoView();
            
-          }, 1000);
+          // }, 1000);
+          var id = this.allMessagesByConversationId.length+'mattie'
+          setTimeout(() => {
+            var el = document.getElementById(id);
+            el.scrollIntoView();
+          }, 2000);
+    
+
+        //   window.setInterval(function() {
+        //     var elem = document.getElementById('gexpcontent');
+        //     // console.log('elemrr------01', elem);
+        //     if(elem){
+        //         elem.scrollTop = elem.scrollHeight;
+        //     }
+        // }, 5000);
   
         } else {
           // console.log('Message Not Sent ', newData.message);

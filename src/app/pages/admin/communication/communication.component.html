@@ -112,7 +112,7 @@
                   </div>
                 </div> -->
                 <!-- *ngIf="onlineUserId != messages.MessageFrom" -->
-                <div class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId; let i = index;">
+                <div class="mattie-scroll-container-div" *ngFor="let messages of allMessagesByConversationId; let i = index;" [id]="i + 'mattie'">
                   <div [ngClass]="[(onlineUserId != messages.MessageFrom )?'matti-image-container':'john-image-container',(allMessagesByConversationId.length - 1 == i)? 'last':'']">
                     <!-- [src]="(onlineUserId != messages.MessageFrom)?messages.UserToDetail.ProfileImage:messages.UserFromDetail.ProfileImage" -->
                     <img *ngIf="onlineUserId != messages.MessageFrom && messages.UserFromDetail.ProfileImage" [src]="messages.UserFromDetail.ProfileImage" class="sidebar-img">
