@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { PilotService } from '../../services/admin/pilots/pilots.service';
 import { NotificationService } from './../../services/notifications/notification.service';
+import { JobService } from './../../services/job/job.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'custom-modals',
@@ -11,6 +13,8 @@ import { NotificationService } from './../../services/notifications/notification
   styleUrls: ['./modals.component.scss']
 })
 export class ModalsComponent implements OnInit {
+  ClientDeliverables: any;
+  jobStatusArray: any = [];
   type: string;
   PilotId: any;
   JobId: any;
@@ -30,6 +34,7 @@ export class ModalsComponent implements OnInit {
     private authService: AuthenticationService,
     private pilotService: PilotService,
     private notification: NotificationService,
+    private jobService: JobService,
 
   ) {
     this.userInfo = this.authService.getCurrentUser();
@@ -39,12 +44,49 @@ export class ModalsComponent implements OnInit {
     this.rate = 0;
     this.isReadonly = false;
   }
+  fileChange(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      this.ClientDeliverables = fileList[0];
+      // console.log('data of xipdsdsa', this.ClientDeliverables);
+    }
+  }
+
+  uploadClientFiles(pilotId, jobId, jobTitle) {
+    this.jobService.uploadClietFiles(this.ClientDeliverables).subscribe(data => {
+      if (data.status) {
+        this.jobStatusArray = {
+          PilotId: pilotId,
+          JobId: jobId,
+          Status: 'completed',
+          JobCompletionTime: moment().format('YYYY-MM-DD[T]HH:mm:ss'),
+          JobDeliverables: data.result
+        };
+        this.jobService.jobStatus(this.jobStatusArray).subscribe(res => {
+          if (res.status) {
+            const notificationdata = {
+              UserId: this.adminData.ID,
+              Message: 'Pilot Claimed The job ' + jobTitle + ' has been completed',
+              JobId: jobId,
+            };
+            this.notification.saveNotification(notificationdata).subscribe(data1 => {
+
+            });
+          } else {
+
+          }
+        });
+        this.closeModal();
+      } else {
+        console.log('fail');
+      }
+    });
+  }
   getAdmin() {
     this.authService.getAdmin().subscribe(data => {
       if (data.status) {
         this.adminData = data.result;
-        console.log('this is admin data', this.adminData);
-
+        // console.log('this is admin data', this.adminData);
       }
     });
   }
@@ -70,7 +112,7 @@ export class ModalsComponent implements OnInit {
           },
 
         ];
-        console.log('this is data', notificationdata);
+        // console.log('this is data', notificationdata);
 
         notificationdata.forEach(val => {
           this.notification.saveNotification(val)
