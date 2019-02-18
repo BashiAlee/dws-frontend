@@ -155,6 +155,25 @@
   </div>
 </div>
 
+<div class="modal-inner makeCenter" *ngIf="type=='pilotFile'">
+  <div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">sdfsdf</h4> -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body sucess">
+    <h3>Please upload the Deliverables that customer have asked.</h3>
+  </div>
+  {{deliverables}}
+  <label for="file-upload" class="custom-file-upload custom-btn1 orange-bg">
+      <i class="fa fa-cloud-upload"></i> Upload File
+  </label>
+  <input id="file-upload" type="file" (change)="fileChange($event)"/>
+  <div class="footer-content">
+    <button type="button" (click)="uploadClientFiles(PilotId,JobId,JobTitle)" class="btn btn-default custom-modal-button success-btn">Done</button>
+  </div>
+</div>
 
 <div class="modal-inner makeCenter" *ngIf="type=='pilotRating'">
   <div class="modal-header">

@@ -95,4 +95,16 @@ export class JobService {
       })
     );
   }
+
+  uploadClietFiles(file) {
+    const formData = new FormData();
+    const headers = new Headers();
+    headers.append('Content-Type', 'multipart/form-data');
+    formData.append('file', file, file.name);
+    return this.http.post(this.staticUrl + 'uploading', formData)
+      .pipe(map((response: any) => {
+
+        return response.json();
+      }));
+  }
 }

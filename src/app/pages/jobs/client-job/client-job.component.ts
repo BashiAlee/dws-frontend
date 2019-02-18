@@ -274,6 +274,16 @@ export class ClientJobComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
     this.loaders.approveProfile = false;
   }
+
+  openFileUploadModal(pilotId, jobId, title) {
+    const initialState = { type: 'pilotFile', PilotId: pilotId, JobId: jobId, JobTitle: title };
+    this.bsModalRef = this.modalService.show(
+      ModalsComponent,
+      Object.assign({}, this.config, { initialState })
+    );
+    this.bsModalRef.content.closeBtnName = 'Close';
+    this.loaders.approveProfile = false;
+  }
   goToAssignPilots() {
     this.router.navigate(['/admin/pilot-list'], { queryParams: { jobId: this.jobData.JobId, creatorId: this.jobData.UserId } });
   }
@@ -608,7 +618,7 @@ export class ClientJobComponent implements OnInit {
     return this.jobInformation.controls;
   }
 
-  sendMessage(id,role) {
+  sendMessage(id, role) {
     let params: NavigationExtras = {
       queryParams: {
         id: id,
