@@ -4,6 +4,7 @@ $grayBorder:lightgray;
 $skyColor:#29abe2;
 $lightGray:#f5f5f6;
 @import '../../../../variables';
+
 //mixins
 @mixin scroll{
   &::-webkit-scrollbar{
@@ -239,8 +240,13 @@ header{
       }
     }
     &:hover{
-      background: #fbfbfd;
+      cursor: pointer;
+      background: #f5f5f6;
     }
+  }
+
+  .sidebar-image-container.activeTabList {
+    background: #f5f5f6;
   }
 }
 .mattie{
@@ -281,6 +287,7 @@ header{
   .matti-scroll-container{
     overflow: auto;
     max-height: 663px;
+    min-height: 663px;
     padding-bottom: 10px;
     @include scroll;
   }

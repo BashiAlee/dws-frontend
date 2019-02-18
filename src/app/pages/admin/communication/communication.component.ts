@@ -1,11 +1,31 @@
-import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { MessagesService } from '../../../services/messages/messages.service';
-import { AuthenticationService } from '../../../services/authentication/authentication.service';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
+import {
+  Router,
+  ActivatedRoute
+} from '@angular/router';
+import {
+  BsModalService
+} from 'ngx-bootstrap/modal';
+import {
+  MessagesService
+} from '../../../services/messages/messages.service';
+import {
+  AuthenticationService
+} from '../../../services/authentication/authentication.service';
+import {
+  BsModalRef
+} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import * as _ from 'lodash';
-import { interval, Subscription } from 'rxjs';
+import {
+  interval,
+  Subscription
+} from 'rxjs';
 
 declare var $: any;
 
@@ -39,7 +59,8 @@ export class CommunicationComponent implements OnInit {
   messageFromID: any;
   loading: any = false;
   subscription: Subscription;
-  urlRole:'';
+  urlRole: '';
+  selectedChat: any;
   @ViewChild("messageInput") inputEl: ElementRef;
   constructor(
     private messageService: MessagesService,
@@ -47,11 +68,11 @@ export class CommunicationComponent implements OnInit {
     private router: Router,
     private modalService: BsModalService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
 
-  
+
     this.userInfo = this.authService.getCurrentUser();
     if (this.router.url.split('/')[1] === 'user') {
       this.userType = 'PILOT';
@@ -66,7 +87,7 @@ export class CommunicationComponent implements OnInit {
           this.isPilotTab = false;
           this.messageFromID = parseInt(params.id);
           this.getMessagesByRole(params.role, this.messageFromID)
-        } else if(params.role == 'pilot'){
+        } else if (params.role == 'pilot') {
           this.urlRole = params.role;
           this.isPilotTab = true;
           this.messageFromID = parseInt(params.id);
@@ -75,8 +96,8 @@ export class CommunicationComponent implements OnInit {
       });
 
     }
-    // const source = interval(10000);
-    // this.subscription = source.subscribe(val => this.loadAfter20Sec(this.userType));
+    const source = interval(10000);
+    this.subscription = source.subscribe(val => this.loadAfter20Sec());
 
     this.onPageLoadCommunication();
 
@@ -104,27 +125,72 @@ export class CommunicationComponent implements OnInit {
     this.activeClass = false;
   }
 
-  loadAfter20Sec(type) {
-    if(type == "ADMIN") {
-      this.route.queryParams.subscribe(params => {
-        this.urlRole = params.role;
-        if (params.role == 'customer') {
-          this.isPilotTab = false;
-          this.messageFromID = parseInt(params.id);
-          this.getMessagesByRole(params.role, this.messageFromID)
-        } else if(params.role == 'pilot'){
-          this.isPilotTab = true;
-          this.messageFromID = parseInt(params.id);
-          this.getMessagesByRole(params.role, this.messageFromID)
+  loadAfter20Sec() {
+
+    var temp = this.currentUserMessages.filter(value => {
+      if (value.MessageFrom == this.userInfo.ID) {
+        return value.MessageTo == this.messageFromID;
+      } else {
+        return value.MessageFrom == this.messageFromID;
+      }
+    });
+
+    this.messageService
+      .getAllMessagesByConversationId(temp[0].ConversationId, this.onlineUserId)
+      .subscribe((data) => {
+        if (data.status) {
+          this.allMessagesByConversationId =
+            data.result;
+
+          this.messageConversationId =
+            data.result[0].ConversationId;
+          // this.lastMessageDate = data.result[0].MessageTime;
+          var lastMessage = _.last(this.allMessagesByConversationId);
+
+          this.lastMessageDate = lastMessage.MessageTime;
+          if (this.userType === 'ADMIN') {
+            if (
+              data.result[0].MessageFrom !=
+              this.onlineUserId
+            ) {
+              this.adminMessageToUserId =
+                data.result[0].MessageFrom;
+              // console.log('id ',this.adminMessageToUserId);
+              // console.log('chek ', this.selectedUser);
+              this.selectedUser = '';
+            } else {
+              this.adminMessageToUserId =
+                data.result[0].MessageTo;
+              // console.log('id to ', this.adminMessageToUserId);
+              // console.log('chek to ', this.selectedUser);
+              this.selectedUser = '';
+            }
+          }
         }
-      });
-    } 
-      this.onPageLoadCommunication();
-    
+
+      })
+
+
+    // if (type == "ADMIN") {
+    //   this.route.queryParams.subscribe(params => {
+    //     this.urlRole = params.role;
+    //     if (params.role == 'customer') {
+    //       this.isPilotTab = false;
+    //       this.messageFromID = parseInt(params.id);
+    //       this.getMessagesByRole(params.role, this.messageFromID)
+    //     } else if (params.role == 'pilot') {
+    //       this.isPilotTab = true;
+    //       this.messageFromID = parseInt(params.id);
+    //       this.getMessagesByRole(params.role, this.messageFromID)
+    //     }
+    //   });
+    // }
+    // this.onPageLoadCommunication();
+
   }
-  
+
   onPageLoadCommunication() {
-    
+
     if (this.userType === 'PILOT') {
       this.messageService.getMessagesListOfCurrentUser(this.userInfo.ID).subscribe(data => {
         // console.log('Messages List ----> ', data.result);
@@ -161,44 +227,44 @@ export class CommunicationComponent implements OnInit {
           // console.log('Messages List ----> ', data.result);
           if (data.status === true && data.result) {
             this.currentUserMessages = data.result;
-            if(this.messageFromID) {
+            if (this.messageFromID) {
               // console.log("SDFSDFSDF hereee----->>>", this.messageFromID);
-              
-      
-              var temp =  this.currentUserMessages.filter(value => {
-                if(value.MessageFrom == this.userInfo.ID) {
+
+
+              var temp = this.currentUserMessages.filter(value => {
+                if (value.MessageFrom == this.userInfo.ID) {
                   return value.MessageTo == this.messageFromID;
                 } else {
                   return value.MessageFrom == this.messageFromID;
                 }
               });
               console.log("GFDGDFDFGDFG", temp);
-              
-             this.selectedSenderChatName =
-             temp[0].SenderFirstName +
-             ' ' +
-             temp[0].SenderMiddleName +
-             ' ' +
-             temp[0].SenderLastName;
 
-           // this.lastMessageDate = temp[0].MessageTime;
-           this.getAllMessages(temp[0]);
-           // console.log('date ', data.result[0].MessageTime)
-           this.messageConversationId = temp[0].ConversationId;
+              this.selectedSenderChatName =
+                temp[0].SenderFirstName +
+                ' ' +
+                temp[0].SenderMiddleName +
+                ' ' +
+                temp[0].SenderLastName;
+
+              // this.lastMessageDate = temp[0].MessageTime;
+              this.getAllMessages(temp[0]);
+              // console.log('date ', data.result[0].MessageTime)
+              this.messageConversationId = temp[0].ConversationId;
             } else {
-                       this.selectedSenderChatName =
-              data.result[0].SenderFirstName +
-              ' ' +
-              data.result[0].SenderMiddleName +
-              ' ' +
-              data.result[0].SenderLastName;
+              this.selectedSenderChatName =
+                data.result[0].SenderFirstName +
+                ' ' +
+                data.result[0].SenderMiddleName +
+                ' ' +
+                data.result[0].SenderLastName;
 
-            // this.lastMessageDate = data.result[0].MessageTime;
-            this.getAllMessages(data.result[0]);
-            // console.log('date ', data.result[0].MessageTime)
-            this.messageConversationId = data.result[0].ConversationId;
+              // this.lastMessageDate = data.result[0].MessageTime;
+              this.getAllMessages(data.result[0]);
+              // console.log('date ', data.result[0].MessageTime)
+              this.messageConversationId = data.result[0].ConversationId;
             }
-         
+
             // this.selectedSenderChatName =
             //   data.result[0].SenderFirstName +
             //   ' ' +
@@ -217,10 +283,10 @@ export class CommunicationComponent implements OnInit {
     }
   }
 
-  getMessagesByRole(role, id?) {
-   
-    
-    
+  getMessagesByRole(role, id ? ) {
+
+
+
 
     if (role === 'pilot') {
       this.currentUserMessages = [];
@@ -247,42 +313,42 @@ export class CommunicationComponent implements OnInit {
         // console.log('Messages List ----> ', data.result);
         if (data.status === true && data.result) {
           this.currentUserMessages = data.result;
-          
-            if(id) {
-    
-      
-              var temp =  this.currentUserMessages.filter(value => {
-                if(value.MessageFrom == this.userInfo.ID) {
-                  return value.MessageTo == this. messageFromID;
-                } else {
-                  return value.MessageFrom == this. messageFromID;
-                }
-              });
-             
-             
-             this.selectedSenderChatName =
-             temp[0].SenderFirstName +
-             ' ' +
-             temp[0].SenderMiddleName +
-             ' ' +
-             temp[0].SenderLastName;
 
-           // this.lastMessageDate = temp[0].MessageTime;
-           this.getAllMessages(temp[0]);
-           // console.log('date ', data.result[0].MessageTime)
-           this.messageConversationId = temp[0].ConversationId;
-            
+          if (id) {
+
+
+            var temp = this.currentUserMessages.filter(value => {
+              if (value.MessageFrom == this.userInfo.ID) {
+                return value.MessageTo == this.messageFromID;
+              } else {
+                return value.MessageFrom == this.messageFromID;
+              }
+            });
+
+
+            this.selectedSenderChatName =
+              temp[0].SenderFirstName +
+              ' ' +
+              temp[0].SenderMiddleName +
+              ' ' +
+              temp[0].SenderLastName;
+
+            // this.lastMessageDate = temp[0].MessageTime;
+            this.getAllMessages(temp[0]);
+            // console.log('date ', data.result[0].MessageTime)
+            this.messageConversationId = temp[0].ConversationId;
+
           } else {
             this.selectedSenderChatName =
-            data.result[0].SenderFirstName +
-            ' ' +
-            data.result[0].SenderMiddleName +
-            ' ' +
-            data.result[0].SenderLastName;
-          // this.lastMessageDate = data.result[0].MessageTime;
-          this.getAllMessages(data.result[0]);
-          // console.log('date ', data.result[0].MessageTime)
-          this.messageConversationId = data.result[0].ConversationId;
+              data.result[0].SenderFirstName +
+              ' ' +
+              data.result[0].SenderMiddleName +
+              ' ' +
+              data.result[0].SenderLastName;
+            // this.lastMessageDate = data.result[0].MessageTime;
+            this.getAllMessages(data.result[0]);
+            // console.log('date ', data.result[0].MessageTime)
+            this.messageConversationId = data.result[0].ConversationId;
           }
         } else {
           // console.log('Messages Not recieved ', data.message);
@@ -291,6 +357,9 @@ export class CommunicationComponent implements OnInit {
   }
 
   getAllMessages(data) {
+    console.log("DSFSDFSDF", data);
+
+    this.selectedChat = data;
     this.loading = true;
     var selectedConversationId = data.ConversationId;
     this.selectedSenderChatName =
@@ -300,9 +369,9 @@ export class CommunicationComponent implements OnInit {
       ' ' +
       data.SenderLastName;
     var role;
-    if(this.isPilotTab) {
+    if (this.isPilotTab) {
       role = 'pilot'
-    } else if(!this.isPilotTab) {
+    } else if (!this.isPilotTab) {
       role = 'customer'
     }
     // this.router.navigate([], { 
@@ -313,7 +382,7 @@ export class CommunicationComponent implements OnInit {
     // });
 
     var id = 0;
-    if(data.MessageFrom == this.userInfo.ID) {
+    if (data.MessageFrom == this.userInfo.ID) {
       id = data.MessageTo
     } else {
       id = data.MessageFrom
@@ -321,7 +390,7 @@ export class CommunicationComponent implements OnInit {
 
     this.messageFromID = id;
 
-    history.replaceState(null, null, 'admin/communication'+'?id='+id+'&role='+role);
+    history.replaceState(null, null, 'admin/communication' + '?id=' + id + '&role=' + role);
 
     //
     // console.log(this.selectedSenderChatName);
@@ -332,7 +401,7 @@ export class CommunicationComponent implements OnInit {
         if (selectedConversationIdResult.status === true) {
           this.allMessagesByConversationId =
             selectedConversationIdResult.result;
-          
+
           this.messageConversationId =
             selectedConversationIdResult.result[0].ConversationId;
           // this.lastMessageDate = selectedConversationIdResult.result[0].MessageTime;
@@ -356,14 +425,14 @@ export class CommunicationComponent implements OnInit {
               // console.log('chek to ', this.selectedUser);
               this.selectedUser = '';
             }
-            if(document.getElementsByClassName('last')[0]) {
-              // $( window ).scrollTo('.last')[0];
-              // var objDiv = $(".last")[0];
-              // var h = objDiv.get(0).scrollHeight;
-              // objDiv.animate({scrollTop: h});
-              // document.getElementsByClassName('last')[0].scrollIntoView();
-            }
-     
+          }
+
+          if (this.allMessagesByConversationId.length) {
+            var id1 = this.allMessagesByConversationId.length - 1 + 'mattie'
+            $(document).ready(function () {
+              var el = document.getElementById(id1);
+              el.scrollIntoView();
+            });
           }
 
           this.loading = false;
@@ -375,6 +444,7 @@ export class CommunicationComponent implements OnInit {
           // );
         }
       });
+
   }
 
   sendMessage(message) {
@@ -424,7 +494,7 @@ export class CommunicationComponent implements OnInit {
           this.onPageLoadCommunication();
           this.message = '';
           this.activeClass = false;
-        
+
           // console.log('scroll');
           // console.log(elements.length);
           // console.log('asdasdas  ----> ',this.allMessagesByConversationId.length);
@@ -433,23 +503,19 @@ export class CommunicationComponent implements OnInit {
           //   var len = elements.length;
           //   const el = elements[elements.length - 1] as HTMLElement;
           //   el.scrollIntoView();
-           
-          // }, 1000);
-          var id = this.allMessagesByConversationId.length+'mattie'
-          setTimeout(() => {
-            var el = document.getElementById(id);
-            el.scrollIntoView();
-          }, 2000);
-    
 
-        //   window.setInterval(function() {
-        //     var elem = document.getElementById('gexpcontent');
-        //     // console.log('elemrr------01', elem);
-        //     if(elem){
-        //         elem.scrollTop = elem.scrollHeight;
-        //     }
-        // }, 5000);
-  
+          // }, 1000);
+
+
+
+          //   window.setInterval(function() {
+          //     var elem = document.getElementById('gexpcontent');
+          //     // console.log('elemrr------01', elem);
+          //     if(elem){
+          //         elem.scrollTop = elem.scrollHeight;
+          //     }
+          // }, 5000);
+
         } else {
           // console.log('Message Not Sent ', newData.message);
         }
@@ -474,7 +540,7 @@ export class CommunicationComponent implements OnInit {
     this.lastMessageDate = '';
   }
 
-  startChat(template: TemplateRef<any>) {
+  startChat(template: TemplateRef < any > ) {
 
     if (this.userType === 'PILOT') {
 
@@ -511,7 +577,7 @@ export class CommunicationComponent implements OnInit {
     this.pilotMessages = false;
   }
 
-  openPilotMessages() { }
+  openPilotMessages() {}
 
 
   check(url) {

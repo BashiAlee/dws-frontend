@@ -4,6 +4,8 @@
       <section id="communication-section">
         <header>
           <h1 class="communications-h1">Communications</h1>
+
+
           <p class="communications-main-p">All of Your Communications/Messages rest here</p>
           <div *ngIf="currentRole == 'admin'">
             <div class="custom-tabs">
@@ -41,7 +43,7 @@
 
                 <div class="aside-scroll-child" *ngFor="let currentList of currentUserMessages | pilots: searchPilot"
                   (click)="getAllMessages(currentList)">
-                  <div class="sidebar-image-container" [ngClass]="(currentRole != 'admin')?'makeSmall':''">
+                  <div class="sidebar-image-container" [ngClass]="(currentRole != 'admin')?'makeSmall':''" [class.activeTabList]="currentList == selectedChat">
                     <img *ngIf="!currentList.ProfileImage" src="../../../../assets/images/avatar.png" class="sidebar-img">
                     <img *ngIf="currentList.ProfileImage" [src]="currentList.ProfileImage" class="sidebar-img">
                     <div class="sidebar-img-text">
@@ -84,20 +86,20 @@
               </div>
             </div>
 
-            <div class="matti-body makeCenter" id="messages-scroll"  *ngIf="!allMessagesByConversationId ">
+            <div class="matti-body makeCenter" id="messages-scroll"  *ngIf="allMessagesByConversationId && !this.allMessagesByConversationId.length">
               <div class="messageEmptyBody">
                   <i class="fa fa-comments" aria-hidden="true"></i>
                   <p>No Chat Found! click start new chat </p>
               </div>
 
             </div>
-            <div class="matti-body makeCenter" id="messages-scroll"  >
+            <!-- <div class="matti-body makeCenter" id="messages-scroll"  *ngIf="loading ">
               <div class="messageEmptyBody">
-                  <!-- <i class="fa fa-comments" aria-hidden="true"></i> -->
+                  <i class="fa fa-comments" aria-hidden="true"></i>
                   <span>Loading</span>
               </div>
 
-            </div>
+            </div> -->
             <div class="mattie-body" id="messages-scroll" *ngIf="allMessagesByConversationId && allMessagesByConversationId.length">
               <div class="matti-scroll-container">
                 <!-- <div class="mattie-scroll-container-div">
