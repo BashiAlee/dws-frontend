@@ -67,6 +67,8 @@ export class ClientJobComponent implements OnInit {
   remainingDays: any = 0;
   remainingTime: any = 0;
   pilotData: any = {};
+  completed: any;
+  jobCompleted: any;
 
   paginationData: any = {};
   pageNumber: any = 10;
@@ -306,6 +308,34 @@ export class ClientJobComponent implements OnInit {
       }
     });
   }
+
+  jobStatus() {
+    this.jobStatusArray = {
+      JobId: this.jobData.JobId,
+      Status: 'completed',
+    };
+    this.loaders.approveProfile = true;
+    const initialState = { type: 'jobCompleted' };
+    this.jobService.adminJobStatus(this.jobStatusArray).subscribe(data => {
+      if (data.status) {
+        const notificationdata = {
+          UserId: this.jobData.UserId,
+          Message: 'Your Job has been marked completed. Please rate the Pilot(s)',
+          JobId: this.jobData.JobId,
+        };
+        this.notification.saveNotification(notificationdata)
+          .subscribe(data1 => {
+          });
+        this.bsModalRef = this.modalService.show(
+          ModalsComponent,
+          Object.assign({}, this.config, { initialState })
+        );
+        this.bsModalRef.content.closeBtnName = 'Close';
+        this.loaders.approveProfile = false;
+      }
+    });
+  }
+
   changeJobStatus() {
     this.jobStatusArray = {
       PilotId: this.userInfo.ID,
@@ -318,11 +348,11 @@ export class ClientJobComponent implements OnInit {
     this.jobService.jobStatus(this.jobStatusArray).subscribe(data => {
       if (data.status) {
         const notificationdata = [
-          {
-            UserId: this.jobData.UserId,
-            Message: 'Your Job has been marked completed. Please rate the Pilot(s)',
-            JobId: this.jobData.JobId,
-          },
+          // {
+          //   UserId: this.jobData.UserId,
+          //   Message: 'Your Job has been marked completed. Please rate the Pilot(s)',
+          //   JobId: this.jobData.JobId,
+          // },
           {
             UserId: this.adminData.ID,
             Message: this.jobData.JobTitle + '  ' + 'has been marked completed',
@@ -366,13 +396,25 @@ export class ClientJobComponent implements OnInit {
   }
   getAssignPolitList(jobId) {
     this.isYou = false;
+    this.completed = 0;
+    this.jobCompleted = false;
+
     this.jobService.getAssignPolits(jobId).subscribe(data => {
       if (data.status && data.result) {
         this.assignedPilotList = data.result;
-        this.bigTotalItems = parseInt(data.totalRecord);
+        this.assignedPilotList.forEach(pilotData => {
+          if (pilotData.JobDeliverable !== '') {
+            this.completed++;
+            // console.log('this s if', this.completed);
+          }
+        });
+        if (this.completed === this.assignedPilotList.length) {
+          this.jobCompleted = true;
+        } else {
+          this.jobCompleted = false;
+        }
       } else {
         this.assignedPilotList = [];
-        this.bigTotalItems = 0;
       }
     });
   }
@@ -381,13 +423,12 @@ export class ClientJobComponent implements OnInit {
       if (data.status) {
 
         this.jobData = data.result;
-        console.log('this is data', this.jobData);
-        if (this.jobData.DateRanges.FromDate != '' && this.jobData.DateRanges.From != '' && this.jobData.DateRanges.To != '') {
+        // console.log('this is data', this.jobData);
+        if (this.jobData.DateRanges.FromDate !== '' && this.jobData.DateRanges.From !== '' && this.jobData.DateRanges.To !== '') {
           this.jobData.DateRanges.FromDate = new Date(
             this.jobData.DateRanges.FromDate
           );
-        }
-        else {
+        } else {
           this.jobData.DateRanges.FromDate = new Date(
             this.jobData.DateRanges.FromDate
           );
@@ -405,13 +446,13 @@ export class ClientJobComponent implements OnInit {
           )
         });
 
-        if (this.jobInformation.value.EquipmentPreferences != '') {
+        if (this.jobInformation.value.EquipmentPreferences !== '') {
           this.IsEquipmentPref = 'yes';
         }
         if (
-          this.jobInformation.value.DateRanges.FromDate != '' &&
-          this.jobInformation.value.DateRanges.From != '' &&
-          this.jobInformation.value.DateRanges.To != ''
+          this.jobInformation.value.DateRanges.FromDate !== '' &&
+          this.jobInformation.value.DateRanges.From !== '' &&
+          this.jobInformation.value.DateRanges.To !== ''
         ) {
           this.IsParticularDate = 'particular';
           var endTime = new Date(this.jobInformation.value.DateRanges.To).getTime();
@@ -437,8 +478,8 @@ export class ClientJobComponent implements OnInit {
           // this.remainingTime = moment(endTime).calendar();
         }
         if (
-          this.jobInformation.value.DateRanges.FromDate != '' &&
-          this.jobInformation.value.DateRanges.ToDate != ''
+          this.jobInformation.value.DateRanges.FromDate !== '' &&
+          this.jobInformation.value.DateRanges.ToDate !== ''
         ) {
           this.IsParticularDate = 'range';
           var endDate = new Date(this.jobInformation.value.DateRanges.ToDate).getTime();
@@ -452,7 +493,7 @@ export class ClientJobComponent implements OnInit {
           // var timeDiff = Math.abs(now1.getTime() - endDate.getTime());
           this.remainingDays = Math.floor(distance / (1000 * 60 * 60 * 24));
         }
-        if (this.jobInformation.value.ParticularData != null) {
+        if (this.jobInformation.value.ParticularData !== null) {
           const control = <FormArray>(
             this.jobInformation.controls['ParticularData']
           );
@@ -496,8 +537,8 @@ export class ClientJobComponent implements OnInit {
     this.jobInformation.value.PrimaryPhone = this.jobInformation.value.PrimaryPhone.toString();
     this.jobInformation.value.SecondaryPhone = this.jobInformation.value.SecondaryPhone.toString();
     // console.log('job Data', this.jobInformation.value);s
-    if (this.jobInformation.value.DateRanges.FromDate != '' && this.jobInformation.value.DateRanges.From != '' &&
-      this.jobInformation.value.DateRanges.To != '') {
+    if (this.jobInformation.value.DateRanges.FromDate !== '' && this.jobInformation.value.DateRanges.From !== '' &&
+      this.jobInformation.value.DateRanges.To !== '') {
       this.jobInformation.value.DateRanges.FromDate = moment(this.jobInformation.value.DateRanges.FromDate).format('ll');
       this.jobInformation.value.DateRanges.From = moment(this.jobInformation.value.DateRanges.From).format('lll');
       this.jobInformation.value.DateRanges.To = moment(this.jobInformation.value.DateRanges.To).format('lll');

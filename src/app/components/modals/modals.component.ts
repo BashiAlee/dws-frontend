@@ -27,7 +27,8 @@ export class ModalsComponent implements OnInit {
   isReadonly = false;
   pilotRating: any;
   adminData: any = [];
-
+  msg: string;
+  timeout: any;
   constructor(
     public bsModalRef: BsModalRef,
     private router: Router,
@@ -78,7 +79,9 @@ export class ModalsComponent implements OnInit {
         });
         this.closeModal();
       } else {
-        console.log('fail');
+        this.msg = data.message;
+        this.timeout = 5000;
+        console.log('fail', data);
       }
     });
   }

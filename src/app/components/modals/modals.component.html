@@ -165,11 +165,11 @@
   <div class="modal-body sucess">
     <h3>Please upload the Deliverables that customer have asked.</h3>
   </div>
-  {{deliverables}}
+  <alert type="danger" [dismissOnTimeout]="timeout" *ngIf="msg">{{ msg }} </alert>
   <label for="file-upload" class="custom-file-upload custom-btn1 orange-bg">
       <i class="fa fa-cloud-upload"></i> Upload File
   </label>
-  <input id="file-upload" type="file" (change)="fileChange($event)"/>
+  <input id="file-upload" type="file" accept=".zip" (change)="fileChange($event)"/>
   <div class="footer-content">
     <button type="button" (click)="uploadClientFiles(PilotId,JobId,JobTitle)" class="btn btn-default custom-modal-button success-btn">Done</button>
   </div>

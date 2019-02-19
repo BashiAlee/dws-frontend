@@ -74,6 +74,13 @@ export class JobService {
       })
     );
   }
+  adminJobStatus(data) {
+    return this.http.post(this.apiUrl + 'job/adminJobStatus', data).pipe(
+      map((response: any) => {
+        return response.json();
+      })
+    );
+  }
   assignPolits(data) {
     return this.http.post(this.apiUrl + 'job/assignJob', data).pipe(
       map((response: any) => {
@@ -101,7 +108,7 @@ export class JobService {
     const headers = new Headers();
     headers.append('Content-Type', 'multipart/form-data');
     formData.append('file', file, file.name);
-    return this.http.post(this.staticUrl + 'uploading', formData)
+    return this.http.post(this.staticUrl + 'uploadFile', formData)
       .pipe(map((response: any) => {
 
         return response.json();

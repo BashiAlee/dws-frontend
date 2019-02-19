@@ -58,8 +58,8 @@
           </ul>
         </div>
       </div>
-      <div class="offset-md-5 col-md-3 col-sm-12 col-xs-12 mTop50 flex-display" *ngIf="jobData && userInfo.Role=='admin'">
-          <button class="custom-btn1 orange-bg" *ngIf="userInfo.Role=='admin'">Completed the Job</button>
+      <div class="offset-md-5 col-md-3 col-sm-12 col-xs-12 mTop50 flex-display" *ngIf="assignedPilotList && assignedPilotList.length && userInfo.Role=='admin'">
+          <button class="custom-btn1 orange-bg" *ngIf="userInfo.Role=='admin'" (click)="jobStatus()" [class.disableBtn]="!jobCompleted">Complete the Job</button>
       </div>
       <div class="offset-md-2 col-md-6 col-sm-12 col-xs-12" *ngIf="jobData && userInfo.Role=='customer' && jobData.JobStatus=='completed'">
         <div class="flex-display">
@@ -463,9 +463,8 @@
             <div class="table-heading">Country</div>
             <div class="table-heading">State</div>
             <div class="table-heading">City</div>
-
+            <div class="table-heading" *ngIf="userInfo.Role=='admin' || userInfo.Role=='customer'">Deliverables</div>
             <div class="table-heading" *ngIf="userInfo.Role=='customer'">Rating</div>
-            <div class="table-heading" *ngIf="userInfo.Role=='admin'">Deliverables</div>
             <div class="table-heading" *ngIf="userInfo.Role=='admin'">Action</div>
           </div>
           <div class="table-body" *ngIf="assignedPilotList && assignedPilotList.length">
@@ -477,10 +476,10 @@
               <div class="table-content">{{pilot.Country ? pilot.Country: '-'}}</div>
               <div class="table-content">{{pilot.State ? pilot.State: '-'}}</div>
               <div class="table-content">{{pilot.City ? pilot.City: "-"}}</div>
-
               <div class="table-content" *ngIf="userInfo.Role=='admin'"><a href="{{pilot.JobDeliverable}}" class="custom-btn blue-bg white-txt p1530" [class.disableBtn]="!pilot.JobDeliverable">Download</a></div>
+              <div class="table-content" *ngIf="userInfo.Role=='customer'"><a href="{{pilot.JobDeliverable}}" class="custom-btn blue-bg white-txt p1530" [class.disableBtn]="jobData.JobStatus !='completed'">Download</a></div>
               <div class="table-content" *ngIf="userInfo.Role=='admin'"><a class="custom-btn blue-bg white-txt p1530" [class.disableBtn]="jobData.JobStatus =='completed' || pilot.JobDeliverable" (click)="unAssignPilot(jobId,pilot.PilotId,jobData.JobTitle)">Unassign</a></div>
-              <div class="table-content makeCenter" *ngIf="userInfo.Role=='customer'" [class.disableDiv]="jobData.JobStatus=='assigned'">
+              <div class="table-content makeCenter" *ngIf="userInfo.Role=='customer'" [class.img-grayscale]="jobData.JobStatus!='completed'">
                 <img src="../../../../assets/icons/rating-star.png"  style="width: 30px;" (click)="openRatingModal(pilot.PilotId,jobData.JobId,jobData.JobTitle)" alt="">
               </div>
             </div>
