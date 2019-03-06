@@ -29,6 +29,7 @@ export class ModalsComponent implements OnInit {
   adminData: any = [];
   msg: string;
   timeout: any;
+  fileLink: any;
   constructor(
     public bsModalRef: BsModalRef,
     private router: Router,
@@ -124,6 +125,31 @@ export class ModalsComponent implements OnInit {
         });
       }
     });
+  }
+
+  uploadFileUrl(pilotId, jobId, jobTitle) {
+    this.jobStatusArray = {
+      PilotId: pilotId,
+      JobId: jobId,
+      Status: 'completed',
+      JobCompletionTime: moment().format('YYYY-MM-DD[T]HH:mm:ss'),
+      JobDeliverables: this.fileLink
+    };
+    this.jobService.jobStatus(this.jobStatusArray).subscribe(res => {
+      if (res.status) {
+        const notificationdata = {
+          UserId: this.adminData.ID,
+          Message: 'Pilot Claimed The job ' + jobTitle + ' has been completed',
+          JobId: jobId,
+        };
+        this.notification.saveNotification(notificationdata).subscribe(data1 => {
+
+        });
+      } else {
+
+      }
+    });
+    this.closeModal();
   }
   ngOnInit() {
     // this.modalRef = this.modelServie.show('template');

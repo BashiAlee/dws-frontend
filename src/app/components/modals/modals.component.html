@@ -166,13 +166,29 @@
     <h3>Please upload the Deliverables that customer have asked.</h3>
   </div>
   <alert type="danger" [dismissOnTimeout]="timeout" *ngIf="msg">{{ msg }} </alert>
-  <label for="file-upload" class="custom-file-upload custom-btn1 orange-bg">
-      <i class="fa fa-cloud-upload"></i> Upload File
-  </label>
-  <input id="file-upload" type="file" accept=".zip" (change)="fileChange($event)"/>
-  <div class="footer-content">
-    <button type="button" (click)="uploadClientFiles(PilotId,JobId,JobTitle)" class="btn btn-default custom-modal-button success-btn">Done</button>
-  </div>
+  <tabset class="tabss">
+    <tab heading="Upload File" id="tab1">
+        <label for="file-upload" class="custom-file-upload custom-btn1 orange-bg">
+            <i class="fa fa-cloud-upload"></i> Upload File
+        </label>
+        <input id="file-upload" type="file" accept=".zip" (change)="fileChange($event)"/>
+        <div class="footer-content">
+          <button type="button" (click)="uploadClientFiles(PilotId,JobId,JobTitle)" class="btn btn-default custom-modal-button success-btn">Done</button>
+        </div>
+      
+
+    
+    </tab>
+    <tab heading="Add Link">
+      
+        <input type="text" class="form-control custom-input"
+        placeholder="Paste link here" [(ngModel)]="fileLink">
+        <div class="footer-content">
+            <button type="button" (click)="uploadFileUrl(PilotId,JobId,JobTitle)" class="btn btn-default custom-modal-button success-btn" [disabled]="!fileLink">Done</button>
+          </div>
+    </tab>
+  </tabset>
+
 </div>
 
 <div class="modal-inner makeCenter" *ngIf="type=='pilotRating'">

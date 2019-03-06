@@ -59,6 +59,7 @@ import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-das
 import { ClientListComponent } from './pages/admin/client-list/client-list.component';
 import { AdminJobCalenderComponent } from './pages/admin/admin-job-calender/admin-job-calender.component';
 import { NotificationListComponent } from './pages/notification-list/notification-list.component';
+import { TabsModule } from 'ngx-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -118,6 +119,7 @@ import { NotificationListComponent } from './pages/notification-list/notificatio
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
+    TabsModule.forRoot()
 
   ],
   entryComponents: [ModalsComponent],
